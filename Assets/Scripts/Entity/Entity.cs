@@ -21,25 +21,6 @@ namespace Midbaryom.Core
     }
 
 
-
-
-
-    public interface IInputReader<T> : IInputReader
-    {
-        event Action<T> OnInputValueReceived;
-
-    }
-    public interface IInputReader : ITaggable
-    {
-        event Action OnInputReceived;
-        event Action OnInputStopped;
-    }
-    public interface IInputHandler
-    {
-        IReadOnlyList<IInputReader<float>> TurnningInputs { get; }
-        // IReadOnlyList<IInputReader>
-    }
-
     public class Entity : MonoBehaviour, IEntity
     {
 
@@ -87,5 +68,19 @@ namespace Midbaryom.Core
 
 
 
+    //public interface IInputReader<T> : IInputReader
+    //{
+    //    event Action<T> OnInputValueReceived;
 
+    //}
+    //public interface IInputReader : ITaggable
+    //{
+    //    event Action OnInputReceived;
+    //    event Action OnInputStopped;
+    //}
+    //public interface IInputHandler
+    //{
+    //    IReadOnlyList<IInputReader<float>> TurnningInputs { get; }
+    //    // IReadOnlyList<IInputReader>
+    //}
 }
