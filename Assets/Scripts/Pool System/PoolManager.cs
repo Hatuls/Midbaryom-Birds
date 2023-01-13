@@ -21,12 +21,7 @@ namespace Midbaryom.Pool
         {
             get
             {
-                if(_instance == null)
-                {
-                    var gameObject = Instantiate(new GameObject("Pool Manager"));
-                    _instance = gameObject.AddComponent<PoolManager>();
-                }
-                return _instance; 
+                return _instance;
             }
         }
         public IReadOnlyList<IEntity> ActiveEntities => _activeEntities;
@@ -34,16 +29,16 @@ namespace Midbaryom.Pool
         private void Awake()
         {
             if (_instance == null)
-            {
                 _instance = this;
-
-            }
             else if (_instance != this)
+            {
                 Destroy(this.gameObject);
+                return;
+            }
 
+            DontDestroyOnLoad(this.gameObject);
 
-            if (_poolStaterPacks != null && _poolStaterPacks.Count > 0)
-                Init();
+            Init();
         }
 
         private void Init()
@@ -51,13 +46,17 @@ namespace Midbaryom.Pool
             _activeEntities = new List<IEntity>();
             _notActiveEntities = new List<IEntity>();
 
-            for (int i = 0; i < _poolStaterPacks.Count; i++)
+            if (_poolStaterPacks != null)
             {
-                PoolStaterPack poolStaterPack = _poolStaterPacks[i];
-                int amount = poolStaterPack.Amount;
 
-                for (int j = 0; j < amount; j++)
-                    InstantiateEntity(poolStaterPack.EntityTagSO).DestroyHandler.Destroy();
+                for (int i = 0; i < _poolStaterPacks.Count; i++)
+                {
+                    PoolStaterPack poolStaterPack = _poolStaterPacks[i];
+                    int amount = poolStaterPack.Amount;
+
+                    for (int j = 0; j < amount; j++)
+                        InstantiateEntity(poolStaterPack.EntityTagSO).DestroyHandler.Destroy();
+                }
             }
         }
 
@@ -98,20 +97,22 @@ namespace Midbaryom.Pool
         {
             for (int i = 0; i < ActiveEntities.Count; i++)
             {
-                Return(ActiveEntities[i]); 
+                Return(ActiveEntities[i]);
             }
         }
         private void OnDestroy()
         {
 
             foreach (var entity in DestroyHandlers())
-              entity.OnDestroy -= Return;
+                entity.OnDestroy -= Return;
 
-            IEnumerable<IDestroyHandler> DestroyHandlers() 
+            IEnumerable<IDestroyHandler> DestroyHandlers()
             {
+                if(ActiveEntities != null && ActiveEntities.Count>0)
                 for (int i = 0; i < ActiveEntities.Count; i++)
                     yield return ActiveEntities[i].DestroyHandler;
 
+                if(_notActiveEntities!=null && _notActiveEntities.Count>0)
                 for (int i = 0; i < _notActiveEntities.Count; i++)
                     yield return _notActiveEntities[i].DestroyHandler;
 

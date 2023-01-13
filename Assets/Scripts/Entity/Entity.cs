@@ -10,6 +10,7 @@ namespace Midbaryom.Core
     public interface IEntity : ITrackable, ITaggable
     {
         EntityTagSO EntityTagSO { get; }
+        IRotator Rotator { get; }
         IStatHandler StatHandler { get; }
         ILocomotion MovementHandler { get; }
         IDestroyHandler DestroyHandler { get; }
@@ -23,14 +24,19 @@ namespace Midbaryom.Core
 
     public class Entity : MonoBehaviour, IEntity
     {
-
+        [Header("Tags:")]
         [SerializeField]
         private EntityTagSO _entityTag;
         [SerializeField]
         private StatSO[] _stats;
         [SerializeField]
         private TagSO[] _entityTags;
+        [Header("Components:")]
+        [SerializeField]
+        private Rigidbody _rigidbody;
 
+
+        private IRotator _rotator;
         private IDestroyHandler _destroyHandler;
         private IStatHandler _statHandler;
         private ILocomotion _movementHandler;
@@ -51,15 +57,25 @@ namespace Midbaryom.Core
         public ILocomotion MovementHandler => _movementHandler;
         public IDestroyHandler DestroyHandler => _destroyHandler;
         public IStatHandler StatHandler => _statHandler;
+        public IRotator Rotator => _rotator;
         public EntityTagSO EntityTagSO => _entityTag;
 
         private void Awake()
         {
             _destroyHandler = new DestroyBehaviour(this);
             _statHandler = new StatHandler(_stats);
-            _movementHandler = new Locomotion(transform, false, _statHandler[StatType.MovementSpeed]);
+            _rotator = new Rotator(transform, _rigidbody,_statHandler[StatType.RotationSpeed]);
+            _movementHandler = new Locomotion(transform, _rigidbody, false, _statHandler[StatType.MovementSpeed]);
         }
-    
+        private void Update()
+        {
+            _rotator.RotationTick();
+        }
+        private void FixedUpdate()
+        {
+           
+            _movementHandler.FixedUpdateTick();
+        }
         private void OnDestroy()
         {
             _destroyHandler.Destroy();

@@ -15,7 +15,6 @@ namespace Midbaryom.Core
         public event Action<IEntity> OnTargetDetectedEntity;
 
 
-        private PoolManager _poolManager;
 
         [SerializeField]
         private Camera _camera;
@@ -33,12 +32,9 @@ namespace Midbaryom.Core
         public bool HasTarget { get; private set; }
         public IEntity Target { get; private set; }
 
-        public IReadOnlyList<IEntity> AllActiveEntities => _poolManager.ActiveEntities;
+        public IReadOnlyList<IEntity> AllActiveEntities => PoolManager.Instance.ActiveEntities;
 
-        private void Start()
-        {
-            _poolManager = PoolManager.Instance;
-        }
+  
         private void Update()
         {
             Vector3 worldPoint = ScreenToWorldPoint();

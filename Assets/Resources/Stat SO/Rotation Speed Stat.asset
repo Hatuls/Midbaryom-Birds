@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 317d6e316397ae447add7132ad8c69db, type: 3}
-  m_Name: Speed Stat
+  m_Name: Rotation Speed Stat
   m_EditorClassIdentifier: 
-  StatType: 0
-  StartValue: 10
+  StatType: 2
+  StartValue: 117.52
   _hasMinValue: 0
   _minValue: 0
   _hasMaxValue: 0

@@ -78,7 +78,8 @@ namespace Midbaryom.Core
     public enum StatType
     {
         MovementSpeed = 0,
-        Points = 1
+        Points = 1,
+        RotationSpeed = 2,
     }
     public interface IStat : ITaggable
     {
