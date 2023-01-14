@@ -47,9 +47,10 @@ namespace Midbaryom.Core
 
         public void MoveTowards(Vector3 direction)
         {
-            Vector3 nextPos = OnHeightRequested?.Invoke() ?? CurrentPosition;
-            nextPos += _movementStat.Value * Time.deltaTime * direction;
-            _transform.position = Vector3.MoveTowards(CurrentPosition, nextPos, Time.deltaTime);
+            Vector3 nextPos = CurrentPosition;
+            nextPos += _movementStat.Value * direction;
+            nextPos.y = OnHeightRequested?.Invoke().y ?? CurrentPosition.y;
+            SetPosition( Vector3.MoveTowards(CurrentPosition, nextPos, Time.deltaTime));
             //    _transform.position = Vector3.MoveTowards(CurrentPosition, nextPos, Time.deltaTime);
         }
 
@@ -78,7 +79,7 @@ namespace Midbaryom.Core
         protected readonly Quaternion _startRotation;
         protected float _currentVelocity;
         protected bool _lockRotation;
-        private Vector3 _direction;
+        protected Vector3 _direction;
         public Rotator(Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation)
         {
             _lockRotation = toLockRotation;

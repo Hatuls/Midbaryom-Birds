@@ -7,26 +7,37 @@ namespace Midbaryom.Camera
     {
         public readonly Transform CameraTransform;
         public readonly UnityEngine.Camera Camera;
-        public readonly IRotator Rotator;
-        //private readonly IPlayer _player;
-        public CameraManager(IPlayer player,UnityEngine.Camera camera , Transform cameraTransform)
-        {
-            Camera = camera ;
-            CameraTransform = cameraTransform;
-            _cameraStates = new Dictionary<CameraState, IState>()
-            {
-                { CameraState.Default, new DefaultCameraState(this) },
-            };
-
-            _currentState = CameraState.Default;
-          //  Rotator = new CameraRotator(); //(CameraTransform, false, player.Entity.StatHandler[StatType.RotationSpeed], CameraTransform.rotation);
-        }
 
         private Dictionary<CameraState, IState> _cameraStates;
         private CameraState _currentState;
 
+        //private readonly IPlayer _player;
+        public CameraManager(IPlayer player, UnityEngine.Camera camera, Transform cameraTransform)
+        {
+            Camera = camera;
+            CameraTransform = cameraTransform;
+            var stat = player.Entity.StatHandler[StatType.RotationSpeed];
+
+            CameraRotationSO _defaultCameraRotation = GameManager.Instance.HuntUp ;
+            CameraRotationSO _huntDownCameraRotation = GameManager.Instance.HuntDown;
+
+
+            _cameraStates = new Dictionary<CameraState, IState>()
+            {
+                { CameraState.Default, new DefaultCameraState(_defaultCameraRotation,player.Entity.Transform,CameraTransform,false,stat, CameraTransform.rotation) },
+                { CameraState.FaceDown, new HuntCameraState(_huntDownCameraRotation,player.Entity.Transform,CameraTransform,false,stat, CameraTransform.rotation) },
+                { CameraState.FaceUp, new HuntCameraState(_defaultCameraRotation,player.Entity.Transform,CameraTransform,false,stat, CameraTransform.rotation) },
+            };
+
+            _currentState = CameraState.Default;
+            CurrentState.OnStateEnter();
+            //  Rotator = new CameraRotator(); //(CameraTransform, false, player.Entity.StatHandler[StatType.RotationSpeed], CameraTransform.rotation);
+        }
+
+
+
         private IState CurrentState => GetState(_currentState);
-  
+
         //public CameraRotator(Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation) : base(transform, toLockRotation, rotationSpeed, startRotation)
         //{
 
@@ -54,20 +65,22 @@ namespace Midbaryom.Camera
         }
     }
 
- 
 
-    public abstract class BaseRotationState : Rotator,IState
+
+    public abstract class BaseRotationState : Rotator, IState
     {
-        protected readonly CameraManager _cameraRotator;
+        protected readonly CameraRotationSO _cameraRotationSO;
 
-        public BaseRotationState(CameraManager cameraManager, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation) :base(transform, toLockRotation, rotationSpeed, startRotation)
+        public BaseRotationState(CameraRotationSO cameraConfig, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation) : base(transform, toLockRotation, rotationSpeed, startRotation)
         {
-            _cameraRotator = cameraManager;
+            _cameraRotationSO = cameraConfig;
         }
 
-        public abstract void OnStateEnter();
-        public abstract void OnStateExit();
-        public abstract void OnStateTick();
+        public virtual void OnStateEnter() { }
+        public virtual void OnStateExit() { }
+        public virtual void OnStateTick() => Tick();
+
+
 
 
     }
@@ -75,41 +88,77 @@ namespace Midbaryom.Camera
     public class DefaultCameraState : BaseRotationState
     {
 
-        public readonly Vector3 ForwardDirection;
-        public DefaultCameraState(CameraManager cameraManager, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation) : base(cameraManager, transform, toLockRotation, rotationSpeed, startRotation)
-        {
-            ForwardDirection = transform.forward;
+        private readonly Transform _objectTransform;
 
+        public DefaultCameraState(CameraRotationSO cameraRotationSO, Transform ObjectTransform, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation) : base(cameraRotationSO, transform, toLockRotation, rotationSpeed, startRotation)
+        {
+            _objectTransform = ObjectTransform;
+        }
+
+
+
+        protected override void RotateTowards()
+        {
+            _direction = Quaternion.AngleAxis(_cameraRotationSO.Angle, Vector3.right) * _objectTransform.forward;
+
+            Quaternion lookRotation = Quaternion.LookRotation(NewDirection);
+            Quaternion lerpDirection = Quaternion.Lerp(_transform.localRotation, lookRotation, RotationSpeed * Time.deltaTime);
+
+            _transform.localRotation = lerpDirection;
+        }
+    }
+
+    public class HuntCameraState : BaseRotationState
+    {
+        private readonly Transform _objectTransform;
+        private float _currentAngle;
+        private float _currentTime;
+        private float _startingAngle;
+        public HuntCameraState( CameraRotationSO cameraRotationSO, Transform ObjectTransform, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation) : base(cameraRotationSO, transform, toLockRotation, rotationSpeed, startRotation)
+        {
+   
+            _objectTransform = ObjectTransform;
         }
 
         public override void OnStateEnter()
         {
-            AssignRotation(StartingRotation() * Vector3.forward);
+            _startingAngle = _transform.localEulerAngles.x; 
+            _currentAngle = 0;
+            _currentTime = 0;
         }
-
-        public override void OnStateExit()
-        {
-          
-        }
-
         public override void OnStateTick()
         {
-            Tick();
+            CalculateAngle();
+            base.OnStateTick();
         }
 
+        private void CalculateAngle()
+        {
+            // maybe change it to currentvalue
+            float remain = _cameraRotationSO.Angle - _startingAngle;
+            _currentAngle = _startingAngle + _cameraRotationSO.Evaluate(_currentTime ) * remain;
+            _currentTime += Time.deltaTime;
+
+            AssignRotation(Quaternion.AngleAxis(_currentAngle, _objectTransform.right) * _objectTransform.forward);
+        }
+        //protected override bool CanRotate()
+        //=> !_lockRotation;
         protected override void RotateTowards()
         {
             Quaternion lookRotation = Quaternion.LookRotation(NewDirection);
             Quaternion lerpDirection = Quaternion.Lerp(_transform.localRotation, lookRotation, RotationSpeed * Time.deltaTime);
-            float yAxisRotation = lerpDirection.eulerAngles.y;
-            Quaternion YRotation = Quaternion.Euler(0f, yAxisRotation, 0f);
-            _transform.localRotation = YRotation;
+            lerpDirection.eulerAngles = new Vector3(lerpDirection.eulerAngles.x, 0, 0);
+            _transform.localRotation = lerpDirection;
         }
     }
+
+
+
     public enum CameraState
     {
         Default,
-        Hunt,
-    }
-
+        FaceDown,
+        FaceUp,
+    } 
 }
+

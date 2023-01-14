@@ -46,6 +46,17 @@ namespace Midbaryom.Core
             foreach (IUpdateable updateable in UpdateCollection)
                 updateable.Tick();
         }
+
+        [ContextMenu("HuntDown")]
+        private void HuntDown()
+        {
+            CameraManager.ChangeState(CameraState.FaceDown);
+        }
+        [ContextMenu("HuntUp")]
+        private void HuntUp()
+        {
+            CameraManager.ChangeState(CameraState.FaceUp);
+        }
     }
 
     public interface IPlayer : ITaggable

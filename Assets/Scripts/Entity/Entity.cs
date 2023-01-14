@@ -10,6 +10,7 @@ namespace Midbaryom.Core
     public interface IEntity : ITrackable, ITaggable
     {
         EntityTagSO EntityTagSO { get; }
+        Transform Transform { get; }
         IRotator Rotator { get; }
         IStatHandler StatHandler { get; }
         ILocomotion MovementHandler { get; }
@@ -43,6 +44,7 @@ namespace Midbaryom.Core
 
         public Vector3 CurrentFacingDirection => MovementHandler.CurrentFacingDirection;
         public Vector3 CurrentPosition => MovementHandler.CurrentPosition;
+        public Transform Transform => transform;
 
         public IEnumerable<TagSO> Tags
         {
