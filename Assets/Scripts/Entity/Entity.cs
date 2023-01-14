@@ -1,4 +1,4 @@
-using System;
+using Midbaryom.Camera;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,30 +60,45 @@ namespace Midbaryom.Core
         public IRotator Rotator => _rotator;
         public EntityTagSO EntityTagSO => _entityTag;
 
+
+
+        public IEnumerable<IUpdateable> UpdateNeeded
+        {
+            get
+            {
+                yield return Rotator;
+                yield return MovementHandler;
+            }
+        }
+
         private void Awake()
         {
             _destroyHandler = new DestroyBehaviour(this);
             _statHandler = new StatHandler(_stats);
-            _rotator = new Rotator(transform, _rigidbody,_statHandler[StatType.RotationSpeed]);
+            _rotator = new Rotator(transform, false, _statHandler[StatType.RotationSpeed],transform.rotation);
             _movementHandler = new Locomotion(transform, _rigidbody, false, _statHandler[StatType.MovementSpeed]);
         }
         private void Update()
         {
-            _rotator.RotationTick();
+            foreach (IUpdateable updateable in UpdateNeeded)
+                updateable.Tick();
         }
-        private void FixedUpdate()
-        {
-           
-            _movementHandler.FixedUpdateTick();
-        }
+
         private void OnDestroy()
         {
             _destroyHandler.Destroy();
         }
     }
-
-
-
+    public interface IUpdateable
+    {
+        void Tick();
+    }
+    public interface IState
+    {
+        void OnStateEnter();
+        void OnStateExit();
+        void OnStateTick();
+    }
     //public interface IInputReader<T> : IInputReader
     //{
     //    event Action<T> OnInputValueReceived;

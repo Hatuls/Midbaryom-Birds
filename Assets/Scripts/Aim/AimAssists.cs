@@ -17,7 +17,7 @@ namespace Midbaryom.Core
 
 
         [SerializeField]
-        private Camera _camera;
+        private UnityEngine.Camera _camera;
 
         [SerializeField]
         private int _layerMaskIndex;

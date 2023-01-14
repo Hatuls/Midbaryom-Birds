@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rotation Speed Stat
   m_EditorClassIdentifier: 
   StatType: 2
-  StartValue: 117.52
+  StartValue: 1
   _hasMinValue: 0
   _minValue: 0
   _hasMaxValue: 0

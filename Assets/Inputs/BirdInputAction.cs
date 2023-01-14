@@ -38,11 +38,11 @@ public partial class @BirdInputAction : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Hunt"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""9db93d4e-ebad-442e-b957-741a2d8fe88e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""initialStateCheck"": true
                 }
             ],
@@ -106,7 +106,7 @@ public partial class @BirdInputAction : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""51f15320-3fbb-4713-b718-caae1383bdb4"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Press(behavior=2),Hold"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Hunt"",

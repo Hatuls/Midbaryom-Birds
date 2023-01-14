@@ -6,19 +6,31 @@ using UnityEngine.InputSystem;
 namespace Midbaryom.Inputs
 {
 
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : IUpdateable
     {
         public event Action<Vector2> OnMove;
-        private IEntity _entity;
+        private readonly IEntity _entity;
 
 
 
         private BirdInputAction _birdInputAction;
+
         private InputAction _huntInputAction;
         private InputAction _movementInputAction;
 
 
+        public PlayerController(IEntity entity)
+        {
+            _entity = entity;
+            _birdInputAction = new BirdInputAction();
 
+            _movementInputAction = _birdInputAction.Player.Move;
+
+            _huntInputAction = _birdInputAction.Player.Hunt;
+            //_huntInputAction.started
+            foreach (var input in InputActions)
+                input.Enable();
+        }
 
 
         public IEnumerable<InputAction> InputActions
@@ -29,33 +41,27 @@ namespace Midbaryom.Inputs
                 yield return _huntInputAction;
             }
         }
-        private void Awake()
-        {
-            _entity = GetComponent<IEntity>();
-            _birdInputAction = new BirdInputAction();
-        }
 
-        private void OnEnable()
-        {
-            _movementInputAction = _birdInputAction.Player.Move;
-     
-            _huntInputAction = _birdInputAction.Player.Hunt;
 
-            foreach (var input in InputActions)
-                input.Enable();
-        }
 
-        private void OnDisable()
+        public void Tick()
         {
-            foreach (var input in InputActions)
-                input.Disable();
+            Rotation();
         }
 
 
-        private void Update()
+
+        private void Rotation()
         {
             Vector2 value = _movementInputAction.ReadValue<Vector2>();
             _entity.Rotator.AssignRotation(new Vector3(value.x, 0, value.y));
+        }
+
+
+        ~PlayerController()
+        {
+            foreach (var input in InputActions)
+                input.Disable();
         }
 
     }
