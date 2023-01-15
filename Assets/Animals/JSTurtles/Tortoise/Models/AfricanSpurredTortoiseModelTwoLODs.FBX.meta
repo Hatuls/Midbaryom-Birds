@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: 7cac81be0f7a24001a90c2716cb92d14
+timeCreated: 1461170229
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: AfricanSpurredTortoiseLOD0
+    100002: AfricanSpurredTortoiseLOD1
+    100004: //RootNode
+    100006: Calf_L
+    100008: Calf_R
+    100010: Clavicle_L
+    100012: Clavicle_R
+    100014: Eye_L
+    100016: Eye_R
+    100018: FirstEyelid_L
+    100020: FirstEyelid_R
+    100022: Foot_L
+    100024: Foot_R
+    100026: Forearm_L
+    100028: Forearm_R
+    100030: Hand_L
+    100032: Hand_R
+    100034: Head
+    100036: Jaw
+    100038: Jaw.1
+    100040: Neck.1
+    100042: Neck.2
+    100044: Neck.3
+    100046: Pelvis
+    100048: Root
+    100050: SecondEyelid_L
+    100052: SecondEyelid_R
+    100054: Spine
+    100056: Tail.1
+    100058: Tail.2
+    100060: Thigh_L
+    100062: Thigh_R
+    100064: ThirdEyelid_L
+    100066: ThirdEyelid_R
+    100068: Tongue.1
+    100070: Tongue.3
+    100072: UpperArm_L
+    100074: UpperArm_R
+    400000: AfricanSpurredTortoiseLOD0
+    400002: AfricanSpurredTortoiseLOD1
+    400004: //RootNode
+    400006: Calf_L
+    400008: Calf_R
+    400010: Clavicle_L
+    400012: Clavicle_R
+    400014: Eye_L
+    400016: Eye_R
+    400018: FirstEyelid_L
+    400020: FirstEyelid_R
+    400022: Foot_L
+    400024: Foot_R
+    400026: Forearm_L
+    400028: Forearm_R
+    400030: Hand_L
+    400032: Hand_R
+    400034: Head
+    400036: Jaw
+    400038: Jaw.1
+    400040: Neck.1
+    400042: Neck.2
+    400044: Neck.3
+    400046: Pelvis
+    400048: Root
+    400050: SecondEyelid_L
+    400052: SecondEyelid_R
+    400054: Spine
+    400056: Tail.1
+    400058: Tail.2
+    400060: Thigh_L
+    400062: Thigh_R
+    400064: ThirdEyelid_L
+    400066: ThirdEyelid_R
+    400068: Tongue.1
+    400070: Tongue.3
+    400072: UpperArm_L
+    400074: UpperArm_R
+    4300000: AfricanSpurredTortoiseLOD1
+    4300002: AfricanSpurredTortoiseLOD0
+    9500000: //RootNode
+    13700000: AfricanSpurredTortoiseLOD0
+    13700002: AfricanSpurredTortoiseLOD1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: Root
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

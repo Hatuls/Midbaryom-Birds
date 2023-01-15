@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: c608f995fbee6d84f9f21c5093646b35
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: EuropeanRabbit_LOD0
+    100004: EuropeanRabbit_LOD1
+    100006: EuropeanRabbit_LOD2
+    100008: EuropeanRabbit_LOD3
+    100010: RigChest
+    100012: RigHead
+    100014: RigJaw
+    100016: RigLBLeg1
+    100018: RigLBLeg2
+    100020: RigLBLegAnkle
+    100022: RigLBLegDigit11
+    100024: RigLEar1
+    100026: RigLEar2
+    100028: RigLFLeg1
+    100030: RigLFLeg2
+    100032: RigLFLegAnkle
+    100034: RigLFLegCollarbone
+    100036: RigLFLegDigit11
+    100038: RigNeck1
+    100040: RigNeck2
+    100042: RigNose
+    100044: RigNoseL
+    100046: RigNoseR
+    100048: RigPelvis
+    100050: RigRBLeg1
+    100052: RigRBLeg2
+    100054: RigRBLegAnkle
+    100056: RigRBLegDigit11
+    100058: RigREar1
+    100060: RigREar2
+    100062: RigRFLeg1
+    100064: RigRFLeg2
+    100066: RigRFLegAnkle
+    100068: RigRFLegCollarbone
+    100070: RigRFLegDigit11
+    100072: RigRoot
+    100074: RigSpine1
+    100076: RigSpine2
+    100078: RigSpine3
+    100080: RigSpine4
+    100082: RigTail1
+    100084: RigTail2
+    100086: RigTail3
+    400000: //RootNode
+    400002: EuropeanRabbit_LOD0
+    400004: EuropeanRabbit_LOD1
+    400006: EuropeanRabbit_LOD2
+    400008: EuropeanRabbit_LOD3
+    400010: RigChest
+    400012: RigHead
+    400014: RigJaw
+    400016: RigLBLeg1
+    400018: RigLBLeg2
+    400020: RigLBLegAnkle
+    400022: RigLBLegDigit11
+    400024: RigLEar1
+    400026: RigLEar2
+    400028: RigLFLeg1
+    400030: RigLFLeg2
+    400032: RigLFLegAnkle
+    400034: RigLFLegCollarbone
+    400036: RigLFLegDigit11
+    400038: RigNeck1
+    400040: RigNeck2
+    400042: RigNose
+    400044: RigNoseL
+    400046: RigNoseR
+    400048: RigPelvis
+    400050: RigRBLeg1
+    400052: RigRBLeg2
+    400054: RigRBLegAnkle
+    400056: RigRBLegDigit11
+    400058: RigREar1
+    400060: RigREar2
+    400062: RigRFLeg1
+    400064: RigRFLeg2
+    400066: RigRFLegAnkle
+    400068: RigRFLegCollarbone
+    400070: RigRFLegDigit11
+    400072: RigRoot
+    400074: RigSpine1
+    400076: RigSpine2
+    400078: RigSpine3
+    400080: RigSpine4
+    400082: RigTail1
+    400084: RigTail2
+    400086: RigTail3
+    2100000: EuropeanRabbit
+    4300000: EuropeanRabbit_LOD0
+    4300002: EuropeanRabbit_LOD1
+    4300004: EuropeanRabbit_LOD2
+    4300006: EuropeanRabbit_LOD3
+    9500000: //RootNode
+    13700000: EuropeanRabbit_LOD0
+    13700002: EuropeanRabbit_LOD1
+    13700004: EuropeanRabbit_LOD2
+    13700006: EuropeanRabbit_LOD3
+    20500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EuropeanRabbit
+    second: {fileID: 2100000, guid: 8e29995e4cbaff047b98c660ca7aaaaa, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages:
+    - 0.25
+    - 0.125
+    - 0.0625
+    - 0.01
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: RigRoot
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

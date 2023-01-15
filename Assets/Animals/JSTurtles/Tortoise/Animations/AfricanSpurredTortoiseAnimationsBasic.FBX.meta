@@ -1,0 +1,1352 @@
+fileFormatVersion: 2
+guid: 0a09c82fdfb804b5ca1a7db83eca3c3d
+timeCreated: 1459689534
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: AfricanSpurredTortoiseDummy
+    100004: Calf_L
+    100006: Calf_R
+    100008: Clavicle_L
+    100010: Clavicle_R
+    100012: Eye_L
+    100014: Eye_R
+    100016: FirstEyelid_L
+    100018: FirstEyelid_R
+    100020: Foot_L
+    100022: Foot_R
+    100024: Forearm_L
+    100026: Forearm_R
+    100028: Hand_L
+    100030: Hand_R
+    100032: Head
+    100034: Jaw
+    100036: Jaw.1
+    100038: Neck.1
+    100040: Neck.2
+    100042: Neck.3
+    100044: Pelvis
+    100046: Root
+    100048: SecondEyelid_L
+    100050: SecondEyelid_R
+    100052: Spine
+    100054: Tail.1
+    100056: Tail.2
+    100058: Thigh_L
+    100060: Thigh_R
+    100062: ThirdEyelid_L
+    100064: ThirdEyelid_R
+    100066: Tongue.1
+    100068: Tongue.3
+    100070: UpperArm_L
+    100072: UpperArm_R
+    400000: //RootNode
+    400002: AfricanSpurredTortoiseDummy
+    400004: Calf_L
+    400006: Calf_R
+    400008: Clavicle_L
+    400010: Clavicle_R
+    400012: Eye_L
+    400014: Eye_R
+    400016: FirstEyelid_L
+    400018: FirstEyelid_R
+    400020: Foot_L
+    400022: Foot_R
+    400024: Forearm_L
+    400026: Forearm_R
+    400028: Hand_L
+    400030: Hand_R
+    400032: Head
+    400034: Jaw
+    400036: Jaw.1
+    400038: Neck.1
+    400040: Neck.2
+    400042: Neck.3
+    400044: Pelvis
+    400046: Root
+    400048: SecondEyelid_L
+    400050: SecondEyelid_R
+    400052: Spine
+    400054: Tail.1
+    400056: Tail.2
+    400058: Thigh_L
+    400060: Thigh_R
+    400062: ThirdEyelid_L
+    400064: ThirdEyelid_R
+    400066: Tongue.1
+    400068: Tongue.3
+    400070: UpperArm_L
+    400072: UpperArm_R
+    7400000: Idle
+    7400002: WalkFroward
+    7400004: TurnRghit
+    7400006: TurnLeft
+    7400008: WalkBack
+    7400010: WalkHit
+    7400012: WalkAttack
+    7400014: Eat
+    7400016: Hit
+    7400018: Attack
+    7400020: SitDown
+    7400022: StandUp
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AfricanSpurredTortoiseDummy
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Pelvis
+        weight: 1
+      - path: Root/Pelvis/Spine
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L/Hand_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R/Hand_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1/Tongue.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Tail.1
+        weight: 1
+      - path: Root/Pelvis/Tail.1/Tail.2
+        weight: 1
+      - path: Root/Pelvis/Thigh_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L/Foot_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R/Foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: WalkFroward
+      takeName: Take 001
+      firstFrame: 40
+      lastFrame: 70
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AfricanSpurredTortoiseDummy
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Pelvis
+        weight: 1
+      - path: Root/Pelvis/Spine
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L/Hand_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R/Hand_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1/Tongue.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Tail.1
+        weight: 1
+      - path: Root/Pelvis/Tail.1/Tail.2
+        weight: 1
+      - path: Root/Pelvis/Thigh_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L/Foot_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R/Foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: TurnRghit
+      takeName: Take 001
+      firstFrame: 80
+      lastFrame: 110
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AfricanSpurredTortoiseDummy
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Pelvis
+        weight: 1
+      - path: Root/Pelvis/Spine
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L/Hand_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R/Hand_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1/Tongue.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Tail.1
+        weight: 1
+      - path: Root/Pelvis/Tail.1/Tail.2
+        weight: 1
+      - path: Root/Pelvis/Thigh_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L/Foot_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R/Foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: TurnLeft
+      takeName: Take 001
+      firstFrame: 120
+      lastFrame: 150
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AfricanSpurredTortoiseDummy
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Pelvis
+        weight: 1
+      - path: Root/Pelvis/Spine
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L/Hand_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R/Hand_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1/Tongue.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Tail.1
+        weight: 1
+      - path: Root/Pelvis/Tail.1/Tail.2
+        weight: 1
+      - path: Root/Pelvis/Thigh_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L/Foot_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R/Foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: WalkBack
+      takeName: Take 001
+      firstFrame: 160
+      lastFrame: 190
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AfricanSpurredTortoiseDummy
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Pelvis
+        weight: 1
+      - path: Root/Pelvis/Spine
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L/Hand_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R/Hand_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1/Tongue.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Tail.1
+        weight: 1
+      - path: Root/Pelvis/Tail.1/Tail.2
+        weight: 1
+      - path: Root/Pelvis/Thigh_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L/Foot_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R/Foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: WalkHit
+      takeName: Take 001
+      firstFrame: 200
+      lastFrame: 230
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AfricanSpurredTortoiseDummy
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Pelvis
+        weight: 1
+      - path: Root/Pelvis/Spine
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L/Hand_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R/Hand_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1/Tongue.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Tail.1
+        weight: 1
+      - path: Root/Pelvis/Tail.1/Tail.2
+        weight: 1
+      - path: Root/Pelvis/Thigh_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L/Foot_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R/Foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: WalkAttack
+      takeName: Take 001
+      firstFrame: 240
+      lastFrame: 270
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AfricanSpurredTortoiseDummy
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Pelvis
+        weight: 1
+      - path: Root/Pelvis/Spine
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L/Hand_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R/Hand_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1/Tongue.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Tail.1
+        weight: 1
+      - path: Root/Pelvis/Tail.1/Tail.2
+        weight: 1
+      - path: Root/Pelvis/Thigh_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L/Foot_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R/Foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Eat
+      takeName: Take 001
+      firstFrame: 280
+      lastFrame: 310
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AfricanSpurredTortoiseDummy
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Pelvis
+        weight: 1
+      - path: Root/Pelvis/Spine
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L/Hand_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R/Hand_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1/Tongue.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Tail.1
+        weight: 1
+      - path: Root/Pelvis/Tail.1/Tail.2
+        weight: 1
+      - path: Root/Pelvis/Thigh_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L/Foot_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R/Foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Hit
+      takeName: Take 001
+      firstFrame: 320
+      lastFrame: 350
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AfricanSpurredTortoiseDummy
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Pelvis
+        weight: 1
+      - path: Root/Pelvis/Spine
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L/Hand_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R/Hand_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1/Tongue.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Tail.1
+        weight: 1
+      - path: Root/Pelvis/Tail.1/Tail.2
+        weight: 1
+      - path: Root/Pelvis/Thigh_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L/Foot_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R/Foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 360
+      lastFrame: 390
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AfricanSpurredTortoiseDummy
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Pelvis
+        weight: 1
+      - path: Root/Pelvis/Spine
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L/Hand_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R/Hand_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1/Tongue.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Tail.1
+        weight: 1
+      - path: Root/Pelvis/Tail.1/Tail.2
+        weight: 1
+      - path: Root/Pelvis/Thigh_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L/Foot_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R/Foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: SitDown
+      takeName: Take 001
+      firstFrame: 400
+      lastFrame: 415
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AfricanSpurredTortoiseDummy
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Pelvis
+        weight: 1
+      - path: Root/Pelvis/Spine
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L/Hand_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R/Hand_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1/Tongue.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Tail.1
+        weight: 1
+      - path: Root/Pelvis/Tail.1/Tail.2
+        weight: 1
+      - path: Root/Pelvis/Thigh_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L/Foot_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R/Foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: StandUp
+      takeName: Take 001
+      firstFrame: 415
+      lastFrame: 430
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AfricanSpurredTortoiseDummy
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Pelvis
+        weight: 1
+      - path: Root/Pelvis/Spine
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_L/UpperArm_L/Forearm_L/Hand_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Clavicle_R/UpperArm_R/Forearm_R/Hand_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Eye_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/FirstEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw/Tongue.1/Tongue.3
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/Jaw.1
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/SecondEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_L
+        weight: 1
+      - path: Root/Pelvis/Spine/Neck.1/Neck.2/Neck.3/Head/ThirdEyelid_R
+        weight: 1
+      - path: Root/Pelvis/Tail.1
+        weight: 1
+      - path: Root/Pelvis/Tail.1/Tail.2
+        weight: 1
+      - path: Root/Pelvis/Thigh_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_L/Calf_L/Foot_L
+        weight: 1
+      - path: Root/Pelvis/Thigh_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R
+        weight: 1
+      - path: Root/Pelvis/Thigh_R/Calf_R/Foot_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: Root
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
