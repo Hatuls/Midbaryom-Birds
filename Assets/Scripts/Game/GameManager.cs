@@ -28,9 +28,9 @@ public class GameManager : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(HeightConfigSO.AnimalHeight * Vector3.up, Radius);
-        Gizmos.DrawSphere(HeightConfigSO.PlayerHeight * Vector3.up, Radius);
-        Gizmos.DrawSphere(HeightConfigSO.GroundHeight * Vector3.up, Radius);
+        Gizmos.DrawSphere(HeightConfigSO.AnimalHeight.Height * Vector3.up, Radius);
+        Gizmos.DrawSphere(HeightConfigSO.PlayerHeight.Height * Vector3.up, Radius);
+        Gizmos.DrawSphere(HeightConfigSO.GroundHeight.Height * Vector3.up, Radius);
     }
 #endif
 }

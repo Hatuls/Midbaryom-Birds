@@ -10,6 +10,7 @@ namespace Midbaryom.Inputs
     {
         public event Action<Vector2> OnMove;
         private readonly IEntity _entity;
+        private readonly Player _player;
 
 
 
@@ -19,19 +20,30 @@ namespace Midbaryom.Inputs
         private InputAction _movementInputAction;
 
 
-        public PlayerController(IEntity entity)
+        public PlayerController(Player player,IEntity entity)
         {
+            _player = player;
             _entity = entity;
             _birdInputAction = new BirdInputAction();
 
             _movementInputAction = _birdInputAction.Player.Move;
 
             _huntInputAction = _birdInputAction.Player.Hunt;
-            //_huntInputAction.started
+            _huntInputAction.started += StartHundDown;
+            _huntInputAction.canceled += EndHunt;
             foreach (var input in InputActions)
                 input.Enable();
         }
 
+        private void StartHundDown(InputAction.CallbackContext obj)
+        {
+            _player.HuntDown();
+        }
+
+        private void EndHunt(InputAction.CallbackContext obj)
+        {
+            _player.HuntUp();
+        }
 
         public IEnumerable<InputAction> InputActions
         {

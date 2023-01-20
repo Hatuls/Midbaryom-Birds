@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d955aa7867b9b54ebb1d07e9e5dcce0, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
+  StartingHeight: 2
   _entity: {fileID: 0}

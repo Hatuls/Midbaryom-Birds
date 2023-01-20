@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Movement Speed Stat
   m_EditorClassIdentifier: 
   StatType: 0
-  StartValue: 2000
+  StartValue: 5
   _hasMinValue: 1
   _minValue: 0
   _hasMaxValue: 0

@@ -147,7 +147,7 @@ namespace Midbaryom.Camera
         {
             Quaternion lookRotation = Quaternion.LookRotation(NewDirection);
             Quaternion lerpDirection = Quaternion.Lerp(_transform.localRotation, lookRotation, RotationSpeed * Time.deltaTime);
-            lerpDirection.eulerAngles = new Vector3(lerpDirection.eulerAngles.x, 0, 0);
+            lerpDirection.eulerAngles = new Vector3(lerpDirection.eulerAngles.x, 0f, 0f);
             _transform.localRotation = lerpDirection;
         }
     }

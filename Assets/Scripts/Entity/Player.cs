@@ -26,7 +26,6 @@ namespace Midbaryom.Core
             get
             {
                 yield return PlayerController;
-                yield return CameraManager;
             }
         }
 
@@ -35,7 +34,7 @@ namespace Midbaryom.Core
         private void Start()
         {
             CameraManager = new CameraManager(this, _camera, _cameraTransform);
-            PlayerController = new PlayerController(Entity);
+            PlayerController = new PlayerController(this,Entity);
         }
 
 
@@ -46,15 +45,21 @@ namespace Midbaryom.Core
             foreach (IUpdateable updateable in UpdateCollection)
                 updateable.Tick();
         }
+        private void LateUpdate()
+        {
+            CameraManager.Tick();
+        }
 
         [ContextMenu("HuntDown")]
-        private void HuntDown()
+        public void HuntDown()
         {
             CameraManager.ChangeState(CameraState.FaceDown);
+            Entity.HeightHandler.SetState(HeightType.Animal);
         }
         [ContextMenu("HuntUp")]
-        private void HuntUp()
+        public void HuntUp()
         {
+            Entity.HeightHandler.SetState(HeightType.Player);
             CameraManager.ChangeState(CameraState.FaceUp);
         }
     }

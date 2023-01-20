@@ -25,7 +25,7 @@ namespace Midbaryom.Core
 
     public class Locomotion : ILocomotion
     {
-        public event Func<Vector3> OnHeightRequested;
+        public event Func<float> OnHeightRequested;
         public event Func<Vector3> OnFaceTowardDirectionRequested;
 
         private readonly Rigidbody _rigidbody;
@@ -48,9 +48,9 @@ namespace Midbaryom.Core
         public void MoveTowards(Vector3 direction)
         {
             Vector3 nextPos = CurrentPosition;
-            nextPos += _movementStat.Value * direction;
-            nextPos.y = OnHeightRequested?.Invoke().y ?? CurrentPosition.y;
-            SetPosition( Vector3.MoveTowards(CurrentPosition, nextPos, Time.deltaTime));
+            nextPos +=  direction;
+            nextPos.y = OnHeightRequested?.Invoke() ?? CurrentPosition.y;
+            SetPosition( Vector3.MoveTowards(CurrentPosition, nextPos, _movementStat.Value*Time.deltaTime));
             //    _transform.position = Vector3.MoveTowards(CurrentPosition, nextPos, Time.deltaTime);
         }
 
@@ -106,12 +106,13 @@ namespace Midbaryom.Core
         protected virtual void RotateTowards()
         {
 
-            float currentYRotation = _transform.eulerAngles.y;
             float targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
-            float relativeAngle = targetAngle + currentYRotation;
-            float smoothAngle = Mathf.SmoothDampAngle(currentYRotation, relativeAngle, ref _currentVelocity, RotationSpeed);
 
-            _transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
+            float currentYRotation = _transform.eulerAngles.y;
+            float relativeAngle = targetAngle + currentYRotation;
+            //float smoothAngle = Mathf.SmoothDampAngle(currentYRotation, relativeAngle, ref _currentVelocity, RotationSpeed);
+            Quaternion lerpDirection = Quaternion.Lerp(_transform.rotation, Quaternion.Euler(0, relativeAngle, 0), RotationSpeed* Time.deltaTime);
+            _transform.rotation = lerpDirection;
         }
         protected virtual bool CanRotate()
         {
