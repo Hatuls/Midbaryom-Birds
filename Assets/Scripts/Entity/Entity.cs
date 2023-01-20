@@ -35,6 +35,8 @@ namespace Midbaryom.Core
         private TagSO[] _entityTags;
         [Header("Components:")]
         [SerializeField]
+        private Transform _transform;
+        [SerializeField]
         private Rigidbody _rigidbody;
 
 
@@ -45,7 +47,7 @@ namespace Midbaryom.Core
         private IHeightHandler _heightHandler;
         public Vector3 CurrentFacingDirection => MovementHandler.CurrentFacingDirection;
         public Vector3 CurrentPosition => MovementHandler.CurrentPosition;
-        public Transform Transform => transform;
+        public Transform Transform => _transform;
 
         public IEnumerable<TagSO> Tags
         {
@@ -79,13 +81,17 @@ namespace Midbaryom.Core
         {
             _destroyHandler = new DestroyBehaviour(this);
             _statHandler = new StatHandler(_stats);
-            _rotator = new Rotator(transform, false, _statHandler[StatType.RotationSpeed],transform.rotation);
-            _movementHandler = new Locomotion(transform, _rigidbody, false, _statHandler[StatType.MovementSpeed]);
-
+            _rotator = new Rotator(_transform, false, _statHandler[StatType.RotationSpeed],_transform.rotation);
+            _movementHandler = new Locomotion(_transform, _rigidbody, false, _statHandler[StatType.MovementSpeed]);
+            _heightHandler = new HeightHandler(_movementHandler as Locomotion, Transform, _entityTag.StartingHeight);
+        }
+        private void OnEnable()
+        {
+            Spawner.RegisterEntity(this);
         }
         private void Start()
         {
-            _heightHandler = new HeightHandler(_movementHandler as Locomotion,Transform, _entityTag.StartingHeight);
+       
         }
         private void Update()
         {
@@ -93,9 +99,14 @@ namespace Midbaryom.Core
                 updateable.Tick();
         }
 
+        private void OnDisable()
+        {
+            Spawner.RemoveEntity(this);
+        }
         private void OnDestroy()
         {
             _destroyHandler.Destroy();
+        
         }
     }
     public interface IUpdateable

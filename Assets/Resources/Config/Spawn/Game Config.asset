@@ -9,8 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d955aa7867b9b54ebb1d07e9e5dcce0, type: 3}
-  m_Name: PreyOne
+  m_Script: {fileID: 11500000, guid: dbdc072bee243da41b07885b7314c395, type: 3}
+  m_Name: Game Config
   m_EditorClassIdentifier: 
-  StartingHeight: 0
-  _entity: {fileID: 2377814402682266039, guid: dbbe737aab31db94884e6fdb91fbc153, type: 3}
+  SpawnRadius: 50
+  ReturnRadius: 70
+  MaxMobsCount: 2
+  SpawnerInfos:
+  - Tag: {fileID: 11400000, guid: 48ee5373ca4a2834cbd1f2bad47c7066, type: 2}
+    SpawnWeight: 1
+    MaxOfSameAnimal: 2

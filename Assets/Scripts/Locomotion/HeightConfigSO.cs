@@ -6,6 +6,21 @@ namespace Midbaryom.Core
     public class HeightConfigSO : ScriptableObject
     {
         public HeightTransition PlayerHeight, GroundHeight, AnimalHeight;
+
+        public HeightTransition GetHeight(HeightType heightType)
+        {
+            switch (heightType)
+            {
+                case HeightType.Animal:
+                    return AnimalHeight;
+                case HeightType.Ground:
+                    return GroundHeight;
+                case HeightType.Player:
+                    return PlayerHeight;
+                default:
+                    throw new System.Exception("Height was not found");
+            }
+        }
     }
 
     [System.Serializable]
@@ -18,6 +33,6 @@ namespace Midbaryom.Core
         private float Duration;
 
         public float Evaluate(float currentTime)
-        => Curve.Evaluate(currentTime / Duration);
+        => Curve.Evaluate(Duration == 0 ? 1 : currentTime / Duration);
     }
 }

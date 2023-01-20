@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2929675810174782666}
   - component: {fileID: 2178231446050063178}
+  - component: {fileID: 8635841005145571776}
   m_Layer: 0
-  m_Name: Pool Manager
+  m_Name: Game Systems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,3 +47,18 @@ MonoBehaviour:
   _poolStaterPacks:
   - EntityTagSO: {fileID: 11400000, guid: 48ee5373ca4a2834cbd1f2bad47c7066, type: 2}
     Amount: 0
+--- !u!114 &8635841005145571776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811118738576246599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e174fa9727ff19247a76cb91031fe89b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolManager: {fileID: 2178231446050063178}
+  _spawnConfig: {fileID: 11400000, guid: 96662b79441852048aef4ceed3d20473, type: 2}
+  _playerTag: {fileID: 11400000, guid: 8d99dff1cd95c3a469d397346a631ae1, type: 2}

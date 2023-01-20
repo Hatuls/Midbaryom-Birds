@@ -114,6 +114,7 @@ namespace Midbaryom.Camera
         private float _currentAngle;
         private float _currentTime;
         private float _startingAngle;
+        private Quaternion _rotation;
         public HuntCameraState( CameraRotationSO cameraRotationSO, Transform ObjectTransform, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation) : base(cameraRotationSO, transform, toLockRotation, rotationSpeed, startRotation)
         {
    
@@ -122,6 +123,7 @@ namespace Midbaryom.Camera
 
         public override void OnStateEnter()
         {
+            _rotation = _transform.localRotation;
             _startingAngle = _transform.localEulerAngles.x; 
             _currentAngle = 0;
             _currentTime = 0;
@@ -135,6 +137,8 @@ namespace Midbaryom.Camera
         private void CalculateAngle()
         {
             // maybe change it to currentvalue
+
+          //  Debug.Log($"");
             float remain = _cameraRotationSO.Angle - _startingAngle;
             _currentAngle = _startingAngle + _cameraRotationSO.Evaluate(_currentTime ) * remain;
             _currentTime += Time.deltaTime;
@@ -146,7 +150,7 @@ namespace Midbaryom.Camera
         protected override void RotateTowards()
         {
             Quaternion lookRotation = Quaternion.LookRotation(NewDirection);
-            Quaternion lerpDirection = Quaternion.Lerp(_transform.localRotation, lookRotation, RotationSpeed * Time.deltaTime);
+            Quaternion lerpDirection = Quaternion.Lerp(_rotation, lookRotation, _currentTime / _cameraRotationSO.Duration);
             lerpDirection.eulerAngles = new Vector3(lerpDirection.eulerAngles.x, 0f, 0f);
             _transform.localRotation = lerpDirection;
         }

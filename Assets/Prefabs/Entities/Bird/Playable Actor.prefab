@@ -223,6 +223,14 @@ PrefabInstance:
       propertyPath: _rigidbody
       value: 
       objectReference: {fileID: 5797710374111487261}
+    - target: {fileID: 8206922584222522397, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: _stats.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206922584222522397, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: _stats.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 62866e239e3fddd48aa854ea7750572c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
 --- !u!1 &8111495349040714921 stripped

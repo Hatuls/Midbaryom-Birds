@@ -28,16 +28,7 @@ namespace Midbaryom.Pool
 
         private void Awake()
         {
-            if (_instance == null)
-                _instance = this;
-            else if (_instance != this)
-            {
-                Destroy(this.gameObject);
-                return;
-            }
-
-            DontDestroyOnLoad(this.gameObject);
-
+            _instance = this;
             Init();
         }
 

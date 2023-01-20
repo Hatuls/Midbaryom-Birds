@@ -37,12 +37,12 @@ namespace Midbaryom.Inputs
 
         private void StartHundDown(InputAction.CallbackContext obj)
         {
-            _player.HuntDown();
+            _player.StateMachine.ChangeState(StateType.Dive);
         }
 
         private void EndHunt(InputAction.CallbackContext obj)
         {
-            _player.HuntUp();
+            _player.StateMachine.ChangeState(StateType.Recover);
         }
 
         public IEnumerable<InputAction> InputActions

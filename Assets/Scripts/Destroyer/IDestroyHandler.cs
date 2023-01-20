@@ -12,6 +12,7 @@ namespace Midbaryom.Core
         IReadOnlyList<IBehaviour> DestroyBehaviours { get; }
         void Destroy();
         void AddBehaviour(IBehaviour behaviour);
+       
         void RemoveBehaviour(IBehaviour behaviour);
     }
 

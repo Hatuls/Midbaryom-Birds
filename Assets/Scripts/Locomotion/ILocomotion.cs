@@ -8,6 +8,7 @@ namespace Midbaryom.Core
     /// </summary>
     public interface ILocomotion : ITrackable, IUpdateable
     {
+        bool AutoPilot { get; set; }
         bool StopMovement { get; set; }
         void SetPosition(Vector3 position);
         void MoveTowards(Vector3 direction);
@@ -33,10 +34,14 @@ namespace Midbaryom.Core
         private readonly IStat _movementStat;
         private bool _stopMovement;
         public bool StopMovement { get => _stopMovement; set => _stopMovement = value; }
-        public Vector3 CurrentFacingDirection => _transform.forward;
+        public Vector3 CurrentFacingDirection => _transform.forward.normalized;
         public Vector3 CurrentPosition => _transform.position;
+
+        public bool AutoPilot { get; set; }
+
         public Locomotion(Transform transform, Rigidbody rigidbody, bool stopMovement, IStat movementStat)
         {
+            AutoPilot = false;
             StopMovement = stopMovement;
             _movementStat = movementStat;
             _transform = transform;
@@ -49,13 +54,20 @@ namespace Midbaryom.Core
         {
             Vector3 nextPos = CurrentPosition;
             nextPos +=  direction;
+            Debug.Log(direction);
             nextPos.y = OnHeightRequested?.Invoke() ?? CurrentPosition.y;
-            SetPosition( Vector3.MoveTowards(CurrentPosition, nextPos, _movementStat.Value*Time.deltaTime));
+            Vector3 finalPosition = Vector3.MoveTowards(CurrentPosition, nextPos, _movementStat.Value * Time.deltaTime);
+            if (!finalPosition.IsNan())
+            SetPosition(finalPosition);
+            
             //    _transform.position = Vector3.MoveTowards(CurrentPosition, nextPos, Time.deltaTime);
         }
 
         public void Tick()
         {
+            if (StopMovement)
+                return;
+
             Vector3 direction = CurrentFacingDirection;
             MoveTowards(direction);
         }
@@ -125,4 +137,12 @@ namespace Midbaryom.Core
 
         public Quaternion StartingRotation() => _startRotation;
     }
+}
+
+public static class VectorHelper
+{
+    public static bool IsNan(this Vector3 vector3)
+        => vector3.x.IsNan() || vector3.y.IsNan() || vector3.z.IsNan();
+
+        public static bool IsNan(this float v) => float.IsNaN(v);
 }

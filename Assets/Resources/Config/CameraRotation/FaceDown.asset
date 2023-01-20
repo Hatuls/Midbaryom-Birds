@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FaceDown
   m_EditorClassIdentifier: 
   Angle: 80
-  Duration: 0.2
+  Duration: 0.5
   Curve:
     serializedVersion: 2
     m_Curve:

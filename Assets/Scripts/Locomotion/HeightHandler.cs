@@ -13,32 +13,35 @@ namespace Midbaryom.Core
 
     public interface IHeightHandler : IUpdateable
     {
-        void SetState(HeightType heightType);
+        void ChangeState(HeightType heightType);
+        HeightConfigSO HeightConfigSO { get; }
     }
     public class HeightHandler : IHeightHandler
     {
         private readonly Locomotion _locomotion;
-        private readonly Dictionary<HeightType, IState> _states;
+        private readonly Dictionary<HeightType, HeightState> _states;
         private HeightType _currentHeight;
         private float _currentFloat;
-
+        public HeightConfigSO HeightConfigSO { get; }
         public HeightHandler(Locomotion locomotion,Transform transform,HeightType startingState)
         {
             _locomotion = locomotion;
             _currentHeight = startingState;
 
-            HeightConfigSO heightConfigSO = GameManager.Instance.HeightConfigSO;
+            HeightConfigSO = GameManager.Instance.HeightConfigSO;
 
-            _states = new Dictionary<HeightType, IState>()
+            _states = new Dictionary<HeightType, HeightState>()
             {
-                {HeightType.Animal,new HeightState(transform, heightConfigSO.AnimalHeight) },
-                {HeightType.Ground,new HeightState(transform, heightConfigSO.GroundHeight) },
-                {HeightType.Player,new HeightState(transform, heightConfigSO.PlayerHeight) },
+                {HeightType.Animal,new HeightState(transform, HeightConfigSO.AnimalHeight) },
+                {HeightType.Ground,new HeightState(transform, HeightConfigSO.GroundHeight) },
+                {HeightType.Player,new HeightState(transform, HeightConfigSO.PlayerHeight) },
             };
-            SetStartPosition(transform, heightConfigSO);
+            SetStartPosition(transform, HeightConfigSO);
 
             _locomotion.OnHeightRequested += GetHeightValue;
-            HeightState.OnHeightNeeded += SetHeightValue;
+
+            foreach (var item in _states)
+          item.Value.OnHeightNeeded += SetHeightValue;
            
             void SetStartPosition(Transform transform, HeightConfigSO heightConfigSO)
             {
@@ -64,21 +67,22 @@ namespace Midbaryom.Core
 
         ~HeightHandler()
         {
-            HeightState.OnHeightNeeded -= SetHeightValue;
+            foreach (var item in _states)
+           item.Value.OnHeightNeeded -= SetHeightValue;
             _locomotion.OnHeightRequested -= GetHeightValue;
         }
         public IState CurrentState => GetState(_currentHeight);
 
         private IState GetState(HeightType heightType)
         {
-            if (_states.TryGetValue(heightType, out IState state))
+            if (_states.TryGetValue(heightType, out HeightState state))
                 return state;
 
             throw new System.Exception($"HeightHandler: State was not found: {heightType}");
         }
         private void SetHeightValue(float val) => _currentFloat = val;
         private float GetHeightValue() => _currentFloat;
-        public void SetState(HeightType heightType)
+        public void ChangeState(HeightType heightType)
         {
             if (heightType == _currentHeight)
                 return;
@@ -95,10 +99,10 @@ namespace Midbaryom.Core
 
     public class HeightState : IState
     {
-        public static event Action<float> OnHeightNeeded;
+        public event Action<float> OnHeightNeeded;
         protected readonly Transform Transform;
         protected readonly HeightTransition HeightTransition;
-        protected static float _counter;
+        protected float _counter;
         public HeightState(Transform transform,HeightTransition heightTransition)
         {
             Transform = transform;
@@ -121,9 +125,9 @@ namespace Midbaryom.Core
             float currentHeight = Transform.position.y;
             float remainDistance = HeightTransition.Height - currentHeight;
 
+            _counter += Time.deltaTime;
             currentHeight += GetHeightValue() * remainDistance;
             OnHeightNeeded?.Invoke(currentHeight);
-            _counter += Time.deltaTime;
         }
     }
 
