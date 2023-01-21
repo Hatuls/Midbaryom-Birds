@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: 44866d59845ff1d4eb07b7207e66650d
+timeCreated: 1551384496
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Head
+    100004: Jaw
+    100006: LeftFang01
+    100008: LeftFang02
+    100010: LeftFang03
+    100012: LeftTongue01
+    100014: LeftTongue02
+    100016: LeftTongue03
+    100018: LeftTongue04
+    100020: LeftTongue05
+    100022: LeftTongue06
+    100024: LowerLip
+    100026: RightFang01
+    100028: RightFang02
+    100030: RightFang03
+    100032: RightTongue01
+    100034: RightTongue02
+    100036: RightTongue03
+    100038: RightTongue04
+    100040: RightTongue05
+    100042: RightTongue06
+    100044: Spine01
+    100046: Spine02
+    100048: Spine03
+    100050: Spine04
+    100052: Spine05
+    100054: Spine06
+    100056: Spine07
+    100058: Spine08
+    100060: Spine09
+    100062: Spine10
+    100064: Spine11
+    100066: Spine12
+    100068: Spine13
+    100070: Spine14
+    100072: Spine15
+    100074: Spine16
+    100076: Spine17
+    100078: Spine18
+    100080: Spine19
+    100082: Spine20
+    100084: Spine21
+    100086: Spine22
+    100088: Spine23
+    100090: Spine24
+    100092: Spine25
+    100094: Spine26
+    100096: Spine27
+    100098: Spine28
+    100100: Spine29
+    100102: Spine30
+    100104: Spine31
+    100106: Spine32
+    100108: Spine33
+    100110: Spine34
+    100112: Spine35
+    100114: Spine36
+    100116: Spine37
+    100118: Spine38
+    100120: Spine39
+    100122: Spine40
+    100124: Spine41
+    100126: Spine42
+    100128: Spine43
+    100130: Spine44
+    100132: Spine45
+    100134: Spine46
+    100136: Spine47
+    100138: Spine48
+    100140: Spine49
+    100142: ThroatBone
+    100144: Tongue01
+    100146: Tongue02
+    100148: Tongue03
+    100150: Tongue04
+    100152: Tongue05
+    100154: Tongue06
+    100156: Tongue07
+    100158: Tongue08
+    100160: Tongue09
+    100162: Tongue10
+    100164: Tongue11
+    100166: UpperLip
+    400000: //RootNode
+    400002: Head
+    400004: Jaw
+    400006: LeftFang01
+    400008: LeftFang02
+    400010: LeftFang03
+    400012: LeftTongue01
+    400014: LeftTongue02
+    400016: LeftTongue03
+    400018: LeftTongue04
+    400020: LeftTongue05
+    400022: LeftTongue06
+    400024: LowerLip
+    400026: RightFang01
+    400028: RightFang02
+    400030: RightFang03
+    400032: RightTongue01
+    400034: RightTongue02
+    400036: RightTongue03
+    400038: RightTongue04
+    400040: RightTongue05
+    400042: RightTongue06
+    400044: Spine01
+    400046: Spine02
+    400048: Spine03
+    400050: Spine04
+    400052: Spine05
+    400054: Spine06
+    400056: Spine07
+    400058: Spine08
+    400060: Spine09
+    400062: Spine10
+    400064: Spine11
+    400066: Spine12
+    400068: Spine13
+    400070: Spine14
+    400072: Spine15
+    400074: Spine16
+    400076: Spine17
+    400078: Spine18
+    400080: Spine19
+    400082: Spine20
+    400084: Spine21
+    400086: Spine22
+    400088: Spine23
+    400090: Spine24
+    400092: Spine25
+    400094: Spine26
+    400096: Spine27
+    400098: Spine28
+    400100: Spine29
+    400102: Spine30
+    400104: Spine31
+    400106: Spine32
+    400108: Spine33
+    400110: Spine34
+    400112: Spine35
+    400114: Spine36
+    400116: Spine37
+    400118: Spine38
+    400120: Spine39
+    400122: Spine40
+    400124: Spine41
+    400126: Spine42
+    400128: Spine43
+    400130: Spine44
+    400132: Spine45
+    400134: Spine46
+    400136: Spine47
+    400138: Spine48
+    400140: Spine49
+    400142: ThroatBone
+    400144: Tongue01
+    400146: Tongue02
+    400148: Tongue03
+    400150: Tongue04
+    400152: Tongue05
+    400154: Tongue06
+    400156: Tongue07
+    400158: Tongue08
+    400160: Tongue09
+    400162: Tongue10
+    400164: Tongue11
+    400166: UpperLip
+    7400000: Turn_Right_01
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Turn_Right_01
+      takeName: Base Stack
+      firstFrame: 2235
+      lastFrame: 2295
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Spine23
+        weight: 1
+      - path: Spine23/Spine22
+        weight: 1
+      - path: Spine23/Spine22/Spine21
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/LowerLip
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11/LeftTongue01
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11/LeftTongue01/LeftTongue02
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11/LeftTongue01/LeftTongue02/LeftTongue03
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11/LeftTongue01/LeftTongue02/LeftTongue03/LeftTongue04
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11/LeftTongue01/LeftTongue02/LeftTongue03/LeftTongue04/LeftTongue05
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11/LeftTongue01/LeftTongue02/LeftTongue03/LeftTongue04/LeftTongue05/LeftTongue06
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11/RightTongue01
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11/RightTongue01/RightTongue02
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11/RightTongue01/RightTongue02/RightTongue03
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11/RightTongue01/RightTongue02/RightTongue03/RightTongue04
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11/RightTongue01/RightTongue02/RightTongue03/RightTongue04/RightTongue05
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/Jaw/Tongue01/Tongue02/Tongue03/Tongue04/Tongue05/Tongue06/Tongue07/Tongue08/Tongue09/Tongue10/Tongue11/RightTongue01/RightTongue02/RightTongue03/RightTongue04/RightTongue05/RightTongue06
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/LeftFang01
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/LeftFang01/LeftFang02
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/LeftFang01/LeftFang02/LeftFang03
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/RightFang01
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/RightFang01/RightFang02
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/RightFang01/RightFang02/RightFang03
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/Head/UpperLip
+        weight: 1
+      - path: Spine23/Spine22/Spine21/Spine20/Spine19/Spine18/Spine17/Spine16/Spine15/Spine14/Spine13/Spine12/Spine11/Spine10/Spine09/Spine08/Spine07/Spine06/Spine05/Spine04/Spine03/Spine02/Spine01/ThroatBone
+        weight: 1
+      - path: Spine23/Spine24
+        weight: 1
+      - path: Spine23/Spine24/Spine25
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37/Spine38
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37/Spine38/Spine39
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37/Spine38/Spine39/Spine40
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37/Spine38/Spine39/Spine40/Spine41
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37/Spine38/Spine39/Spine40/Spine41/Spine42
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37/Spine38/Spine39/Spine40/Spine41/Spine42/Spine43
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37/Spine38/Spine39/Spine40/Spine41/Spine42/Spine43/Spine44
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37/Spine38/Spine39/Spine40/Spine41/Spine42/Spine43/Spine44/Spine45
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37/Spine38/Spine39/Spine40/Spine41/Spine42/Spine43/Spine44/Spine45/Spine46
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37/Spine38/Spine39/Spine40/Spine41/Spine42/Spine43/Spine44/Spine45/Spine46/Spine47
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37/Spine38/Spine39/Spine40/Spine41/Spine42/Spine43/Spine44/Spine45/Spine46/Spine47/Spine48
+        weight: 1
+      - path: Spine23/Spine24/Spine25/Spine26/Spine27/Spine28/Spine29/Spine30/Spine31/Spine32/Spine33/Spine34/Spine35/Spine36/Spine37/Spine38/Spine39/Spine40/Spine41/Spine42/Spine43/Spine44/Spine45/Spine46/Spine47/Spine48/Spine49
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 1
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: Spine23
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 96655e18227ff724fb692238bbe40066,
+    type: 3}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
