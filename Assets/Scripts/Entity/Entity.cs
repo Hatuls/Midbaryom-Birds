@@ -1,4 +1,5 @@
 using Midbaryom.Camera;
+using Midbaryom.Visual;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace Midbaryom.Core
         IStatHandler StatHandler { get; }
         ILocomotion MovementHandler { get; }
         IDestroyHandler DestroyHandler { get; }
+        IVisualHandler VisualHandler { get; }
     }
 
     public interface IBehaviour
@@ -38,7 +40,8 @@ namespace Midbaryom.Core
         private Transform _transform;
         [SerializeField]
         private Rigidbody _rigidbody;
-
+        [SerializeField]
+        private VisualHandler _visualHandler;
 
         private IRotator _rotator;
         private IDestroyHandler _destroyHandler;
@@ -48,7 +51,7 @@ namespace Midbaryom.Core
         public Vector3 CurrentFacingDirection => MovementHandler.CurrentFacingDirection;
         public Vector3 CurrentPosition => MovementHandler.CurrentPosition;
         public Transform Transform => _transform;
-
+        public IVisualHandler VisualHandler => _visualHandler;
         public IEnumerable<TagSO> Tags
         {
             get
@@ -84,15 +87,14 @@ namespace Midbaryom.Core
             _rotator = new Rotator(_transform, false, _statHandler[StatType.RotationSpeed],_transform.rotation);
             _movementHandler = new Locomotion(_transform, _rigidbody, false, _statHandler[StatType.MovementSpeed]);
             _heightHandler = new HeightHandler(_movementHandler as Locomotion, Transform, _entityTag.StartingHeight);
+
         }
         private void OnEnable()
         {
             Spawner.RegisterEntity(this);
+            VisualHandler?.Init(this);
         }
-        private void Start()
-        {
-       
-        }
+      
         private void Update()
         {
             foreach (IUpdateable updateable in UpdateNeeded)

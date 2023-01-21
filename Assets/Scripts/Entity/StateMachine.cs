@@ -155,17 +155,22 @@ namespace Midbaryom.Core
         {
             base.OnStateEnter();
             _entity.MovementHandler.StopMovement = true;
+            _entity.Rotator.StopRotation = true;
+            _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", 0);
         }
         public override void OnStateExit()
         {
             base.OnStateExit();
             _entity.MovementHandler.StopMovement = false;
+            _entity.Rotator.StopRotation = false;
+ 
+
         }
     }
 
     public class AIMoveState : BaseState
     {
-        private static float _angle = 45f;
+        private static float _angle = 40f;
         private float _counter;
         private float _duration;
         private Vector2 _rotationTime;
@@ -190,6 +195,7 @@ namespace Midbaryom.Core
 
         public override void OnStateEnter()
         {
+            _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", .5f);
             base.OnStateExit();
             ResetParams();
         }

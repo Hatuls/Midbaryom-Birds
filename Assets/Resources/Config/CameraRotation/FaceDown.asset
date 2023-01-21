@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0eda18304686c646bcbd2cd34e770ca, type: 3}
   m_Name: FaceDown
   m_EditorClassIdentifier: 
-  Angle: 80
+  Angle: 75
   Duration: 0.5
   Curve:
     serializedVersion: 2

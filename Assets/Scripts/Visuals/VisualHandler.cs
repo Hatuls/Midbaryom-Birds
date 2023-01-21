@@ -3,9 +3,16 @@ using System;
 using UnityEngine;
 namespace Midbaryom.Visual
 {
-
-    public class VisualHandler : MonoBehaviour
+    public interface IVisualHandler
     {
+        IAnimatorController AnimatorController { get; }
+
+        void Init(IEntity entity);
+    }
+
+    public class VisualHandler : MonoBehaviour, IVisualHandler
+    {
+
         [SerializeField]
         private AnimatorController _animatorController;
         public IAnimatorController AnimatorController => _animatorController;
@@ -21,25 +28,38 @@ namespace Midbaryom.Visual
         [SerializeField]
         private Animator _animator;
         public Animator Animator => _animator;
-
-        private IStat _movementSpeed;
-        private int MovementSpeedHash = Animator.StringToHash("Speed");
+        private IRotator _rotator;
+        private ILocomotion _locomotion;
+        private IStat _movmenetSpeed;
+     
+        private int RotationHash = Animator.StringToHash("Turn");
         internal void Init(IEntity entity)
         {
-            _movementSpeed = entity.StatHandler[StatType.MovementSpeed];
-         _movementSpeed.OnValueChanged += AssignMovementSpeed;
+            _movmenetSpeed = entity.StatHandler[StatType.MovementSpeed];
+            _locomotion = entity.MovementHandler;
+            _rotator = entity.Rotator;
+            _rotator.OnFaceDirection += AssignRotation;
+            _locomotion.OnMove += AssignMovementSpeed;
             entity.DestroyHandler.AddBehaviour(this);
         }
 
+        private void AssignRotation(float angle)
+        {
+           // Animator.SetFloat(RotationHash, -angle);
+        }
 
         private void AssignMovementSpeed(float speed)
         {
-            Animator.SetFloat(MovementSpeedHash, speed);
+            //float startSpeed = _movmenetSpeed.StartValue;
+            //speed /= startSpeed * 2;
+            //Animator.SetFloat("Forward", speed);
+
         }
 
         public void ApplyBehaviour()
         {
-            _movementSpeed.OnValueChanged -= AssignMovementSpeed;
+            _rotator.OnFaceDirection -= AssignRotation;
+            _locomotion.OnMove -= AssignMovementSpeed;
         }
     }
 

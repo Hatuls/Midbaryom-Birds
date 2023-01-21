@@ -76,13 +76,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityTag: {fileID: 0}
-  _stats:
-  - {fileID: 11400000, guid: 643c91707cd803d4ca266f111a3c4343, type: 2}
-  - {fileID: 11400000, guid: 0fd53c894b3c99a4ba6759a627e30bb4, type: 2}
-  - {fileID: 11400000, guid: c9a84d8b9393f1749a482ee3907d2288, type: 2}
+  _stats: []
   _entityTags: []
   _transform: {fileID: 8559331389127733801}
   _rigidbody: {fileID: 0}
+  _visualHandler: {fileID: 0}
 --- !u!1 &8552093136087515650
 GameObject:
   m_ObjectHideFlags: 0

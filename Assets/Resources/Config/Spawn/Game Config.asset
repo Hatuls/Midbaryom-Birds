@@ -14,8 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnRadius: 50
   ReturnRadius: 70
-  MaxMobsCount: 2
+  MaxMobsCount: 3
   SpawnerInfos:
   - Tag: {fileID: 11400000, guid: 48ee5373ca4a2834cbd1f2bad47c7066, type: 2}
     SpawnWeight: 1
+    MaxOfSameAnimal: 2
+  - Tag: {fileID: 11400000, guid: 279f4f4260fcd9e4489670a971c8edf1, type: 2}
+    SpawnWeight: 2
+    MaxOfSameAnimal: 2
+  - Tag: {fileID: 11400000, guid: 435a0728e671d3e4fa294487a677fef3, type: 2}
+    SpawnWeight: 2
+    MaxOfSameAnimal: 2
+  - Tag: {fileID: 11400000, guid: b861e76536d8ca94aa6b6fefa9ad857f, type: 2}
+    SpawnWeight: 2
     MaxOfSameAnimal: 2

@@ -8,11 +8,11 @@ namespace Midbaryom.Core
     /// </summary>
     public interface ILocomotion : ITrackable, IUpdateable
     {
+        event Action<float> OnMove;
         bool AutoPilot { get; set; }
         bool StopMovement { get; set; }
         void SetPosition(Vector3 position);
         void MoveTowards(Vector3 direction);
-
     }
     public interface IForwardDirection
     {
@@ -28,7 +28,7 @@ namespace Midbaryom.Core
     {
         public event Func<float> OnHeightRequested;
         public event Func<Vector3> OnFaceTowardDirectionRequested;
-
+        public event Action<float> OnMove;
         private readonly Rigidbody _rigidbody;
         private readonly Transform _transform;
         private readonly IStat _movementStat;
@@ -56,17 +56,21 @@ namespace Midbaryom.Core
             nextPos +=  direction;
             Debug.Log(direction);
             nextPos.y = OnHeightRequested?.Invoke() ?? CurrentPosition.y;
-            Vector3 finalPosition = Vector3.MoveTowards(CurrentPosition, nextPos, _movementStat.Value * Time.deltaTime);
+            float movementSpeed = _movementStat.Value;
+            Vector3 finalPosition = Vector3.MoveTowards(CurrentPosition, nextPos, movementSpeed * Time.deltaTime);
             if (!finalPosition.IsNan())
             SetPosition(finalPosition);
-            
+            OnMove?.Invoke(movementSpeed);
             //    _transform.position = Vector3.MoveTowards(CurrentPosition, nextPos, Time.deltaTime);
         }
 
         public void Tick()
         {
             if (StopMovement)
+            {
+                OnMove?.Invoke(0);
                 return;
+            }
 
             Vector3 direction = CurrentFacingDirection;
             MoveTowards(direction);
@@ -80,6 +84,8 @@ namespace Midbaryom.Core
 
     public interface IRotator : IForwardDirection, IUpdateable
     {
+        event Action<float> OnFaceDirection;
+        bool StopRotation { get; set; }
         Vector3 NewDirection { get; }
         Quaternion StartingRotation();
         void AssignRotation(Vector3 direction);
@@ -92,6 +98,9 @@ namespace Midbaryom.Core
         protected float _currentVelocity;
         protected bool _lockRotation;
         protected Vector3 _direction;
+
+        public event Action<float> OnFaceDirection;
+
         public Rotator(Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation)
         {
             _lockRotation = toLockRotation;
@@ -103,7 +112,7 @@ namespace Midbaryom.Core
         public Vector3 NewDirection => _direction;
         public float RotationSpeed => _rotationSpeed.Value;
         public Vector3 CurrentFacingDirection => _transform.forward;
-
+        public bool StopRotation { get => _lockRotation; set => _lockRotation = value; }
         public void AssignRotation(Vector3 direction)
         {
             _direction = direction;
@@ -125,10 +134,12 @@ namespace Midbaryom.Core
             //float smoothAngle = Mathf.SmoothDampAngle(currentYRotation, relativeAngle, ref _currentVelocity, RotationSpeed);
             Quaternion lerpDirection = Quaternion.Lerp(_transform.rotation, Quaternion.Euler(0, relativeAngle, 0), RotationSpeed* Time.deltaTime);
             _transform.rotation = lerpDirection;
+
+            OnFaceDirection?.Invoke(relativeAngle);
         }
         protected virtual bool CanRotate()
         {
-            return (!_lockRotation && NewDirection.magnitude > 0);
+            return (!StopRotation && NewDirection.magnitude > 0);
         }
 
 

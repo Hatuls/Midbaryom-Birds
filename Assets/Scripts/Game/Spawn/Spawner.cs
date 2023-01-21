@@ -59,7 +59,11 @@ namespace Midbaryom.Core
             if(tooFarEntities.Count>0)
             {
                 for (int i = 0; i < tooFarEntities.Count; i++)
+                {
                     tooFarEntities[i].DestroyHandler.Destroy();
+                    tooFarEntities[i].Transform.gameObject.SetActive(false);
+                }
+                tooFarEntities.Clear();
             }
         }
 
