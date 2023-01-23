@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Actor
       objectReference: {fileID: 0}
+    - target: {fileID: 8206922584222522397, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: _visualHandler
+      value: 
+      objectReference: {fileID: 13430798890228883}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
 --- !u!1 &6754008762620876418 stripped
@@ -73,6 +77,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931cfcd9ee4813f4cb14955e004e7128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6962055027989364484 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6366026649775990322, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+  m_PrefabInstance: {fileID: 4091128471069546806}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2281044800852341107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,3 +95,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entity: {fileID: 5269848389614339371}
+--- !u!114 &13430798890228883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6962055027989364484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e580f9d3c501684bbe613110f68bfc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visualTransform: {fileID: 0}
+  _animatorController:
+    _animator: {fileID: 0}

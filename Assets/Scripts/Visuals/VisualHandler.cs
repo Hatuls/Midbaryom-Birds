@@ -6,32 +6,41 @@ namespace Midbaryom.Visual
     public interface IVisualHandler
     {
         IAnimatorController AnimatorController { get; }
-
+        Transform VisualTransform { get; }
         void Init(IEntity entity);
     }
 
     public class VisualHandler : MonoBehaviour, IVisualHandler
     {
-
+        [SerializeField]
+        private Transform _visualTransform;
         [SerializeField]
         private AnimatorController _animatorController;
         public IAnimatorController AnimatorController => _animatorController;
+
+        public Transform VisualTransform { get => _visualTransform; }
 
         public void Init(IEntity entity)
         {
             _animatorController.Init(entity);
         }
+
+        private void LateUpdate()
+        {
+            _visualTransform.transform.localPosition = Vector3.zero;
+        }
     }
     [Serializable]
     public class AnimatorController : IAnimatorController, IBehaviour
     {
+
         [SerializeField]
         private Animator _animator;
         public Animator Animator => _animator;
         private IRotator _rotator;
         private ILocomotion _locomotion;
         private IStat _movmenetSpeed;
-     
+
         private int RotationHash = Animator.StringToHash("Turn");
         internal void Init(IEntity entity)
         {
@@ -45,7 +54,7 @@ namespace Midbaryom.Visual
 
         private void AssignRotation(float angle)
         {
-           // Animator.SetFloat(RotationHash, -angle);
+            // Animator.SetFloat(RotationHash, -angle);
         }
 
         private void AssignMovementSpeed(float speed)

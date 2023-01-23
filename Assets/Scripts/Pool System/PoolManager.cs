@@ -46,8 +46,12 @@ namespace Midbaryom.Pool
                     int amount = poolStaterPack.Amount;
 
                     for (int j = 0; j < amount; j++)
-                        InstantiateEntity(poolStaterPack.EntityTagSO).DestroyHandler.Destroy();
+                    {
+                        var entity = InstantiateEntity(poolStaterPack.EntityTagSO);
+                            entity.DestroyHandler.Destroy();
+                    }
                 }
+                ReturnAllBack();
             }
         }
 
@@ -83,6 +87,7 @@ namespace Midbaryom.Pool
         {
             _activeEntities.Remove(obj);
             _notActiveEntities.Add(obj);
+            obj.Transform.gameObject.SetActive(false);
         }
         public void ReturnAllBack()
         {

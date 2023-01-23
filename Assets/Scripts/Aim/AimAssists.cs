@@ -24,12 +24,12 @@ namespace Midbaryom.Core
         [SerializeField, Range(0, 100f)]
         private float _radius;
         [SerializeField, Range(0, 200f)]
-        private float _maxDistance;
+        private float _rayDistance;
 
 
         [SerializeField]
         private Vector3 _offset ;
-        public bool HasTarget { get; private set; }
+        public bool HasTarget => Target != null;
         public IEntity Target { get; private set; }
 
         public IReadOnlyList<IEntity> AllActiveEntities => PoolManager.Instance.ActiveEntities;
@@ -81,7 +81,7 @@ namespace Midbaryom.Core
                     currentEntity = allActiveEntities[i];
                     float currentsTargetDistance = GetDistance(currentEntity, middleScanPoint);
 
-                    if (currentsTargetDistance < _maxDistance)
+                    if (currentsTargetDistance < _radius)
                     {
                         if (closestTarget == null)
                             closestTarget = currentEntity;
@@ -101,7 +101,6 @@ namespace Midbaryom.Core
         public void ResetTarget()
         {
             Target = null;
-            HasTarget = false;
             if (OnTargetReset != null)
                 OnTargetReset.Invoke();
         }
@@ -109,15 +108,15 @@ namespace Midbaryom.Core
         private bool ShootRaycast(Vector3 direction, out RaycastHit raycastHit)
         {
             Ray rei = new Ray(transform.position, direction);
-            return Physics.Raycast(rei, out raycastHit, _maxDistance, _layerMaskIndex);
+            return Physics.Raycast(rei, out raycastHit, _rayDistance, _layerMaskIndex);
         }
         private void OnDrawGizmosSelected()
         {
-
+      
             Gizmos.color = HasTarget ? Color.green : Color.red;
             Vector3 direction = ScreenToWorldPoint() - transform.position;
             
-            Gizmos.DrawLine(transform.position, transform.position + direction*_maxDistance);
+            Gizmos.DrawLine(transform.position, transform.position + direction*_rayDistance);
           if( ShootRaycast(direction.normalized,out RaycastHit hit))
             Gizmos.DrawWireSphere(hit.point, _radius);
             Gizmos.color = Color.blue;

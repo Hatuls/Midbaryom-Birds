@@ -9,6 +9,8 @@ namespace Midbaryom.Core
 
     public class Spawner : MonoBehaviour
     {
+        public static Spawner Instance;
+
         private static List<IEntity> _activeEntities = new List<IEntity>();
         [SerializeField]
         private PoolManager _poolManager;
@@ -28,6 +30,11 @@ namespace Midbaryom.Core
         public static void RemoveEntity(IEntity entity)
             => _activeEntities.Remove(entity);
 
+        public void Awake()
+        {
+        Instance = this;
+            
+        }
         private void Start()
         {
             _heightConfigSO = GameManager.Instance.HeightConfigSO;

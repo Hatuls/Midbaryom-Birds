@@ -25,7 +25,10 @@ public class AIBehaviour : MonoBehaviour
             new AIIdleState(_entity),
             new AIMoveState(_entity),
         };
-        _stateMachine = new StateMachine(StateType.Idle, AIStates);
+
+        int randomState = UnityEngine.Random.Range(0, AIStates.Length);
+
+        _stateMachine = new StateMachine(AIStates[randomState].StateType, AIStates);
         _aIBrain = new AIBrain(_stateMachine);
     }
     private void Update()

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rabbit Speed
   m_EditorClassIdentifier: 
   StatType: 0
-  StartValue: 1
+  StartValue: 4
   _hasMinValue: 1
   _minValue: 0
   _hasMaxValue: 0

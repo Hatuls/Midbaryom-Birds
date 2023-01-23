@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnRadius: 50
   ReturnRadius: 70
-  MaxMobsCount: 3
+  MaxMobsCount: 5
   SpawnerInfos:
   - Tag: {fileID: 11400000, guid: 48ee5373ca4a2834cbd1f2bad47c7066, type: 2}
     SpawnWeight: 1

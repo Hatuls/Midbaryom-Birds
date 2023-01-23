@@ -54,7 +54,7 @@ namespace Midbaryom.Core
         {
             Vector3 nextPos = CurrentPosition;
             nextPos +=  direction;
-            Debug.Log(direction);
+       
             nextPos.y = OnHeightRequested?.Invoke() ?? CurrentPosition.y;
             float movementSpeed = _movementStat.Value;
             Vector3 finalPosition = Vector3.MoveTowards(CurrentPosition, nextPos, movementSpeed * Time.deltaTime);
