@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa487fdf674db040aac2e4080fdd231, type: 3}
+  m_Name: Generic AI Config
+  m_EditorClassIdentifier: 
+  TargetDestinationRadius: 100
+  AIBrainConfigs:
+  - stateType: 0
+    MinMaxDuration: {x: 2, y: 5}
+  - stateType: 3
+    MinMaxDuration: {x: 10, y: 15}

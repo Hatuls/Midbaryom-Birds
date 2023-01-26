@@ -20,6 +20,10 @@ namespace Midbaryom.Core
 
         [SerializeField]
         private EntityTagSO _playerTag;
+
+        [SerializeField]
+        private bool _toStopReposition;
+
         private HeightConfigSO _heightConfigSO;
         private IEntity _player;
         UnityEngine.Camera _camera;
@@ -43,7 +47,7 @@ namespace Midbaryom.Core
         }
 
 
-        private void Update()
+        private void FixedUpdate()
         {
             // check if there is enough mobs on the map
             // if not then spawn new mob
@@ -52,7 +56,7 @@ namespace Midbaryom.Core
 
             // check all mobs locations and distance from the player
             // any far mob will need to be repositioned;
-
+            if(!_toStopReposition)
             RePositionMob();
         }
 

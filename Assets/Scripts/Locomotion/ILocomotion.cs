@@ -88,6 +88,7 @@ namespace Midbaryom.Core
         bool StopRotation { get; set; }
         Vector3 NewDirection { get; }
         Quaternion StartingRotation();
+        void SetRotation(Quaternion quaternion);
         void AssignRotation(Vector3 direction);
     }
     public class Rotator : IRotator
@@ -133,7 +134,7 @@ namespace Midbaryom.Core
             float relativeAngle = targetAngle + currentYRotation;
             //float smoothAngle = Mathf.SmoothDampAngle(currentYRotation, relativeAngle, ref _currentVelocity, RotationSpeed);
             Quaternion lerpDirection = Quaternion.Lerp(_transform.rotation, Quaternion.Euler(0, relativeAngle, 0), RotationSpeed* Time.deltaTime);
-            _transform.rotation = lerpDirection;
+            SetRotation(lerpDirection);
 
             OnFaceDirection?.Invoke(relativeAngle);
         }
@@ -142,7 +143,7 @@ namespace Midbaryom.Core
             return (!StopRotation && NewDirection.magnitude > 0);
         }
 
-
+        public void SetRotation(Quaternion rotation) => _transform.rotation = rotation;
         public void Lock() => _lockRotation = true;
         public void UnLock() => _lockRotation = false;
 

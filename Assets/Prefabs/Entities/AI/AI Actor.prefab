@@ -94,7 +94,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207707669819a414c87e9cd44a005bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _agent: {fileID: 1419693908867709460}
+  _aIBehaviourSO: {fileID: 11400000, guid: e9a4daef23e9e3a41af3727617257fc6, type: 2}
   _entity: {fileID: 5269848389614339371}
+--- !u!195 &1419693908867709460
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754008762620876418}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &13430798890228883
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,6 +16,10 @@ namespace Midbaryom.Core
         [SerializeField]
         private AimAssists _aimAssists;
 
+        [SerializeField]
+        private ParticleSystem _particleSystem;
+        private PlayerDiveState _playerDiveState;
+
         private StateMachine _playerStateMachine;
         public IEntity Entity => _entity;
         public IEnumerable<TagSO> Tags => Entity.Tags;
@@ -37,14 +41,20 @@ namespace Midbaryom.Core
             CameraManager = new CameraManager(this, _camera, _cameraTransform);
             PlayerController = new PlayerController(this, Entity);
             InitStateMachine();
+
+
         }
 
         private void InitStateMachine()
         {
+            _playerDiveState = new PlayerDiveState(this, Entity.StatHandler[StatType.DiveSpeed]);
+            _playerDiveState.OnStateEnterEvent += _particleSystem.Play;
+            _playerDiveState.OnStateExitEvent += _particleSystem.Stop;
+            
             BaseState[] baseStates = new BaseState[]
             {
                 new PlayerIdleState(this),
-                new PlayerDiveState(this,Entity.StatHandler[StatType.DiveSpeed]),
+           _playerDiveState   ,
                 new PlayerRecoverState(this),
             };
             _playerStateMachine = new StateMachine(StateType.Idle, baseStates);
@@ -55,23 +65,16 @@ namespace Midbaryom.Core
             foreach (IUpdateable updateable in UpdateCollection)
                 updateable.Tick();
         }
+        
         private void LateUpdate()
         {
             CameraManager.Tick();
         }
-
-        //[ContextMenu("HuntDown")]
-        //public void HuntDown()
-        //{
-        //    CameraManager.ChangeState(CameraState.FaceDown);
-        //    Entity.HeightHandler.ChangeState(HeightType.Animal);
-        //}
-        //[ContextMenu("HuntUp")]
-        //public void HuntUp()
-        //{
-        //    Entity.HeightHandler.ChangeState(HeightType.Player);
-        //    CameraManager.ChangeState(CameraState.FaceUp);
-        //}
+        private void OnDestroy()
+        {
+            _playerDiveState.OnStateEnterEvent -= _particleSystem.Play;
+            _playerDiveState.OnStateExitEvent  -= _particleSystem.Stop;
+        }
     }
 
     public interface IPlayer : ITaggable

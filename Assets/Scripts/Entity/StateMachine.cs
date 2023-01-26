@@ -1,11 +1,16 @@
-﻿using Midbaryom.Camera;
+﻿using Midbaryom.AI;
+using Midbaryom.Camera;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Midbaryom.Core
 {
-    public class StateMachine :  IStateMachine
+    public class StateMachine : IStateMachine
     {
         private StateType _currentStateType;
         protected Dictionary<StateType, IState> _stateDictionary;
@@ -20,6 +25,8 @@ namespace Midbaryom.Core
             _stateDictionary = new Dictionary<StateType, IState>();
             for (int i = 0; i < baseStates.Length; i++)
                 _stateDictionary.Add(baseStates[i].StateType, baseStates[i]);
+
+            GetState(_currentStateType).OnStateEnter();
         }
         private IState GetState(StateType stateType)
         {
@@ -78,7 +85,7 @@ namespace Midbaryom.Core
             _player = player;
         }
         public override StateType StateType => StateType.Idle;
-     
+
     }
 
     public class PlayerDiveState : BaseState
@@ -106,7 +113,7 @@ namespace Midbaryom.Core
     public class PlayerRecoverState : BaseState
     {
         private readonly HeightConfigSO _heightConfigSO;
-       
+
         private readonly IPlayer _player;
         public override StateType StateType => StateType.Recover;
         public PlayerRecoverState(IPlayer player) : base(player.Entity)
@@ -148,63 +155,98 @@ namespace Midbaryom.Core
     public class AIIdleState : BaseState
     {
         public override StateType StateType => StateType.Idle;
-        public AIIdleState(IEntity entity) : base(entity)
+
+        private readonly AIBehaviour _aIBehaviour;
+        private readonly NavMeshAgent agent;
+
+        public AIIdleState(AIBehaviour aIBehaviour, NavMeshAgent agent) : base(aIBehaviour.Entity)
         {
+            _aIBehaviour = aIBehaviour;
+            this.agent = agent;
         }
         public override void OnStateEnter()
         {
             base.OnStateEnter();
-            _entity.MovementHandler.StopMovement = true;
-            _entity.Rotator.StopRotation = true;
+            var go = _aIBehaviour.gameObject;
+            if (go.activeSelf&&go.activeInHierarchy)
+                agent.isStopped = true;
+
+
             _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", 0);
         }
-        public override void OnStateExit()
-        {
-            base.OnStateExit();
-            _entity.MovementHandler.StopMovement = false;
-            _entity.Rotator.StopRotation = false;
  
-
-        }
     }
 
     public class AIMoveState : BaseState
     {
-        private static float _angle = 40f;
-        private float _counter;
-        private float _duration;
-        private Vector2 _rotationTime;
+
+        private readonly NavMeshAgent _agent;
+        private readonly AIBehaviour Aibehaviour;
+        private readonly NavMeshPath _path;
         public override StateType StateType => StateType.Run;
-        public AIMoveState(IEntity entity) : base(entity)
+        public Vector3 CurrentPos;
+
+        public AIMoveState(AIBehaviour aibehaviour, NavMeshAgent agent) : base(aibehaviour.Entity)
         {
-            _rotationTime = new Vector2(2f, 3.5f);
-        }
-        public override void OnStateTick()
-        {
-            base.OnStateTick();
-            _counter += Time.deltaTime;
-            if (_counter >= _duration)
-                ChangeRotation();
+            Aibehaviour = aibehaviour;
+            _agent = agent;
+            _path = new NavMeshPath();
+            _agent.autoRepath = true;
         }
 
-        private void ResetParams()
+        private  void ResetParams()
         {
-            _counter = 0;
-            _duration = UnityEngine.Random.Range(_rotationTime.x, _rotationTime.y);
+            Aibehaviour.StartCoroutine(GenerateRandomPoint());
+            if(Aibehaviour.gameObject.activeSelf)
+            _agent.isStopped = false;
+        }
+
+        private  IEnumerator GenerateRandomPoint()
+        {
+             int attempt = -1;
+            const int maxAttemptyPerFrame = 3;
+            System.Random rnd = new System.Random();
+            do
+            {
+                if (attempt % maxAttemptyPerFrame == 0)
+                    yield return null;
+                else
+                    attempt++;
+
+                Vector3 currentPos = Aibehaviour.CurrentPosition;
+                currentPos.x += RND();
+                currentPos.z += RND();
+                CurrentPos = currentPos;
+
+
+            } while (!NavMesh.CalculatePath(Aibehaviour.CurrentPosition, CurrentPos, -1, _path) || _path.status != NavMeshPathStatus.PathComplete);
+            _agent.SetPath(_path);
+
+            _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", .5f);
+            float RND()
+            {
+                int radius = System.Convert.ToInt32(Aibehaviour.AIBehaviourSO.TargetDestinationRadius);
+                return rnd.Next(-radius, radius);
+            }
         }
 
         public override void OnStateEnter()
         {
-            _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", .5f);
-            base.OnStateExit();
             ResetParams();
+   
+
+
+            base.OnStateExit();
         }
 
-        private void ChangeRotation()
+
+        public override void OnStateExit()
         {
-            ResetParams();
-            Vector3 dir = Quaternion.AngleAxis(UnityEngine.Random.Range(-_angle, _angle), Vector3.up) * _entity.CurrentFacingDirection;
-            _entity.Rotator.AssignRotation(dir);
+            base.OnStateExit();
+            Aibehaviour.StopCoroutine(GenerateRandomPoint());
+
+
         }
+
     }
 }

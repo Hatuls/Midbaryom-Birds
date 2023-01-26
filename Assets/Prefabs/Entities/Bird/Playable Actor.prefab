@@ -156,9 +156,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6595880725985223107}
     m_Modifications:
+    - target: {fileID: 1054115372146460961, guid: a4a2f010c43a20a4da8dd56d2ac93eb8, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2778365376125858407, guid: a4a2f010c43a20a4da8dd56d2ac93eb8, type: 3}
       propertyPath: m_Name
       value: Speed Lines
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778365376125858407, guid: a4a2f010c43a20a4da8dd56d2ac93eb8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964617189955009667, guid: a4a2f010c43a20a4da8dd56d2ac93eb8, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9212794876152350065, guid: a4a2f010c43a20a4da8dd56d2ac93eb8, type: 3}
       propertyPath: m_RootOrder
@@ -209,6 +221,11 @@ PrefabInstance:
 --- !u!4 &7781443206454884055 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9212794876152350065, guid: a4a2f010c43a20a4da8dd56d2ac93eb8, type: 3}
+  m_PrefabInstance: {fileID: 1452219008824062886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1911682547920059015 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1054115372146460961, guid: a4a2f010c43a20a4da8dd56d2ac93eb8, type: 3}
   m_PrefabInstance: {fileID: 1452219008824062886}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1579715150867127069
@@ -379,7 +396,7 @@ MonoBehaviour:
   _camera: {fileID: 153332052759234720}
   _layerMaskIndex: -1
   _radius: 0.7
-  _maxDistance: 55.7
+  _rayDistance: 0
   _offset: {x: 0, y: 0, z: 0}
 --- !u!114 &5723832581012774896
 MonoBehaviour:
@@ -397,3 +414,4 @@ MonoBehaviour:
   _cameraTransform: {fileID: 6595880725985223107}
   _camera: {fileID: 153332052759234720}
   _aimAssists: {fileID: 4481805199779135657}
+  _particleSystem: {fileID: 1911682547920059015}
