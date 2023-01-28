@@ -444,6 +444,10 @@ PrefabInstance:
       propertyPath: _maxDistance
       value: 41.9
       objectReference: {fileID: 0}
+    - target: {fileID: 4481805199779135657, guid: 08b3b8e50db30644fb8a1210b036ea38, type: 3}
+      propertyPath: _rayDistance
+      value: 64.6
+      objectReference: {fileID: 0}
     - target: {fileID: 5607848934156209412, guid: 08b3b8e50db30644fb8a1210b036ea38, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -775,7 +779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2178231446050063178, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
       propertyPath: _poolStaterPacks.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2178231446050063178, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
       propertyPath: _poolStaterPacks.Array.data[4].Amount
@@ -786,6 +790,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2178231446050063178, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
+      propertyPath: _poolStaterPacks.Array.data[6].Amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2178231446050063178, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
       propertyPath: _poolStaterPacks.Array.data[4].EntityTagSO
       value: 
       objectReference: {fileID: 11400000, guid: 1187b3e4cf003864ba19e66bb6517bb6, type: 2}
@@ -793,6 +801,10 @@ PrefabInstance:
       propertyPath: _poolStaterPacks.Array.data[5].EntityTagSO
       value: 
       objectReference: {fileID: 11400000, guid: 4f4ef024e6e61a649a2f33f9d164ab66, type: 2}
+    - target: {fileID: 2178231446050063178, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
+      propertyPath: _poolStaterPacks.Array.data[6].EntityTagSO
+      value: 
+      objectReference: {fileID: 11400000, guid: c7c1aa07114a2184089601ee1fe74aa1, type: 2}
     - target: {fileID: 2929675810174782666, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
       propertyPath: m_RootOrder
       value: 2

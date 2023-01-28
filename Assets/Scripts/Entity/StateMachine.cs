@@ -168,9 +168,9 @@ namespace Midbaryom.Core
         {
             base.OnStateEnter();
             var go = _aIBehaviour.gameObject;
-            if (go.activeSelf&&go.activeInHierarchy)
+            if (go.activeSelf&&go.activeInHierarchy && agent.isActiveAndEnabled)
                 agent.isStopped = true;
-
+     
 
             _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", 0);
         }
@@ -197,7 +197,7 @@ namespace Midbaryom.Core
         private  void ResetParams()
         {
             Aibehaviour.StartCoroutine(GenerateRandomPoint());
-            if(Aibehaviour.gameObject.activeSelf)
+            if(Aibehaviour.gameObject.activeSelf && _agent.isActiveAndEnabled)
             _agent.isStopped = false;
         }
 

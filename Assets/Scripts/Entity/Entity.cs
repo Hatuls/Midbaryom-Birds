@@ -10,6 +10,7 @@ namespace Midbaryom.Core
     /// </summary>
     public interface IEntity : ITrackable, ITaggable
     {
+        ITargetBehaviour TargetBehaviour { get; }
         EntityTagSO EntityTagSO { get; }
         Transform Transform { get; }
         IRotator Rotator { get; }
@@ -42,7 +43,8 @@ namespace Midbaryom.Core
         private Rigidbody _rigidbody;
         [SerializeField]
         private VisualHandler _visualHandler;
-
+        [SerializeField]
+        private TargetedBehaviour _targetBehaviour;
         private IRotator _rotator;
         private IDestroyHandler _destroyHandler;
         private IStatHandler _statHandler;
@@ -79,6 +81,8 @@ namespace Midbaryom.Core
                 yield return HeightHandler;
             }
         }
+
+        public ITargetBehaviour TargetBehaviour => _targetBehaviour;
 
         private void Awake()
         {

@@ -41,7 +41,6 @@ namespace Midbaryom.Visual
         private ILocomotion _locomotion;
         private IStat _movmenetSpeed;
 
-        private int RotationHash = Animator.StringToHash("Turn");
         internal void Init(IEntity entity)
         {
             _movmenetSpeed = entity.StatHandler[StatType.MovementSpeed];

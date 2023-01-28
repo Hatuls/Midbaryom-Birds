@@ -62,7 +62,11 @@ namespace Midbaryom.Core
 
         private void AssignTarget(IEntity closestTarget)
         {
+            if (Target == closestTarget)
+                return;
+            Target?.TargetBehaviour.UnTargeted();
             Target = closestTarget;
+            Target.TargetBehaviour.Targeted();
             OnTargetDetected?.Invoke();
             OnTargetDetectedEntity?.Invoke(Target);
         }
@@ -100,6 +104,8 @@ namespace Midbaryom.Core
 
         public void ResetTarget()
         {
+            if(Target!=null)
+                Target.TargetBehaviour.UnTargeted();
             Target = null;
             if (OnTargetReset != null)
                 OnTargetReset.Invoke();
