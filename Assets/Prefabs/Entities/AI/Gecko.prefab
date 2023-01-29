@@ -15,6 +15,18 @@ PrefabInstance:
       propertyPath: _animatorController._animator
       value: 
       objectReference: {fileID: 7208905874944636396}
+    - target: {fileID: 2695896218941205519, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2695896218941205519, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2695896218941205519, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _entityTag
       value: 
@@ -57,15 +69,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6987838126387728175, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7.194
       objectReference: {fileID: 0}
     - target: {fileID: 6987838126387728175, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.079
       objectReference: {fileID: 0}
     - target: {fileID: 6987838126387728175, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 26.4
       objectReference: {fileID: 0}
     - target: {fileID: 6987838126387728175, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -133,6 +145,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5527128382044670099}
     m_Modifications:
+    - target: {fileID: 620789968673841630, guid: bf9b76e4f4959ee4787eb2d83714f6e0, type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.032194883
+      objectReference: {fileID: 0}
+    - target: {fileID: 620789968675525096, guid: bf9b76e4f4959ee4787eb2d83714f6e0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eff76e7e58ccd9a4d834a5976c6548bd, type: 2}
     - target: {fileID: 620789968679709896, guid: bf9b76e4f4959ee4787eb2d83714f6e0, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0

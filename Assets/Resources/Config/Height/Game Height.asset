@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Game Height
   m_EditorClassIdentifier: 
   PlayerHeight:
-    Height: 20
+    Height: 38.9
     Curve:
       serializedVersion: 2
       m_Curve:
