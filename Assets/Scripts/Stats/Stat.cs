@@ -81,6 +81,7 @@ namespace Midbaryom.Core
         Points = 1,
         RotationSpeed = 2,
         DiveSpeed = 3,
+        RecoverSpeed = 4,
     }
     public interface IStat : ITaggable
     {

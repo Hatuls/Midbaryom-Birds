@@ -107,6 +107,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7033308147361413513, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _rb
+      value: 
+      objectReference: {fileID: 1477942996558545834}
+    - target: {fileID: 7033308147361413513, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _agent
+      value: 
+      objectReference: {fileID: 8822048917410012808}
     - target: {fileID: 9034018518519621430, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: m_UseGravity
       value: 0
@@ -120,6 +128,11 @@ PrefabInstance:
 --- !u!54 &1477942996558545834 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 9034018518519621430, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+  m_PrefabInstance: {fileID: 7628520153085355164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &8822048917410012808 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 1419693908867709460, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
   m_PrefabInstance: {fileID: 7628520153085355164}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5527128382044670099 stripped

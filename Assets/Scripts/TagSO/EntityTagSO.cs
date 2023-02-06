@@ -8,5 +8,7 @@ namespace Midbaryom.Core
         [SerializeField]
         private Entity _entity;
         public Entity Entity => _entity;
+
+        public bool CanBeTargeted = true;
     }
 }

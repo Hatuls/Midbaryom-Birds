@@ -18,6 +18,7 @@ namespace Midbaryom.Core
         public IReadOnlyDictionary<StateType, IState> StateDictionary => _stateDictionary;
         public StateType CurrentStateType => _currentStateType;
         public IState CurrentState => GetState(_currentStateType);
+        public bool LockStateMachine { get; set; }
 
         public StateMachine(StateType startingState, params BaseState[] baseStates)
         {
@@ -37,7 +38,7 @@ namespace Midbaryom.Core
 
         public void ChangeState(StateType stateType)
         {
-            if (stateType == CurrentStateType)
+            if (stateType == CurrentStateType || LockStateMachine)
                 return;
 
             CurrentState.OnStateExit();
@@ -90,48 +91,100 @@ namespace Midbaryom.Core
 
     public class PlayerDiveState : BaseState
     {
+        public static event Action OnTargetHit;
+        private readonly ILocomotion _movementHandler;
         private readonly IPlayer _player;
         public override StateType StateType => StateType.Dive;
         private readonly IStat _diveSpeed, _movementSpeed;
+
+        private const float minDistanceToTargetAquire= 2f;
         public PlayerDiveState(IPlayer player, IStat speed) : base(player.Entity)
         {
             _player = player;
             _diveSpeed = speed;
+            
             _movementSpeed = _entity.StatHandler[StatType.MovementSpeed];
+            _movementHandler = _entity.MovementHandler;
         }
 
         public override void OnStateEnter()
         {
-            _player.CameraManager.ChangeState(CameraState.FaceDown);
+            _player.TargetHandler.LockAtTarget();
+            _player.CameraManager.ChangeState(CameraState.FaceTowardsEnemy);
             _entity.HeightHandler.ChangeState(HeightType.Animal);
             _movementSpeed.Value += _diveSpeed.Value;
+
+            _movementHandler.StopMovement = true;
             base.OnStateEnter();
         }
 
+        public override void OnStateExit()
+        {
+            _movementSpeed.Value -= _diveSpeed.Value;
+            _movementHandler.StopMovement = false;
+            base.OnStateExit();
+            _player.AimAssists.UnLockTarget();
+        }
+        public override void OnStateTick()
+        {
+            base.OnStateTick();
+            AimAssists aimAssists = _player.AimAssists;
+            bool hasTarget = aimAssists.HasTarget;
+
+            if (hasTarget)
+            {
+                Vector3 dir = aimAssists.TargetDirection;
+                _movementHandler.MoveTowards(dir);
+        
+                if (Vector3.Distance(aimAssists.Target.CurrentPosition, _entity.CurrentPosition) <= minDistanceToTargetAquire)
+                    OnTargetHit?.Invoke();
+            }
+
+        }
+        private void MoveTowardsTarget()
+        {
+
+        }
     }
 
     public class PlayerRecoverState : BaseState
     {
+        public static event Action OnRecoverStateTryingToExit;
         private readonly HeightConfigSO _heightConfigSO;
-
+        private readonly IStat _recoverSpeed;
         private readonly IPlayer _player;
         public override StateType StateType => StateType.Recover;
-        public PlayerRecoverState(IPlayer player) : base(player.Entity)
+        public PlayerRecoverState(IPlayer player,IStat additionSpeed) : base(player.Entity)
         {
             _player = player;
             _heightConfigSO = _entity.HeightHandler.HeightConfigSO;
+            _recoverSpeed = additionSpeed;
         }
 
         public override void OnStateEnter()
         {
             _entity.HeightHandler.ChangeState(HeightType.Player);
             _player.CameraManager.ChangeState(CameraState.FaceUp);
-            _entity.StatHandler[StatType.MovementSpeed].Reset();
+            _entity.StatHandler[StatType.MovementSpeed].Value += _recoverSpeed.Value;
+      
             base.OnStateEnter();
         }
-
+        public override void OnStateExit()
+        {
+            base.OnStateExit();
+            _entity.StatHandler[StatType.MovementSpeed].Value -= _recoverSpeed.Value;
+        }
 
         public override void OnStateTick()
+        {
+     
+            CheckHeight();
+            base.OnStateTick();
+        }
+
+     
+
+        private void CheckHeight()
         {
             float offset = 0.1f;
             float requiredHeight = _heightConfigSO.PlayerHeight.Height;
@@ -139,11 +192,11 @@ namespace Midbaryom.Core
             height.y = requiredHeight;
 
             if (Vector3.Distance(_entity.CurrentPosition, height) < offset)
+            {
+                OnRecoverStateTryingToExit?.Invoke();
                 _player.StateMachine.ChangeState(StateType.Idle);
-
-            base.OnStateTick();
+            }
         }
-
     }
 
 
@@ -220,6 +273,8 @@ namespace Midbaryom.Core
 
 
             } while (!NavMesh.CalculatePath(Aibehaviour.CurrentPosition, CurrentPos, -1, _path) || _path.status != NavMeshPathStatus.PathComplete);
+            if (!_agent.isActiveAndEnabled)
+                yield break;
             _agent.SetPath(_path);
 
             _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", .5f);

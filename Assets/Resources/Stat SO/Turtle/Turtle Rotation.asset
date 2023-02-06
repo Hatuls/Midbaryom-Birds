@@ -1,20 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317d6e316397ae447add7132ad8c69db, type: 3}
-  m_Name: Turtle Rotation
-  m_EditorClassIdentifier: 
-  StatType: 2
-  StartValue: 0.8
-  _hasMinValue: 0
-  _minValue: 0
-  _hasMaxValue: 0
-  _maxValue: 0
+version https://git-lfs.github.com/spec/v1
+oid sha256:b968e91ceae81f511b63defcc5f6f00476af43bb7b7f4ea29b5ef86ee81a9adc
+size 502

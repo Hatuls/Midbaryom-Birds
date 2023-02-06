@@ -14,7 +14,7 @@ namespace Midbaryom.Core
         public event Action OnTargetDetected;
         public event Action<IEntity> OnTargetDetectedEntity;
 
-
+        private List<IEntity> _allTargets = new List<IEntity>();
 
         [SerializeField]
         private UnityEngine.Camera _camera;
@@ -30,13 +30,20 @@ namespace Midbaryom.Core
         [SerializeField]
         private Vector3 _offset ;
         public bool HasTarget => Target != null;
+
+        private bool _lockTarget;
         public IEntity Target { get; private set; }
 
         public IReadOnlyList<IEntity> AllActiveEntities => PoolManager.Instance.ActiveEntities;
 
-  
+        public Vector3 TargetDirection => HasTarget ? (  Target.CurrentPosition - transform.position).normalized : Vector3.zero;
+
+        public IReadOnlyList<IEntity> AllTargets { get => _allTargets;  }
+
         private void Update()
         {
+            if (_lockTarget)
+                return;
             Vector3 worldPoint = ScreenToWorldPoint();
             Vector3 direction = worldPoint - transform.position;
             Scan(direction.normalized);
@@ -64,9 +71,10 @@ namespace Midbaryom.Core
         {
             if (Target == closestTarget)
                 return;
-            Target?.TargetBehaviour.UnTargeted();
+       
+         //   Target?.TargetBehaviour.UnTargeted();
             Target = closestTarget;
-            Target.TargetBehaviour.Targeted();
+        
             OnTargetDetected?.Invoke();
             OnTargetDetectedEntity?.Invoke(Target);
         }
@@ -83,6 +91,9 @@ namespace Midbaryom.Core
                 for (int i = 0; i < count; i++)
                 {
                     currentEntity = allActiveEntities[i];
+                    if (!currentEntity.EntityTagSO.CanBeTargeted)
+                        continue;
+
                     float currentsTargetDistance = GetDistance(currentEntity, middleScanPoint);
 
                     if (currentsTargetDistance < _radius)
@@ -92,7 +103,11 @@ namespace Midbaryom.Core
 
                         else if (currentsTargetDistance < GetDistance(closestTarget, middleScanPoint))
                             closestTarget = currentEntity;
+
+                        _allTargets.Add(currentEntity);
                     }
+                    else
+                        _allTargets.Remove(currentEntity);
                 }
             }
 
@@ -102,13 +117,24 @@ namespace Midbaryom.Core
                 => Vector3.Distance(closestTarget.CurrentPosition, point);
         }
 
+        internal void LockTarget()
+        {
+            _lockTarget = true;
+        }
+
         public void ResetTarget()
         {
-            if(Target!=null)
-                Target.TargetBehaviour.UnTargeted();
+            //if (Target != null)
+                //   Target.TargetBehaviour.UnTargeted();
             Target = null;
+            _allTargets.Clear();
             if (OnTargetReset != null)
                 OnTargetReset.Invoke();
+        }
+
+        internal void UnLockTarget()
+        {
+            _lockTarget = false;
         }
 
         private bool ShootRaycast(Vector3 direction, out RaycastHit raycastHit)

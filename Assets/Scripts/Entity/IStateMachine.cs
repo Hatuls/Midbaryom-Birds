@@ -7,7 +7,7 @@ namespace Midbaryom.Core
         IState CurrentState { get; }
         StateType CurrentStateType { get; }
         IReadOnlyDictionary<StateType, IState> StateDictionary { get; }
-
+        bool LockStateMachine { get; set; }
         void ChangeState(StateType stateType);
     }
 }

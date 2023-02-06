@@ -1,16 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d955aa7867b9b54ebb1d07e9e5dcce0, type: 3}
-  m_Name: Gecko
-  m_EditorClassIdentifier: 
-  StartingHeight: 0
-  _entity: {fileID: 2377814402682266039, guid: dbbe737aab31db94884e6fdb91fbc153, type: 3}
+version https://git-lfs.github.com/spec/v1
+oid sha256:755cff3a2bdb130fbd3d5e7ffbd0950753ff1d03a28e459a8b085122505e79da
+size 523

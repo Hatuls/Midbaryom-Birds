@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AI;
+
 namespace Midbaryom.Core
 {
 
@@ -7,10 +9,27 @@ namespace Midbaryom.Core
         [SerializeField]
         private Entity _entity;
 
-       
+        [SerializeField]
+        private Rigidbody _rb;
+        [SerializeField]
+        private NavMeshAgent _agent;
+        public void PotentiallyTarget()
+        {
+            Debug.Log("Potential Target: " + gameObject.name);
+        }
+        private void OnEnable()
+        {
+            _entity.VisualHandler.AnimatorController.Animator.SetBool("isDead", false);
+        }
         public void Targeted()
         {
-            Debug.Log("Target: " + gameObject.name);
+            if (_agent.isActiveAndEnabled)
+            {
+            _agent.isStopped = true;
+            _agent.enabled = false;
+                _entity.VisualHandler.AnimatorController.Animator.SetBool("isDead", true);
+            }
+            _rb.isKinematic = true;
         }
 
         public void UnTargeted()
@@ -22,7 +41,7 @@ namespace Midbaryom.Core
     public interface ITargetBehaviour
     {
         void Targeted();
-
+        void PotentiallyTarget();
         void UnTargeted();
     }
 }

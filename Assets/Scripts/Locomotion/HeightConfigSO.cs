@@ -33,6 +33,8 @@ namespace Midbaryom.Core
         private float Duration;
 
         public float Evaluate(float currentTime)
-        => Curve.Evaluate(Duration == 0 ? 1 : currentTime / Duration);
+        => Evaluate(currentTime, Duration);
+        public float Evaluate(float currentTime, float duration)
+=> Curve.Evaluate(duration == 0 ? 1 : currentTime / duration);
     }
 }

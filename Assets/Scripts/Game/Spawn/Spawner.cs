@@ -27,7 +27,17 @@ namespace Midbaryom.Core
         private HeightConfigSO _heightConfigSO;
         private IEntity _player;
         UnityEngine.Camera _camera;
-        private IReadOnlyList<IEntity> AllEntities => _activeEntities;
+        public IReadOnlyList<IEntity> AllEntities => _activeEntities;
+
+        public IEntity Player 
+        { 
+            get 
+            { 
+                 if(_player == null)
+                    _player = AllEntities.First(x => x.ContainTag(_playerTag));
+                return _player; 
+            } 
+        }
 
         public static void RegisterEntity(IEntity entity)
             => _activeEntities.Add(entity);
@@ -42,7 +52,7 @@ namespace Midbaryom.Core
         private void Start()
         {
             _heightConfigSO = GameManager.Instance.HeightConfigSO;
-            _player = AllEntities.First(x => x.ContainTag(_playerTag));
+            _player = Player;
             _camera = UnityEngine.Camera.main;
         }
 

@@ -1,5 +1,6 @@
 using Midbaryom.Camera;
 using Midbaryom.Visual;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Midbaryom.Core
         EntityTagSO EntityTagSO { get; }
         Transform Transform { get; }
         IRotator Rotator { get; }
-        IHeightHandler HeightHandler { get; }
+        IHeightHandler HeightHandler { get; set; }
         IStatHandler StatHandler { get; }
         ILocomotion MovementHandler { get; }
         IDestroyHandler DestroyHandler { get; }
@@ -70,7 +71,7 @@ namespace Midbaryom.Core
         public IRotator Rotator => _rotator;
         public EntityTagSO EntityTagSO => _entityTag;
 
-        public IHeightHandler HeightHandler => _heightHandler;
+        public IHeightHandler HeightHandler { get => _heightHandler; set => _heightHandler = value; }
 
         public IEnumerable<IUpdateable> UpdateNeeded
         {
@@ -90,7 +91,7 @@ namespace Midbaryom.Core
             _statHandler = new StatHandler(_stats);
             _rotator = new Rotator(_transform, false, _statHandler[StatType.RotationSpeed],_transform.rotation);
             _movementHandler = new Locomotion(_transform, _rigidbody, false, _statHandler[StatType.MovementSpeed]);
-            _heightHandler = new HeightHandler(_movementHandler as Locomotion, Transform, _entityTag.StartingHeight);
+            _heightHandler = new HeightHandler(MovementHandler as Locomotion, Transform, EntityTagSO.StartingHeight);
 
         }
         private void OnEnable()
@@ -112,7 +113,6 @@ namespace Midbaryom.Core
         private void OnDestroy()
         {
             _destroyHandler.Destroy();
-        
         }
     }
     public interface IUpdateable
@@ -121,6 +121,7 @@ namespace Midbaryom.Core
     }
     public interface IState
     {
+        event Action OnStateEnterEvent,OnStateExitEvent,OnStateTickEvent;
         void OnStateEnter();
         void OnStateExit();
         void OnStateTick();

@@ -37,6 +37,7 @@ namespace Midbaryom.Inputs
 
         private void StartHundDown(InputAction.CallbackContext obj)
         {
+            if(_player.AimAssists.HasTarget)
             _player.StateMachine.ChangeState(StateType.Dive);
         }
 

@@ -20,7 +20,7 @@ namespace Midbaryom.Core
     }
     public interface ITrackable : IForwardDirection
     {
-
+        Transform Transform { get; }
         Vector3 CurrentPosition { get; }
     }
 
@@ -34,10 +34,12 @@ namespace Midbaryom.Core
         private readonly IStat _movementStat;
         private bool _stopMovement;
         public bool StopMovement { get => _stopMovement; set => _stopMovement = value; }
-        public Vector3 CurrentFacingDirection => _transform.forward.normalized;
-        public Vector3 CurrentPosition => _transform.position;
+        public Vector3 CurrentFacingDirection => Transform.forward.normalized;
+        public Vector3 CurrentPosition => Transform.position;
 
         public bool AutoPilot { get; set; }
+
+        public Transform Transform => _transform;
 
         public Locomotion(Transform transform, Rigidbody rigidbody, bool stopMovement, IStat movementStat)
         {
@@ -71,6 +73,7 @@ namespace Midbaryom.Core
                 OnMove?.Invoke(0);
                 return;
             }
+
 
             Vector3 direction = CurrentFacingDirection;
             MoveTowards(direction);
