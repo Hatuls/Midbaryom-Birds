@@ -93,7 +93,7 @@ namespace Midbaryom.Core
             EntityTagSO mobTag = _spawnConfig.ConductMob(AllEntities);
             IEntity mob = _poolManager.Pull(mobTag);
 
-            float yPos = _heightConfigSO.GetHeight(mobTag.StartingHeight).Height;
+            float yPos = _heightConfigSO.GetHeight(mobTag.StartingHeight).Height + 1;
             Transform t = mob.Transform;
             t.position = GenerateSpawnLocation(yPos);
             t.gameObject.SetActive(true);
