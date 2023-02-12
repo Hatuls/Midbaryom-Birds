@@ -23,13 +23,23 @@ namespace Midbaryom.Core
         }
         public void Targeted()
         {
+            _entity.MovementHandler.StopMovement = true;
+            _entity.Rotator.StopRotation = true;
+
+            StopAgentMovement();
+
+            _entity.VisualHandler.AnimatorController.Animator.SetBool("isDead", true);
+
+            _rb.isKinematic = true;
+        }
+
+        private void StopAgentMovement()
+        {
             if (_agent.isActiveAndEnabled)
             {
-            _agent.isStopped = true;
-            _agent.enabled = false;
-                _entity.VisualHandler.AnimatorController.Animator.SetBool("isDead", true);
+                _agent.isStopped = true;
+                _agent.enabled = false;
             }
-            _rb.isKinematic = true;
         }
 
         public void UnTargeted()

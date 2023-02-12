@@ -9,6 +9,7 @@ namespace Midbaryom.Core
 
     public class Spawner : MonoBehaviour
     {
+        private const float SMALL_OFFSET = 0.05f;
         public static Spawner Instance;
 
         private static List<IEntity> _activeEntities = new List<IEntity>();
@@ -17,7 +18,8 @@ namespace Midbaryom.Core
 
         [SerializeField]
         private SpawnConfigSO _spawnConfig;
-
+        [SerializeField]
+        private float _spawningHeightOffset;
         [SerializeField]
         private EntityTagSO _playerTag;
 
@@ -27,6 +29,7 @@ namespace Midbaryom.Core
         private HeightConfigSO _heightConfigSO;
         private IEntity _player;
         UnityEngine.Camera _camera;
+
         public IReadOnlyList<IEntity> AllEntities => _activeEntities;
 
         public IEntity Player 
@@ -93,7 +96,7 @@ namespace Midbaryom.Core
             EntityTagSO mobTag = _spawnConfig.ConductMob(AllEntities);
             IEntity mob = _poolManager.Pull(mobTag);
 
-            float yPos = _heightConfigSO.GetHeight(mobTag.StartingHeight).Height + 1;
+            float yPos = _heightConfigSO.GetHeight(mobTag.StartingHeight).Height + _spawningHeightOffset;
             Transform t = mob.Transform;
             t.position = GenerateSpawnLocation(yPos);
             t.gameObject.SetActive(true);
@@ -119,7 +122,6 @@ namespace Midbaryom.Core
 
             bool PointInCameraView(Vector3 point)
             {
-        
                 Vector3 viewport = _camera.WorldToViewportPoint(point);
                 bool inCameraFrustum = Is01(viewport.x) && Is01(viewport.y);
                 bool inFrontOfCamera = viewport.z > 0;
@@ -132,7 +134,7 @@ namespace Midbaryom.Core
 
                 float distance = Vector3.Distance(_camera.transform.position, point);
 
-                if (Physics.Raycast(_camera.transform.position, directionBetween, out depthCheck, distance + 0.05f))
+                if (Physics.Raycast(_camera.transform.position, directionBetween, out depthCheck, distance + SMALL_OFFSET))
                 {
                     if (depthCheck.point != point)
                     {

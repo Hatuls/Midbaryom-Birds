@@ -261,7 +261,9 @@ namespace Midbaryom.Core
             System.Random rnd = new System.Random();
             do
             {
-                if (attempt % maxAttemptyPerFrame == 0)
+                if(_agent.isActiveAndEnabled == false)
+                    yield break;
+                else if (attempt % maxAttemptyPerFrame == 0)
                     yield return null;
                 else
                     attempt++;

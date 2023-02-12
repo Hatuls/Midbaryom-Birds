@@ -6,6 +6,9 @@ namespace Midbaryom.Core
 
     public class TargetHandler : MonoBehaviour
     {
+        private bool _hasTargetAttached;
+        private IEntity _holdingTarget;
+
         [SerializeField]
         private Player _player;
         [SerializeField]
@@ -14,9 +17,11 @@ namespace Midbaryom.Core
         private AimAssists _aimAssists;
         public IEntity Target => _aimAssists.Target;
         public IReadOnlyList<IEntity> AllTargets => _aimAssists.AllActiveEntities;
-        private IEntity _holdingTarget;
 
-        public bool HasTargetAttached;
+        public bool HasTargetAttached { get => _hasTargetAttached; private set => _hasTargetAttached = value; }
+
+    
+        
 
         private void Awake()
         {
@@ -41,17 +46,25 @@ namespace Midbaryom.Core
 
 
             HasTargetAttached = true;
+
+
             _aimAssists.LockTarget();
             _player.StateMachine.ChangeState(StateType.Recover);
             _player.StateMachine.LockStateMachine = true;
-            target.MovementHandler.StopMovement = true;
-            target.Rotator.StopRotation = true;
-            target.Transform.SetParent(_targetHoldingLocation);
-            target.Transform.localPosition = Vector3.zero;
-            target.Transform.rotation = Quaternion.Euler(0, 0, 0);
+
+         
             target.TargetBehaviour.Targeted();
+
+            SetTargetAtHoldingPosition(target);
         }
 
+        private void SetTargetAtHoldingPosition(IEntity target)
+        {
+            Transform targetsTransform = target.Transform;
+            targetsTransform.SetParent(_targetHoldingLocation);
+            targetsTransform.localPosition = Vector3.zero;
+            targetsTransform.rotation = Quaternion.Euler(0, 0, 0);
+        }
 
         public void ResetTarget()
         {

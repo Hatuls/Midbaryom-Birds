@@ -34,7 +34,7 @@ PrefabInstance:
     - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _entityTag
       value: 
-      objectReference: {fileID: 11400000, guid: 435a0728e671d3e4fa294487a677fef3, type: 2}
+      objectReference: {fileID: 11400000, guid: c7c1aa07114a2184089601ee1fe74aa1, type: 2}
     - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _stats.Array.size
       value: 3
