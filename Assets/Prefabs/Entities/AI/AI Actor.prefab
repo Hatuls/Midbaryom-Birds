@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207707669819a414c87e9cd44a005bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetedBehaviour: {fileID: 7033308147361413513}
   _agent: {fileID: 1419693908867709460}
   _aIBehaviourSO: {fileID: 11400000, guid: e9a4daef23e9e3a41af3727617257fc6, type: 2}
   _entity: {fileID: 5269848389614339371}

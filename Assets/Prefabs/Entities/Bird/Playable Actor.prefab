@@ -397,7 +397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 115956, guid: 09cbd05b2fa794323a8774a17c2e8c2d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 487030, guid: 09cbd05b2fa794323a8774a17c2e8c2d, type: 3}
       propertyPath: m_RootOrder
@@ -413,7 +413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487030, guid: 09cbd05b2fa794323a8774a17c2e8c2d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.048
       objectReference: {fileID: 0}
     - target: {fileID: 487030, guid: 09cbd05b2fa794323a8774a17c2e8c2d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -443,6 +443,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 13738654, guid: 09cbd05b2fa794323a8774a17c2e8c2d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e4221729bd401764d8a7a9f90e2da92e, type: 2}
+    - target: {fileID: 13738654, guid: 09cbd05b2fa794323a8774a17c2e8c2d, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 09cf317821b365e40ab691cdabf8ee73, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09cbd05b2fa794323a8774a17c2e8c2d, type: 3}
 --- !u!1001 &1452219008824062886
@@ -701,7 +709,6 @@ MonoBehaviour:
   _player: {fileID: 5723832581012774896}
   _targetHoldingLocation: {fileID: 3058446561178545163}
   _aimAssists: {fileID: 4481805199779135657}
-  HasTargetAttached: 0
 --- !u!114 &4481805199779135657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,6 +726,9 @@ MonoBehaviour:
   _radius: 17.5
   _rayDistance: 85
   _offset: {x: 0, y: 0, z: 0}
+  _warningTargets:
+    _preciseness: 0
+  _startWarningAnimalsAt: 2
 --- !u!114 &5723832581012774896
 MonoBehaviour:
   m_ObjectHideFlags: 0

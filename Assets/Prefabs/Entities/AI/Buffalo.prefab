@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 4f4ef024e6e61a649a2f33f9d164ab66, type: 2}
     - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _stats.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _stats.Array.data[0]
@@ -35,6 +35,10 @@ PrefabInstance:
       propertyPath: _stats.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: dca5b51d6ff9b834fa4af2431cec6242, type: 2}
+    - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _stats.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 05371d93503d7b14693d12778b6afc12, type: 2}
     - target: {fileID: 6754008762620876418, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: m_Name
       value: Buffalo

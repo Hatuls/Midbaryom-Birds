@@ -36,7 +36,7 @@ namespace Midbaryom.Core
         private int _startWarningAnimalsAt = 2;
 
         private bool _lockTarget;
-
+        private Vector3 _middleScreenPoint;
         public bool HasTarget => Target != null;
         public IEntity Target { get; private set; }
         public IReadOnlyList<IEntity> AllActiveEntities => PoolManager.Instance.ActiveEntities;
@@ -46,6 +46,11 @@ namespace Midbaryom.Core
         public IReadOnlyList<IEntity> AllTargets { get => _allTargets; }
         public IWarningTargets WarningTargets { get => _warningTargets; }
         public Vector3 FacingDirection => (ScreenToWorldPoint() - transform.position).normalized;
+
+        private void Start()
+        {
+            _middleScreenPoint = new Vector3(_halfViewPoint, _halfViewPoint, _camera.nearClipPlane);
+        }
         private void Update()
         {
             if (_lockTarget)
@@ -55,7 +60,7 @@ namespace Midbaryom.Core
         }
 
         private Vector3 ScreenToWorldPoint()
-        => _camera.ViewportToWorldPoint(Quaternion.Euler(_offset) * new Vector3(_halfViewPoint, _halfViewPoint, _camera.nearClipPlane));
+        => _camera.ViewportToWorldPoint(Quaternion.Euler(_offset) * _middleScreenPoint);
 
 
         private void Scan(Vector3 facingDirection)
@@ -63,16 +68,15 @@ namespace Midbaryom.Core
             if (ShootRaycast(facingDirection, out RaycastHit raycastHit))
             {
                 IEntity closestTarget = CheckDistance(raycastHit.point);
-                if (closestTarget == null)
-                    ResetTarget();
-                else
-                {
-                    WarnOtherTarget();
+                if (closestTarget != null)
+                { 
                     AssignTarget(closestTarget);
+                    WarnOtherTarget();
+                    return;
                 }
             }
-            else
-                ResetTarget();
+
+            ResetTarget();
         }
 
 
@@ -115,10 +119,15 @@ namespace Midbaryom.Core
                         else if (currentsTargetDistance < GetDistance(closestTarget, middleScanPoint))
                             closestTarget = currentEntity;
 
+                        if(!_allTargets.Contains(currentEntity))
                         _allTargets.Add(currentEntity);
                     }
                     else
-                        _allTargets.Remove(currentEntity);
+                    {
+                       
+                        if(_allTargets.Remove(currentEntity))
+                            currentEntity.TargetBehaviour.UnTargeted();
+                    }
                 }
             }
 
@@ -159,12 +168,12 @@ namespace Midbaryom.Core
         private void WarnOtherTarget()
         {
             if (Target == null
-                || _allTargets.Count > _startWarningAnimalsAt)
+                || _allTargets.Count < _startWarningAnimalsAt)
                 return;
 
 
-            //Getting all the other targets that are not the target we currently have
-            var otherTargets = _allTargets.Where(x => WarningTargets.IsTargetWarned(transform.position, x));
+            //Getting all the other targets that are not the target we currently locked on
+            var otherTargets = _allTargets.Where(x => x!=Target && WarningTargets.IsTargetWarned(transform.position, x));
 
             foreach (var alertedEnemy in otherTargets)
                 alertedEnemy.TargetBehaviour.PotentiallyTarget();

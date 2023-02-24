@@ -33,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: b861e76536d8ca94aa6b6fefa9ad857f, type: 2}
     - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _stats.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _stats.Array.data[0]
@@ -47,6 +47,10 @@ PrefabInstance:
       propertyPath: _stats.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 8653db48ba3839441ab49b624abe3d3d, type: 2}
+    - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _stats.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: cde10150a0d2d6d4998afa43f447dbef, type: 2}
     - target: {fileID: 6754008762620876418, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: m_Name
       value: Rabbit

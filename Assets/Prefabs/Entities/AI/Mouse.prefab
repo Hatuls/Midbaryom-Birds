@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 1040250818658684005}
     - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _stats.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _stats.Array.data[0]
@@ -39,6 +39,10 @@ PrefabInstance:
       propertyPath: _stats.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: fa9eaef10fe66734691da6e29243b2d3, type: 2}
+    - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _stats.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6299bf8fd4bf6a843a93a1b127366982, type: 2}
     - target: {fileID: 6754008762620876418, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: m_Name
       value: Mouse

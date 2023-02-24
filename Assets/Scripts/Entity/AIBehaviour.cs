@@ -8,6 +8,8 @@ namespace Midbaryom.AI
     public class AIBehaviour : MonoBehaviour
     {
         [SerializeField]
+        private TargetedBehaviour _targetedBehaviour;
+        [SerializeField]
         private NavMeshAgent _agent;
         [SerializeField]
         private AIBehaviourSO _aIBehaviourSO;
@@ -43,18 +45,29 @@ namespace Midbaryom.AI
             BaseState[] AIStates = new BaseState[]
             {
             new AIIdleState(this,_agent),
-          _moveState,
+            _moveState,
+             new AIRunAwayState(this, _agent),
             };
 
-   
+            IStat movementSpeedStat = Entity.StatHandler[StatType.MovementSpeed];
+            movementSpeedStat.OnValueChanged += UpdateAgentSpeed;
             Entity.MovementHandler.StopMovement = true;
-            _agent.speed = Entity.StatHandler[StatType.MovementSpeed].Value;
+            UpdateAgentSpeed( movementSpeedStat.Value);
+
+
             _stateMachine = new StateMachine(StateType.Idle, AIStates);
     
-            _aIBrain = new AIBrain(_stateMachine, AIBehaviourSO);
+            _aIBrain = new AIBrain(_stateMachine, AIBehaviourSO,_targetedBehaviour);
 
             float val = Random.Range(0, 360);
             _entity.Rotator.SetRotation(Quaternion.Euler(0, val, 0));
+
+     
+        }
+        private void OnDestroy()
+        {
+            Entity.StatHandler[StatType.MovementSpeed].OnValueChanged-= UpdateAgentSpeed;
+
         }
         private void OnEnable()
         {
@@ -64,10 +77,7 @@ namespace Midbaryom.AI
 
             _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", 0);
             if (_stateMachine != null)
-                _stateMachine.ChangeState(StateType.Run);
-
-
-
+                _stateMachine.ChangeState(StateType.Roam);
         }
         private void Update()
         {
@@ -90,18 +100,34 @@ namespace Midbaryom.AI
             }
         }
 
+        private void UpdateAgentSpeed(float amount)
+        {
+            _agent.speed = amount;
+
+        }
+
     }
     public class AIBrain : IUpdateable
     {
         private readonly IStateMachine _stateMachine;
         private readonly AIBehaviourSO aIBehaviourSO;
+        private readonly ITargetBehaviour _targetedBehaviour;
         private float _counter;
         private float _duration;
-        public AIBrain(IStateMachine state, AIBehaviourSO aIBehaviourSO)
+        public AIBrain(IStateMachine state, AIBehaviourSO aIBehaviourSO,ITargetBehaviour targetBehaviour)
         {
             _stateMachine = state;
             this.aIBehaviourSO = aIBehaviourSO;
+            _targetedBehaviour = targetBehaviour;
+            _targetedBehaviour.OnPotentiallyTargeted += MoveToRunAwayState;
+            _targetedBehaviour.OnUnTargeted += MoveToIdleState;
             Reset();
+        }
+
+        ~AIBrain()
+        {
+            _targetedBehaviour.OnPotentiallyTargeted -= MoveToRunAwayState;
+            _targetedBehaviour.OnUnTargeted          -= MoveToIdleState;
         }
 
         private void Reset()
@@ -111,8 +137,8 @@ namespace Midbaryom.AI
             var currentState = _stateMachine.CurrentStateType;
             if (currentState == StateType.Idle)
                 _duration = aIBehaviourSO.GetConfig(StateType.Idle).RandomDuration;
-            else if (currentState == StateType.Run)
-                _duration = aIBehaviourSO.GetConfig(StateType.Run).RandomDuration;
+            else if (currentState == StateType.Roam)
+                _duration = aIBehaviourSO.GetConfig(StateType.Roam).RandomDuration;
         }
         public void Tick()
         {
@@ -125,11 +151,23 @@ namespace Midbaryom.AI
         {
             var currentState = _stateMachine.CurrentStateType;
             if (currentState == StateType.Idle)
-                _stateMachine.ChangeState(StateType.Run);
-            else if (currentState == StateType.Run)
+                _stateMachine.ChangeState(StateType.Roam);
+            else if (currentState == StateType.Roam)
                 _stateMachine.ChangeState(StateType.Idle);
 
             Reset();
+        }
+
+
+        private void MoveToRunAwayState()
+        {
+            _stateMachine.ChangeState(StateType.RunAway);
+        }
+
+        private void MoveToIdleState()
+        {
+            if (_stateMachine.CurrentStateType == StateType.RunAway)
+                _stateMachine.ChangeState(StateType.Idle);
         }
     }
 }

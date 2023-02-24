@@ -57,8 +57,8 @@ namespace Midbaryom.Core
         Idle,
         Dive,
         Recover,
-        Run,
-
+        Roam,
+        RunAway,
     }
 
 
@@ -141,10 +141,7 @@ namespace Midbaryom.Core
             }
 
         }
-        private void MoveTowardsTarget()
-        {
-
-        }
+   
     }
 
     public class PlayerRecoverState : BaseState
@@ -233,10 +230,10 @@ namespace Midbaryom.Core
     public class AIMoveState : BaseState
     {
 
-        private readonly NavMeshAgent _agent;
-        private readonly AIBehaviour Aibehaviour;
-        private readonly NavMeshPath _path;
-        public override StateType StateType => StateType.Run;
+        protected readonly NavMeshAgent _agent;
+        protected readonly AIBehaviour Aibehaviour;
+        protected readonly NavMeshPath _path;
+        public override StateType StateType => StateType.Roam;
         public Vector3 CurrentPos;
 
         public AIMoveState(AIBehaviour aibehaviour, NavMeshAgent agent) : base(aibehaviour.Entity)
@@ -291,8 +288,6 @@ namespace Midbaryom.Core
         {
             ResetParams();
    
-
-
             base.OnStateExit();
         }
 
@@ -303,6 +298,34 @@ namespace Midbaryom.Core
             Aibehaviour.StopCoroutine(GenerateRandomPoint());
 
 
+        }
+
+    }
+
+    public class AIRunAwayState : AIMoveState
+    {
+        private readonly IStat _runAwaySpeed;
+        private readonly IStat _movementSpeed;
+        public override StateType StateType => StateType.RunAway;
+        public AIRunAwayState(AIBehaviour aibehaviour, NavMeshAgent agent) : base(aibehaviour,agent)
+        {
+            _runAwaySpeed =  _entity.StatHandler[StatType.RunAwaySpeed];
+            _movementSpeed = _entity.StatHandler[StatType.MovementSpeed];
+        }
+
+        public override void OnStateEnter()
+        {
+            base.OnStateEnter();
+            Debug.Log($"{Aibehaviour.gameObject.name} is Running!");
+            _movementSpeed.Value += _runAwaySpeed.Value;
+       
+        }
+
+        public override void OnStateExit()
+        {
+            _movementSpeed.Value -= _runAwaySpeed.Value;
+            Debug.Log($"{Aibehaviour.gameObject.name} is stopped running!");
+            base.OnStateExit();
         }
 
     }

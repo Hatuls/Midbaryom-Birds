@@ -80,8 +80,9 @@ namespace Midbaryom.Core
         MovementSpeed = 0,
         Points = 1,
         RotationSpeed = 2,
-        DiveSpeed = 3,
-        RecoverSpeed = 4,
+        DiveSpeed = 3,// flying down
+        RecoverSpeed = 4, // bird flying back up
+        RunAwaySpeed =5,
     }
     public interface IStat : ITaggable
     {
