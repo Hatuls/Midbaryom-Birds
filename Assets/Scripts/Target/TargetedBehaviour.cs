@@ -28,7 +28,7 @@ namespace Midbaryom.Core
         }
         private void OnEnable()
         {
-            _entity.VisualHandler.AnimatorController.Animator.SetBool("isDead", false);
+            _entity.VisualHandler.AnimatorController.SetBool("isDead", false);
         }
         /// <summary>
         /// Called the moment the bird holds the prey
@@ -40,7 +40,7 @@ namespace Midbaryom.Core
 
             StopAgentMovement();
 
-            _entity.VisualHandler.AnimatorController.Animator.SetBool("isDead", true);
+            _entity.VisualHandler.AnimatorController.SetBool("isDead", true);
 
             _rb.isKinematic = true;
 

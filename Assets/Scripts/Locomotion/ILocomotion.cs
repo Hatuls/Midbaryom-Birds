@@ -120,6 +120,7 @@ namespace Midbaryom.Core
         public void AssignRotation(Vector3 direction)
         {
             _direction = direction;
+           // Debug.LogError(direction);
             _direction.Normalize();
         }
 
@@ -146,7 +147,7 @@ namespace Midbaryom.Core
             return (!StopRotation && NewDirection.magnitude > 0);
         }
 
-        public void SetRotation(Quaternion rotation) => _transform.rotation = rotation;
+        public virtual void SetRotation(Quaternion rotation) => _transform.rotation = rotation;
         public void Lock() => _lockRotation = true;
         public void UnLock() => _lockRotation = false;
 

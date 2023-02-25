@@ -77,8 +77,14 @@ namespace Midbaryom.Core
         {
             List<IEntity> tooFarEntities = new List<IEntity>();
             for (int i = 0; i < AllEntities.Count; i++)
-                if (Vector3.Distance(AllEntities[i].CurrentPosition, _player.CurrentPosition) > _spawnConfig.ReturnRadius)
+            {
+                Vector3 playerPosition = _player.CurrentPosition;
+                Vector3 currentPosition = AllEntities[i].CurrentPosition;
+                playerPosition.y = 0;
+                currentPosition.y = 0;
+                if (Vector3.Distance(currentPosition, playerPosition) > _spawnConfig.ReturnRadius)
                     tooFarEntities.Add(AllEntities[i]);
+            }
 
             if(tooFarEntities.Count>0)
             {
@@ -101,6 +107,7 @@ namespace Midbaryom.Core
             t.position = GenerateSpawnLocation(yPos);
             t.gameObject.SetActive(true);
             t.SetParent(null);
+            
         }
 
         private Vector3 GenerateSpawnLocation(float yPos)

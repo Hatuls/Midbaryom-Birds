@@ -13,7 +13,7 @@ namespace Midbaryom.Core
     {
         ITargetBehaviour TargetBehaviour { get; }
         EntityTagSO EntityTagSO { get; }
-        Transform Transform { get; }
+        Rigidbody Rigidbody { get; }
         IRotator Rotator { get; }
         IHeightHandler HeightHandler { get; set; }
         IStatHandler StatHandler { get; }
@@ -71,6 +71,8 @@ namespace Midbaryom.Core
         public IRotator Rotator => _rotator;
         public EntityTagSO EntityTagSO => _entityTag;
 
+        public ITargetBehaviour TargetBehaviour => _targetBehaviour;
+        public Rigidbody Rigidbody => _rigidbody;
         public IHeightHandler HeightHandler { get => _heightHandler; set => _heightHandler = value; }
 
         public IEnumerable<IUpdateable> UpdateNeeded
@@ -83,14 +85,12 @@ namespace Midbaryom.Core
             }
         }
 
-        public ITargetBehaviour TargetBehaviour => _targetBehaviour;
-
         private void Awake()
         {
             _destroyHandler = new DestroyBehaviour(this);
             _statHandler = new StatHandler(_stats);
             _rotator = new Rotator(_transform, false, _statHandler[StatType.RotationSpeed],_transform.rotation);
-            _movementHandler = new Locomotion(_transform, _rigidbody, false, _statHandler[StatType.MovementSpeed]);
+            _movementHandler = new Locomotion(_transform, Rigidbody, false, _statHandler[StatType.MovementSpeed]);
             _heightHandler = new HeightHandler(MovementHandler as Locomotion, Transform, EntityTagSO.StartingHeight);
 
         }

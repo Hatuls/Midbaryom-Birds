@@ -31,44 +31,26 @@ namespace Midbaryom.Visual
         }
     }
     [Serializable]
-    public class AnimatorController : IAnimatorController, IBehaviour
+    public class AnimatorController : IAnimatorController
     {
 
         [SerializeField]
         private Animator _animator;
-        public Animator Animator => _animator;
-        private IRotator _rotator;
-        private ILocomotion _locomotion;
-        private IStat _movmenetSpeed;
+   //     public Animator Animator => _animator;
+   
 
         internal void Init(IEntity entity)
         {
-            _movmenetSpeed = entity.StatHandler[StatType.MovementSpeed];
-            _locomotion = entity.MovementHandler;
-            _rotator = entity.Rotator;
-            _rotator.OnFaceDirection += AssignRotation;
-            _locomotion.OnMove += AssignMovementSpeed;
-            entity.DestroyHandler.AddBehaviour(this);
+
         }
 
-        private void AssignRotation(float angle)
+        public void PlayAnimation(string animationName)
         {
-            // Animator.SetFloat(RotationHash, -angle);
+            _animator.Play(animationName);
         }
-
-        private void AssignMovementSpeed(float speed)
-        {
-            //float startSpeed = _movmenetSpeed.StartValue;
-            //speed /= startSpeed * 2;
-            //Animator.SetFloat("Forward", speed);
-
-        }
-
-        public void ApplyBehaviour()
-        {
-            _rotator.OnFaceDirection -= AssignRotation;
-            _locomotion.OnMove -= AssignMovementSpeed;
-        }
+        public void SetFloat(string paramName, float val) => _animator.SetFloat(paramName, val);
+        public void SetBool(string paramName, bool val) => _animator.SetBool(paramName, val);
+        public void SetTrigger(string paramName) => _animator.SetTrigger(paramName);
     }
 
 

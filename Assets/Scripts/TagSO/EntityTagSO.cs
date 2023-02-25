@@ -7,8 +7,21 @@ namespace Midbaryom.Core
         public HeightType StartingHeight;
         [SerializeField]
         private Entity _entity;
-        public Entity Entity => _entity;
+        [SerializeField]
+        private HoldingOffset _holdingOffset;
 
         public bool CanBeTargeted = true;
+
+        public Entity Entity => _entity;
+        public HoldingOffset HoldingOffset => _holdingOffset;
+
+    }
+    [System.Serializable]
+    public class HoldingOffset
+    {
+        public Vector3 PositionOffset;
+        [SerializeField]
+        private Vector3 _rotationOffset;
+        public Quaternion RotaionOffset => Quaternion.Euler(_rotationOffset);
     }
 }

@@ -73,9 +73,9 @@ namespace Midbaryom.AI
         {
             float val = Random.Range(0, 360);
             _entity.Rotator?.SetRotation(Quaternion.Euler(0, val, 0));
-
-
-            _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", 0);
+            _agent.enabled = true;
+            _entity.Rigidbody.isKinematic = false;
+            _entity.VisualHandler.AnimatorController.SetFloat("Forward", 0);
             if (_stateMachine != null)
                 _stateMachine.ChangeState(StateType.Roam);
         }
