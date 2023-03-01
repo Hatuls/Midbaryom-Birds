@@ -16,17 +16,17 @@ namespace Midbaryom.Camera
         {
             Camera = camera;
             CameraTransform = cameraTransform;
-            var stat = player.Entity.StatHandler[StatType.RotationSpeed];
-
-            CameraRotationSO _defaultCameraRotation = GameManager.Instance.HuntUp ;
+            var rotationSpeed = player.Entity.StatHandler[StatType.RotationSpeed];
+            var movementSpeed = player.Entity.StatHandler[StatType.MovementSpeed];
+            CameraRotationSO _defaultCameraRotation = GameManager.Instance.HuntUp;
             CameraRotationSO _huntDownCameraRotation = GameManager.Instance.HuntDown;
 
 
             _cameraStates = new Dictionary<CameraState, IState>()
             {
-                { CameraState.Default, new DefaultCameraState(_defaultCameraRotation,player.Entity.Transform,CameraTransform,false,stat, CameraTransform.rotation) },
-                { CameraState.FaceTowardsEnemy, new HuntDiveInCameraState(_huntDownCameraRotation,player.Entity.Transform,CameraTransform,false,stat, CameraTransform.rotation,player.AimAssists) },
-                { CameraState.FaceUp, new HuntCameraState(_defaultCameraRotation,player.Entity.Transform,CameraTransform,false,stat, CameraTransform.rotation) },
+                { CameraState.Default, new DefaultCameraState(_defaultCameraRotation,player.Entity.Transform,CameraTransform,false,rotationSpeed, CameraTransform.rotation) },
+                { CameraState.FaceTowardsEnemy, new HuntDiveInCameraState(_huntDownCameraRotation,player.Entity.Transform,CameraTransform,false,rotationSpeed, CameraTransform.rotation,player.AimAssists,movementSpeed,player.Entity.Rotator)  },
+                { CameraState.FaceUp, new HuntCameraState(_defaultCameraRotation,player.Entity.Transform,CameraTransform,false,rotationSpeed, CameraTransform.rotation) },
             };
 
             _currentState = CameraState.Default;
@@ -81,13 +81,13 @@ namespace Midbaryom.Camera
 
 
 
-    
+
 
         public virtual void OnStateEnter() { OnStateEnterEvent?.Invoke(); }
         public virtual void OnStateExit() { OnStateExitEvent?.Invoke(); }
         public virtual void OnStateTick() { Tick(); OnStateTickEvent?.Invoke(); }
 
-    
+
     }
 
     public class DefaultCameraState : BaseRotationState
@@ -115,44 +115,64 @@ namespace Midbaryom.Camera
     public class HuntDiveInCameraState : HuntCameraState
     {
         private readonly AimAssists _aimAssists;
-        public HuntDiveInCameraState(CameraRotationSO cameraRotationSO, Transform ObjectTransform, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation, AimAssists aimAssists) : base(cameraRotationSO, ObjectTransform, transform, toLockRotation, rotationSpeed, startRotation)
+        private readonly IStat _speedStat;
+        private readonly IRotator _rotator;
+        public HuntDiveInCameraState(CameraRotationSO cameraRotationSO, Transform ObjectTransform, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation, AimAssists aimAssists, IStat speed, IRotator rotator) : base(cameraRotationSO, ObjectTransform, transform, toLockRotation, rotationSpeed, startRotation)
         {
             _aimAssists = aimAssists;
+            _speedStat = speed;
+            _rotator = rotator;
         }
-
+    
         protected override void CalculateAngle()
         {
             if (_aimAssists.HasTarget)
             {
+                Vector3 myPos = _objectTransform.position;
+                Vector3 targetPos = _aimAssists.Target.CurrentPosition;
+                float distance = Vector3.Distance(myPos, targetPos);
+                float divition = _objectTransform.position.y / distance;
+                float angle = Mathf.Sin(divition) * Mathf.Rad2Deg;
 
-                var angle = Mathf.Sin(_transform.position.y / Vector3.Distance(_transform.position, _aimAssists.Target.CurrentPosition)) * Mathf.Rad2Deg;
+                _currentAngle = _startingAngle + angle * _cameraRotationSO.Evaluate(_currentTime);
+                Vector3 v = Quaternion.AngleAxis(_currentAngle, _objectTransform.right) * _objectTransform.forward;
 
-            float remain = angle - _startingAngle;
-            _currentAngle = _startingAngle +  remain;
-            _currentTime += Time.deltaTime;
+                AssignRotation(v);
 
-            AssignRotation(Quaternion.AngleAxis(_currentAngle, _objectTransform.right) * _objectTransform.forward);
-        }
+                _currentTime += Time.deltaTime;
             }
+        }
+
+        protected override void RotateTowards()
+        {
+            Vector3 myPos = _objectTransform.position;
+            Vector3 targetPos = _aimAssists.Target.CurrentPosition;
+            float distance = Vector3.Distance(myPos, targetPos);
+            float time = distance / _speedStat.Value;
+            Quaternion lookRotation = Quaternion.LookRotation(NewDirection);
+            Quaternion lerpDirection = Quaternion.Lerp(_rotation, lookRotation, _currentTime / time);
+            lerpDirection.eulerAngles = new Vector3(lerpDirection.eulerAngles.x, 0f, 0f);
+            _transform.localRotation = lerpDirection;
+        }
     }
     public class HuntCameraState : BaseRotationState
     {
         protected readonly Transform _objectTransform;
-  
+
         protected float _currentAngle;
         protected float _currentTime;
         protected float _startingAngle;
         protected Quaternion _rotation;
-        public HuntCameraState( CameraRotationSO cameraRotationSO, Transform ObjectTransform, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation ) : base(cameraRotationSO, transform, toLockRotation, rotationSpeed, startRotation)
+        public HuntCameraState(CameraRotationSO cameraRotationSO, Transform ObjectTransform, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation) : base(cameraRotationSO, transform, toLockRotation, rotationSpeed, startRotation)
         {
-   
+
             _objectTransform = ObjectTransform;
         }
 
         public override void OnStateEnter()
         {
             _rotation = _transform.localRotation;
-            _startingAngle = _transform.localEulerAngles.x; 
+            _startingAngle = _transform.localEulerAngles.x;
             _currentAngle = 0;
             _currentTime = 0;
         }
@@ -167,7 +187,7 @@ namespace Midbaryom.Camera
             // maybe change it to currentvalue
 
             float remain = _cameraRotationSO.Angle - _startingAngle;
-            _currentAngle = _startingAngle + _cameraRotationSO.Evaluate(_currentTime ) * remain;
+            _currentAngle = _startingAngle + _cameraRotationSO.Evaluate(_currentTime) * remain;
             _currentTime += Time.deltaTime;
 
             AssignRotation(Quaternion.AngleAxis(_currentAngle, _objectTransform.right) * _objectTransform.forward);
@@ -190,6 +210,6 @@ namespace Midbaryom.Camera
         Default,
         FaceTowardsEnemy,
         FaceUp,
-    } 
+    }
 }
 

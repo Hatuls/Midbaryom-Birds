@@ -91,13 +91,16 @@ namespace Midbaryom.Core
 
     public class PlayerDiveState : BaseState
     {
+
         public static event Action OnTargetHit;
         private readonly ILocomotion _movementHandler;
         private readonly IPlayer _player;
         public override StateType StateType => StateType.Dive;
         private readonly IStat _diveSpeed, _movementSpeed;
 
-        private const float minDistanceToTargetAquire= 2f;
+        private const float minDistanceToTargetAquire= 6f;
+        private const float minDistanceToStartCatchingAnimation = 15f;
+        bool _isPlayingAnimation;
         public PlayerDiveState(IPlayer player, IStat speed) : base(player.Entity)
         {
             _player = player;
@@ -113,7 +116,7 @@ namespace Midbaryom.Core
             _player.CameraManager.ChangeState(CameraState.FaceTowardsEnemy);
             _entity.HeightHandler.ChangeState(HeightType.Animal);
             _movementSpeed.Value += _diveSpeed.Value;
-
+            _isPlayingAnimation = false;
             _movementHandler.StopMovement = true;
             base.OnStateEnter();
         }
@@ -135,9 +138,21 @@ namespace Midbaryom.Core
             {
                 Vector3 dir = aimAssists.TargetDirection;
                 _movementHandler.MoveTowards(dir);
-        
-                if (Vector3.Distance(aimAssists.Target.CurrentPosition, _entity.CurrentPosition) <= minDistanceToTargetAquire)
+
+
+                Vector3 targetPos = aimAssists.Target.CurrentPosition;
+                Vector3 myPos = _entity.CurrentPosition;
+                //myPos.y = 0;
+                //targetPos.y = 0;
+                float distance = Vector3.Distance(targetPos, myPos);
+                if (distance <= minDistanceToTargetAquire)
                     OnTargetHit?.Invoke();
+                else if (!_isPlayingAnimation && distance <= minDistanceToStartCatchingAnimation)
+                {
+                    _isPlayingAnimation = true;
+                 //   Debug.Log(distance);
+                    _entity.VisualHandler.AnimatorController.SetTrigger("Attack");
+                }
             }
 
         }
@@ -222,7 +237,7 @@ namespace Midbaryom.Core
                 agent.isStopped = true;
      
 
-            _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", 0);
+            _entity.VisualHandler.AnimatorController.SetFloat("Forward", 0);
         }
  
     }
@@ -276,7 +291,7 @@ namespace Midbaryom.Core
                 yield break;
             _agent.SetPath(_path);
 
-            _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", .5f);
+            _entity.VisualHandler.AnimatorController.SetFloat("Forward", .5f);
             float RND()
             {
                 int radius = System.Convert.ToInt32(Aibehaviour.AIBehaviourSO.TargetDestinationRadius);

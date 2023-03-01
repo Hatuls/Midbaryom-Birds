@@ -31,6 +31,7 @@ namespace Midbaryom.Core
         {
             get
             {
+                yield return CameraManager;
                 yield return PlayerController;
                 yield return _playerStateMachine;
             }
@@ -77,7 +78,7 @@ namespace Midbaryom.Core
         
         private void LateUpdate()
         {
-            CameraManager.Tick();
+        //    .Tick();
         }
         private void OnDestroy()
         {
