@@ -222,7 +222,7 @@ namespace Midbaryom.Core
                 agent.isStopped = true;
      
 
-            _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", 0);
+            _entity.VisualHandler.AnimatorController.Animator.SetFloat("Forward", 0); 
         }
  
     }

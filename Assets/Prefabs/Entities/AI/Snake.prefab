@@ -15,6 +15,18 @@ PrefabInstance:
       propertyPath: _animatorController._animator
       value: 
       objectReference: {fileID: 8572422958830789423}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._targetedBehaviour
+      value: 
+      objectReference: {fileID: 1043272292182825505}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._meshRenderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._meshRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 8521662373497210501}
     - target: {fileID: 1419693908867709460, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -113,6 +125,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+--- !u!114 &1043272292182825505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7033308147361413513, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+  m_PrefabInstance: {fileID: 8061767558946546600}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df1fe9275896d94fb2ec67845eec772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5370711546991857575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2695896218941205519, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
@@ -181,11 +204,24 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 137256538446156630, guid: d65ef6c64c2e4d349ba0475515d794e7, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 137256538446156630, guid: d65ef6c64c2e4d349ba0475515d794e7, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: a85ed927e31d62d4a905f37b1eacb300, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d65ef6c64c2e4d349ba0475515d794e7, type: 3}
 --- !u!4 &8622872118734001607 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4007027620790292, guid: d65ef6c64c2e4d349ba0475515d794e7, type: 3}
+  m_PrefabInstance: {fileID: 8621196865942312403}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8521662373497210501 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137256538446156630, guid: d65ef6c64c2e4d349ba0475515d794e7, type: 3}
   m_PrefabInstance: {fileID: 8621196865942312403}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &8572422958830789423 stripped

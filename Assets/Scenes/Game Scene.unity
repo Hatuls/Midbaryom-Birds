@@ -271,10 +271,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Buffalo
       objectReference: {fileID: 0}
-    - target: {fileID: 1607455022779036938, guid: 64b746c688669914c913aaa153ad1457, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3101877592396426407, guid: 64b746c688669914c913aaa153ad1457, type: 3}
       propertyPath: m_RootOrder
       value: 4
