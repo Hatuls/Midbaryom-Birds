@@ -15,6 +15,38 @@ PrefabInstance:
       propertyPath: _animatorController._animator
       value: 
       objectReference: {fileID: 9158960872292540574}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._targetedBehaviour
+      value: 
+      objectReference: {fileID: 3057531289488562689}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._meshRenderers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._meshRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 9158960872296750686}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._meshRenderers.Array.data[1]
+      value: 
+      objectReference: {fileID: 9158960872296750684}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._meshRenderers.Array.data[2]
+      value: 
+      objectReference: {fileID: 9158960872296750682}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._meshRenderers.Array.data[3]
+      value: 
+      objectReference: {fileID: 9158960872296750682}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._meshRenderers.Array.data[4]
+      value: 
+      objectReference: {fileID: 9158960872296750682}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._meshRenderers.Array.data[5]
+      value: 
+      objectReference: {fileID: 9158960872296750682}
     - target: {fileID: 5269848389614339371, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _entityTag
       value: 
@@ -97,6 +129,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+--- !u!114 &3057531289488562689 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7033308147361413513, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+  m_PrefabInstance: {fileID: 5473523900934382472}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df1fe9275896d94fb2ec67845eec772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7970355043968929671 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2695896218941205519, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
@@ -183,5 +226,20 @@ Transform:
 --- !u!95 &9158960872292540574 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: 6160f3d89f1b0ea4d937e787ce9746f1, type: 3}
+  m_PrefabInstance: {fileID: 9158960872283051518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &9158960872296750686 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 13700000, guid: 6160f3d89f1b0ea4d937e787ce9746f1, type: 3}
+  m_PrefabInstance: {fileID: 9158960872283051518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &9158960872296750684 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 13700002, guid: 6160f3d89f1b0ea4d937e787ce9746f1, type: 3}
+  m_PrefabInstance: {fileID: 9158960872283051518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &9158960872296750682 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 13700004, guid: 6160f3d89f1b0ea4d937e787ce9746f1, type: 3}
   m_PrefabInstance: {fileID: 9158960872283051518}
   m_PrefabAsset: {fileID: 0}

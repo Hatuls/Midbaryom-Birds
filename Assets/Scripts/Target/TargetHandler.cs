@@ -77,6 +77,7 @@ namespace Midbaryom.Core
                 _aimAssists.ResetTarget();
                 _player.StateMachine.LockStateMachine = false;
                 AddPoints(_holdingTarget);
+                _holdingTarget.Transform.SetParent(null);
                 _holdingTarget = null;
             }
         }

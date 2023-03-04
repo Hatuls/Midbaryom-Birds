@@ -14,6 +14,8 @@ namespace Midbaryom.Visual
     public class VisualHandler : MonoBehaviour, IVisualHandler
     {
         [SerializeField]
+        private bool _isPlayer;
+        [SerializeField]
         private Transform _visualTransform;
         [SerializeField]
         private AnimatorController _animatorController;
@@ -26,7 +28,9 @@ namespace Midbaryom.Visual
         public void Init(IEntity entity)
         {
             _animatorController.Init(entity);
+            if(!_isPlayer)
             _eatenEffect.Init();
+  
         }
 
         private void LateUpdate()
@@ -35,10 +39,11 @@ namespace Midbaryom.Visual
         }
         private void OnEnable()
         {
-            _eatenEffect?.DeActivate();
+            _eatenEffect.DeActivate();
         }
         private void OnDestroy()
         {
+            if(!_isPlayer)
             _eatenEffect?.Dispose();
         }
 
@@ -51,11 +56,13 @@ namespace Midbaryom.Visual
     [Serializable]
     public class EatenEffect : IDisposable
     {
-        private const string PROPERTY_NAME = "IsEaten";
+        private const string PROPERTY_NAME = "Vector1_efb32ed04052442bbc005a3c2485ecb2";
         [SerializeField]
         private Renderer[] _meshRenderers;
         [SerializeField]
         private TargetedBehaviour _targetedBehaviour;
+
+        private static int PropertyID = Shader.PropertyToID(PROPERTY_NAME);
 
         private List<Material> _redEffectMaterials = new List<Material>();
         public void Init()
@@ -73,7 +80,7 @@ namespace Midbaryom.Visual
             _targetedBehaviour.OnTargeted += Activate;
         }
         public void Activate()
-        => SetEatenProperty(1);
+               => SetEatenProperty(1);
 
 
 

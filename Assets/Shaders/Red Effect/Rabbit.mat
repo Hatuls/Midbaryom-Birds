@@ -10,10 +10,10 @@ Material:
   m_Name: Rabbit
   m_Shader: {fileID: -6465566751694194690, guid: 1fbc114989158474faaaf4f1040d0297, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2001
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -37,8 +37,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Boolean_997bf1e1f3964a699b75c76725cfddd7: 0
-    - Vector1_1d287a0adf79418aaddf96b9d4c5d0bd: 0.5
-    - Vector1_caa8068c50e24ca09d6d31ae7037302c: 2
+    - Vector1_1d287a0adf79418aaddf96b9d4c5d0bd: 2
+    - Vector1_caa8068c50e24ca09d6d31ae7037302c: 8
     - Vector1_efb32ed04052442bbc005a3c2485ecb2: 0
     m_Colors:
     - Color_e8e2b54f0fe540f28aa988fec94910b9: {r: 1, g: 0, b: 0, a: 1}
