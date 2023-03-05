@@ -53,7 +53,7 @@ namespace Midbaryom.Core
             _player.StateMachine.LockStateMachine = true;
 
          
-            target.TargetBehaviour.Targeted();
+            target.TargetBehaviour.Eaten();
 
             SetTargetAtHoldingPosition(target);
         }

@@ -16,13 +16,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8572422958830789423}
     - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _shaderView._targetedBehaviour
+      value: 
+      objectReference: {fileID: 1043272292182825505}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _eatenEffect._targetedBehaviour
       value: 
       objectReference: {fileID: 1043272292182825505}
     - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _eatenEffect._meshRenderers.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 8521662373497210501}
     - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _eatenEffect._meshRenderers.Array.data[0]
       value: 
