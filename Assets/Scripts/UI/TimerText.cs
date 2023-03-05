@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TimerText : MonoBehaviour
 {
-    private const string TIME_TEXT = "Time: ";
+    private const string Format = "00:00";
     [SerializeField]
     private TextMeshProUGUI _text;
 
@@ -25,6 +25,6 @@ public class TimerText : MonoBehaviour
     private void SetText(float time)
     {
         int roundedTime = Mathf.RoundToInt(time);
-        _text.text =roundedTime.ToString("00:00");
+        _text.text =roundedTime.ToString(Format);
     }
 }
