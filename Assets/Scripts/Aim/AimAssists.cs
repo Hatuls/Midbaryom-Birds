@@ -35,6 +35,10 @@ namespace Midbaryom.Core
         [SerializeField]
         private int _startWarningAnimalsAt = 2;
 
+        [SerializeField]
+        private TagSO[] _targetingTags;
+
+
         private bool _lockTarget;
         private Vector3 _middleScreenPoint;
         public bool HasTarget => Target != null;
@@ -49,6 +53,7 @@ namespace Midbaryom.Core
 
         private void Start()
         {
+            ///Set _targetingTags to the current targeting animals
             _middleScreenPoint = new Vector3(_halfViewPoint, _halfViewPoint, _camera.nearClipPlane);
         }
         private void Update()
@@ -106,8 +111,12 @@ namespace Midbaryom.Core
                 for (int i = 0; i < count; i++)
                 {
                     currentEntity = allActiveEntities[i];
-                    if (!currentEntity.EntityTagSO.CanBeTargeted)
+
+                    if (!currentEntity.ContainOneOrMoreTags(_targetingTags))
                         continue;
+
+                  //  if (!currentEntity.EntityTagSO.CanBeTargeted)
+                  //      continue;
 
                     float currentsTargetDistance = GetDistance(currentEntity, middleScanPoint);
 

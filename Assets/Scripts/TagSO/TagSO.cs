@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Midbaryom.Core
 {
+    [CreateAssetMenu(menuName ="ScriptableObjects/Tags/New Tag")]
     public class TagSO : ScriptableObject { }
     public interface ITaggable
     {
@@ -58,6 +59,7 @@ namespace Midbaryom.Core
             for (int i = 0; i < tagsSO.Length; i++)
             {
                 bool containCurrent = tagable.ContainTag(tagsSO[i]);
+
                 if (containCurrent)
                     playerTags.Add(playerTags[i]);
 

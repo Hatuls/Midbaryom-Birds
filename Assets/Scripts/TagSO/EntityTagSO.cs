@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 namespace Midbaryom.Core
 {
     [CreateAssetMenu(menuName ="ScriptableObjects/Tags/New Entity", fileName ="New Entitiy SO")]
@@ -10,8 +11,17 @@ namespace Midbaryom.Core
         [SerializeField]
         private HoldingOffset _holdingOffset;
 
-        public bool CanBeTargeted = true;
+        [SerializeField]
+        private TagSO[] _tags;
 
+        public IEnumerable<TagSO> Tags
+        {
+            get
+            {
+                for (int i = 0; i < _tags.Length; i++)
+                    yield return _tags[i];
+            }
+        }
         public Entity Entity => _entity;
         public HoldingOffset HoldingOffset => _holdingOffset;
 

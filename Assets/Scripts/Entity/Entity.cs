@@ -35,8 +35,7 @@ namespace Midbaryom.Core
         private EntityTagSO _entityTag;
         [SerializeField]
         private StatSO[] _stats;
-        [SerializeField]
-        private TagSO[] _entityTags;
+
         [Header("Components:")]
         [SerializeField]
         private Transform _transform;
@@ -60,9 +59,9 @@ namespace Midbaryom.Core
             get
             {
                 yield return _entityTag;
-
-                for (int i = 0; i < _entityTags.Length; i++)
-                    yield return _entityTags[i];
+                
+                foreach (TagSO tag in _entityTag.Tags)
+                    yield return tag;
             }
         }
         public ILocomotion MovementHandler => _movementHandler;
