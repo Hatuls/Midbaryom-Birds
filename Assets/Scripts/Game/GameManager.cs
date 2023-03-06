@@ -20,6 +20,13 @@ namespace Midbaryom.Core
         public CameraRotationSO HuntDown, HuntUp;
         public HeightConfigSO HeightConfigSO;
         public SpawnConfigSO _spawnConfig;
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Application.Quit();
+        }
+
 #if UNITY_EDITOR
         [Header("Editor:")]
         public float Radius;

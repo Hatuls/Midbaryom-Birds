@@ -1,6 +1,7 @@
 using Midbaryom.Core;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 namespace Midbaryom.Visual
 {
@@ -20,6 +21,8 @@ namespace Midbaryom.Visual
         [SerializeField]
         private AnimatorController _animatorController;
         [SerializeField]
+        private EatenScaleEffect _eatenEffect;
+        [SerializeField]
         private ShaderView _shaderView;
         public IAnimatorController AnimatorController => _animatorController;
 
@@ -29,8 +32,10 @@ namespace Midbaryom.Visual
         {
             _animatorController.Init(entity);
             if (!_isPlayer)
+            {
                 _shaderView.Init();
-
+                _eatenEffect.Init();
+            }
         }
 
         private void LateUpdate()
@@ -41,11 +46,16 @@ namespace Midbaryom.Visual
         {
             _shaderView.IgnoreResetEffect = false;
             _shaderView.DeActivate();
+            _eatenEffect.Reset();
         }
         private void OnDestroy()
         {
             if (!_isPlayer)
-                _shaderView?.Dispose();
+            {
+            _shaderView.Dispose();
+            _eatenEffect.Dispose();
+            }
+    
         }
 
 #if UNITY_EDITOR
@@ -84,6 +94,7 @@ namespace Midbaryom.Visual
                         _glowingShadersMaterial.Add(mats[j]);
                 }
             }
+
             _targetedBehaviour.OnEaten += ActivateRedEffect;
             _targetedBehaviour.OnUnTargeted += DeActivate;
             _targetedBehaviour.OnCurrentlyTargeted += ActivateWhiteEffect;
@@ -91,7 +102,7 @@ namespace Midbaryom.Visual
         public void ActivateRedEffect()
         {
             IgnoreResetEffect = true;
-          _glowingShaderSO.ApplyEffect(_glowingShadersMaterial, _glowingShaderSO.RedEffect);
+            _glowingShaderSO.ApplyEffect(_glowingShadersMaterial, _glowingShaderSO.RedEffect);
         }
 
         public void ActivateWhiteEffect()
@@ -100,8 +111,8 @@ namespace Midbaryom.Visual
 
         public void DeActivate()
         {
-            if(!IgnoreResetEffect)
-            _glowingShaderSO?.RemoveEffect(_glowingShadersMaterial);
+            if (!IgnoreResetEffect)
+                _glowingShaderSO?.RemoveEffect(_glowingShadersMaterial);
         }
 
 
@@ -127,5 +138,59 @@ namespace Midbaryom.Visual
 
     }
 
+    [Serializable]
+    public class EatenScaleEffect : IDisposable
+    {
+        [SerializeField]
+        private Entity _entity;
+        [SerializeField]
+        private TargetedBehaviour _targetBehaviour;
+        [SerializeField]
+        private AnimationCurve _scaleEase;
+               [SerializeField]
+        private float _duration = 2f;
+        private CancellationTokenSource _cancellationTokenSource;
 
+        private CancellationToken _cancellationToken;
+        private bool _isFlag;
+        public void Dispose()
+        {
+            _cancellationTokenSource.Cancel();
+            _targetBehaviour.OnEaten -= ActivateRedEffect;
+            _cancellationTokenSource.Dispose();
+        }
+
+        public void Init()
+        {
+            _cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken token = _cancellationTokenSource.Token;
+            _targetBehaviour.OnEaten += ActivateRedEffect;
+        }
+        public void Reset()
+        {
+                       _entity.Transform.localScale = Vector3.one;
+            _isFlag = false;
+        }
+        private async void ActivateRedEffect()
+        {
+                      if (_isFlag)
+                return;
+            _isFlag = true;
+  
+            float _counter = 0;
+            Transform transform = _entity.Transform;
+            Vector3 scale = transform.localScale;
+            do
+            {
+                await System.Threading.Tasks.Task.Yield();
+                if (_cancellationToken.IsCancellationRequested)
+                    return;
+
+                _counter += Time.deltaTime;
+                transform.localScale = Vector3.Lerp(scale, Vector3.zero, _scaleEase.Evaluate( _counter / _duration));
+
+            } while (_counter <= _duration);
+
+        }
+    }
 }

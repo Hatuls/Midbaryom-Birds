@@ -32,10 +32,10 @@ namespace Midbaryom.Visual
                 for (int i = 0; i < count; i++)
                 {
                     Material material = materials[i];
+                    material.SetColor(SHADER_COLOR_REFERENCE, glowingEffect.Color);
                     material.SetFloat(SHADER_TIMER_REFERENCE, glowingEffect.Timer);
                     material.SetFloat(SHADER_HIGHLIGHT_SCALE_REFERENCE, glowingEffect.HighLightPower);
                     material.SetFloat(SHADER_FRESNEL_SCALE_REFERENCE, glowingEffect.FresnelPower);
-                    material.SetColor(SHADER_COLOR_REFERENCE, glowingEffect.Color);
                     material.SetFloat(SHADER_ACTIVATION_REFERENCE, ACTIVATE);
                 }
             }
