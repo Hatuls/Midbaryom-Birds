@@ -23,7 +23,8 @@ namespace Midbaryom.Core.Config
             for (int i = 0; i < SpawnerInfos.Length; i++)
             {
                 SpawnerInfo current = SpawnerInfos[i];
-                if (randomize < previousValue + current.SpawnWeight)
+                int spawnWeight = current.SpawnWeight;
+                if (spawnWeight > 0 && randomize < previousValue + spawnWeight)
                 {
                     var tag = current.Tag;
                     if (activeList.Where(x => x.ContainTag(tag)).Count() < current.MaxOfSameAnimal)
@@ -33,7 +34,7 @@ namespace Midbaryom.Core.Config
                     }
                 }
 
-                previousValue += current.SpawnWeight;
+                previousValue += spawnWeight;
             }
 
             if (spawnerInfo == null)

@@ -1,6 +1,7 @@
 using Midbaryom.Core;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 namespace Midbaryom.Visual
 {
@@ -20,7 +21,9 @@ namespace Midbaryom.Visual
         [SerializeField]
         private AnimatorController _animatorController;
         [SerializeField]
-        private EatenEffect _eatenEffect;
+        private EatenScaleEffect _eatenEffect;
+        [SerializeField]
+        private ShaderView _shaderView;
         public IAnimatorController AnimatorController => _animatorController;
 
         public Transform VisualTransform { get => _visualTransform; }
@@ -28,9 +31,11 @@ namespace Midbaryom.Visual
         public void Init(IEntity entity)
         {
             _animatorController.Init(entity);
-            if(!_isPlayer)
-            _eatenEffect.Init();
-  
+            if (!_isPlayer)
+            {
+                _shaderView.Init();
+                _eatenEffect.Init();
+            }
         }
 
         private void LateUpdate()
@@ -39,102 +44,153 @@ namespace Midbaryom.Visual
         }
         private void OnEnable()
         {
-            _eatenEffect.DeActivate();
+            _shaderView.IgnoreResetEffect = false;
+            _shaderView.DeActivate();
+            _eatenEffect.Reset();
         }
         private void OnDestroy()
         {
-            if(!_isPlayer)
-            _eatenEffect?.Dispose();
+            if (!_isPlayer)
+            {
+            _shaderView.Dispose();
+            _eatenEffect.Dispose();
+            }
+    
         }
 
+#if UNITY_EDITOR
         [ContextMenu("Assign Data")]
         private void Assign()
         {
-            _eatenEffect?.Assign(this);
+            _shaderView?.Assign(this);
+            UnityEditor.EditorUtility.SetDirty(this);
         }
+#endif
     }
     [Serializable]
-    public class EatenEffect : IDisposable
+    public class ShaderView : IDisposable
     {
-        private const string PROPERTY_NAME = "Vector1_efb32ed04052442bbc005a3c2485ecb2";
+
+
         [SerializeField]
-        private Renderer[] _meshRenderers;
+        private GlowingShaderSO _glowingShaderSO;
+        [SerializeField]
+        private List<Renderer> _meshRenderers;
         [SerializeField]
         private TargetedBehaviour _targetedBehaviour;
 
-        private static int PropertyID = Shader.PropertyToID(PROPERTY_NAME);
+        public bool IgnoreResetEffect { get; set; } = false;
 
-        private List<Material> _redEffectMaterials = new List<Material>();
+        private List<Material> _glowingShadersMaterial = new List<Material>();
         public void Init()
         {
-            for (int i = 0; i < _meshRenderers.Length; i++)
+            for (int i = 0; i < _meshRenderers.Count; i++)
             {
                 var current = _meshRenderers[i];
                 var mats = current.materials;
                 for (int j = 0; j < mats.Length; j++)
                 {
-                    if (mats[j].HasProperty(PROPERTY_NAME))
-                        _redEffectMaterials.Add(mats[j]);
+                    if (mats[j].HasProperty(GlowingShaderSO.SHADER_ACTIVATION_REFERENCE))
+                        _glowingShadersMaterial.Add(mats[j]);
                 }
             }
-            _targetedBehaviour.OnTargeted += Activate;
+
+            _targetedBehaviour.OnEaten += ActivateRedEffect;
+            _targetedBehaviour.OnUnTargeted += DeActivate;
+            _targetedBehaviour.OnCurrentlyTargeted += ActivateWhiteEffect;
         }
-        public void Activate()
-               => SetEatenProperty(1);
+        public void ActivateRedEffect()
+        {
+            IgnoreResetEffect = true;
+            _glowingShaderSO.ApplyEffect(_glowingShadersMaterial, _glowingShaderSO.RedEffect);
+        }
 
-
+        public void ActivateWhiteEffect()
+       => _glowingShaderSO.ApplyEffect(_glowingShadersMaterial, _glowingShaderSO.WhiteEffect);
 
 
         public void DeActivate()
-        => SetEatenProperty(0);
-
-
-        private void SetEatenProperty(int val)
         {
-            if (_redEffectMaterials.Count > 0)
-                for (int i = 0; i < _redEffectMaterials.Count; i++)
-                {
-                    _redEffectMaterials[i].SetFloat(PROPERTY_NAME, val);
-                }
+            if (!IgnoreResetEffect)
+                _glowingShaderSO?.RemoveEffect(_glowingShadersMaterial);
         }
+
 
         public void Dispose()
         {
             DeActivate();
-            _targetedBehaviour.OnTargeted -= Activate;
+            _targetedBehaviour.OnEaten -= ActivateRedEffect;
+            _targetedBehaviour.OnUnTargeted -= DeActivate;
+            _targetedBehaviour.OnCurrentlyTargeted -= ActivateWhiteEffect;
         }
-
+#if UNITY_EDITOR
         public void Assign(VisualHandler visualHandler)
         {
             var parent = visualHandler.transform.parent;
             _targetedBehaviour = parent.GetComponent<TargetedBehaviour>();
-            _meshRenderers = parent.GetComponentsInChildren<Renderer>();
+            _meshRenderers = new List<Renderer>();
+            foreach (var renderer in parent.GetComponentsInChildren<Renderer>())
+            {
+                _meshRenderers.Add(renderer);
+            }
         }
-    }
+#endif
 
+    }
 
     [Serializable]
-    public class AnimatorController : IAnimatorController
+    public class EatenScaleEffect : IDisposable
     {
-
         [SerializeField]
-        private Animator _animator;
-   //     public Animator Animator => _animator;
-   
+        private Entity _entity;
+        [SerializeField]
+        private TargetedBehaviour _targetBehaviour;
+        [SerializeField]
+        private AnimationCurve _scaleEase;
+               [SerializeField]
+        private float _duration = 2f;
+        private CancellationTokenSource _cancellationTokenSource;
 
-        internal void Init(IEntity entity)
+        private CancellationToken _cancellationToken;
+        private bool _isFlag;
+        public void Dispose()
         {
-
+            _cancellationTokenSource.Cancel();
+            _targetBehaviour.OnEaten -= ActivateRedEffect;
+            _cancellationTokenSource.Dispose();
         }
 
-        public void PlayAnimation(string animationName)
+        public void Init()
         {
-            _animator.Play(animationName);
+            _cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken token = _cancellationTokenSource.Token;
+            _targetBehaviour.OnEaten += ActivateRedEffect;
         }
-        public void SetFloat(string paramName, float val) => _animator.SetFloat(paramName, val);
-        public void SetBool(string paramName, bool val) => _animator.SetBool(paramName, val);
-        public void SetTrigger(string paramName) => _animator.SetTrigger(paramName);
+        public void Reset()
+        {
+                       _entity.Transform.localScale = Vector3.one;
+            _isFlag = false;
+        }
+        private async void ActivateRedEffect()
+        {
+                      if (_isFlag)
+                return;
+            _isFlag = true;
+  
+            float _counter = 0;
+            Transform transform = _entity.Transform;
+            Vector3 scale = transform.localScale;
+            do
+            {
+                await System.Threading.Tasks.Task.Yield();
+                if (_cancellationToken.IsCancellationRequested)
+                    return;
+
+                _counter += Time.deltaTime;
+                transform.localScale = Vector3.Lerp(scale, Vector3.zero, _scaleEase.Evaluate( _counter / _duration));
+
+            } while (_counter <= _duration);
+
+        }
     }
-
-
 }

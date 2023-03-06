@@ -92,10 +92,10 @@ namespace Midbaryom.Core
             if (Target == closestTarget)
                 return;
 
-            //   Target?.TargetBehaviour.UnTargeted();
             Target = closestTarget;
 
             OnTargetDetected?.Invoke();
+            Target?.TargetBehaviour.CurrentTarget();
             OnTargetDetectedEntity?.Invoke(Target);
         }
 

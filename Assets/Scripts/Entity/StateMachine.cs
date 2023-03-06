@@ -259,11 +259,14 @@ namespace Midbaryom.Core
             _agent.autoRepath = true;
         }
 
-        private  void ResetParams()
+        private void ResetParams()
         {
             Aibehaviour.StartCoroutine(GenerateRandomPoint());
-            if(Aibehaviour.gameObject.activeSelf && _agent.isActiveAndEnabled)
-            _agent.isStopped = false;
+            if (_agent.isActiveAndEnabled && Aibehaviour.gameObject.activeSelf)
+            {
+            
+                _agent.isStopped = false; 
+            }
         }
 
         private  IEnumerator GenerateRandomPoint()

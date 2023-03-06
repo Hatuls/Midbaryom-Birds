@@ -134,6 +134,11 @@ SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 568549840458183130, guid: def3680db508d36448d3841f0dd5ae57, type: 3}
   m_PrefabInstance: {fileID: 397900477412861520}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &172901987497252744 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 568549840458183128, guid: def3680db508d36448d3841f0dd5ae57, type: 3}
+  m_PrefabInstance: {fileID: 397900477412861520}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8109685472079490494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -162,13 +167,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 172901987501369678}
     - target: {fileID: 3235433442082583605, guid: 1db550bd21fee69479506d12eedb0481, type: 3}
+      propertyPath: _shaderView._targetedBehaviour
+      value: 
+      objectReference: {fileID: 4456612177826118801}
+    - target: {fileID: 3235433442082583605, guid: 1db550bd21fee69479506d12eedb0481, type: 3}
       propertyPath: _eatenEffect._targetedBehaviour
       value: 
       objectReference: {fileID: 4456612177826118801}
     - target: {fileID: 3235433442082583605, guid: 1db550bd21fee69479506d12eedb0481, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235433442082583605, guid: 1db550bd21fee69479506d12eedb0481, type: 3}
       propertyPath: _eatenEffect._meshRenderers.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3235433442082583605, guid: 1db550bd21fee69479506d12eedb0481, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 172901987497252750}
+    - target: {fileID: 3235433442082583605, guid: 1db550bd21fee69479506d12eedb0481, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.data[1]
+      value: 
+      objectReference: {fileID: 172901987497252748}
+    - target: {fileID: 3235433442082583605, guid: 1db550bd21fee69479506d12eedb0481, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.data[2]
+      value: 
+      objectReference: {fileID: 172901987497252746}
+    - target: {fileID: 3235433442082583605, guid: 1db550bd21fee69479506d12eedb0481, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.data[3]
+      value: 
+      objectReference: {fileID: 172901987497252744}
     - target: {fileID: 3235433442082583605, guid: 1db550bd21fee69479506d12eedb0481, type: 3}
       propertyPath: _eatenEffect._meshRenderers.Array.data[0]
       value: 

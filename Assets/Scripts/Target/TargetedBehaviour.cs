@@ -7,8 +7,9 @@ namespace Midbaryom.Core
     public class TargetedBehaviour : MonoBehaviour, ITargetBehaviour
     {
         public event Action OnPotentiallyTargeted;
-        public event Action OnTargeted;
+        public event Action OnEaten;
         public event Action OnUnTargeted;
+        public event Action OnCurrentlyTargeted;
 
         [SerializeField]
         private Entity _entity;
@@ -33,7 +34,7 @@ namespace Midbaryom.Core
         /// <summary>
         /// Called the moment the bird holds the prey
         /// </summary>
-        public void Targeted()
+        public void Eaten()
         {
             _entity.MovementHandler.StopMovement = true;
             _entity.Rotator.StopRotation = true;
@@ -44,7 +45,7 @@ namespace Midbaryom.Core
 
             _rb.isKinematic = true;
 
-            OnTargeted?.Invoke();
+            OnEaten?.Invoke();
         }
 
         private void StopAgentMovement()
@@ -63,15 +64,34 @@ namespace Midbaryom.Core
             _isPotentiallyTargeted = false;
             OnUnTargeted?.Invoke();
         }
+
+        public void CurrentTarget()
+        {
+            OnCurrentlyTargeted?.Invoke();
+        }
     }
 
     public interface ITargetBehaviour
     {
         event Action OnPotentiallyTargeted;
-        event Action OnTargeted;
+        event Action OnCurrentlyTargeted;
+        event Action OnEaten;
         event Action OnUnTargeted;
-        void Targeted();
+        /// <summary>
+        /// When the prey is under the bird legs
+        /// </summary>
+        void Eaten();
+        /// <summary>
+        /// When the animal is in the scan distance
+        /// </summary>
         void PotentiallyTarget();
+        /// <summary>
+        /// when the animal is not a target anymore
+        /// </summary>
         void UnTargeted();
+        /// <summary>
+        /// the animal is being targeted
+        /// </summary>
+        void CurrentTarget();
     }
 }

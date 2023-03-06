@@ -5,26 +5,28 @@ using UnityEngine;
 
 public class TimerText : MonoBehaviour
 {
-    private const string Format = "00:00";
+    private const string FORMAT = "00:00";
     [SerializeField]
     private TextMeshProUGUI _text;
-
+    [SerializeField]
+    private float _sessionTime =90f;
     float _counter = 0;
 
     private void Start()
     {
-        _counter = 0;   
+        _counter = _sessionTime;   
     }
 
-    void Update()
+    void LateUpdate()
     {
-        _counter += Time.deltaTime;
+        _counter -= Time.deltaTime;
         SetText(_counter);
     }
 
     private void SetText(float time)
     {
         int roundedTime = Mathf.RoundToInt(time);
-        _text.text =roundedTime.ToString(Format);
+        int clampedTime = Mathf.Max(roundedTime, 0);
+        _text.text = clampedTime.ToString(FORMAT);
     }
 }

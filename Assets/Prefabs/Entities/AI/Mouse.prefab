@@ -12,17 +12,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5777458598038292231}
     - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _shaderView._glowingShaderSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 3a4df44c6a9b41f4c804c2900b9faba0, type: 2}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _animatorController._animator
       value: 
       objectReference: {fileID: 5777458598029273319}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _shaderView._targetedBehaviour
+      value: 
+      objectReference: {fileID: 8060130347813529983}
     - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _eatenEffect._targetedBehaviour
       value: 
       objectReference: {fileID: 8060130347813529983}
     - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _eatenEffect._meshRenderers.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 5777458598040585703}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.data[1]
+      value: 
+      objectReference: {fileID: 5777458598040585701}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.data[2]
+      value: 
+      objectReference: {fileID: 5777458598040585699}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.data[3]
+      value: 
+      objectReference: {fileID: 5777458598040585697}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _shaderView._meshRenderers.Array.data[4]
+      value: 
+      objectReference: {fileID: 5777458598033380903}
     - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _eatenEffect._meshRenderers.Array.data[0]
       value: 
