@@ -233,7 +233,7 @@ namespace Midbaryom.Core
         {
             base.OnStateEnter();
             var go = _aIBehaviour.gameObject;
-            if (go.activeSelf&&go.activeInHierarchy && agent.isActiveAndEnabled)
+            if (go.activeSelf&&go.activeInHierarchy && agent.isActiveAndEnabled && agent.isOnNavMesh)
                 agent.isStopped = true;
      
 
@@ -262,7 +262,7 @@ namespace Midbaryom.Core
         private void ResetParams()
         {
             Aibehaviour.StartCoroutine(GenerateRandomPoint());
-            if (_agent.isActiveAndEnabled && Aibehaviour.gameObject.activeSelf)
+            if (_agent.isActiveAndEnabled && Aibehaviour.gameObject.activeSelf&& _agent.isOnNavMesh)
             {
             
                 _agent.isStopped = false; 
@@ -290,7 +290,7 @@ namespace Midbaryom.Core
 
 
             } while (!NavMesh.CalculatePath(Aibehaviour.CurrentPosition, CurrentPos, -1, _path) || _path.status != NavMeshPathStatus.PathComplete);
-            if (!_agent.isActiveAndEnabled)
+            if (!_agent.isActiveAndEnabled || !_agent.isOnNavMesh)
                 yield break;
             _agent.SetPath(_path);
 

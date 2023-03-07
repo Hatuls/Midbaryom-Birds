@@ -77,10 +77,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityTag: {fileID: 0}
   _stats: []
-  _entityTags: []
   _transform: {fileID: 8559331389127733801}
   _rigidbody: {fileID: 0}
   _visualHandler: {fileID: 0}
+  _rotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _targetBehaviour: {fileID: 0}
 --- !u!1 &8552093136087515650
 GameObject:
   m_ObjectHideFlags: 0

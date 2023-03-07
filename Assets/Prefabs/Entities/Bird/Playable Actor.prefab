@@ -614,6 +614,30 @@ PrefabInstance:
       propertyPath: _stats.Array.data[4]
       value: 
       objectReference: {fileID: 11400000, guid: 205d327d9fa5196408924c42f2a4a332, type: 2}
+    - target: {fileID: 8206922584222522397, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: _rotationCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206922584222522397, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: _rotationCurve.m_Curve.Array.data[1].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206922584222522397, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: _rotationCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206922584222522397, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: _rotationCurve.m_Curve.Array.data[1].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206922584222522397, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: _rotationCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206922584222522397, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: _rotationCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
 --- !u!1 &8111495349040714921 stripped

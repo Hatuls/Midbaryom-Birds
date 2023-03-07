@@ -179,11 +179,11 @@ namespace Midbaryom.Visual
   
             float _counter = 0;
             Transform transform = _entity.Transform;
-            Vector3 scale = transform.localScale;
+            Vector3 scale = transform.localScale; 
             do
             {
                 await System.Threading.Tasks.Task.Yield();
-                if (_cancellationToken.IsCancellationRequested)
+                if (_cancellationToken.IsCancellationRequested || transform == null)
                     return;
 
                 _counter += Time.deltaTime;

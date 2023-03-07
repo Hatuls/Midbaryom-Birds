@@ -96,21 +96,35 @@ namespace Midbaryom.Core
     }
     public class Rotator : IRotator
     {
+        public event Action<float> OnFaceDirection;
         protected readonly Transform _transform;
         protected readonly IStat _rotationSpeed;
         protected readonly Quaternion _startRotation;
         protected float _currentVelocity;
         protected bool _lockRotation;
         protected Vector3 _direction;
-
-        public event Action<float> OnFaceDirection;
-
+        protected float _counter;
+        protected float _lerpDuration;
+        protected AnimationCurve _curve;
         public Rotator(Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation)
         {
             _lockRotation = toLockRotation;
             _rotationSpeed = rotationSpeed;
             _transform = transform;
             _startRotation = startRotation;
+            _counter = 0;
+            _lerpDuration = rotationSpeed.Value;
+            _curve = AnimationCurve.EaseInOut(0, 0, 1f, 1f);
+        } 
+        public Rotator(Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation, AnimationCurve rotationCurve)
+        {
+            _lockRotation = toLockRotation;
+            _rotationSpeed = rotationSpeed;
+            _transform = transform;
+            _startRotation = startRotation;
+            _counter = 0;
+            _lerpDuration = rotationSpeed.Value;
+            _curve = rotationCurve;
         }
 
         public Vector3 NewDirection => _direction;
@@ -126,31 +140,43 @@ namespace Midbaryom.Core
 
         public void Tick()
         {
-            if (CanRotate())
+            if (!CanRotate())
+                return;
+            else if(NewDirection.magnitude > 0)
                 RotateTowards();
+            else
+                ResetLerp();
         }
         protected virtual void RotateTowards()
         {
 
             float targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
-
             float currentYRotation = _transform.eulerAngles.y;
+
+            _counter += Time.deltaTime  ;
+
+         
             float relativeAngle = targetAngle + currentYRotation;
-            //float smoothAngle = Mathf.SmoothDampAngle(currentYRotation, relativeAngle, ref _currentVelocity, RotationSpeed);
-            Quaternion lerpDirection = Quaternion.Lerp(_transform.rotation, Quaternion.Euler(0, relativeAngle, 0), RotationSpeed* Time.deltaTime);
+            float rotationLerpValue = _curve.Evaluate((_counter * RotationSpeed) / 100f);
+         //  Debug.Log(rotationLerpValue);
+            //float smoothAngle = Mathf.SmoothDampAngle(currentYRotation, relativeAngle, ref _currentVelocity, rotationLerpValue);
+            Quaternion lerpDirection = Quaternion.Lerp(_transform.rotation, Quaternion.Euler(0, relativeAngle, 0), rotationLerpValue);
             SetRotation(lerpDirection);
 
             OnFaceDirection?.Invoke(relativeAngle);
+
+         
+
         }
         protected virtual bool CanRotate()
         {
-            return (!StopRotation && NewDirection.magnitude > 0);
+            return (!StopRotation);
         }
 
         public virtual void SetRotation(Quaternion rotation) => _transform.rotation = rotation;
         public void Lock() => _lockRotation = true;
         public void UnLock() => _lockRotation = false;
-
+        public void ResetLerp() => _counter = 0;
         public Quaternion StartingRotation() => _startRotation;
     }
 }

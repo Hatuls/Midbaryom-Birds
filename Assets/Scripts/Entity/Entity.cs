@@ -44,6 +44,8 @@ namespace Midbaryom.Core
         [SerializeField]
         private VisualHandler _visualHandler;
         [SerializeField]
+        private AnimationCurve _rotationCurve;
+        [SerializeField]
         private TargetedBehaviour _targetBehaviour;
         private IRotator _rotator;
         private IDestroyHandler _destroyHandler;
@@ -69,7 +71,6 @@ namespace Midbaryom.Core
         public IStatHandler StatHandler => _statHandler;
         public IRotator Rotator => _rotator;
         public EntityTagSO EntityTagSO => _entityTag;
-
         public ITargetBehaviour TargetBehaviour => _targetBehaviour;
         public Rigidbody Rigidbody => _rigidbody;
         public IHeightHandler HeightHandler { get => _heightHandler; set => _heightHandler = value; }
@@ -88,7 +89,7 @@ namespace Midbaryom.Core
         {
             _destroyHandler = new DestroyBehaviour(this);
             _statHandler = new StatHandler(_stats);
-            _rotator = new Rotator(_transform, false, _statHandler[StatType.RotationSpeed],_transform.rotation);
+            _rotator = new Rotator(_transform, false, _statHandler[StatType.RotationSpeed],_transform.rotation, _rotationCurve);
             _movementHandler = new Locomotion(_transform, Rigidbody, false, _statHandler[StatType.MovementSpeed]);
             _heightHandler = new HeightHandler(MovementHandler as Locomotion, Transform, EntityTagSO.StartingHeight);
 
@@ -125,19 +126,5 @@ namespace Midbaryom.Core
         void OnStateExit();
         void OnStateTick();
     }
-    //public interface IInputReader<T> : IInputReader
-    //{
-    //    event Action<T> OnInputValueReceived;
 
-    //}
-    //public interface IInputReader : ITaggable
-    //{
-    //    event Action OnInputReceived;
-    //    event Action OnInputStopped;
-    //}
-    //public interface IInputHandler
-    //{
-    //    IReadOnlyList<IInputReader<float>> TurnningInputs { get; }
-    //    // IReadOnlyList<IInputReader>
-    //}
 }

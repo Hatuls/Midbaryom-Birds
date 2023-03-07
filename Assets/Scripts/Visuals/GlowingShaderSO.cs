@@ -61,7 +61,7 @@ namespace Midbaryom.Visual
         {
             public Color Color;
             public float Timer = 1f;
-            [Range(0,2f)]
+            [Range(0,5f)]
             public float FresnelPower = 3.19f;
             [Range(0,100f)]
             public float HighLightPower = 6.51f;

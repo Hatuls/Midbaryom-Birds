@@ -75,6 +75,7 @@ namespace Midbaryom.AI
             _entity.Rotator?.SetRotation(Quaternion.Euler(0, val, 0));
             _agent.enabled = true;
             _entity.Rigidbody.isKinematic = false;
+            _entity.Rigidbody.useGravity= true;
             _entity.VisualHandler.AnimatorController.SetFloat("Forward", 0);
             if (_stateMachine != null)
                 _stateMachine.ChangeState(StateType.Roam);
