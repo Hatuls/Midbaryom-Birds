@@ -21,7 +21,7 @@ namespace Midbaryom.Core
         [SerializeField]
         private float _spawningHeightOffset;
         [SerializeField]
-        private EntityTagSO _playerTag;
+        private TagSO _playerTag;
 
         [SerializeField]
         private bool _toStopReposition;

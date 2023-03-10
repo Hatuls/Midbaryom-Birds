@@ -16,12 +16,11 @@ namespace Midbaryom.Core
         [SerializeField]
         private AimAssists _aimAssists;
         [SerializeField]
-        private TargetHandler _targetHandler;
-
+        private BaseTargetHandler _targetHandler;
         [SerializeField]
-        private ParticleSystem _particleSystem;
-        private PlayerDiveState _playerDiveState;
-        private StateMachine _playerStateMachine;
+        private BirdStateMachine _playerStateMachine;
+
+        
         public IEntity Entity => _entity;
         public AimAssists AimAssists => _aimAssists;
         public IEnumerable<TagSO> Tags => Entity.Tags;
@@ -31,15 +30,15 @@ namespace Midbaryom.Core
         {
             get
             {
-                yield return CameraManager;
                 yield return PlayerController;
                 yield return _playerStateMachine;
+                yield return CameraManager;
             }
         }
 
-        public IStateMachine StateMachine => _playerStateMachine;
+        public IStateMachine StateMachine => _playerStateMachine.StateMachine;
 
-        public TargetHandler TargetHandler => _targetHandler;
+        public BaseTargetHandler TargetHandler => _targetHandler;
 
         private void Start()
         {
@@ -50,43 +49,21 @@ namespace Midbaryom.Core
 
             CameraManager = new CameraManager(this, _camera, _cameraTransform);
             PlayerController = new PlayerController(this, Entity);
+            _playerStateMachine.InitStateMachine();
+            _targetHandler.InitTargetHandler(this);
 
-            InitStateMachine();
-         //   _aimAssists.OnTargetReset += ExitState;
         }
 
-        private void InitStateMachine()
-        {
-            _playerDiveState = new PlayerDiveState(this, Entity.StatHandler[StatType.DiveSpeed]);
-            _playerDiveState.OnStateEnterEvent += _particleSystem.Play;
-            _playerDiveState.OnStateExitEvent += _particleSystem.Stop;
- 
-            BaseState[] baseStates = new BaseState[]
-            {
-                new PlayerIdleState(this),
-                _playerDiveState,
-                new PlayerRecoverState(this,Entity.StatHandler[StatType.RecoverSpeed]),
-            };
-            _playerStateMachine = new StateMachine(StateType.Idle, baseStates);
-        }
-        private void ExitState() => _playerStateMachine.ChangeState(StateType.Recover);
+     
         private void Update()
         {
             foreach (IUpdateable updateable in UpdateCollection)
                 updateable.Tick();
         }
         
-        private void LateUpdate()
-        {
-        //    .Tick();
-        }
-        private void OnDestroy()
-        {
-            _aimAssists.OnTargetReset -= ExitState;
-            _playerDiveState.OnStateEnterEvent -= _particleSystem.Play;
-            _playerDiveState.OnStateExitEvent  -= _particleSystem.Stop;
-        }
+     
     }
+
 
     public interface IPlayer : ITaggable
     {
@@ -94,7 +71,7 @@ namespace Midbaryom.Core
         IStateMachine StateMachine { get; }
         PlayerController PlayerController { get; }
         AimAssists AimAssists { get; }
-        TargetHandler TargetHandler { get; }
+        BaseTargetHandler TargetHandler { get; }
         CameraManager CameraManager { get; }
     }
 

@@ -59,6 +59,7 @@ namespace Midbaryom.Core
         Recover,
         Roam,
         RunAway,
+        Eat,
     }
 
 
@@ -92,7 +93,7 @@ namespace Midbaryom.Core
     public class PlayerDiveState : BaseState
     {
 
-        public static event Action OnTargetHit;
+        public event Action OnTargetHit;
         private readonly ILocomotion _movementHandler;
         private readonly IPlayer _player;
         public override StateType StateType => StateType.Dive;
@@ -161,7 +162,7 @@ namespace Midbaryom.Core
 
     public class PlayerRecoverState : BaseState
     {
-        public static event Action OnRecoverStateTryingToExit;
+        public event Action OnRecoverStateTryingToExit;
         private readonly HeightConfigSO _heightConfigSO;
         private readonly IStat _recoverSpeed;
         private readonly IPlayer _player;
