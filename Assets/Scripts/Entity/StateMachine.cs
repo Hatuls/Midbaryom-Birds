@@ -92,6 +92,8 @@ namespace Midbaryom.Core
 
     public class PlayerDiveState : BaseState
     {
+        private const float minDistanceToTargetAquire = 6f;
+        private const float minDistanceToStartCatchingAnimation = 12f;
 
         public event Action OnTargetHit;
         private readonly ILocomotion _movementHandler;
@@ -99,8 +101,7 @@ namespace Midbaryom.Core
         public override StateType StateType => StateType.Dive;
         private readonly IStat _diveSpeed, _movementSpeed;
 
-        private const float minDistanceToTargetAquire= 6f;
-        private const float minDistanceToStartCatchingAnimation = 15f;
+   
         bool _isPlayingAnimation;
         public PlayerDiveState(IPlayer player, IStat speed) : base(player.Entity)
         {
@@ -245,7 +246,7 @@ namespace Midbaryom.Core
 
     public class AIMoveState : BaseState
     {
-
+        private const float HEIGHT_OFFSET = 50f;
         protected readonly NavMeshAgent _agent;
         protected readonly AIBehaviour Aibehaviour;
         protected readonly NavMeshPath _path;
@@ -273,13 +274,14 @@ namespace Midbaryom.Core
         private  IEnumerator GenerateRandomPoint()
         {
              int attempt = -1;
-            const int maxAttemptyPerFrame = 3;
+            const int maxAttemptPerFrame = 3;
             System.Random rnd = new System.Random();
+
             do
             {
                 if(_agent.isActiveAndEnabled == false)
                     yield break;
-                else if (attempt % maxAttemptyPerFrame == 0)
+                else if (attempt % maxAttemptPerFrame == 0)
                     yield return null;
                 else
                     attempt++;
@@ -287,12 +289,14 @@ namespace Midbaryom.Core
                 Vector3 currentPos = Aibehaviour.CurrentPosition;
                 currentPos.x += RND();
                 currentPos.z += RND();
+                currentPos.y = GetGroundYValue(currentPos);
                 CurrentPos = currentPos;
 
-
             } while (!NavMesh.CalculatePath(Aibehaviour.CurrentPosition, CurrentPos, -1, _path) || _path.status != NavMeshPathStatus.PathComplete);
+
             if (!_agent.isActiveAndEnabled || !_agent.isOnNavMesh)
                 yield break;
+
             _agent.SetPath(_path);
 
             _entity.VisualHandler.AnimatorController.SetFloat("Forward", .5f);
@@ -301,6 +305,16 @@ namespace Midbaryom.Core
                 int radius = System.Convert.ToInt32(Aibehaviour.AIBehaviourSO.TargetDestinationRadius);
                 return rnd.Next(-radius, radius);
             }
+        }
+
+        private float GetGroundYValue(Vector3 currentPos)
+        {
+            currentPos.y += HEIGHT_OFFSET;
+            Ray rei = new Ray(currentPos, Vector3.down);
+            if (Physics.Raycast(rei, out var hit, 100f, -1))
+                return hit.point.y;
+            else
+                return currentPos.y - HEIGHT_OFFSET;
         }
 
         public override void OnStateEnter()

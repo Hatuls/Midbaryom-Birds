@@ -2,9 +2,11 @@
 
 namespace Midbaryom.Core
 {
-    public class HarpyEagleStateMachine : BirdStateMachine
+    public class EatAllStateMachine : BirdStateMachine
     {
 
+        [SerializeField,Range(0f,10f)]
+        private float _duration = 1f;
         [SerializeField]
         private ParticleSystem _particleSystem;
 
@@ -21,6 +23,7 @@ namespace Midbaryom.Core
             {
                 new PlayerIdleState(_player),
                 _playerDiveState,
+                new EatCarcassState(_player,_duration ),
                 new PlayerRecoverState(_player,_player.Entity.StatHandler[StatType.RecoverSpeed]),
             };
             _playerStateMachine = new StateMachine(StateType.Idle, baseStates);
