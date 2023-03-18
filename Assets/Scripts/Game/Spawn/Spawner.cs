@@ -72,7 +72,7 @@ namespace Midbaryom.Core
             if(!_toStopReposition)
             RePositionMob();
         }
-
+          
         private void RePositionMob()
         {
             List<IEntity> tooFarEntities = new List<IEntity>();
@@ -80,9 +80,8 @@ namespace Midbaryom.Core
             {
                 Vector3 playerPosition = _player.CurrentPosition;
                 Vector3 currentPosition = AllEntities[i].CurrentPosition;
-                playerPosition.y = 0;
-                currentPosition.y = 0;
-                if (Vector3.Distance(currentPosition, playerPosition) > _spawnConfig.ReturnRadius)
+
+                if (Vector3.Distance(currentPosition, playerPosition) > _spawnConfig.ReturnRadius  )
                     tooFarEntities.Add(AllEntities[i]);
             }
 
@@ -106,8 +105,10 @@ namespace Midbaryom.Core
             float yPos = _heightConfigSO.GetHeight(mobTag.StartingHeight).Height + _spawningHeightOffset;
             Transform t = mob.Transform;
             t.SetParent(null);
+            mob.Rigidbody.isKinematic = true;
             t.position = GenerateSpawnLocation(yPos);
             t.gameObject.SetActive(true);
+            mob.Rigidbody.isKinematic = false;
         }
 
         private Vector3 GenerateSpawnLocation(float yPos)
@@ -123,9 +124,9 @@ namespace Midbaryom.Core
             } while (PointInCameraView(destination));
 
             Ray rei = new Ray(destination, Vector3.down);
-            if (Physics.Raycast(rei, out RaycastHit raycastHit, 100f, -1))
+            if (Physics.Raycast(rei, out RaycastHit raycastHit, 500f, -1))
             {
-                const float GROUND_OFFSET = 5f;
+                const float GROUND_OFFSET =2f;
                 destination.y = raycastHit.point.y + GROUND_OFFSET;
             }
             else

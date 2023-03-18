@@ -18,9 +18,9 @@ public class ScoreManager : MonoBehaviour
         {
             int amount = 0;
             foreach (var animal in _animalScore.Values)
-            {
                 amount += animal.Amount;
-            }
+            
+            return amount;
         }
     }
     private void Start()
@@ -34,9 +34,8 @@ public class ScoreManager : MonoBehaviour
 }
 
 
-public class User
-{
-}
+
+
 [Serializable]
 public class AnimalScore
 {
