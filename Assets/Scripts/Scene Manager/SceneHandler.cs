@@ -123,6 +123,7 @@ public class SceneHandler : MonoBehaviour, ISceneHandler
         }
         while (!asyncOperation.isDone);
         _activeScenes.Remove(index);
+        Resources.UnloadUnusedAssets();
     }
     #endregion
 
