@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 1e0a25ed1bbd5d04891016d724c79e82, type: 2}
+--- !u!1 &14095400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 654464735386234754, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 2135466032}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &20454560
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,11 +241,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -294,12 +307,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal Icon (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4844030364025569477, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b0c58834e2dea744ba9a02bd38bc5ae0, type: 3}
+    - target: {fileID: 6260224886251647629, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 265ec74fe6e2fda4aa193fa8217ba45f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
 --- !u!224 &25299373 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
   m_PrefabInstance: {fileID: 25299372}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &91619945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1893968921528149257, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 720232486}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &126229805
 PrefabInstance:
@@ -611,6 +637,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
+--- !u!1 &434958190 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1893968921528149257, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 2135466032}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &518798447 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c7dbaa836b8dac1478cf32cee032debb, type: 3}
@@ -736,6 +767,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551287529}
   m_CullTransparentMesh: 1
+--- !u!1 &557361585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1893968921528149257, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 3699546430097914675}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &627878961
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,11 +994,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1016,12 +1060,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal Icon (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4844030364025569477, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d7e05a25a9167c942acf74e0e1eaa36f, type: 3}
+    - target: {fileID: 6260224886251647629, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e2da246fc8b96fb48873cce3998c1508, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
 --- !u!224 &720232487 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
   m_PrefabInstance: {fileID: 720232486}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &724984142 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1893968921528149257, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 1978775139}
   m_PrefabAsset: {fileID: 0}
 --- !u!198 &754761633 stripped
 ParticleSystem:
@@ -1065,11 +1122,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1123,12 +1188,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal Icon (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844030364025569477, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 82e1fd870259599478185e98279db612, type: 3}
+    - target: {fileID: 6260224886251647629, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f09d832886f82d0428e4d56b84e4a334, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
 --- !u!224 &762676605 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
   m_PrefabInstance: {fileID: 762676604}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &802986112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 654464735386234754, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 25299372}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &814526899
 GameObject:
@@ -1140,6 +1222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 814526900}
   - component: {fileID: 814526901}
+  - component: {fileID: 814526902}
   m_Layer: 5
   m_Name: Holder
   m_TagString: Untagged
@@ -1199,6 +1282,84 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &814526902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814526899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cce97aadcd535748b80efb3aaa16bfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawner: {fileID: 951776888}
+  _targetedAnimalIcons:
+  - _targetedImageObject: {fileID: 1985443006}
+    _untargetedImageObject: {fileID: 557361585}
+    _entityTag:
+      GroupName: Mouse
+      TagsCollection:
+      - {fileID: 11400000, guid: 279f4f4260fcd9e4489670a971c8edf1, type: 2}
+  - _targetedImageObject: {fileID: 802986112}
+    _untargetedImageObject: {fileID: 1067032322}
+    _entityTag:
+      GroupName: Turtle
+      TagsCollection:
+      - {fileID: 11400000, guid: 435a0728e671d3e4fa294487a677fef3, type: 2}
+  - _targetedImageObject: {fileID: 1441406391}
+    _untargetedImageObject: {fileID: 2069428225}
+    _entityTag:
+      GroupName: Snake
+      TagsCollection:
+      - {fileID: 11400000, guid: c7c1aa07114a2184089601ee1fe74aa1, type: 2}
+  - _targetedImageObject: {fileID: 1659769215}
+    _untargetedImageObject: {fileID: 724984142}
+    _entityTag:
+      GroupName: Gecko
+      TagsCollection:
+      - {fileID: 11400000, guid: 48ee5373ca4a2834cbd1f2bad47c7066, type: 2}
+  - _targetedImageObject: {fileID: 14095400}
+    _untargetedImageObject: {fileID: 434958190}
+    _entityTag:
+      GroupName: Rabbit
+      TagsCollection:
+      - {fileID: 11400000, guid: b861e76536d8ca94aa6b6fefa9ad857f, type: 2}
+  - _targetedImageObject: {fileID: 966296887}
+    _untargetedImageObject: {fileID: 1204345483}
+    _entityTag:
+      GroupName: Aspidoscelis
+      TagsCollection:
+      - {fileID: 0}
+  - _targetedImageObject: {fileID: 1852357429}
+    _untargetedImageObject: {fileID: 91619945}
+    _entityTag:
+      GroupName: Bugs
+      TagsCollection:
+      - {fileID: 11400000, guid: 1187b3e4cf003864ba19e66bb6517bb6, type: 2}
+  _allEntities:
+  - GroupName: Mouse
+    TagsCollection:
+    - {fileID: 11400000, guid: 279f4f4260fcd9e4489670a971c8edf1, type: 2}
+  - GroupName: Turtle
+    TagsCollection:
+    - {fileID: 11400000, guid: 435a0728e671d3e4fa294487a677fef3, type: 2}
+  - GroupName: Snake
+    TagsCollection:
+    - {fileID: 11400000, guid: c7c1aa07114a2184089601ee1fe74aa1, type: 2}
+  - GroupName: Gecko
+    TagsCollection:
+    - {fileID: 11400000, guid: 48ee5373ca4a2834cbd1f2bad47c7066, type: 2}
+  - GroupName: Rabbit
+    TagsCollection:
+    - {fileID: 11400000, guid: b861e76536d8ca94aa6b6fefa9ad857f, type: 2}
+  - GroupName: Aspidoscelis
+    TagsCollection:
+    - {fileID: 0}
+  - GroupName: Bugs
+    TagsCollection:
+    - {fileID: 11400000, guid: 1187b3e4cf003864ba19e66bb6517bb6, type: 2}
 --- !u!114 &951776888 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8635841005145571776, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
@@ -1271,6 +1432,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7e6040041522524b9376e27a8d4da88, type: 3}
+--- !u!1 &966296887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 654464735386234754, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 762676604}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1018560391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,10 +1633,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1067032322 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1893968921528149257, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 25299372}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &1074474496 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 417044524765322834, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
   m_PrefabInstance: {fileID: 419488985}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1204345483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1893968921528149257, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 762676604}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1353035223
 GameObject:
@@ -1741,6 +1917,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5943d82739f8377488fa2d3df9f5ad34, type: 3}
+--- !u!1 &1441406391 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 654464735386234754, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 2039066595}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1476189318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,6 +2136,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658034816}
   m_CullTransparentMesh: 1
+--- !u!1 &1659769215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 654464735386234754, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 1978775139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1670587780
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,6 +2330,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c7dbaa836b8dac1478cf32cee032debb, type: 3}
   m_PrefabInstance: {fileID: 1842102850}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1852357429 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 654464735386234754, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 720232486}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1978775139
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2181,11 +2372,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2239,12 +2438,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal Icon (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4844030364025569477, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a0253a66a59530841a58941c94c4e1b5, type: 3}
+    - target: {fileID: 6260224886251647629, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f4a9d02b145c4384b8b9ac02b36e6fbc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
 --- !u!224 &1978775140 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
   m_PrefabInstance: {fileID: 1978775139}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1985443006 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 654464735386234754, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 3699546430097914675}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2015162729
 PrefabInstance:
@@ -2344,11 +2556,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2402,6 +2622,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal Icon (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4844030364025569477, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1ab8da94572615546bc6451a082c3172, type: 3}
+    - target: {fileID: 6260224886251647629, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6edcd27f34871584abe52bc93654d0e0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
 --- !u!224 &2039066596 stripped
@@ -2486,6 +2714,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2069428225 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1893968921528149257, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+  m_PrefabInstance: {fileID: 2039066595}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2135466032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2523,11 +2756,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2581,6 +2822,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal Icon (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4844030364025569477, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0c10700614a77c048893e6c2787a1dcf, type: 3}
+    - target: {fileID: 6260224886251647629, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c752f1c885f5193448f975ffc02adb75, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
 --- !u!224 &2135466033 stripped
@@ -2819,11 +3068,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 981310580694521237, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2877,6 +3134,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal Icon
       objectReference: {fileID: 0}
+    - target: {fileID: 4844030364025569477, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 125ff46236119f64d912e80cb985efc2, type: 3}
+    - target: {fileID: 4844030364025569477, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260224886251647629, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fcb7d2d27afb6e84da7a589a3fb6c82a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
 --- !u!224 &3699546430097914676 stripped

@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 3227448160224580196}
   - component: {fileID: 6260224886251647629}
   m_Layer: 5
-  m_Name: Inner Icon
+  m_Name: Targeted Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2204846595759844914
 RectTransform:
   m_ObjectHideFlags: 0
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 563186316429378534}
   - component: {fileID: 4844030364025569477}
   m_Layer: 5
-  m_Name: Outer Icon
+  m_Name: Not Targeted Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
