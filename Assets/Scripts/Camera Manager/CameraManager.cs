@@ -27,6 +27,8 @@ namespace Midbaryom.Camera
                 { CameraState.Default, new DefaultCameraState(_defaultCameraRotation,player.Entity.Transform,CameraTransform,false,rotationSpeed, CameraTransform.rotation) },
                 { CameraState.FaceTowardsEnemy, new HuntDiveInCameraState(_huntDownCameraRotation,player.Entity.Transform,CameraTransform,false,rotationSpeed, CameraTransform.rotation,player.AimAssists,movementSpeed,player.Entity.Rotator)  },
                 { CameraState.FaceUp, new HuntCameraState(_defaultCameraRotation,player.Entity.Transform,CameraTransform,false,rotationSpeed, CameraTransform.rotation) },
+                { CameraState.LookAtCarcass, new LookAtCarcassState(_huntDownCameraRotation, player.TargetHandler, cameraTransform, player.Entity.Transform, false, rotationSpeed, cameraTransform.rotation) }
+
             };
 
             _currentState = CameraState.Default;
@@ -89,7 +91,41 @@ namespace Midbaryom.Camera
 
 
     }
+    public class LookAtCarcassState : BaseRotationState
+    {
+        private readonly Transform _cameraHead;
+        public LookAtCarcassState(CameraRotationSO cameraConfig,BaseTargetHandler targetHandler,Transform objectTransform, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation) : base(cameraConfig, transform, toLockRotation, rotationSpeed, startRotation)
+        {
+     
+            _cameraHead = objectTransform;
+            TargetHandler = targetHandler;
+        }
 
+        public BaseTargetHandler TargetHandler { get; }
+        public override void OnStateEnter()
+        {
+
+            StopRotation = true;
+            Quaternion q = new Quaternion();
+            q.eulerAngles = new Vector3(90f, 0f, 0f);
+            _cameraHead.localRotation = q;
+            base.OnStateEnter();
+        }
+        protected override void RotateTowards()
+        {
+            if (TargetHandler.HasTargetAttached)
+            {
+                Quaternion q = new Quaternion();
+                q.eulerAngles = new Vector3(90f, 0f, 0f);
+                _cameraHead.localRotation = q;
+            }
+        }
+        public override void OnStateExit()
+        {
+            StopRotation = false;
+            base.OnStateExit(); 
+        }
+    }
     public class DefaultCameraState : BaseRotationState
     {
 
@@ -151,7 +187,7 @@ namespace Midbaryom.Camera
                 Vector3 myPos = _objectTransform.position;
                 Vector3 targetPos = _aimAssists.Target.CurrentPosition;
                 float distance = Vector3.Distance(myPos, targetPos);
-                if (distance <= 10f)
+                if (distance <= 20f)
                     return;
                 float time = distance / _speedStat.Value;
                 Quaternion lookRotation = Quaternion.LookRotation(NewDirection);
@@ -216,6 +252,7 @@ namespace Midbaryom.Camera
         Default,
         FaceTowardsEnemy,
         FaceUp,
+        LookAtCarcass,
     }
 }
 

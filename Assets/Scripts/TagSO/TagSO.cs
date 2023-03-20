@@ -13,6 +13,7 @@ namespace Midbaryom.Core
 
     public static class TagHelper
     {
+
         public static bool ContainTag(this ITaggable taggable, TagSO tagSO)
         {
             bool isContain = false;
@@ -39,6 +40,19 @@ namespace Midbaryom.Core
             return isContainAll;
         }
 
+        public static bool ContainAllTags(this ITaggable taggable, IEnumerable<TagSO> tagsSO)
+        {
+            bool isContainAll = true;
+            foreach (var tag in tagsSO)
+            {
+                isContainAll &= taggable.ContainTag(tag);
+                if (!isContainAll)
+                    break;
+            }
+            return isContainAll;
+        }
+
+
         public static bool ContainOneOrMoreTags(this ITaggable taggable, TagSO[] playerTagSO)
         {
             bool isContainAll = false;
@@ -51,6 +65,18 @@ namespace Midbaryom.Core
             return isContainAll;
         }
 
+        public static bool ContainOneOrMoreTags(this ITaggable taggable, IEnumerable<TagSO> tags)
+        {
+            bool isContainAll = false;
+            foreach (var tag in tags)
+            {
+                isContainAll |= taggable.ContainTag(tag);
+                if (isContainAll)
+                    break;
+            }
+
+            return isContainAll;
+        }
         public static bool ContainOneOrMoreTags(this ITaggable tagable, TagSO[] tagsSO, out IReadOnlyList<TagSO> tagFound)
         {
             List<TagSO> playerTags = new List<TagSO>(tagsSO.Length);
@@ -62,6 +88,25 @@ namespace Midbaryom.Core
 
                 if (containCurrent)
                     playerTags.Add(playerTags[i]);
+
+                isContainAll |= containCurrent;
+            }
+
+            tagFound = playerTags;
+            return isContainAll;
+        }
+
+        public static bool ContainOneOrMoreTags(this ITaggable tagable, IEnumerable<TagSO> tagsSO, out IReadOnlyList<TagSO> tagFound)
+        {
+            List<TagSO> playerTags = new List<TagSO>();
+            bool isContainAll = false;
+
+            foreach (var tag in tagsSO)
+            {
+                bool containCurrent = tagable.ContainTag(tag);
+
+                if (containCurrent)
+                    playerTags.Add(tag);
 
                 isContainAll |= containCurrent;
             }

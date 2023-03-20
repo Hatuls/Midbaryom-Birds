@@ -631,10 +631,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3750997155052517636, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
-      propertyPath: _duration
-      value: 3.52
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
 --- !u!1 &434958190 stripped
@@ -1331,7 +1327,7 @@ MonoBehaviour:
     _entityTag:
       GroupName: Aspidoscelis
       TagsCollection:
-      - {fileID: 0}
+      - {fileID: 11400000, guid: 2b3d9ea88314c9343b059dc4e198259c, type: 2}
   - _targetedImageObject: {fileID: 1852357429}
     _untargetedImageObject: {fileID: 91619945}
     _entityTag:
@@ -1356,7 +1352,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b861e76536d8ca94aa6b6fefa9ad857f, type: 2}
   - GroupName: Aspidoscelis
     TagsCollection:
-    - {fileID: 0}
+    - {fileID: 11400000, guid: 2b3d9ea88314c9343b059dc4e198259c, type: 2}
   - GroupName: Bugs
     TagsCollection:
     - {fileID: 11400000, guid: 1187b3e4cf003864ba19e66bb6517bb6, type: 2}

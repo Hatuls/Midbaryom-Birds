@@ -7,29 +7,39 @@ namespace Midbaryom.Core
     {
         public event Action OnEatDurationCompleted;
         private float _counter = 0f;
+        private readonly IPlayer _player;
         private readonly float _duration;
         public override StateType StateType => StateType.Eat;
-        public EatCarcassState(IPlayer entity,float duration) : base(entity.Entity)
+        public EatCarcassState(IPlayer player,float duration) : base(player.Entity)
         {
+            _player = player;
             _duration = duration;
             ResetCounter();
-    
+       
         }
 
 
         public override void OnStateEnter()
         {
-            _entity.MovementHandler.StopMovement = true;
+            SetConfig(true);
+           // _player.CameraManager.ChangeState(Camera.CameraState.Default);
             ResetCounter();
-            _entity.VisualHandler.AnimatorController.SetBool("IsEating", true);
+            
+            _player.CameraManager.ChangeState(Camera.CameraState.LookAtCarcass);
             base.OnStateEnter();
         }
 
         public override void OnStateExit()
         {
-            _entity.MovementHandler.StopMovement = false;
-            _entity.VisualHandler.AnimatorController.SetBool("IsEating", false);
+            SetConfig( false);
             base.OnStateExit();
+        }
+
+        private void SetConfig(bool value)
+        {
+            _entity.Rotator.StopRotation = value;
+            _entity.MovementHandler.StopMovement = value;
+            _entity.VisualHandler.AnimatorController.SetBool("IsEating", value);
         }
 
         public override void OnStateTick()

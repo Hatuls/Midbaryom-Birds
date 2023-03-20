@@ -123,6 +123,14 @@ PrefabInstance:
       propertyPath: _shaderView._meshRenderers.Array.data[2]
       value: 
       objectReference: {fileID: 5747320453286425305}
+    - target: {fileID: 1003617795, guid: 08b3b8e50db30644fb8a1210b036ea38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.242
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003617795, guid: 08b3b8e50db30644fb8a1210b036ea38, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.33
+      objectReference: {fileID: 0}
     - target: {fileID: 4481805199779135657, guid: 08b3b8e50db30644fb8a1210b036ea38, type: 3}
       propertyPath: _targetingTags.Array.size
       value: 1
@@ -141,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5607848934156209412, guid: 08b3b8e50db30644fb8a1210b036ea38, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5607848934156209412, guid: 08b3b8e50db30644fb8a1210b036ea38, type: 3}
       propertyPath: m_LocalPosition.z
@@ -254,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 2381510297574333751}
-  _duration: 1
+  _duration: 3.52
   _particleSystem: {fileID: 8422954722115074112}
 --- !u!114 &7257245408259079419
 MonoBehaviour:

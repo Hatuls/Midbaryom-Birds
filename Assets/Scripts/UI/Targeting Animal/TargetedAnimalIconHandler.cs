@@ -50,19 +50,19 @@ public class TargetedAnimalIconHandler : MonoBehaviour
             return;
 
         ResetAll();
-        GetIcon(entityTag).Targeted();
+        GetIcon(entity).Targeted();
 
         _entityTag = entityTag;
     }
 
-    private TargetedAnimalIcon GetIcon(EntityTagSO entityTag)
+    private TargetedAnimalIcon GetIcon(IEntity entityTag)
     {
         for (int i = 0; i < _targetedAnimalIcons.Length; i++)
         {
-            if (_targetedAnimalIcons[i].TargetType.ContainTag(entityTag))
+            if (_targetedAnimalIcons[i].TargetType.ContainOneOrMoreTags(entityTag.Tags))
                 return _targetedAnimalIcons[i];
         }
-        throw new System.Exception("Entity Tag was not found!\n"+entityTag.name);
+        throw new System.Exception("Entity Tag was not found!\n"+ entityTag.EntityTagSO.name);
     }
 
     #region Editor

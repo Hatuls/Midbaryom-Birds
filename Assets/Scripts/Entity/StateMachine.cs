@@ -92,7 +92,7 @@ namespace Midbaryom.Core
 
     public class PlayerDiveState : BaseState
     {
-        private const float minDistanceToTargetAquire = 6f;
+        private const float minDistanceToTargetAquire = 5f;
         private const float minDistanceToStartCatchingAnimation = 12f;
 
         public event Action OnTargetHit;
@@ -180,7 +180,7 @@ namespace Midbaryom.Core
             _entity.HeightHandler.ChangeState(HeightType.Player);
             _player.CameraManager.ChangeState(CameraState.FaceUp);
             _entity.StatHandler[StatType.MovementSpeed].Value += _recoverSpeed.Value;
-      
+            _entity.Rotator.StopRotation = false;
             base.OnStateEnter();
         }
         public override void OnStateExit()
