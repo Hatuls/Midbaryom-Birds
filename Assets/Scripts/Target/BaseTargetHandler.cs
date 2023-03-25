@@ -56,6 +56,9 @@ namespace Midbaryom.Core
 
         protected virtual void AddPoints(IEntity holdingTarget)
         {
+            if (PlayerScore.Instance != null)
+                PlayerScore.Instance.Add(holdingTarget);
+            
             _player.Entity.StatHandler[StatType.Points].Value += holdingTarget.StatHandler[StatType.Points].Value;
         }
 

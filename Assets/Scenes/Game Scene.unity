@@ -819,7 +819,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 627878964}
-  _sessionTime: 60
+  _sessionTime: 5
+  isTimeDepleted: 0
 --- !u!114 &627878964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1670,6 +1671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _angle: 20
   point: {x: -0.44, y: 0, z: 2.16}
+  _angleTest: 0
 --- !u!4 &1124154862
 Transform:
   m_ObjectHideFlags: 0
@@ -2286,6 +2288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd265308b777494d97abf92ef43faf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timerText: {fileID: 627878963}
   HuntDown: {fileID: 11400000, guid: 8227dacfda0866d488216663ac098ad9, type: 2}
   HuntUp: {fileID: 11400000, guid: 9774fc0d2dba7d0488b72d7bfd033afc, type: 2}
   HeightConfigSO: {fileID: 11400000, guid: b9d3e3f037e28ee4991170e0fb5cd06e, type: 2}
@@ -2512,15 +2515,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 658716771582880691, guid: dbbe737aab31db94884e6fdb91fbc153, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.194
+      value: -376
       objectReference: {fileID: 0}
     - target: {fileID: 658716771582880691, guid: dbbe737aab31db94884e6fdb91fbc153, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.079
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 658716771582880691, guid: dbbe737aab31db94884e6fdb91fbc153, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26.4
+      value: 1354
       objectReference: {fileID: 0}
     - target: {fileID: 658716771582880691, guid: dbbe737aab31db94884e6fdb91fbc153, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2549,6 +2552,10 @@ PrefabInstance:
     - target: {fileID: 658716771582880691, guid: dbbe737aab31db94884e6fdb91fbc153, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1477942996558545834, guid: dbbe737aab31db94884e6fdb91fbc153, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3775984090359738910, guid: dbbe737aab31db94884e6fdb91fbc153, type: 3}
       propertyPath: m_Name
@@ -2981,6 +2988,18 @@ PrefabInstance:
     - target: {fileID: 1811118738576246599, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
       propertyPath: m_Name
       value: Pool Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2178231446050063178, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
+      propertyPath: _onMeshPoint.x
+      value: -376
+      objectReference: {fileID: 0}
+    - target: {fileID: 2178231446050063178, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
+      propertyPath: _onMeshPoint.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2178231446050063178, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
+      propertyPath: _onMeshPoint.z
+      value: 1354
       objectReference: {fileID: 0}
     - target: {fileID: 2178231446050063178, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
       propertyPath: _poolStaterPacks.Array.size

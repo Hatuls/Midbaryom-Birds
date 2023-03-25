@@ -1,9 +1,12 @@
 using Midbaryom.Core;
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
-[CreateAssetMenu (menuName ="ScriptableObjects/Eagles/New Eagle Data")]
-public class EagleTypeSO : ScriptableObject
+[CreateAssetMenu(menuName = "ScriptableObjects/Eagles/New Eagle Data")]
+[Serializable]
+public class EagleTypeSO : ScriptableObject, IComparable<EagleTypeSO>
 {
     [SerializeField]
     private string _eagleName;
@@ -12,14 +15,22 @@ public class EagleTypeSO : ScriptableObject
     [SerializeField]
     private DietData[] _diets;
 
+    public int Order;
 
     public Sprite Image => _eagleImage;
     public string Name => _eagleName;
-
+    public IEnumerable<float> DietPrecentages
+    {
+        get
+        {
+            for (int i = 0; i < _diets.Length; i++)
+                yield return _diets[i].Precentage;
+        }
+    }
     public IReadOnlyList<DietData> DietDatas => _diets;
     public float GetPrecentage(TagSO tagSO)
     {
-        if(tagSO == null || _diets == null || _diets.Length == 0)
+        if (tagSO == null || _diets == null || _diets.Length == 0)
         {
             Debug.LogError("Initalization was not set correct");
             return -1;
@@ -35,11 +46,42 @@ public class EagleTypeSO : ScriptableObject
         Debug.LogWarning("Type was not found?");
         return -1;
     }
+
+    public int CompareTo(EagleTypeSO other)
+    {
+        if (other.Order == Order)
+            return 0;
+        else if (Order > other.Order)
+            return +1;
+        else
+            return -1;
+    }
+
+    public void SetRawInfo(string name, Sprite img)
+    {
+        _eagleName = name;
+        _eagleImage = img;
+        if (_diets == null)
+            _diets = new DietData[0];
+        AssetDatabase.SaveAssetIfDirty(this);
+    }
+
+    public void Add(TagSO tagSO, float precentage)
+    {
+      List<DietData> dietDatas = _diets.ToList();
+        var instance = new DietData() { DietType = tagSO, Precentage = precentage };
+        dietDatas.Add(instance);
+        _diets = dietDatas.ToArray();
+        AssetDatabase.SaveAssetIfDirty(this);
+    }
+
 }
 
-[System.Serializable]
+[Serializable]
 public class DietData
 {
+    [SerializeField]
     public TagSO DietType;
+    [SerializeField]
     public float Precentage;
 }

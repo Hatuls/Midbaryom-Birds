@@ -14,7 +14,8 @@ namespace Midbaryom.Pool
         private static PoolManager _instance;
         private List<IEntity> _activeEntities;
         private List<IEntity> _notActiveEntities;
-
+        [SerializeField]
+        private Vector3 _onMeshPoint;
         [SerializeField]
         private List<PoolStaterPack> _poolStaterPacks;
         public static PoolManager Instance
@@ -78,7 +79,7 @@ namespace Midbaryom.Pool
 
         private IEntity InstantiateEntity(EntityTagSO tagSO)
         {
-            var cache = Instantiate(tagSO.Entity, transform);
+            var cache = Instantiate(tagSO.Entity, _onMeshPoint, Quaternion.identity, transform);
             cache.DestroyHandler.OnDestroy += Return;
             return cache;
         }
