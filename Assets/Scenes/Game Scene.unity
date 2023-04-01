@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 627878964}
-  _sessionTime: 5
+  _sessionTime: 90
   isTimeDepleted: 0
 --- !u!114 &627878964
 MonoBehaviour:

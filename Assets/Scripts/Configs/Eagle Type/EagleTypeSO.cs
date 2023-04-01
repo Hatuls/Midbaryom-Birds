@@ -56,13 +56,14 @@ public class EagleTypeSO : ScriptableObject, IComparable<EagleTypeSO>
         else
             return -1;
     }
-
+#if UNITY_EDITOR
     public void SetRawInfo(string name, Sprite img)
     {
         _eagleName = name;
         _eagleImage = img;
         if (_diets == null)
             _diets = new DietData[0];
+        EditorUtility.SetDirty(this);
         AssetDatabase.SaveAssetIfDirty(this);
     }
 
@@ -72,9 +73,11 @@ public class EagleTypeSO : ScriptableObject, IComparable<EagleTypeSO>
         var instance = new DietData() { DietType = tagSO, Precentage = precentage };
         dietDatas.Add(instance);
         _diets = dietDatas.ToArray();
+    
+        EditorUtility.SetDirty(this);
         AssetDatabase.SaveAssetIfDirty(this);
     }
-
+#endif
 }
 
 [Serializable]
