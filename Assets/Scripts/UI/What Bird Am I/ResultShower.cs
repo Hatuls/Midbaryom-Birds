@@ -31,7 +31,7 @@ public class ResultShower : MonoBehaviour
     }
     private void ShowResult(EagleTypeSO obj)
     {
-        //   _eagleImage.sprite = obj.Image;
+        _eagleImage.sprite = obj.Image;
         _eagleName.text = obj.Name;
 
         StartCoroutine(VisualEntrance());

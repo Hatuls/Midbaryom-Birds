@@ -1,5 +1,7 @@
 ﻿using Midbaryom.Core;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -71,13 +73,27 @@ public class BirdTypeEditorScript
        // Debug.Log(path);
         List<EagleTypeSO> eagleTypeSOs = new List<EagleTypeSO>();
 
+
+      string[] imagesGUIDs =  AssetDatabase.FindAssets("t:Sprite", new string[] { "Assets/Art/Images/Eagles" });
+        List<string> paths = new List<string>();
+        for (int i = 0; i < imagesGUIDs.Length; i++)
+            paths.Add(AssetDatabase.GUIDToAssetPath(imagesGUIDs[i]));
+        
+
         for (int i = 0; i < configsNames.Length; i++)
         {
+
+            string EagleName = configsNames[i];
+            string relevatImagePath = paths.FirstOrDefault(x => x.Contains(EagleName));
+            Sprite image = null;
+            if (string.IsNullOrEmpty(relevatImagePath) == false)
+                image = AssetDatabase.LoadAssetAtPath(relevatImagePath, typeof(Sprite)) as Sprite;
+
             var eagleType = ScriptableObject.CreateInstance<EagleTypeSO>();
-            eagleType.SetRawInfo(configsNames[i], null);// add image here
+            eagleType.SetRawInfo(EagleName, image);// add image here
             eagleTypeSOs.Add(eagleType);
             eagleType.Order = i;
-            AssetDatabase.CreateAsset(eagleType, path + $"{configsNames[i]}.asset");
+            AssetDatabase.CreateAsset(eagleType, path + $"{EagleName}.asset");
             AssetDatabase.SaveAssetIfDirty(eagleType);
         }
 

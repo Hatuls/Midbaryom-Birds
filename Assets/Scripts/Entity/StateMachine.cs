@@ -92,17 +92,16 @@ namespace Midbaryom.Core
 
     public class PlayerDiveState : BaseState
     {
+        public event Action OnTargetHit;
         private const float minDistanceToTargetAquire = 5f;
         private const float minDistanceToStartCatchingAnimation = 12f;
 
-        public event Action OnTargetHit;
         private readonly ILocomotion _movementHandler;
         private readonly IPlayer _player;
-        public override StateType StateType => StateType.Dive;
         private readonly IStat _diveSpeed, _movementSpeed;
-
-   
-        bool _isPlayingAnimation;
+        private float _rotatingAngle = .05f;
+        private bool _isPlayingAnimation;
+        public override StateType StateType => StateType.Dive;
         public PlayerDiveState(IPlayer player, IStat speed) : base(player.Entity)
         {
             _player = player;
@@ -120,13 +119,16 @@ namespace Midbaryom.Core
             _movementSpeed.Value += _diveSpeed.Value;
             _isPlayingAnimation = false;
             _movementHandler.StopMovement = true;
+            _player.PlayerController.LockInputs = true;
             base.OnStateEnter();
         }
 
         public override void OnStateExit()
         {
             _movementSpeed.Value -= _diveSpeed.Value;
+          //  _entity.Rotator.StopRotation = false;
             _movementHandler.StopMovement = false;
+            _player.PlayerController.LockInputs = false;
             base.OnStateExit();
             _player.AimAssists.UnLockTarget();
         }
@@ -140,8 +142,7 @@ namespace Midbaryom.Core
             {
                 Vector3 dir = aimAssists.TargetDirection;
                 _movementHandler.MoveTowards(dir);
-
-
+                RotateTowards(dir);
                 Vector3 targetPos = aimAssists.Target.CurrentPosition;
                 Vector3 myPos = _entity.CurrentPosition;
                 //myPos.y = 0;
@@ -158,7 +159,28 @@ namespace Midbaryom.Core
             }
 
         }
-   
+
+        private void RotateTowards(Vector3 dir)
+        {
+            if (Vector3.Dot(_entity.CurrentFacingDirection, dir) == 1)// no need to rotate if we are facing  the target
+                return;
+
+            //we want to know if we are facing towards the target
+            // so we get the crossed vector of the 2 directions
+            Vector3 right = Vector3.Cross(_entity.CurrentFacingDirection, dir);
+            // getting the dot product of the up vector and the crossed vector we received
+            float d = Vector3.Dot(right, Vector3.up);
+
+            Vector3 falseInput = Vector3.zero;
+
+            // we only want to change rotation around the X axis 
+            if (d > _rotatingAngle)
+                falseInput.x = 1f;
+            else if (d < -_rotatingAngle)
+                falseInput.x = -1;
+     
+            _entity.Rotator.AssignRotation(falseInput);
+        }
     }
 
     public class PlayerRecoverState : BaseState

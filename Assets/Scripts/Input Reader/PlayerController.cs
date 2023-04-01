@@ -20,7 +20,7 @@ namespace Midbaryom.Inputs
         private InputAction _movementInputAction;
         private Vector3 _previousInput;
         private float _counter;
-
+        public bool LockInputs { get; set; }
         public PlayerController(Player player,IEntity entity)
         {
             _player = player;
@@ -28,7 +28,7 @@ namespace Midbaryom.Inputs
             _birdInputAction = new BirdInputAction();
 
             _movementInputAction = _birdInputAction.Player.Move;
-
+            LockInputs = false;
             _huntInputAction = _birdInputAction.Player.Hunt;
             _huntInputAction.started += StartHundDown;
             _huntInputAction.canceled += EndHunt;
@@ -60,6 +60,7 @@ namespace Midbaryom.Inputs
 
         public void Tick()
         {
+            if(LockInputs == false)
             Rotation();
         }
 
@@ -68,7 +69,7 @@ namespace Midbaryom.Inputs
         private void Rotation()
         {
             Vector2 value = _movementInputAction.ReadValue<Vector2>();
-            Vector3 result = new Vector3(value.x, 0, value.y);
+            Vector3 result = new Vector3(value.x, 0, 0);
 
             _entity.Rotator.AssignRotation(result);
         }
