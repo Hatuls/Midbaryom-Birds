@@ -55,7 +55,7 @@ public class ScoreAnalyzer : MonoBehaviour
     [ContextMenu("Load Eagles From Resources")]
     private void LoadEagles()
     {
-        var sortedList = Resources.LoadAll<EagleTypeSO>("Config/Eagles Data/")?.ToList();
+        var sortedList = Resources.LoadAll<EagleTypeSO>("Config/Eagles Data")?.ToList();
         sortedList?.Sort();
         _eagleTypeSOs = sortedList?.ToArray();
         if (_eagleTypeSOs == null || _eagleTypeSOs.Length == 0)

@@ -122,8 +122,10 @@ public class SceneHandler : MonoBehaviour, ISceneHandler
             yield return null;
         }
         while (!asyncOperation.isDone);
+
         _activeScenes.Remove(index);
-        Resources.UnloadUnusedAssets();
+
+      yield return Resources.UnloadUnusedAssets();
     }
     #endregion
 
