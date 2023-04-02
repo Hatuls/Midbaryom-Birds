@@ -64,7 +64,7 @@ public class BirdTypeEditorScript
         string[] configsNames = new string[]
         {
             "Short-toed snake eagle",
-            "Golden Eagle",
+            "Golden eagle",
             "Long-legged buzzard",
             "Common kestrel",
             "Eurasian griffon vulture",

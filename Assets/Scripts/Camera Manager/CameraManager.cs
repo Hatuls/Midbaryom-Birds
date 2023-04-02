@@ -11,7 +11,7 @@ namespace Midbaryom.Camera
         private Dictionary<CameraState, IState> _cameraStates;
         private CameraState _currentState;
 
-        //private readonly IPlayer _player;
+      public bool IsActive { get; set; }
         public CameraManager(IPlayer player, UnityEngine.Camera camera, Transform cameraTransform)
         {
             Camera = camera;
@@ -30,7 +30,7 @@ namespace Midbaryom.Camera
                 { CameraState.LookAtCarcass, new LookAtCarcassState(_huntDownCameraRotation, player.TargetHandler, cameraTransform, player.Entity.Transform, false, rotationSpeed, cameraTransform.rotation) }
 
             };
-
+            IsActive = true;
             _currentState = CameraState.Default;
             CurrentState.OnStateEnter();
             //  Rotator = new CameraRotator(); //(CameraTransform, false, player.Entity.StatHandler[StatType.RotationSpeed], CameraTransform.rotation);
@@ -46,7 +46,7 @@ namespace Midbaryom.Camera
         //}
         public void ChangeState(CameraState cameraState)
         {
-            if (_currentState == cameraState)
+            if (_currentState == cameraState || !IsActive)
                 return;
 
             CurrentState.OnStateExit();
@@ -63,6 +63,7 @@ namespace Midbaryom.Camera
         }
         public void Tick()
         {
+            if(IsActive)
             CurrentState.OnStateTick();
         }
     }

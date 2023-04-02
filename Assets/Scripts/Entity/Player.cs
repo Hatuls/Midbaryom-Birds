@@ -60,8 +60,12 @@ namespace Midbaryom.Core
             foreach (IUpdateable updateable in UpdateCollection)
                 updateable.Tick();
         }
+
+        private void OnDestroy()
+        {
+            CameraManager.IsActive = false;
         
-     
+        }
     }
 
 
