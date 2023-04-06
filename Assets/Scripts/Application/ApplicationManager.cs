@@ -36,6 +36,6 @@ public class ApplicationManager : MonoBehaviour
 public enum LanguageType
 {
 Hebrew=0,
-Arabic=1,
-English=2,
+English=1,
+Arabic=2,
 }
