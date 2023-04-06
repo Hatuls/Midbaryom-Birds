@@ -12,18 +12,7 @@ public class PlayerScore : MonoBehaviour
     private TagSO[] _gameEntites;
 
     public IReadOnlyDictionary<TagSO, AnimalScore> AnimalScoreDictionary => _animalScore;
-    public int TotalScoreAmount
-    {
-
-        get
-        {
-            int amount = 0;
-            foreach (var animal in AnimalScoreDictionary.Values)
-                amount += animal.Amount;
-
-            return amount;
-        }
-    }
+ 
     private void Awake()
     {
         if (Instance == null)
@@ -43,9 +32,9 @@ public class PlayerScore : MonoBehaviour
             _animalScore.Add(_gameEntites[i], new AnimalScore());
 
         ResetScores();
-
     }
 
+   
     public void ResetScores()
     {
         AnimalScore.TotalAmount = 0;
