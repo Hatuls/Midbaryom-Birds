@@ -459,7 +459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _screenTransitioner: {fileID: 702445695}
   _popUp: {fileID: 1684803733}
-  _evacuateTextIndex: 0
+  _evacuateTextIndex: 12
   _popupEtranceDuration: 0.2
   _curve:
     serializedVersion: 2
@@ -485,8 +485,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _delayTillPopUp: 5
-  _delayTillReturnToLanguageScene: 4
+  _delayTillPopUp: 10
+  _delayTillReturnToLanguageScene: 10
 --- !u!1 &228036722
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,7 +1689,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -65}
-  m_SizeDelta: {x: 600, y: 150}
+  m_SizeDelta: {x: 800, y: 150}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1240647064
 MonoBehaviour:
@@ -1774,7 +1774,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.31436157, y: 0, z: 0.55371094, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2053,7 +2053,6 @@ MonoBehaviour:
       GroupName: Bugs
       TagsCollection:
       - {fileID: 11400000, guid: 1187b3e4cf003864ba19e66bb6517bb6, type: 2}
-      - {fileID: 11400000, guid: a7b3b47f0c5d26046b0d40959efa87cf, type: 2}
       - {fileID: 11400000, guid: 7db3532dbe1610b4292210fa8131e752, type: 2}
   _allEntities:
   - GroupName: Mouse
@@ -2071,7 +2070,7 @@ MonoBehaviour:
   - GroupName: Rabbit
     TagsCollection:
     - {fileID: 11400000, guid: b861e76536d8ca94aa6b6fefa9ad857f, type: 2}
-  - GroupName: Aspidoscelis
+  - GroupName: Carcrass
     TagsCollection:
     - {fileID: 11400000, guid: 2b3d9ea88314c9343b059dc4e198259c, type: 2}
   - GroupName: Bugs

@@ -42,7 +42,8 @@ public class BirdsDietManager : MonoBehaviour
             if (_targetedAnimalIcons[i].TargetType.ContainTag(entityTag))
                 return _targetedAnimalIcons[i];
         }
-        throw new System.Exception("Entity Tag was not found!\n" + entityTag.name);
+        Debug.LogWarning("Entity Tag was not found!\n" + entityTag.name);
+        return null;
     }
 
     #region Editor

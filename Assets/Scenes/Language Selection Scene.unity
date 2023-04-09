@@ -564,7 +564,7 @@ MonoBehaviour:
   _img: {fileID: 787437523}
   _exitEffect:
     _startColor: {r: 0, g: 0, b: 0, a: 0}
-    _endColor: {r: 0, g: 0, b: 0, a: 1}
+    _endColor: {r: 1, g: 1, b: 1, a: 1}
     _duration: 0.3
     _curve:
       serializedVersion: 2
