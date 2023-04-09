@@ -15,6 +15,11 @@ public class EagleTypeSO : ScriptableObject, IComparable<EagleTypeSO>
     [SerializeField]
     private DietData[] _diets;
 
+    [Tooltip("The index of the information that presetented about this eagle at the end screen")]
+    public int InfoIndex;
+    [Tooltip("The Eagle's name index\nwith this you can translate the name to the relevant language")]
+    public int EagleNameIndex;
+
     public int Order;
 
     public Sprite Image => _eagleImage;
@@ -57,10 +62,12 @@ public class EagleTypeSO : ScriptableObject, IComparable<EagleTypeSO>
             return -1;
     }
 #if UNITY_EDITOR
-    public void SetRawInfo(string name, Sprite img)
+    public void SetRawInfo(string name, Sprite img, int nameIndex,int infoIndex)
     {
         _eagleName = name;
         _eagleImage = img;
+        EagleNameIndex = nameIndex;
+        InfoIndex = infoIndex;
         if (_diets == null)
             _diets = new DietData[0];
         EditorUtility.SetDirty(this);

@@ -15,9 +15,9 @@ namespace Midbaryom.Core
                 _instance = this;
             else if (_instance != this)
                 Destroy(this.gameObject);
-
-            _sceneHandler = FindObjectOfType<SceneHandler>();
         }
+        [SerializeField]
+        private ScreenTransitioner _screenTransitioner;
         [SerializeField]
         private TimerText _timerText;
 
@@ -25,7 +25,6 @@ namespace Midbaryom.Core
         public HeightConfigSO HeightConfigSO;
         public SpawnConfigSO _spawnConfig;
 
-        private SceneHandler _sceneHandler;
         private void Start()
         {
             if (PlayerScore.Instance != null)
@@ -36,11 +35,9 @@ namespace Midbaryom.Core
 
         private void MoveToNextScene()
         {
-            if (_sceneHandler == null)
-                return;
+    
             const int END_GAME_SCENE_INDEX = 3;
-
-            _sceneHandler.LoadSceneAdditive(END_GAME_SCENE_INDEX, true);
+            _screenTransitioner.StartExit(END_GAME_SCENE_INDEX);
         }
 
         private void Update()

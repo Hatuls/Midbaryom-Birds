@@ -4,12 +4,13 @@ public class ApplicationManager : MonoBehaviour
 {
     private static ApplicationManager _instance;
     private const int FIRST_SCENE_INDEX = 1;
+    private const int SCREEN_RESOLUTION = 1376;
+    [SerializeField]
+    private LanguageBank _languageBank;
     [SerializeField]
     private SceneHandler _sceneHandler;
-    private LanguageType _languageType;
     public static ApplicationManager Instance => _instance;
-
-    public LanguageType LanguageType => _languageType;
+    public LangaugeSettings LanguageSettings { get; private set; }
 
     private void OnEnable()
     {
@@ -19,8 +20,17 @@ public class ApplicationManager : MonoBehaviour
 
     private void Awake()
     {
+        Screen.SetResolution(SCREEN_RESOLUTION, SCREEN_RESOLUTION, true);
         _instance = this;
-        _languageType = LanguageType.Hebrew;
+        LanguageSettings = new LangaugeSettings(_languageBank);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+            Application.Quit();
+    }
+    private void Start()
+    {
         _sceneHandler.LoadSceneAdditive(FIRST_SCENE_INDEX);
     }
     private void OnDestroy()
@@ -29,13 +39,27 @@ public class ApplicationManager : MonoBehaviour
     }
 
     public void SetLanguage(LanguageType language)
-    {
-        _languageType = language;
-    }
+        => LanguageSettings.SetLanguage(language);
 }
 public enum LanguageType
 {
-Hebrew=0,
-English=1,
-Arabic=2,
+    Hebrew = 0,
+    English = 1,
+    Arabic = 2,
+}
+public class LangaugeSettings
+{
+    public LanguageBank LanguageBank { get; private set; }
+    public LanguageType LanguageType { get; private set; }
+
+    public LangaugeSettings(LanguageBank languageBank)
+    {
+        LanguageBank = languageBank;
+    }
+    public void SetLanguage(LanguageType language)
+    {
+        LanguageType = language;
+    }
+    public string GetText(int index)
+        => LanguageBank.GetText(LanguageType, index);
 }

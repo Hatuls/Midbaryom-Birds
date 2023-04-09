@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class PlayButton : MonoBehaviour
 {
-    SceneHandler _sceneHandler;
-    void Start()
-    {
-        _sceneHandler = FindObjectOfType<SceneHandler>();
-    }
-
+    [SerializeField]
+    private ScreenTransitioner _screenTransitioner;
+    private int _nextScene = 2; // game scene
     public void Play()
     {
-        _sceneHandler.LoadSceneAdditive(2, true);
-
+        _screenTransitioner.StartExit(_nextScene);
     }
 }

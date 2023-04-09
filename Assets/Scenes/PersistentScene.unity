@@ -246,6 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d53d2efaaf6eb45ad3358cf4d01c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _languageBank: {fileID: 11400000, guid: 75eff647d73a71b42987bb5006cd66b0, type: 2}
   _sceneHandler: {fileID: 664964503}
 --- !u!4 &745132615
 Transform:

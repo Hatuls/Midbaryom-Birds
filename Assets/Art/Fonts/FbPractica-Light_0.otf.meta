@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 29a5b8a846f1a6c4eb9734de1c19bea3
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Fb Practica
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 51954dc03c13ba6488269d9ff0577020, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

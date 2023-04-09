@@ -10,8 +10,7 @@ public class ResultShower : MonoBehaviour
 
     [SerializeField]
     private RectTransform _resultTransform;
-    [SerializeField]
-    private TextMeshProUGUI _eagleName;
+
     [SerializeField]
     private Image _eagleImage;
 
@@ -32,7 +31,7 @@ public class ResultShower : MonoBehaviour
     private void ShowResult(EagleTypeSO obj)
     {
         _eagleImage.sprite = obj.Image;
-        _eagleName.text = obj.Name;
+       // _eagleName.text = obj.Name;
 
         StartCoroutine(VisualEntrance());
     }

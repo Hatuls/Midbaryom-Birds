@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class LanguageToolEditor : EditorWindow
 {
-    private static BankSenteces[] _bankSenteces;
+    private static BankSentences[] _bankSenteces;
     private LanguageType _languageType;
     [MenuItem("Tools/Languages/Load")]
     public static void AssignLanguages()
@@ -19,7 +19,7 @@ public class LanguageToolEditor : EditorWindow
         _bankSenteces = null;
         Resources.UnloadUnusedAssets();
     }
-    private static BankSenteces[] LoadLanguage()
+    private static BankSentences[] LoadLanguage()
     {
         TextAsset textAsset = Resources.Load("Languages/LanguageCSV") as TextAsset;
         if (textAsset == null)
@@ -28,7 +28,7 @@ public class LanguageToolEditor : EditorWindow
         string csv = textAsset.text;
         string[] rows = csv.Replace("\r", "").Split('\n');
 
-        BankSenteces[] sentences = new BankSenteces[rows.Length-2];
+        BankSentences[] sentences = new BankSentences[rows.Length-2];
         
 
         for (int i = 1; i < rows.Length-1; i++)
@@ -47,7 +47,7 @@ public class LanguageToolEditor : EditorWindow
                 coulmns[0] = checkThisLine;
             }
         
-            sentences[i-1] = new BankSenteces(i-1,coulmns);
+            sentences[i-1] = new BankSentences(i-1,coulmns);
         }
 
         return sentences;
@@ -58,18 +58,23 @@ public class LanguageToolEditor : EditorWindow
     private void OnGUI()
     {
         GUILayout.Label("This is a Langauge", EditorStyles.boldLabel);
-
+        EditorGUILayout.BeginHorizontal();
         if(GUILayout.Button("Refresh"))
             _bankSenteces = LoadLanguage();
 
         if (_bankSenteces == null)
             return;
 
+        if (GUILayout.Button("Create Assets"))
+            CreateAssets();
+
+        EditorGUILayout.EndHorizontal();
+
        EditorGUILayout.IntField("Size", _bankSenteces.Length);
 
         for (int i = 0; i < _bankSenteces.Length; i++)
         {
-            BankSenteces dialogue = _bankSenteces[i];
+            BankSentences dialogue = _bankSenteces[i];
             EditorGUILayout.BeginVertical();
             dialogue.GUI();
             EditorGUILayout.EndVertical();
@@ -78,28 +83,56 @@ public class LanguageToolEditor : EditorWindow
         
         // Debug.Log(_languageType);
     }
+
+    private void CreateAssets()
+    {
+        if (_bankSenteces == null)
+            _bankSenteces = LoadLanguage();
+
+        if (_bankSenteces == null)
+            return;
+
+        var bankSentences = ScriptableObject.CreateInstance<LanguageBank>();
+        int length = _bankSenteces.Length;
+        Sentence[] sentences = new Sentence[length];
+
+        for (int i = 0; i < length; i++)
+            sentences[i] = _bankSenteces[i].Sentence;
+
+        bankSentences.Init(sentences);
+        string path = $"Assets/Resources/Languages/";
+        AssetDatabase.CreateAsset(bankSentences, path + $"LanguageSO.asset");
+        AssetDatabase.SaveAssets();
+    }
 }
+
 [Serializable]
-public class BankSenteces
+public class BankSentences
 {
     [SerializeField]
     private int _index;
     [SerializeField]
-    private string[] _sentences;
-    public BankSenteces(int index, params string[] sentences)
+    private string _context;
+    [SerializeField]
+    private Sentence _sentence;
+    public BankSentences(int index, params string[] sentences)
     {
         _index = index;
-        _sentences = new string[sentences.Length];
-        for (int i = 0; i < _sentences.Length; i++)
-            _sentences[i] = sentences[i].Replace('^',',');
-        
+
+        _context = sentences[0].Replace('^',',');
+
+        string[] translates = new string[sentences.Length - 1];
+        for (int i = 1; i < sentences.Length; i++)
+            translates[i - 1] = sentences[i];
+        _sentence = new Sentence(translates);
     }
     public int Index => _index;
-    public string Context => _sentences[0];
-    public string Hebrew => _sentences[1];
-    public string English => _sentences[2];
-    public string Arabic => _sentences[3];
+    public string Context => _context;
+    public string Hebrew => _sentence.Hebrew;
+    public string English => _sentence.English;
+    public string Arabic => _sentence.Arabic;
 
+    public Sentence Sentence => _sentence.Copy();
     public string Text(LanguageType languageType)
     {
         switch (languageType)

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 7c6e1107c0d673648a6956c33d583147
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - FbOgen
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 065ebc6a17c62e44690b2c8eeaa1fefc, type: 3}
+  - {fileID: 12800000, guid: 5bdc41d6e0d7fd944a57953a14f14beb, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

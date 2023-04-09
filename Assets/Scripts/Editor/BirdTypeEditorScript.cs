@@ -69,6 +69,26 @@ public class BirdTypeEditorScript
             "Common kestrel",
             "Eurasian griffon vulture",
         };
+
+        int[] InfoIndexes = new int[]
+        {
+            15,
+            16,
+            17,
+            14,
+            13,
+        };
+
+        int[] NameIndexes = new int[]
+         {
+            7,
+            8,
+            9,
+            11,
+            10,
+         };
+
+
         string path = $"Assets/Resources/Config/Eagles Data/";
        // Debug.Log(path);
         List<EagleTypeSO> eagleTypeSOs = new List<EagleTypeSO>();
@@ -90,7 +110,7 @@ public class BirdTypeEditorScript
                 image = AssetDatabase.LoadAssetAtPath(relevatImagePath, typeof(Sprite)) as Sprite;
 
             var eagleType = ScriptableObject.CreateInstance<EagleTypeSO>();
-            eagleType.SetRawInfo(EagleName, image);// add image here
+            eagleType.SetRawInfo(EagleName, image,NameIndexes[i],InfoIndexes[i]);// add image here
             eagleTypeSOs.Add(eagleType);
             eagleType.Order = i;
             AssetDatabase.CreateAsset(eagleType, path + $"{EagleName}.asset");

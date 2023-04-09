@@ -82,6 +82,8 @@ public class TargetedAnimalIconHandler : MonoBehaviour
 
 
 }
+
+
 [System.Serializable]
 public class TargetedAnimalIcon
 {
