@@ -95,29 +95,34 @@ namespace Midbaryom.Camera
     public class LookAtCarcassState : BaseRotationState
     {
         private readonly Transform _cameraHead;
+        private Quaternion _startingRotation;
+        private Quaternion _finalRotation;
+        private float _duration = 0.25f;
+        private float _lockToTargetCounter = 0;
         public LookAtCarcassState(CameraRotationSO cameraConfig,BaseTargetHandler targetHandler,Transform objectTransform, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation) : base(cameraConfig, transform, toLockRotation, rotationSpeed, startRotation)
         {
      
             _cameraHead = objectTransform;
             TargetHandler = targetHandler;
+            _finalRotation = new Quaternion();
+            _finalRotation.eulerAngles = new Vector3(90f, 0, 0);
         }
 
         public BaseTargetHandler TargetHandler { get; }
         public override void OnStateEnter()
         {
-
+            _lockToTargetCounter = 0;
             StopRotation = true;
-            Quaternion q = new Quaternion();
-            q.eulerAngles = new Vector3(90f, 0f, 0f);
-            _cameraHead.localRotation = q;
+            _startingRotation = _cameraHead.localRotation;
             base.OnStateEnter();
         }
         protected override void RotateTowards()
         {
             if (TargetHandler.HasTargetAttached)
             {
-                Quaternion q = new Quaternion();
-                q.eulerAngles = new Vector3(90f, 0f, 0f);
+                _lockToTargetCounter += Time.deltaTime;
+                Quaternion q = Quaternion.Lerp(_startingRotation, _finalRotation, _lockToTargetCounter / _duration);
+
                 _cameraHead.localRotation = q;
             }
         }
@@ -154,27 +159,30 @@ namespace Midbaryom.Camera
         private readonly AimAssists _aimAssists;
         private readonly IStat _speedStat;
         private readonly IRotator _rotator;
+        
         public HuntDiveInCameraState(CameraRotationSO cameraRotationSO, Transform ObjectTransform, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation, AimAssists aimAssists, IStat speed, IRotator rotator) : base(cameraRotationSO, ObjectTransform, transform, toLockRotation, rotationSpeed, startRotation)
         {
             _aimAssists = aimAssists;
             _speedStat = speed;
             _rotator = rotator;
         }
-
+        public override void OnStateEnter()
+        {
+            base.OnStateEnter();
+            _startingAngle = _transform.localEulerAngles.x;
+        }
         protected override void CalculateAngle()
         {
             if (_aimAssists.HasTarget)
             {
                 Vector3 myPos = _objectTransform.position;
                 Vector3 targetPos = _aimAssists.Target.CurrentPosition;
-                float distance = Vector3.Distance(myPos, targetPos);
-                float divition = _objectTransform.position.y / distance;
-                float angle = Mathf.Sin(divition) * Mathf.Rad2Deg;
+                Vector3 dir = targetPos - myPos;
+                dir.Normalize();
+        
+                Vector3 v = Vector3.Lerp(_transform.forward, dir, _currentTime / _cameraRotationSO.Duration);
+                _transform.rotation = Quaternion.LookRotation(v, Vector3.up);
 
-                _currentAngle = _startingAngle + angle * _cameraRotationSO.Evaluate(_currentTime);
-                Vector3 v = Quaternion.AngleAxis(_currentAngle, _objectTransform.right) * _objectTransform.forward;
-
-                AssignRotation(v);
 
                 _currentTime += Time.deltaTime;
             }
@@ -182,20 +190,7 @@ namespace Midbaryom.Camera
 
         protected override void RotateTowards()
         {
-
-            if (_aimAssists.HasTarget)
-            {
-                Vector3 myPos = _objectTransform.position;
-                Vector3 targetPos = _aimAssists.Target.CurrentPosition;
-                float distance = Vector3.Distance(myPos, targetPos);
-                if (distance <= 20f)
-                    return;
-                float time = distance / _speedStat.Value;
-                Quaternion lookRotation = Quaternion.LookRotation(NewDirection);
-                Quaternion lerpDirection = Quaternion.Lerp(_rotation, lookRotation, _currentTime / time);
-                lerpDirection.eulerAngles = new Vector3(lerpDirection.eulerAngles.x, 0f, 0f);
-                _transform.localRotation = lerpDirection;
-            }
+            
         }
     }
     public class HuntCameraState : BaseRotationState

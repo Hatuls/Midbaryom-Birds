@@ -142,11 +142,14 @@ namespace Midbaryom.Core
             {
                 Vector3 dir = aimAssists.TargetDirection;
                 _movementHandler.MoveTowards(dir);
-                RotateTowards(dir);
+                RotateBodyTowards(dir);
                 Vector3 targetPos = aimAssists.Target.CurrentPosition;
                 Vector3 myPos = _entity.CurrentPosition;
-                //myPos.y = 0;
-                //targetPos.y = 0;
+       
+
+
+
+
                 float distance = Vector3.Distance(targetPos, myPos);
                 if (distance <= minDistanceToTargetAquire)
                     OnTargetHit?.Invoke();
@@ -159,8 +162,8 @@ namespace Midbaryom.Core
             }
 
         }
-
-        private void RotateTowards(Vector3 dir)
+      
+        private void RotateBodyTowards(Vector3 dir)
         {
             if (Vector3.Dot(_entity.CurrentFacingDirection, dir) == 1)// no need to rotate if we are facing  the target
                 return;
