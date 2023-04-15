@@ -17,12 +17,12 @@ public class LanguageTMPRO : MonoBehaviour
         {
             case LanguageType.Hebrew:
             case LanguageType.Arabic:
-                _textMeshProUGUI.alignment = TextAlignmentOptions.Midline;
+                //_textMeshProUGUI.alignment = TextAlignmentOptions.Midline;
                 _textMeshProUGUI.isRightToLeftText = true;
                 break;
             case LanguageType.English:
                 _textMeshProUGUI.isRightToLeftText = false;
-                _textMeshProUGUI.alignment= TextAlignmentOptions.Midline;
+                //_textMeshProUGUI.alignment= TextAlignmentOptions.Midline;
                 break;
             default:
                 break;
