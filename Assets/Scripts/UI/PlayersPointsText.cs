@@ -16,7 +16,7 @@ namespace Midbaryom.UI
         }
         private void Start()
         {
-            _points = Spawner.Instance.Player.StatHandler[StatType.Points];
+            _points = Spawner.Instance.PlayerEntity.StatHandler[StatType.Points];
             _points.OnValueChanged += UpdateText;
         }
 

@@ -18,7 +18,7 @@ public class CarcussEatingVisualController : MonoBehaviour
     private IEnumerator Start()
     {
         yield return null;
-        _player = _spawner.Player.Transform.GetComponent<IPlayer>();
+        _player = _spawner.Player;
         _eatState =  _player.StateMachine.StateDictionary[StateType.Eat];
         _eatState.OnStateEnterEvent += ApplyEffect;
         _eatState.OnStateExitEvent += ReturnToNormal;

@@ -1,6 +1,5 @@
 using Midbaryom.Core.Config;
 using Midbaryom.Pool;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -27,21 +26,30 @@ namespace Midbaryom.Core
         private bool _toStopReposition;
 
         private HeightConfigSO _heightConfigSO;
-        private IEntity _player;
-        UnityEngine.Camera _camera;
-
+        private IEntity _playerEntity;
+        private IPlayer _player;
+        private UnityEngine.Camera _camera;
+        private bool _startSpawning;
         public IReadOnlyList<IEntity> AllEntities => _activeEntities;
 
-        public IEntity Player 
-        { 
-            get 
-            { 
-                 if(_player == null)
-                    _player = AllEntities.First(x => x.ContainTag(_playerTag));
-                return _player; 
-            } 
+        public IEntity PlayerEntity
+        {
+            get
+            {
+                if (_playerEntity == null)
+                    _playerEntity = AllEntities.First(x => x.ContainTag(_playerTag));
+                return _playerEntity;
+            }
         }
-
+        public IPlayer Player
+        {
+            get
+            {
+                if (_player == null)
+                    _player = PlayerEntity.Transform.GetComponent<IPlayer>();
+                return _player;
+            }
+        }
         public static void RegisterEntity(IEntity entity)
             => _activeEntities.Add(entity);
         public static void RemoveEntity(IEntity entity)
@@ -49,19 +57,25 @@ namespace Midbaryom.Core
 
         public void Awake()
         {
-        Instance = this;
-            
+            Instance = this;
+            _startSpawning = false;
+            GameManager.OnGameStarted += StartGame;
         }
         private void Start()
         {
             _heightConfigSO = GameManager.Instance.HeightConfigSO;
-            _player = Player;
+            _playerEntity = PlayerEntity;
             _camera = UnityEngine.Camera.main;
         }
 
-
+        private void OnDestroy()
+        {
+            GameManager.OnGameStarted -= StartGame;
+        }
         private void FixedUpdate()
         {
+            if (!_startSpawning)
+                return;
             // check if there is enough mobs on the map
             // if not then spawn new mob
             if (AllEntities.Count - 1 < _spawnConfig.MaxMobsCount)
@@ -69,23 +83,23 @@ namespace Midbaryom.Core
 
             // check all mobs locations and distance from the player
             // any far mob will need to be repositioned;
-            if(!_toStopReposition)
-            RePositionMob();
+            if (!_toStopReposition)
+                RePositionMob();
         }
-          
+
         private void RePositionMob()
         {
             List<IEntity> tooFarEntities = new List<IEntity>();
             for (int i = 0; i < AllEntities.Count; i++)
             {
-                Vector3 playerPosition = _player.CurrentPosition;
+                Vector3 playerPosition = _playerEntity.CurrentPosition;
                 Vector3 currentPosition = AllEntities[i].CurrentPosition;
 
-                if (Vector3.Distance(currentPosition, playerPosition) > _spawnConfig.ReturnRadius  )
+                if (Vector3.Distance(currentPosition, playerPosition) > _spawnConfig.ReturnRadius)
                     tooFarEntities.Add(AllEntities[i]);
             }
 
-            if(tooFarEntities.Count>0)
+            if (tooFarEntities.Count > 0)
             {
                 for (int i = 0; i < tooFarEntities.Count; i++)
                 {
@@ -113,7 +127,7 @@ namespace Midbaryom.Core
 
         private Vector3 GenerateSpawnLocation(float yPos)
         {
-            Vector3 playerPosition = _player.Transform.position;
+            Vector3 playerPosition = _playerEntity.Transform.position;
             Vector3 destination = playerPosition;
             destination.y = yPos;
             do
@@ -126,7 +140,7 @@ namespace Midbaryom.Core
             Ray rei = new Ray(destination, Vector3.down);
             if (Physics.Raycast(rei, out RaycastHit raycastHit, 500f, -1))
             {
-                const float GROUND_OFFSET =2f;
+                const float GROUND_OFFSET = 2f;
                 destination.y = raycastHit.point.y + GROUND_OFFSET;
             }
             else
@@ -169,11 +183,11 @@ namespace Midbaryom.Core
                 float min = playerAxisPoint - _spawnConfig.SpawnRadius;
                 float max = playerAxisPoint + _spawnConfig.SpawnRadius;
 
-                if(min <= max)
-                  return  UnityEngine.Random.Range( min, max );
-                
+                if (min <= max)
+                    return UnityEngine.Random.Range(min, max);
+
                 else
-                  return  UnityEngine.Random.Range( max, min );
+                    return UnityEngine.Random.Range(max, min);
             }
         }
 
@@ -184,6 +198,12 @@ namespace Midbaryom.Core
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, _spawnConfig.SpawnRadius);
 
+        }
+
+
+        private void StartGame()
+        {
+            _startSpawning = true;
         }
     }
 

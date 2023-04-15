@@ -823,7 +823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 627878964}
-  _sessionTime: 90
+  _sessionTime: {fileID: 11400000, guid: 3239c52ff5581db48aefd7bb6bac5be2, type: 2}
   isTimeDepleted: 0
 --- !u!114 &627878964
 MonoBehaviour:

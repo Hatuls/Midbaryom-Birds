@@ -7,6 +7,11 @@ namespace Midbaryom.Core
     [DefaultExecutionOrder(-99999)]
     public class GameManager : MonoBehaviour
     {
+        public static event Action OnGameStarted;
+        public static event Action OnTutorialStarted;
+        public static event Action OnGameReset;
+
+
         private static GameManager _instance;
         public static GameManager Instance => _instance;
         private void Awake()
@@ -31,6 +36,7 @@ namespace Midbaryom.Core
                 PlayerScore.Instance.ResetScores();
          
             _timerText.OnTimeEnded += MoveToNextScene;
+            OnGameStarted?.Invoke();
         }
 
         private void MoveToNextScene()

@@ -23,7 +23,7 @@ public class TargetedAnimalIconHandler : MonoBehaviour
     {
         ResetAll();
         yield return null;
-        _aimAssists = _spawner.Player.Transform.GetComponent<AimAssists>();
+        _aimAssists = _spawner.PlayerEntity.Transform.GetComponent<AimAssists>();
         _aimAssists.OnTargetDetectedEntity += Target;
         _aimAssists.OnTargetReset += ResetAll;
     }

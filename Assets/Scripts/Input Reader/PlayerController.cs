@@ -15,13 +15,13 @@ namespace Midbaryom.Inputs
 
 
         private BirdInputAction _birdInputAction;
-
+        private IInputHandler<Vector2> _movementInputHandler;
         private InputAction _huntInputAction;
         private InputAction _movementInputAction;
         private Vector3 _previousInput;
         private float _counter;
         public bool LockInputs { get; set; }
-        public PlayerController(Player player,IEntity entity)
+        public PlayerController(Player player, IEntity entity)
         {
             _player = player;
             _entity = entity;
@@ -34,12 +34,14 @@ namespace Midbaryom.Inputs
             _huntInputAction.canceled += EndHunt;
             foreach (var input in InputActions)
                 input.Enable();
+
+            ResetToDefault();
         }
 
         private void StartHundDown(InputAction.CallbackContext obj)
         {
-            if(_player.AimAssists.HasTarget)
-            _player.StateMachine.ChangeState(StateType.Dive);
+            if (_player.AimAssists.HasTarget)
+                _player.StateMachine.ChangeState(StateType.Dive);
         }
 
         private void EndHunt(InputAction.CallbackContext obj)
@@ -60,8 +62,8 @@ namespace Midbaryom.Inputs
 
         public void Tick()
         {
-            if(LockInputs == false)
-            Rotation();
+            if (LockInputs == false)
+                Rotation();
         }
 
 
@@ -69,13 +71,14 @@ namespace Midbaryom.Inputs
         private void Rotation()
         {
             Vector2 value = _movementInputAction.ReadValue<Vector2>();
-            Vector3 result = new Vector3(value.x, 0, 0);
-
-            _entity.Rotator.AssignRotation(result);
+            _movementInputHandler.Handle(value);
         }
 
-
-
+        public void SetInputBehaviour(IInputHandler<Vector2> inputBehaviour)
+        {
+            _movementInputHandler = inputBehaviour;
+        }
+        public void ResetToDefault() => SetInputBehaviour(new RegularInputs(_entity));
 
         ~PlayerController()
         {
@@ -85,4 +88,67 @@ namespace Midbaryom.Inputs
 
     }
 
+}
+
+public interface IInputHandler<T>
+{
+    void Handle(T input);
+}
+
+public class RegularInputs : IInputHandler<Vector2>
+{
+    private readonly IEntity _entity;
+    public RegularInputs(IEntity entity)
+    {
+        _entity = entity;
+    }
+    public void Handle(Vector2 input)
+    {
+        Vector3 result = new Vector3(input.x, 0, 0);
+
+        _entity.Rotator.AssignRotation(result);
+    }
+}
+public class OnlyRightInputEnabled : IInputHandler<Vector2>
+{
+    public event Action OnRight;
+    private readonly IEntity _entity;
+
+    public OnlyRightInputEnabled(IEntity entity)
+    {
+        _entity = entity;
+    }
+
+    public void Handle(Vector2 input)
+    {
+        Vector3 result = new Vector3(input.x, 0, 0);
+        bool _isLeft = input.x > 0;
+        if (_isLeft)
+        {
+            _entity.Rotator.AssignRotation(result);
+            OnRight?.Invoke();
+        }
+    }
+}
+public class OnlyLeftInputEnabled : IInputHandler<Vector2>
+{
+    public event Action OnLeft;
+    private readonly IEntity _entity;
+
+    public OnlyLeftInputEnabled(IEntity entity)
+    {
+        _entity = entity;
+    }
+
+    public void Handle(Vector2 input)
+    {
+        Vector3 result = new Vector3(input.x, 0, 0);
+        bool _isLeft = input.x <= 0;
+
+        if (_isLeft)
+            _entity.Rotator.AssignRotation(result);
+        if (input.x < 0)
+            OnLeft?.Invoke();
+        
+    }
 }

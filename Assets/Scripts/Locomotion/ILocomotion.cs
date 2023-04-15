@@ -134,7 +134,7 @@ namespace Midbaryom.Core
         public void AssignRotation(Vector3 direction)
         {
             _direction = direction;
-           // Debug.LogError(direction);
+            //Debug.LogError(direction);
             _direction.Normalize();
         }
 
