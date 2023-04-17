@@ -9,6 +9,11 @@ namespace Midbaryom.Core.Tutorial
         public event Action OnTutorialCompeleted;
         public event Action OnTutorialStarted;
 
+        [SerializeField]
+        private Spawner _spawner;
+        [SerializeField]
+        private EntityTagSO _entityTagSO;
+
         private BaseTutorialTask[] _baseTutorialTasks;
         private int _currentTask;
         private IPlayer _player;
@@ -27,8 +32,9 @@ namespace Midbaryom.Core.Tutorial
         {
             _baseTutorialTasks = new BaseTutorialTask[]
             {
-                new MoveLeft(_player, -20),
+                new MoveLeft(_player, -20), 
                 new MoveRight(_player , 40),
+                new HuntTutorial(_player, _spawner,_entityTagSO)
             };
             for (int i = 0; i < _baseTutorialTasks.Length; i++)
                 _baseTutorialTasks[i].OnComplete += MoveNext;
@@ -64,7 +70,35 @@ namespace Midbaryom.Core.Tutorial
         public virtual void TaskStarted() => OnTaskStarted?.Invoke();
     }
 
+    public class HuntTutorial : BaseTutorialTask
+    {
+        private readonly IPlayer _player;
+        private readonly Spawner _spawner;
+        private readonly EntityTagSO _enemyTag;
 
+
+        public HuntTutorial(IPlayer player,Spawner spawner, EntityTagSO enemyTag)
+        {
+            _player = player;
+            _spawner = spawner;
+            _enemyTag = enemyTag;
+        }
+
+        public override void TaskStarted()
+        {
+  _player.PlayerController.ResetToDefault();
+            var mob = _spawner.SpawnEntity(_enemyTag);
+            mob.DestroyHandler.OnDestroy += EntityHunted;
+            //Show arrow towards enemy
+            base.TaskStarted();
+        }
+
+        private void EntityHunted(IEntity entity) 
+        { 
+            entity.DestroyHandler.OnDestroy -= EntityHunted;
+            TaskCompleted(); 
+        }
+    }
     public class MoveLeft : BaseTutorialTask
     {
         private readonly IPlayer _player;
@@ -93,13 +127,17 @@ namespace Midbaryom.Core.Tutorial
         }
         void CheckTask()
         {
-            if(_endAngle <= _playerTransform.localRotation.eulerAngles.y)
+            if(_endAngle >= _playerTransform.localRotation.eulerAngles.y)
+            {
+
             TaskCompleted();
+            }
         }
         protected override void TaskCompleted()
         {
-           // _player.PlayerController.LockInputs = true;
+            _player.Entity.Rotator.AssignRotation(Vector3.zero);
             _moveLeft.OnLeft -= CheckTask;
+            Debug.LogWarning("Task Left Completed");
             base.TaskCompleted();
         }
     }
@@ -137,7 +175,8 @@ namespace Midbaryom.Core.Tutorial
         }
         protected override void TaskCompleted()
         {
-            // _player.PlayerController.LockInputs = true;
+            _player.Entity.Rotator.AssignRotation(Vector3.zero);
+            Debug.LogWarning("Task Right Completed");
             _moveLeft.OnRight -= CheckTask;
             base.TaskCompleted();
         }

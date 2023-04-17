@@ -2397,6 +2397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _screenTransitioner: {fileID: 976557554}
+  _tutorialManager: {fileID: 1808002222}
   _timerText: {fileID: 627878963}
   HuntDown: {fileID: 11400000, guid: 8227dacfda0866d488216663ac098ad9, type: 2}
   HuntUp: {fileID: 11400000, guid: 9774fc0d2dba7d0488b72d7bfd033afc, type: 2}
@@ -2429,6 +2430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9385b5bfa0d58a94fa16d1cc8a4654bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawner: {fileID: 951776888}
+  _entityTagSO: {fileID: 11400000, guid: 8ac05556dd904cd429a39f3eca443a89, type: 2}
 --- !u!1001 &1842102850
 PrefabInstance:
   m_ObjectHideFlags: 0

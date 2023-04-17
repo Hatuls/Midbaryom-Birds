@@ -112,19 +112,35 @@ namespace Midbaryom.Core
             }
         }
 
-        private void SpawnEntity()
+        public void SpawnEntity()
         {
             EntityTagSO mobTag = _spawnConfig.ConductMob(AllEntities);
+            SpawnEntity(mobTag);
+        }
+
+        public IEntity SpawnEntity(EntityTagSO mobTag,Vector3 spawnLocation)
+        {
             IEntity mob = _poolManager.Pull(mobTag);
-            float yPos = _heightConfigSO.GetHeight(mobTag.StartingHeight).Height + _spawningHeightOffset;
             Transform t = mob.Transform;
             t.SetParent(null);
             mob.Rigidbody.isKinematic = true;
+            t.position = spawnLocation;  
+            t.gameObject.SetActive(true);
+            mob.Rigidbody.isKinematic = false;
+            return mob;
+        }
+        public IEntity SpawnEntity(EntityTagSO mobTag)
+        {
+            IEntity mob = _poolManager.Pull(mobTag);
+            Transform t = mob.Transform;
+            t.SetParent(null);
+            mob.Rigidbody.isKinematic = true;
+            float yPos = _heightConfigSO.GetHeight(mobTag.StartingHeight).Height + _spawningHeightOffset;
             t.position = GenerateSpawnLocation(yPos);
             t.gameObject.SetActive(true);
             mob.Rigidbody.isKinematic = false;
+            return mob;
         }
-
         private Vector3 GenerateSpawnLocation(float yPos)
         {
             Vector3 playerPosition = _playerEntity.Transform.position;
