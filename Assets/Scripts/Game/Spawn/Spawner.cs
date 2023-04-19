@@ -136,12 +136,25 @@ namespace Midbaryom.Core
             t.SetParent(null);
             mob.Rigidbody.isKinematic = true;
             float yPos = _heightConfigSO.GetHeight(mobTag.StartingHeight).Height + _spawningHeightOffset;
-            t.position = GenerateSpawnLocation(yPos);
+            t.position = GenerateSpawnLocation(yPos, _spawnConfig.SpawnRadius);
             t.gameObject.SetActive(true);
             mob.Rigidbody.isKinematic = false;
             return mob;
         }
-        private Vector3 GenerateSpawnLocation(float yPos)
+
+        public IEntity SpawnEntity(EntityTagSO mobTag, float radius)
+        {
+            IEntity mob = _poolManager.Pull(mobTag);
+            Transform t = mob.Transform;
+            t.SetParent(null);
+            mob.Rigidbody.isKinematic = true;
+            float yPos = _heightConfigSO.GetHeight(mobTag.StartingHeight).Height + _spawningHeightOffset;
+            t.position = GenerateSpawnLocation(yPos, radius );
+            t.gameObject.SetActive(true);
+            mob.Rigidbody.isKinematic = false;
+            return mob;
+        }
+        private Vector3 GenerateSpawnLocation(float yPos,float radius)
         {
             Vector3 playerPosition = _playerEntity.Transform.position;
             Vector3 destination = playerPosition;
@@ -196,8 +209,8 @@ namespace Midbaryom.Core
 
             float GetRandomPoint(float playerAxisPoint)
             {
-                float min = playerAxisPoint - _spawnConfig.SpawnRadius;
-                float max = playerAxisPoint + _spawnConfig.SpawnRadius;
+                float min = playerAxisPoint - radius;
+                float max = playerAxisPoint + radius ;
 
                 if (min <= max)
                     return UnityEngine.Random.Range(min, max);

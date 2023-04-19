@@ -9,6 +9,8 @@ public class TimerText : MonoBehaviour
 
     private const string FORMAT = "{0:00}:{1:00}";
     [SerializeField]
+    private GameObject _panel;
+    [SerializeField]
     private TextMeshProUGUI _text;
     [SerializeField]
     private TimerSO _sessionTime ;
@@ -18,6 +20,8 @@ public class TimerText : MonoBehaviour
     private bool isTimeDepleted;
     private void Awake()
     {
+        _panel.SetActive(false);
+        gameObject.SetActive(false);
         GameManager.OnGameStarted += StartTimer;
     }
     private void OnDestroy()
@@ -27,6 +31,8 @@ public class TimerText : MonoBehaviour
     }
     private void StartTimer()
     {
+        _panel.SetActive(true);
+        gameObject.SetActive(true);
         ResetTimer();
         StartCoroutine(CountDown());
     }
