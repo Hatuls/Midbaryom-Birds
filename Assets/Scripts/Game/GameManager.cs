@@ -1,5 +1,6 @@
 using Midbaryom.Camera;
 using Midbaryom.Core.Config;
+using Midbaryom.Core.Tutorial;
 using System;
 using UnityEngine;
 namespace Midbaryom.Core
@@ -14,6 +15,17 @@ namespace Midbaryom.Core
 
         private static GameManager _instance;
         public static GameManager Instance => _instance;
+  
+        [SerializeField]
+        private ScreenTransitioner _screenTransitioner;
+        [SerializeField]
+        private TutorialManager _tutorialManager;
+        [SerializeField]
+        private TimerText _timerText;
+
+        public CameraRotationSO HuntDown, HuntUp;
+        public HeightConfigSO HeightConfigSO;
+        public SpawnConfigSO _spawnConfig;
         private void Awake()
         {
             if (_instance == null || _instance == this)
@@ -21,24 +33,18 @@ namespace Midbaryom.Core
             else if (_instance != this)
                 Destroy(this.gameObject);
         }
-        [SerializeField]
-        private ScreenTransitioner _screenTransitioner;
-        [SerializeField]
-        private TimerText _timerText;
-
-        public CameraRotationSO HuntDown, HuntUp;
-        public HeightConfigSO HeightConfigSO;
-        public SpawnConfigSO _spawnConfig;
-
         private void Start()
         {
             if (PlayerScore.Instance != null)
                 PlayerScore.Instance.ResetScores();
          
             _timerText.OnTimeEnded += MoveToNextScene;
+            _tutorialManager.OnTutorialCompeleted += StartGame;
+        }
+        public void StartGame()
+        {
             OnGameStarted?.Invoke();
         }
-
         private void MoveToNextScene()
         {
     
@@ -54,6 +60,7 @@ namespace Midbaryom.Core
         private void OnDestroy()
         {
             _timerText.OnTimeEnded -= MoveToNextScene;
+            _tutorialManager.OnTutorialCompeleted -= StartGame;
         }
 #if UNITY_EDITOR
         [Header("Editor:")]

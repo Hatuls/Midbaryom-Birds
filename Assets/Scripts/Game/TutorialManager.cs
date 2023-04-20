@@ -9,9 +9,19 @@ namespace Midbaryom.Core.Tutorial
         public event Action OnTutorialCompeleted;
         public event Action OnTutorialStarted;
 
+        [SerializeField]
+        private MoveLeft _left;
+        [SerializeField]
+        private MoveRight _right;
+        [SerializeField]
+        private HuntTutorial _hunt;
+
         private BaseTutorialTask[] _baseTutorialTasks;
         private int _currentTask;
         private IPlayer _player;
+
+        [SerializeField]
+        private LanguageTMPRO _languageTMPRO;
 
         private IEnumerator Start()
         {
@@ -27,13 +37,18 @@ namespace Midbaryom.Core.Tutorial
         {
             _baseTutorialTasks = new BaseTutorialTask[]
             {
-                new MoveLeft(_player, -20),
-                new MoveRight(_player , 40),
+                _left,
+                _right,
+                _hunt,
             };
             for (int i = 0; i < _baseTutorialTasks.Length; i++)
                 _baseTutorialTasks[i].OnComplete += MoveNext;
         }
-
+        private void OnDestroy()
+        {
+            for (int i = 0; i < _baseTutorialTasks.Length; i++)
+                _baseTutorialTasks[i].OnComplete -= MoveNext;
+        }
         private void StartTutorial()
         {
 
@@ -47,14 +62,17 @@ namespace Midbaryom.Core.Tutorial
                 _baseTutorialTasks[_currentTask].TaskStarted();
             else
             {
+                if (PlayerScore.Instance != null)
+                    PlayerScore.Instance.ResetScores();
                 OnTutorialCompeleted?.Invoke();
+                _languageTMPRO.gameObject.SetActive(false);
                 Debug.Log("Complete!");
             }
         }
     }
 
 
-    public abstract class BaseTutorialTask
+    public abstract class BaseTutorialTask :MonoBehaviour
     {
         public event Action OnComplete;
         public event Action OnTaskStarted;
@@ -62,84 +80,5 @@ namespace Midbaryom.Core.Tutorial
 
 
         public virtual void TaskStarted() => OnTaskStarted?.Invoke();
-    }
-
-
-    public class MoveLeft : BaseTutorialTask
-    {
-        private readonly IPlayer _player;
-        private readonly OnlyLeftInputEnabled _moveLeft;
-        private  float _endAngle;
-        private readonly float _turningAngleToComplete;
-        private readonly Transform _playerTransform;
-        public MoveLeft(IPlayer player,float turnAngleComplete)
-        {
-            _player = player;
-            _playerTransform = _player.Entity.Transform;
-                _moveLeft = new OnlyLeftInputEnabled(_player.Entity);
-            _moveLeft.OnLeft += CheckTask;
-
-            _turningAngleToComplete = turnAngleComplete;
-
-        }
-
-        public override void TaskStarted()
-        {
-            _player.Entity.MovementHandler.StopMovement = true;
-            float currentPlayerAngle = _playerTransform.localRotation.eulerAngles.y;
-            _endAngle = currentPlayerAngle + _turningAngleToComplete;
-            _player.PlayerController.SetInputBehaviour(_moveLeft);
-            base.TaskStarted();
-        }
-        void CheckTask()
-        {
-            if(_endAngle <= _playerTransform.localRotation.eulerAngles.y)
-            TaskCompleted();
-        }
-        protected override void TaskCompleted()
-        {
-           // _player.PlayerController.LockInputs = true;
-            _moveLeft.OnLeft -= CheckTask;
-            base.TaskCompleted();
-        }
-    }
-
-    public class MoveRight : BaseTutorialTask
-    {
-        private readonly IPlayer _player;
-        private readonly OnlyRightInputEnabled _moveLeft;
-        private float _endAngle;
-        private readonly float _turningAngleToComplete;
-        private readonly Transform _playerTransform;
-        public MoveRight(IPlayer player, float turnAngleComplete)
-        {
-            _player = player;
-            _playerTransform = _player.Entity.Transform;
-            _moveLeft = new OnlyRightInputEnabled(_player.Entity);
-            _moveLeft.OnRight += CheckTask;
-
-            _turningAngleToComplete = turnAngleComplete;
-
-        }
-
-        public override void TaskStarted()
-        {
-            _player.Entity.MovementHandler.StopMovement = true;
-            float currentPlayerAngle = _playerTransform.localRotation.eulerAngles.y;
-            _endAngle = currentPlayerAngle + _turningAngleToComplete;
-            _player.PlayerController.SetInputBehaviour(_moveLeft);
-            base.TaskStarted();
-        }
-        void CheckTask()
-        {
-            if (_endAngle <= _playerTransform.localRotation.eulerAngles.y)
-                TaskCompleted();
-        }
-        protected override void TaskCompleted()
-        {
-            // _player.PlayerController.LockInputs = true;
-            _moveLeft.OnRight -= CheckTask;
-            base.TaskCompleted();
-        }
     }
 }
