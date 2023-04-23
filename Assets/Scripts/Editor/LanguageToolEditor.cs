@@ -8,6 +8,7 @@ public class LanguageToolEditor : EditorWindow
 {
     private static BankSentences[] _bankSenteces;
     private LanguageType _languageType;
+    private Vector2 _scrollPos;
     [MenuItem("Tools/Languages/Load")]
     public static void AssignLanguages()
     {
@@ -65,11 +66,13 @@ public class LanguageToolEditor : EditorWindow
         if (_bankSenteces == null)
             return;
 
+
         if (GUILayout.Button("Create Assets"))
             CreateAssets();
 
         EditorGUILayout.EndHorizontal();
 
+        _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
        EditorGUILayout.IntField("Size", _bankSenteces.Length);
 
         for (int i = 0; i < _bankSenteces.Length; i++)
@@ -78,9 +81,9 @@ public class LanguageToolEditor : EditorWindow
             EditorGUILayout.BeginVertical();
             dialogue.GUI();
             EditorGUILayout.EndVertical();
-        }      
+        }
+        EditorGUILayout.EndScrollView();
 
-        
         // Debug.Log(_languageType);
     }
 

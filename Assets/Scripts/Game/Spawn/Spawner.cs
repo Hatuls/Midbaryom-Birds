@@ -173,7 +173,10 @@ namespace Midbaryom.Core
                 destination.y = raycastHit.point.y + GROUND_OFFSET;
             }
             else
+            {
                 Debug.LogError("Spawner: Didnt hit the ground?");
+                return GenerateSpawnLocation(yPos, radius);
+            }
 
             return destination;
 

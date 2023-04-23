@@ -122,7 +122,7 @@ public class OnlyRightInputEnabled : IInputHandler<Vector2>
     public void Handle(Vector2 input)
     {
         Vector3 result = new Vector3(input.x, 0, 0);
-        bool _isLeft = input.x > 0;
+        bool _isLeft = input.x >= 0;
         if (_isLeft)
         {
             _entity.Rotator.AssignRotation(result);
@@ -150,5 +150,15 @@ public class OnlyLeftInputEnabled : IInputHandler<Vector2>
         if (input.x < 0)
             OnLeft?.Invoke();
         
+    }
+}
+
+public class NoInputBehaviour : IInputHandler<Vector2>
+{
+
+    public void Handle(Vector2 input)
+    {
+      
+
     }
 }

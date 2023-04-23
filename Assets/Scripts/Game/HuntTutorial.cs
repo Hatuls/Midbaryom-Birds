@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 namespace Midbaryom.Core.Tutorial
 {
-    public class HuntTutorial : BaseTutorialTask
+    public class HuntTutorial : TutorialTask
     {
         private  IPlayer _player;
         [SerializeField]
@@ -14,11 +14,6 @@ namespace Midbaryom.Core.Tutorial
         [SerializeField]
         private ArrowBehaviour _arrowBehaviour;
 
-        [SerializeField]
-        private LanguageTMPRO _languageTMPRO;
-
-        [SerializeField]
-        private int _languageIndex;
 
         private bool _isActive;
         [SerializeField]
@@ -26,16 +21,26 @@ namespace Midbaryom.Core.Tutorial
         public override void TaskStarted()
         {
             _player = _spawner.Player;
-            _player.PlayerController.ResetToDefault();
+         //   _player.Entity.Rotator.AssignRotation(Vector3.zero);
+       
             var mob = _spawner.SpawnEntity(_enemyTag, _transform.position);
             mob.DestroyHandler.OnDestroy += EntityHunted;
-            _arrowBehaviour.IsActive = true;
-            _arrowBehaviour.Open();
-            _arrowBehaviour.PointTowards(_player, mob);
-            _player.Entity.MovementHandler.StopMovement = false;
- 
-            _isActive = true;
+            StartCoroutine(EffectCoroutine(_fadeOut, FadeIn));
 
+
+
+            void FadeIn()
+            {
+                _player.PlayerController.ResetToDefault();
+                _player.Entity.MovementHandler.StopMovement = false;
+
+                StartCoroutine(EffectCoroutine(_fadeIn));
+                base.TaskStarted();
+                _arrowBehaviour.IsActive = true;
+                _arrowBehaviour.Open();
+                _arrowBehaviour.PointTowards(_player, mob);
+                _isActive = true;
+            }
 
             base.TaskStarted();
         }
@@ -47,19 +52,38 @@ namespace Midbaryom.Core.Tutorial
 
             if( _player.AimAssists.HasTarget)
             {
-                _languageTMPRO.gameObject.SetActive(_player.AimAssists.HasTarget);
-                _languageTMPRO.SetText(_languageIndex);
+                TargetInRange();
             }
 
         }
+
+        private void TargetInRange()
+        {
+            _player.Entity.MovementHandler.StopMovement = true;
+            _player.Entity.Rotator.AssignRotation(Vector3.zero);
+            _player.PlayerController.SetInputBehaviour(new NoInputBehaviour());
+            _isActive = false;
+            _languageTMPRO.gameObject.SetActive(true);
+            ShowInstructions();
+        }
+
         private void EntityHunted(IEntity entity) 
         { 
             entity.DestroyHandler.OnDestroy -= EntityHunted;
+            _player.PlayerController.ResetToDefault();
+
+
             _arrowBehaviour.Close();
             _arrowBehaviour.IsActive = false;
             TaskCompleted();
-            _isActive = false;
+          
             _languageTMPRO.gameObject.SetActive(_isActive);
+
+        }
+
+        private void ResumeMovement()
+        {
+
         }
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+
 namespace Midbaryom.Core.Tutorial
 {
 
@@ -16,7 +18,7 @@ namespace Midbaryom.Core.Tutorial
         [SerializeField]
         private HuntTutorial _hunt;
 
-        private BaseTutorialTask[] _baseTutorialTasks;
+        private BaseTask[] _baseTutorialTasks;
         private int _currentTask;
         private IPlayer _player;
 
@@ -28,14 +30,14 @@ namespace Midbaryom.Core.Tutorial
             yield return null;
             _player = Spawner.Instance.Player;
             InitTutorial();
-        
+
             yield return null;
             StartTutorial();
         }
 
         private void InitTutorial()
         {
-            _baseTutorialTasks = new BaseTutorialTask[]
+            _baseTutorialTasks = new BaseTask[]
             {
                 _left,
                 _right,
@@ -71,8 +73,53 @@ namespace Midbaryom.Core.Tutorial
         }
     }
 
+    public class TutorialTask : BaseTask
+    {
 
-    public abstract class BaseTutorialTask :MonoBehaviour
+        [SerializeField, Tooltip("The picture of the movement the player need to do")]
+        protected Sprite _sprite;
+        [SerializeField]
+        protected Image _img;
+        [SerializeField]
+        protected LanguageTMPRO _languageTMPRO;
+
+        [SerializeField]
+        protected int _languageIndex;
+
+        [SerializeField]
+        protected TransitionEffect _fadeIn;
+        [SerializeField]
+        protected TransitionEffect _fadeOut;
+        protected void ShowInstructions()
+        {
+            _languageTMPRO.SetText(_languageIndex);
+            _img.sprite = _sprite;
+            _img.SetNativeSize();
+        }
+
+        protected IEnumerator EffectCoroutine(TransitionEffect effect, Action OnComplete = null)
+        {
+            float duration = effect.Duration;
+            var curve = effect.Curve;
+            float counter = 0;
+            _img.color = effect.StartColor;
+            do
+            {
+                yield return null;
+                counter += Time.deltaTime;
+                float precentage = counter / duration;
+
+                _img.color = Color.Lerp(effect.StartColor, effect.EndColor, curve.Evaluate(precentage));
+
+            } while (counter < duration);
+
+            _img.color = effect.EndColor;
+            yield return null;
+            OnComplete?.Invoke();
+
+        }
+    }
+    public abstract class BaseTask : MonoBehaviour
     {
         public event Action OnComplete;
         public event Action OnTaskStarted;

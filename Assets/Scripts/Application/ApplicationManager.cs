@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ApplicationManager : MonoBehaviour
@@ -20,18 +21,24 @@ public class ApplicationManager : MonoBehaviour
 
     private void Awake()
     {
-        Screen.SetResolution(SCREEN_RESOLUTION, SCREEN_RESOLUTION, true);
+        PlayerPrefs.DeleteAll();
         _instance = this;
         LanguageSettings = new LangaugeSettings(_languageBank);
+        Screen.SetResolution(SCREEN_RESOLUTION, SCREEN_RESOLUTION, true);
+
+        PlayerPrefs.Save();
     }
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
             Application.Quit();
     }
-    private void Start()
+    private IEnumerator Start()
     {
         _sceneHandler.LoadSceneAdditive(FIRST_SCENE_INDEX);
+        yield return null;
+        Screen.SetResolution(SCREEN_RESOLUTION, SCREEN_RESOLUTION, true);
+ 
     }
     private void OnDestroy()
     {
@@ -62,4 +69,6 @@ public class LangaugeSettings
     }
     public string GetText(int index)
         => LanguageBank.GetText(LanguageType, index);
+    public string GetText(int index,LanguageType languageType)
+    => LanguageBank.GetText(languageType, index);
 }

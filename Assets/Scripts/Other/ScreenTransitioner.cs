@@ -13,9 +13,9 @@ public class ScreenTransitioner : MonoBehaviour
     private Image _img;
 
     [SerializeField]
-    private BlackScreenEffect _exitEffect;
+    private TransitionEffect _exitEffect;
     [SerializeField]
-    private BlackScreenEffect _entranceEffect;
+    private TransitionEffect _entranceEffect;
 
 
     private void Awake()
@@ -45,7 +45,7 @@ public class ScreenTransitioner : MonoBehaviour
             _sceneHandler.LoadSceneAdditive(nextScene, true);
         }
     }
-    private IEnumerator EffectCoroutine(BlackScreenEffect effect, Action OnComplete = null)
+    private IEnumerator EffectCoroutine(TransitionEffect effect, Action OnComplete = null)
     {
         float duration = effect.Duration;
         var curve = effect.Curve;
@@ -67,7 +67,7 @@ public class ScreenTransitioner : MonoBehaviour
     }
 }
 [Serializable]
-public class BlackScreenEffect
+public class TransitionEffect
 {
     [SerializeField]
     private Color _startColor;

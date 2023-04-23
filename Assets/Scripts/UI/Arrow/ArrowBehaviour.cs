@@ -71,6 +71,9 @@ public class ArrowBehaviour : MonoBehaviour
 
     public void Close()
     {
+        if (_arrow == null)
+            return;
+
         if (ReferenceEquals(_arrow.gameObject, null) == false) ;
         _arrow.gameObject.SetActive(false);
     }

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 namespace Midbaryom.Core.Tutorial
 {
-    public class MoveLeft : BaseTutorialTask
+    public class MoveLeft : TutorialTask
     {
         [SerializeField]
         private Spawner _spawner;
@@ -12,22 +14,20 @@ namespace Midbaryom.Core.Tutorial
         private  float _turningAngleToComplete;
         private Transform _playerTransform;
 
-        [SerializeField]
-        private LanguageTMPRO _languageTMPRO;
-
-        [SerializeField]
-        private int _languageIndex;
         public override void TaskStarted()
         {
             _player = _spawner.Player; 
             _playerTransform = _player.Entity.Transform; 
              _moveLeft = new OnlyLeftInputEnabled(_player.Entity);
             _moveLeft.OnLeft += CheckTask;
-            _languageTMPRO.SetText(_languageIndex);
+       
             _player.Entity.MovementHandler.StopMovement = true;
             float currentPlayerAngle = _playerTransform.localRotation.eulerAngles.y;
             _endAngle = currentPlayerAngle + _turningAngleToComplete;
             _player.PlayerController.SetInputBehaviour(_moveLeft);
+
+            ShowInstructions();
+            StartCoroutine(EffectCoroutine(_fadeIn));
             base.TaskStarted();
         }
         void CheckTask()

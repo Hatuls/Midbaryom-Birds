@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class LanguageTMPRO : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI _textMeshProUGUI;
+    protected TextMeshProUGUI _textMeshProUGUI;
     [SerializeField]
-    private Text _text;
+    protected Text _text;
     private void Awake()
     {
         if (ApplicationManager.Instance == null)
@@ -40,7 +40,7 @@ public class LanguageTMPRO : MonoBehaviour
         }
     }
 
-    public void SetText(int index)
+    public virtual void SetText(int index)
     {
         string text = ApplicationManager.Instance?.LanguageSettings?.GetText(index);
         if (_textMeshProUGUI != null)
@@ -56,11 +56,15 @@ public class LanguageTMPRO : MonoBehaviour
         }
     }
 
-    private string Reverse(string text)
+    protected string Reverse(string text)
     {
+        if (string.IsNullOrEmpty(text))
+            return string.Empty;
+
         string s = string.Empty;
         foreach (var letter in text.Reverse())
             s = string.Concat(s,letter);
+
         return s;
     }
 }
