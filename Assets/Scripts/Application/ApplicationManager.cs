@@ -4,15 +4,15 @@ using UnityEngine;
 public class ApplicationManager : MonoBehaviour
 {
     private static ApplicationManager _instance;
-    private const int FIRST_SCENE_INDEX = 1;
-    private const int SCREEN_RESOLUTION = 1376;
+
+    public const int SCREEN_RESOLUTION = 1376;
     [SerializeField]
     private LanguageBank _languageBank;
-    [SerializeField]
-    private SceneHandler _sceneHandler;
+
+ 
     public static ApplicationManager Instance => _instance;
     public LangaugeSettings LanguageSettings { get; private set; }
-
+    [SerializeField]
     private void OnEnable()
     {
         Resources.UnloadUnusedAssets();
@@ -25,21 +25,19 @@ public class ApplicationManager : MonoBehaviour
         _instance = this;
         LanguageSettings = new LangaugeSettings(_languageBank);
         Screen.SetResolution(SCREEN_RESOLUTION, SCREEN_RESOLUTION, true);
-
         PlayerPrefs.Save();
+    }
+    private IEnumerator Start()
+    {
+        yield return null;
+        Screen.SetResolution(SCREEN_RESOLUTION, SCREEN_RESOLUTION, true);
     }
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
             Application.Quit();
     }
-    private IEnumerator Start()
-    {
-        _sceneHandler.LoadSceneAdditive(FIRST_SCENE_INDEX);
-        yield return null;
-        Screen.SetResolution(SCREEN_RESOLUTION, SCREEN_RESOLUTION, true);
- 
-    }
+
     private void OnDestroy()
     {
         _instance = null;

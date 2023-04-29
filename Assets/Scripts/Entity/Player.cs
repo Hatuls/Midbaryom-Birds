@@ -20,6 +20,8 @@ namespace Midbaryom.Core
         [SerializeField]
         private BirdStateMachine _playerStateMachine;
 
+        [SerializeField]
+        private BodyTrackingConfigSO _bodyTrackingConfigSO;
         
         public IEntity Entity => _entity;
         public AimAssists AimAssists => _aimAssists;
@@ -48,7 +50,7 @@ namespace Midbaryom.Core
                                                      this);
 
             CameraManager = new CameraManager(this, _camera, _cameraTransform);
-            PlayerController = new PlayerController(this, Entity);
+            PlayerController = new PlayerController(this, Entity, _bodyTrackingConfigSO);
             _playerStateMachine.InitStateMachine();
             _targetHandler.InitTargetHandler(this);
 

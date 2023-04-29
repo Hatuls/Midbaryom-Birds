@@ -11,7 +11,7 @@ namespace Midbaryom.Inputs
         public event Action<Vector2> OnMove;
         private readonly IEntity _entity;
         private readonly Player _player;
-
+        private readonly BodyTrackingConfigSO _bodyTrackingConfigSO;
 
 
         private BirdInputAction _birdInputAction;
@@ -21,7 +21,7 @@ namespace Midbaryom.Inputs
         private Vector3 _previousInput;
         private float _counter;
         public bool LockInputs { get; set; }
-        public PlayerController(Player player, IEntity entity)
+        public PlayerController(Player player, IEntity entity, BodyTrackingConfigSO bodyTrackingConfigSO)
         {
             _player = player;
             _entity = entity;
@@ -36,9 +36,15 @@ namespace Midbaryom.Inputs
                 input.Enable();
 
             ResetToDefault();
+            _bodyTrackingConfigSO = bodyTrackingConfigSO;
         }
 
         private void StartHundDown(InputAction.CallbackContext obj)
+        {
+            HuntDown();
+        }
+
+        public void HuntDown()
         {
             if (_player.AimAssists.HasTarget)
                 _player.StateMachine.ChangeState(StateType.Dive);
@@ -62,7 +68,7 @@ namespace Midbaryom.Inputs
 
         public void Tick()
         {
-            if (LockInputs == false)
+            if (LockInputs == false && _bodyTrackingConfigSO.InputModeType == BodyTrackingConfigSO.InputMode.Keyboard)
                 Rotation();
         }
 
@@ -73,7 +79,13 @@ namespace Midbaryom.Inputs
             Vector2 value = _movementInputAction.ReadValue<Vector2>();
             _movementInputHandler.Handle(value);
         }
+        public void Rotate(Vector3 direction)
+        {
+            if (LockInputs)
+                return;
 
+            _movementInputHandler.Handle(direction);
+        }
         public void SetInputBehaviour(IInputHandler<Vector2> inputBehaviour)
         {
             _movementInputHandler = inputBehaviour;
