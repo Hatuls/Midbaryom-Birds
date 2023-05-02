@@ -1,4 +1,5 @@
-﻿using Midbaryom.Core.Tutorial;
+﻿using Midbaryom.Core;
+using Midbaryom.Core.Tutorial;
 using System;
 using TMPro;
 using UnityEngine;
@@ -52,17 +53,20 @@ public class BaseEyeTutorial : MonoBehaviour
 
 public class HumanEyeTutorial : BaseEyeTutorial
 {
-
+    [SerializeField]
+    private Player _player;
     [SerializeField]
     private GameObject[] _objectsToClose;
     protected override void SetVisuals()
     {
         Array.ForEach(_objectsToClose, x => x.SetActive(false));
+
+        _player.PlayerController.SetInputBehaviour(new NoInputBehaviour());
         base.SetVisuals();
     }
     protected override void RemoveVisuals()
     {
-        Array.ForEach(_objectsToClose, x => x.SetActive(true));
+       // Array.ForEach(_objectsToClose, x => x.SetActive(true));
         base.RemoveVisuals();
     }
 }

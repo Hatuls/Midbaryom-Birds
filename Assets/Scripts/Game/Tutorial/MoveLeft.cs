@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Midbaryom.Core.Tutorial
@@ -9,11 +10,12 @@ namespace Midbaryom.Core.Tutorial
         private Spawner _spawner;
         private  IPlayer _player;
         private  OnlyLeftInputEnabled _moveLeft;
+        [SerializeField,ReadOnly("Required Y Rotation")]
         private  float _endAngle;
         [SerializeField]
         private  float _turningAngleToComplete;
         private Transform _playerTransform;
-
+   
         public override void TaskStarted()
         {
             _player = _spawner.Player; 
@@ -25,14 +27,14 @@ namespace Midbaryom.Core.Tutorial
             float currentPlayerAngle = _playerTransform.localRotation.eulerAngles.y;
             _endAngle = currentPlayerAngle + _turningAngleToComplete;
             _player.PlayerController.SetInputBehaviour(_moveLeft);
-
+    
             ShowInstructions();
             StartCoroutine(EffectCoroutine(_fadeIn));
             base.TaskStarted();
         }
         void CheckTask()
         {
-            if(_endAngle >= _playerTransform.localRotation.eulerAngles.y)
+            if(_endAngle >= _playerTransform.rotation.eulerAngles.y)
             {
             TaskCompleted();
             }

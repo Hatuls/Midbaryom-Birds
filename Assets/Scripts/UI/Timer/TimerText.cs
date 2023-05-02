@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class TimerText : MonoBehaviour
 {
     public event Action OnTimeEnded;
@@ -16,6 +18,8 @@ public class TimerText : MonoBehaviour
     private TimerSO _sessionTime ;
     float _counter = 0;
 
+    [SerializeField]
+    private Image _img;
     [SerializeField]
     private bool isTimeDepleted;
     private void Awake()
@@ -51,6 +55,7 @@ public class TimerText : MonoBehaviour
         {
             yield return null;
             _counter -= Time.deltaTime;
+            _img.fillAmount = 1 - (_counter / _sessionTime.SessionTime);
             SetText(_counter);
         } while (_counter > 0);
     }

@@ -15,13 +15,18 @@ namespace Midbaryom.Core.Tutorial
         private Transform _transform;
 
         private bool _isActive;
+        [SerializeField]
+        private GameObject[] _objectsToOpen;
 
         public override void TaskStarted()
         {
             _player = _spawner.Player;
-         //   _player.Entity.Rotator.AssignRotation(Vector3.zero);
-       
-            var mob = _spawner.SpawnEntity(_enemyTag, _transform.position);
+            //   _player.Entity.Rotator.AssignRotation(Vector3.zero);
+            Vector3 dir = _player.AimAssists.FacingDirection;
+            Ray rei = new Ray(_player.Entity.CurrentPosition, dir);
+            Physics.Raycast(rei, out RaycastHit hit);
+            Array.ForEach(_objectsToOpen, x => x.SetActive(true));
+            var mob = _spawner.SpawnEntity(_enemyTag, hit.point);
             mob.DestroyHandler.OnDestroy += EntityHunted;
             StartCoroutine(EffectCoroutine(_fadeOut, FadeIn));
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Midbaryom.Core.Tutorial
@@ -11,7 +12,7 @@ namespace Midbaryom.Core.Tutorial
         public event Action OnTutorialCompeleted;
         public event Action OnTutorialStarted;
 
-     
+        public UnityEvent OnTutorialCompleted;
         [SerializeField]
         private BaseTask[] _baseTutorialTasks;
         private int _currentTask;
@@ -54,6 +55,7 @@ namespace Midbaryom.Core.Tutorial
             {
                 if (PlayerScore.Instance != null)
                     PlayerScore.Instance.ResetScores();
+                OnTutorialCompleted?.Invoke();
                 OnTutorialCompeleted?.Invoke();
                 _languageTMPRO.gameObject.SetActive(false);
                 Debug.Log("Complete!");
