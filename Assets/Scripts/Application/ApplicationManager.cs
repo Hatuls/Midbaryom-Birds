@@ -9,7 +9,7 @@ public class ApplicationManager : MonoBehaviour
     [SerializeField]
     private LanguageBank _languageBank;
 
- 
+
     public static ApplicationManager Instance => _instance;
     public LangaugeSettings LanguageSettings { get; private set; }
     [SerializeField]
@@ -66,7 +66,29 @@ public class LangaugeSettings
         LanguageType = language;
     }
     public string GetText(int index)
-        => LanguageBank.GetText(LanguageType, index);
-    public string GetText(int index,LanguageType languageType)
-    => LanguageBank.GetText(languageType, index);
+    {
+        try
+        {
+            return LanguageBank.GetText(LanguageType, index);
+
+        }
+        catch (System.Exception e)
+        {
+
+            throw new System.Exception($"Language index was not found\nKey: {LanguageType}\nValue: {index}\n{e.Message}");
+        }
+    }
+    public string GetText(int index, LanguageType languageType)
+    {
+        try
+        {
+            return LanguageBank.GetText(languageType, index);
+
+        }
+        catch (System.Exception e)
+        {
+
+            throw new System.Exception($"Language index was not found\nKey: {LanguageType}\nValue: {index}\n{e.Message}");
+        }
+    }
 }
