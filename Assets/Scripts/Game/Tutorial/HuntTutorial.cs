@@ -29,7 +29,7 @@ namespace Midbaryom.Core.Tutorial
             var mob = _spawner.SpawnEntity(_enemyTag, hit.point);
             mob.DestroyHandler.OnDestroy += EntityHunted;
             StartCoroutine(EffectCoroutine(_fadeOut, FadeIn));
-
+          //  _player.Entity.MovementHandler.StopMovement = true;
 
 
             void FadeIn()

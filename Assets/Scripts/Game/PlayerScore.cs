@@ -67,7 +67,7 @@ public class PlayerScore : MonoBehaviour
         foreach (var tag in AnimalScoreDictionary.Values)
         {
             i++;
-            precentages[i] = AnimalScore.TotalAmount ==0 ? 0 : tag.Precentage;
+            precentages[i] = AnimalScore.TotalAmount == 0 ? 0 : tag.Precentage;
         }
         return precentages;
     }
@@ -80,7 +80,7 @@ public class AnimalScore
     private int _amount = 0;
 
     public int Amount { get => _amount; }
-    public float Precentage => Amount / TotalAmount;
+    public float Precentage => (float)Amount / TotalAmount;
     public void AddOneToCount() => _amount++;
     public void Reset() => _amount = 0;
 }

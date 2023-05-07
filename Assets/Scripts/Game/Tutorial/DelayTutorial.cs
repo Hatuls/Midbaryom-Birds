@@ -21,6 +21,7 @@ namespace Midbaryom.Core.Tutorial
         private IEnumerator Delay()
         {
             yield return new WaitForSeconds(_delay);
+            OnTutorialFinished?.Invoke();
             TaskCompleted();
         }
     }

@@ -10,7 +10,7 @@ public class LanguageTMPRO : MonoBehaviour
     protected TextMeshProUGUI _textMeshProUGUI;
     [SerializeField]
     protected Text _text;
-    private void Awake()
+    protected virtual void Awake()
     {
         if (ApplicationManager.Instance == null)
             gameObject.SetActive(false);
@@ -19,7 +19,7 @@ public class LanguageTMPRO : MonoBehaviour
         ChangeAllignments(currentLangauge);
     }
 
-    private void ChangeAllignments(LanguageType currentLangauge)
+    protected void ChangeAllignments(LanguageType currentLangauge)
     {
         if (_textMeshProUGUI == null)
             return;

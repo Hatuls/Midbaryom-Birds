@@ -34,7 +34,6 @@ namespace Midbaryom.Core.Tutorial
             {
                 ShowInstructions();
                 StartCoroutine(EffectCoroutine(_fadeIn));
-              
             }
 
             base.TaskStarted();
@@ -52,7 +51,7 @@ namespace Midbaryom.Core.Tutorial
             _player.Entity.Rotator.AssignRotation(Vector3.zero);
             Debug.LogWarning("Task Right Completed");
             _moveRight.OnRight -= CheckTask;
-            _languageTMPRO.gameObject.SetActive(false);
+          
             base.TaskCompleted();
         }
     }

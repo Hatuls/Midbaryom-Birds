@@ -1,5 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using System.Management;
+using System.Threading.Tasks;
 using UnityEngine;
 using static BodyTrackingConfigSO;
 
@@ -26,14 +27,25 @@ public class InputModeManager : MonoBehaviour
     }
 
 
-    public void SetCameraInputMode()
+    public  void SetCameraInputMode()
     {
-        _canvas.SetActive(false);
-        _bodyTrackingConfigSO.SetInput(InputMode.Camera);
-        _camera.gameObject.SetActive(false);
-        _zedManager = Instantiate(_zedManager);
-        _zedManager.OnBodyTrackingInitialized += LoadNextScene;
-        Screen.SetResolution(ApplicationManager.SCREEN_RESOLUTION, ApplicationManager.SCREEN_RESOLUTION, true);
+
+       // if ()
+       try {
+
+            _canvas.SetActive(false);
+            _bodyTrackingConfigSO.SetInput(InputMode.Camera);
+            _camera.gameObject.SetActive(false);
+            _zedManager = Instantiate(_zedManager);
+            _zedManager.OnBodyTrackingInitialized += LoadNextScene;
+            Screen.SetResolution(ApplicationManager.SCREEN_RESOLUTION, ApplicationManager.SCREEN_RESOLUTION, true);
+        } catch (Exception e)
+        {
+            throw e;
+        }
+
+      
+
     }
     public void SetKeyboardInputMode()
     {
@@ -55,4 +67,6 @@ public class InputModeManager : MonoBehaviour
         _sceneHandler.LoadSceneAdditive(FIRST_SCENE_INDEX);
         Screen.SetResolution(ApplicationManager.SCREEN_RESOLUTION, ApplicationManager.SCREEN_RESOLUTION, true);
     }
+
+ 
 }
