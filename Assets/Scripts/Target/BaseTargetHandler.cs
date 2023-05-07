@@ -87,10 +87,21 @@ namespace Midbaryom.Core
             Transform targetsTransform = target.Transform;
             targetsTransform.SetParent(_targetHoldingLocation);
             var offsetPosition = target.EntityTagSO.HoldingOffset;
-            targetsTransform.localPosition = offsetPosition.PositionOffset;
+                                    targetsTransform.localPosition = offsetPosition.PositionOffset;
             targetsTransform.localRotation = offsetPosition.RotaionOffset;
-        } 
-      
+        }
+#if UNITY_EDITOR
+        [ContextMenu("Set offsetPosition")]
+        private void AssingOffsetPosition()
+        {
+            if (_holdingTarget == null)
+                return;
+
+            var offsetPosition = _holdingTarget.EntityTagSO.HoldingOffset;
+            offsetPosition.PositionOffset = _holdingTarget.Transform.localPosition;
+            offsetPosition.RotaionOffset = _holdingTarget.Transform.localRotation;
+        }
+#endif
     }
 
 }

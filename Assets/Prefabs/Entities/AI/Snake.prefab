@@ -12,6 +12,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8622872118734001607}
     - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._duration
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _animatorController._animator
       value: 
       objectReference: {fileID: 8572422958830789423}
@@ -32,6 +36,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect.fadeEase.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _shaderView._meshRenderers.Array.data[0]
       value: 
       objectReference: {fileID: 8521662373497210501}
@@ -39,6 +47,22 @@ PrefabInstance:
       propertyPath: _eatenEffect._meshRenderers.Array.data[0]
       value: 
       objectReference: {fileID: 8521662373497210501}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect.fadeEase.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect.fadeEase.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect.fadeEase.m_Curve.Array.data[1].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect.fadeEase.m_Curve.Array.data[1].outSlope
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1419693908867709460, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -218,12 +242,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 137256538446156630, guid: d65ef6c64c2e4d349ba0475515d794e7, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 137256538446156630, guid: d65ef6c64c2e4d349ba0475515d794e7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a85ed927e31d62d4a905f37b1eacb300, type: 2}
     - target: {fileID: 137256538446156630, guid: d65ef6c64c2e4d349ba0475515d794e7, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: a85ed927e31d62d4a905f37b1eacb300, type: 2}
+      objectReference: {fileID: 2100000, guid: 4e56f37549f149a4cb12de8de5fd045c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d65ef6c64c2e4d349ba0475515d794e7, type: 3}
 --- !u!4 &8622872118734001607 stripped

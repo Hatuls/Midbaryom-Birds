@@ -18,7 +18,7 @@ namespace Midbaryom.Core
         {
             get
             {
-                for (int i = 0; i < _tags.Length; i++)
+               for (int i = 0; i < _tags.Length; i++)
                     yield return _tags[i];
             }
         }
@@ -29,9 +29,30 @@ namespace Midbaryom.Core
     [System.Serializable]
     public class HoldingOffset
     {
-        public Vector3 PositionOffset;
+        [SerializeField]
+        private Vector3 _positionOffset;
+        public Vector3 PositionOffset
+        {
+            get
+            {
+                return _positionOffset;
+            }
+#if UNITY_EDITOR
+            set => _positionOffset = value;
+#endif
+        }
+
         [SerializeField]
         private Vector3 _rotationOffset;
-        public Quaternion RotaionOffset => Quaternion.Euler(_rotationOffset);
+        public Quaternion RotaionOffset
+        {
+            get
+            {
+                return Quaternion.Euler(_rotationOffset);
+            }
+#if UNITY_EDITOR
+            set => _rotationOffset = value.eulerAngles;
+#endif
+        }
     }
 }

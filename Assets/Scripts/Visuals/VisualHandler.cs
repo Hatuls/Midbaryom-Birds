@@ -9,6 +9,8 @@ namespace Midbaryom.Visual
     {
         IAnimatorController AnimatorController { get; }
         Transform VisualTransform { get; }
+        ShaderView ShaderView { get; }
+
         void Init(IEntity entity);
     }
 
@@ -25,7 +27,7 @@ namespace Midbaryom.Visual
         [SerializeField]
         private ShaderView _shaderView;
         public IAnimatorController AnimatorController => _animatorController;
-
+        public ShaderView ShaderView => _shaderView;
         public Transform VisualTransform { get => _visualTransform; }
 
         public void Init(IEntity entity)
@@ -52,10 +54,10 @@ namespace Midbaryom.Visual
         {
             if (!_isPlayer)
             {
-            _shaderView.Dispose();
-            _eatenEffect.Dispose();
+                _shaderView.Dispose();
+                _eatenEffect.Dispose();
             }
-    
+
         }
 
 #if UNITY_EDITOR
@@ -82,6 +84,7 @@ namespace Midbaryom.Visual
         public bool IgnoreResetEffect { get; set; } = false;
 
         private List<Material> _glowingShadersMaterial = new List<Material>();
+        public IReadOnlyList<Material> GlowingShadersMaterial => _glowingShadersMaterial;
         public void Init()
         {
             for (int i = 0; i < _meshRenderers.Count; i++)
@@ -141,13 +144,15 @@ namespace Midbaryom.Visual
     [Serializable]
     public class EatenScaleEffect : IDisposable
     {
+        public const string SHADER_TRANSPARENCY_REFERENCE = "Vector1_673f696a3fe8409e89c886e99152aa66";
+
         [SerializeField]
         private Entity _entity;
         [SerializeField]
         private TargetedBehaviour _targetBehaviour;
         [SerializeField]
-        private AnimationCurve _scaleEase;
-               [SerializeField]
+        private AnimationCurve fadeEase;
+        [SerializeField]
         private float _duration = 2f;
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -156,41 +161,68 @@ namespace Midbaryom.Visual
         public void Dispose()
         {
             _cancellationTokenSource.Cancel();
-            _targetBehaviour.OnEaten -= ActivateRedEffect;
+            _targetBehaviour.OnEaten -= ActivateEatenEffect;
             _cancellationTokenSource.Dispose();
+
         }
 
         public void Init()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            CancellationToken token = _cancellationTokenSource.Token;
-            _targetBehaviour.OnEaten += ActivateRedEffect;
+            _cancellationToken = _cancellationTokenSource.Token;
+            _targetBehaviour.OnEaten += ActivateEatenEffect;
         }
         public void Reset()
         {
-                       _entity.Transform.localScale = Vector3.one;
+            foreach (var material in _entity.VisualHandler.ShaderView.GlowingShadersMaterial)
+            {
+                material.SetFloat(SHADER_TRANSPARENCY_REFERENCE, 1);
+            }
             _isFlag = false;
         }
-        private async void ActivateRedEffect()
+        private async void ActivateEatenEffect()
         {
-                      if (_isFlag)
+            if (_isFlag)
                 return;
             _isFlag = true;
-  
+
             float _counter = 0;
-            Transform transform = _entity.Transform;
-            Vector3 scale = transform.localScale; 
             do
             {
                 await System.Threading.Tasks.Task.Yield();
-                if (_cancellationToken.IsCancellationRequested || transform == null)
+                if (_cancellationToken.IsCancellationRequested)
                     return;
 
                 _counter += Time.deltaTime;
-                transform.localScale = Vector3.Lerp(scale, Vector3.zero, _scaleEase.Evaluate( _counter / _duration));
-
+                // transform.localScale = Vector3.Lerp(scale, Vector3.zero, );
+                foreach (var material in _entity.VisualHandler.ShaderView.GlowingShadersMaterial)
+                {
+                    material.SetFloat(SHADER_TRANSPARENCY_REFERENCE, fadeEase.Evaluate(1 - (_counter / _duration)));
+                }
+            
             } while (_counter <= _duration);
 
         }
+        //private async void ActivateRedEffect()
+        //{
+        //              if (_isFlag)
+        //        return;
+        //    _isFlag = true;
+
+        //    float _counter = 0;
+        //    Transform transform = _entity.Transform;
+        //    Vector3 scale = transform.localScale; 
+        //    do
+        //    {
+        //        await System.Threading.Tasks.Task.Yield();
+        //        if (_cancellationToken.IsCancellationRequested || transform == null)
+        //            return;
+
+        //        _counter += Time.deltaTime;
+        //        transform.localScale = Vector3.Lerp(scale, Vector3.zero, _scaleEase.Evaluate( _counter / _duration));
+
+        //    } while (_counter <= _duration);
+
+        //}
     }
 }

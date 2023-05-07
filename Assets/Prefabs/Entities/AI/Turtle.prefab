@@ -12,6 +12,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2341828580051746092}
     - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect._duration
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _animatorController._animator
       value: 
       objectReference: {fileID: 2341828580042055084}
@@ -32,6 +36,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect.fadeEase.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: _shaderView._meshRenderers.Array.data[0]
       value: 
       objectReference: {fileID: 2341828580037873346}
@@ -47,6 +55,22 @@ PrefabInstance:
       propertyPath: _eatenEffect._meshRenderers.Array.data[1]
       value: 
       objectReference: {fileID: 2341828580037667330}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect.fadeEase.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect.fadeEase.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect.fadeEase.m_Curve.Array.data[1].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 13430798890228883, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
+      propertyPath: _eatenEffect.fadeEase.m_Curve.Array.data[1].outSlope
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2695896218941205519, guid: f78cb82caaa744e40833742b8dedd53c, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -225,16 +249,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 13729260, guid: fd0a8f44aff80485488ee71c2bd90dfb, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 13729260, guid: fd0a8f44aff80485488ee71c2bd90dfb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a64f4b8695b75ae44b1506cab2c53b1e, type: 2}
     - target: {fileID: 13729260, guid: fd0a8f44aff80485488ee71c2bd90dfb, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: a64f4b8695b75ae44b1506cab2c53b1e, type: 2}
     - target: {fileID: 13769004, guid: fd0a8f44aff80485488ee71c2bd90dfb, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 13769004, guid: fd0a8f44aff80485488ee71c2bd90dfb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a64f4b8695b75ae44b1506cab2c53b1e, type: 2}
     - target: {fileID: 13769004, guid: fd0a8f44aff80485488ee71c2bd90dfb, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
