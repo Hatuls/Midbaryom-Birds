@@ -21,6 +21,7 @@ namespace Midbaryom.Inputs
         private Vector3 _previousInput;
         private float _counter;
         public bool LockInputs { get; set; }
+        public bool CanCancelHunt { get; set; }
         public PlayerController(Player player, IEntity entity, BodyTrackingConfigSO bodyTrackingConfigSO)
         {
             _player = player;
@@ -52,6 +53,7 @@ namespace Midbaryom.Inputs
 
         private void EndHunt(InputAction.CallbackContext obj)
         {
+            if(CanCancelHunt)
             _player.StateMachine.ChangeState(StateType.Recover);
         }
 

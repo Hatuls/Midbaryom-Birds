@@ -35,6 +35,7 @@ namespace Midbaryom.Core.Tutorial
             void FadeIn()
             {
                 _player.PlayerController.ResetToDefault();
+                _player.PlayerController.CanCancelHunt = false ;
                 _player.Entity.MovementHandler.StopMovement = false;
 
                 StartCoroutine(EffectCoroutine(_fadeIn));
@@ -75,7 +76,7 @@ namespace Midbaryom.Core.Tutorial
             _player.PlayerController.ResetToDefault();
 
             TaskCompleted();
-          
+            _player.PlayerController.CanCancelHunt = true;
             _languageTMPRO.gameObject.SetActive(_isActive);
 
         }
