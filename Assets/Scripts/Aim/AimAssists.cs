@@ -24,7 +24,7 @@ namespace Midbaryom.Core
         private int _layerMaskIndex;
         [SerializeField, Range(0, 100f)]
         private float _radius;
-        [SerializeField, Range(0, 200f)]
+        [SerializeField, Range(0, 300f)]
         private float _rayDistance;
 
 

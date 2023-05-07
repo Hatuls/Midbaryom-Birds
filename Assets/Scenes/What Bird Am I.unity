@@ -376,7 +376,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eagleTypeSOs:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a9e68ba04608caa469a231a41d1e2577, type: 2}
+  - {fileID: 11400000, guid: cbd096e019f621549812f8b99f7349db, type: 2}
+  - {fileID: 11400000, guid: 2b10d5455e4f18c4e98aaf1126493e48, type: 2}
+  - {fileID: 11400000, guid: 3c77a783476aab247b7266bf54e1bde1, type: 2}
+  - {fileID: 11400000, guid: edbd44b755b2f804c9210a5fa1fbdd3d, type: 2}
 --- !u!4 &185571785
 Transform:
   m_ObjectHideFlags: 0
