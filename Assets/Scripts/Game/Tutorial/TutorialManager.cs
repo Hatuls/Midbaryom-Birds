@@ -17,12 +17,18 @@ namespace Midbaryom.Core.Tutorial
         private BaseTask[] _baseTutorialTasks;
         private int _currentTask;
         private IPlayer _player;
-
+        [SerializeField]
+        private bool _skipTutorial;
         [SerializeField]
         private LanguageTMPRO _languageTMPRO;
 
         private IEnumerator Start()
         {
+            if (_skipTutorial)
+            {
+                CompleteTutorial();
+                yield break;
+            }
             InitTutorial();
             yield return null;
             _player = Spawner.Instance.Player;
@@ -53,13 +59,18 @@ namespace Midbaryom.Core.Tutorial
                 _baseTutorialTasks[_currentTask].TaskStarted();
             else
             {
-                if (PlayerScore.Instance != null)
-                    PlayerScore.Instance.ResetScores();
-                OnTutorialCompleted?.Invoke();
-                OnTutorialCompeleted?.Invoke();
-                _languageTMPRO.gameObject.SetActive(false);
-                Debug.Log("Complete!");
+                CompleteTutorial();
             }
+        }
+
+        private void CompleteTutorial()
+        {
+            if (PlayerScore.Instance != null)
+                PlayerScore.Instance.ResetScores();
+            OnTutorialCompleted?.Invoke();
+            OnTutorialCompeleted?.Invoke();
+            _languageTMPRO.gameObject.SetActive(false);
+            Debug.Log("Complete!");
         }
     }
 

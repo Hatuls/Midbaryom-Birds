@@ -30,6 +30,15 @@ namespace Midbaryom.Core
         private IPlayer _player;
         private UnityEngine.Camera _camera;
         private bool _startSpawning;
+        [SerializeField]
+        private AimAssists _aimAssists;
+
+
+        [SerializeField]
+        private float _maxViewPort=1f;
+        [SerializeField]
+        private float _minViewPort =0f;
+
         public IReadOnlyList<IEntity> AllEntities => _activeEntities;
 
         public IEntity PlayerEntity
@@ -90,13 +99,15 @@ namespace Midbaryom.Core
         private void RePositionMob()
         {
             List<IEntity> tooFarEntities = new List<IEntity>();
+                Vector3 playerPosition = _aimAssists.PointOnWorld;
+                EntityTagSO entityTagSO = _player.Entity.EntityTagSO;
             for (int i = 0; i < AllEntities.Count; i++)
             {
-                Vector3 playerPosition = _playerEntity.CurrentPosition;
-                Vector3 currentPosition = AllEntities[i].CurrentPosition;
+                IEntity entity = AllEntities[i];
+                Vector3 currentPosition = entity.CurrentPosition;
 
-                if (Vector3.Distance(currentPosition, playerPosition) > _spawnConfig.ReturnRadius)
-                    tooFarEntities.Add(AllEntities[i]);
+                if (Vector3.Distance(currentPosition, playerPosition) > _spawnConfig.ReturnRadius && entity.EntityTagSO != entityTagSO)
+                    tooFarEntities.Add(entity);
             }
 
             if (tooFarEntities.Count > 0)
@@ -156,7 +167,8 @@ namespace Midbaryom.Core
         }
         private Vector3 GenerateSpawnLocation(float yPos,float radius)
         {
-            Vector3 playerPosition = _playerEntity.Transform.position;
+           // Vector3 playerPosition = _playerEntity.Transform.position;
+            Vector3 playerPosition = _aimAssists.PointOnWorld;
             Vector3 destination = playerPosition;
             destination.y = yPos;
             do
@@ -208,7 +220,7 @@ namespace Midbaryom.Core
             }
 
             bool Is01(float a)
-            => a > 0 && a < 1;
+            => a > _minViewPort && a < _maxViewPort;
 
             float GetRandomPoint(float playerAxisPoint)
             {

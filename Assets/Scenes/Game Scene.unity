@@ -394,6 +394,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 70850972}
   m_CullTransparentMesh: 1
+--- !u!114 &76478760 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5787516406540862062, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
+  m_PrefabInstance: {fileID: 419488985}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bd50fe4a129cc4a88040a234baa891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &91619945 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1893968921528149257, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
@@ -794,6 +805,7 @@ MonoBehaviour:
   _text: {fileID: 0}
   _languageType: 0
   _textIndex: 22
+  UseCurrentSelectedLanguage: 0
 --- !u!114 &205196031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2330,6 +2342,7 @@ MonoBehaviour:
   - {fileID: 1900399314}
   - {fileID: 702654298}
   - {fileID: 205196031}
+  _skipTutorial: 1
   _languageTMPRO: {fileID: 1549313264}
 --- !u!114 &951776888 stripped
 MonoBehaviour:
@@ -4571,6 +4584,18 @@ PrefabInstance:
       propertyPath: _playerTag
       value: 
       objectReference: {fileID: 11400000, guid: 1ab0b2dd8ba1a9e42bf89271dd138730, type: 2}
+    - target: {fileID: 8635841005145571776, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
+      propertyPath: _aimAssists
+      value: 
+      objectReference: {fileID: 76478760}
+    - target: {fileID: 8635841005145571776, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
+      propertyPath: _maxViewPort
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635841005145571776, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
+      propertyPath: _minViewPort
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8635841005145571776, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
       propertyPath: _spawningHeightOffset
       value: 50

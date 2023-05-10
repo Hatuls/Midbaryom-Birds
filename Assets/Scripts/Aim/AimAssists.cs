@@ -38,7 +38,7 @@ namespace Midbaryom.Core
         [SerializeField]
         private TagSO[] _targetingTags;
 
-
+        private Vector3 _pointOnWorld;
         private bool _lockTarget;
         private Vector3 _middleScreenPoint;
         public bool HasTarget => Target != null;
@@ -50,6 +50,8 @@ namespace Midbaryom.Core
         public IReadOnlyList<IEntity> AllTargets { get => _allTargets; }
         public IWarningTargets WarningTargets { get => _warningTargets; }
         public Vector3 FacingDirection => (ScreenToWorldPoint() - transform.position).normalized;
+
+        public Vector3 PointOnWorld { get => _pointOnWorld; }
 
         private void Start()
         {
@@ -64,7 +66,7 @@ namespace Midbaryom.Core
             Scan(FacingDirection);
         }
 
-        private Vector3 ScreenToWorldPoint()
+        public Vector3 ScreenToWorldPoint()
         => _camera.ViewportToWorldPoint(Quaternion.Euler(_offset) * _middleScreenPoint);
 
 
@@ -72,7 +74,9 @@ namespace Midbaryom.Core
         {
             if (ShootRaycast(facingDirection, out RaycastHit raycastHit))
             {
-                IEntity closestTarget = CheckDistance(raycastHit.point);
+                _pointOnWorld = raycastHit.point;
+                IEntity closestTarget = CheckDistance(_pointOnWorld);
+
                 if (closestTarget != null)
                 { 
                     AssignTarget(closestTarget);

@@ -90,7 +90,14 @@ namespace Midbaryom.AI
  
         private void OnDrawGizmosSelected()
         {
+
+
+
             Vector3 CurrentPos = transform.position;
+
+            Gizmos.color = Color.black;
+            Gizmos.DrawSphere(CurrentPos, 5f);
+
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(CurrentPos, AIBehaviourSO.TargetDestinationRadius);
             if (_moveState != null)
