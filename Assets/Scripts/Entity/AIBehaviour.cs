@@ -93,7 +93,7 @@ namespace Midbaryom.AI
 
 #if UNITY_EDITOR
         public bool DrawGizmosOnAnimal;
-#endif
+
 
         private void OnDrawGizmosSelected()
         {
@@ -117,7 +117,7 @@ namespace Midbaryom.AI
                 Gizmos.DrawSphere(MoveToPosition, 2f);
             }
         }
-
+#endif
         private void UpdateAgentSpeed(float amount)
         {
             _agent.speed = amount;

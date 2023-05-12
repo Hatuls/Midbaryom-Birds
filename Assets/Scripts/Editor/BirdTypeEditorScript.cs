@@ -34,12 +34,12 @@ public class BirdTypeEditorScript
         //"Snake","Reptiles","Mouse","Rabbit","Bird","Insects","Dead Target"
         int[,] diets = new int[,]
         {
+             { 0, 0, 0, 0, 0, 0, 0 },
              { 60, 30, 10, 0, 0, 0, 0 },
              { 10, 0, 0, 60, 30, 0, 0 },
              { 30, 60, 10, 0, 0, 0, 0 },
              { 0, 10, 30, 0, 0, 60, 0 },
              { 0, 0, 0, 0, 0, 0, 100 },
-             { 0, 0, 0, 0, 0, 0, 0 },
             
         };
 
@@ -57,40 +57,40 @@ public class BirdTypeEditorScript
 
     private static List<EagleTypeSO> CreateConfigs()
     {
+        // דרור
         //חיוואי נחשים,
         //עיט זהוב,
         //עקב עיטי,
         //בז מצוי,
         //נשר מקראי
-        // דרור
         string[] configsNames = new string[]
         {
+            "House sparrow",
             "Short-toed snake eagle",
             "Golden eagle",
             "Long-legged buzzard",
             "Common kestrel",
             "Eurasian griffon vulture",
-            "House sparrow",
         };
 
         int[] InfoIndexes = new int[]
         {
+            24,
             15,
             16,
             17,
             14,
             13,
-            24,
         };
 
         int[] NameIndexes = new int[]
          {
+            23,
             7,
             8,
             9,
             11,
             10,
-            23,
          };
 
 
