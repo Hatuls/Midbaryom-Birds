@@ -24,11 +24,13 @@ namespace Midbaryom.Core.Tutorial
 
         private IEnumerator Start()
         {
+#if UNITY_EDITOR
             if (_skipTutorial)
             {
                 CompleteTutorial();
                 yield break;
             }
+#endif
             InitTutorial();
             yield return null;
             _player = Spawner.Instance.Player;
