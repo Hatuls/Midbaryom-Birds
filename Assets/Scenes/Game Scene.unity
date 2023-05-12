@@ -1055,7 +1055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2571807672142106563, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -78.26
+      value: -89.7
       objectReference: {fileID: 0}
     - target: {fileID: 2571807672142106563, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1063,7 +1063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2571807672142106563, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -125.91
+      value: -140.9
       objectReference: {fileID: 0}
     - target: {fileID: 2571807672142106563, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1095,7 +1095,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5787516406540862062, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
       propertyPath: _radius
-      value: 35
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787516406540862062, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
+      propertyPath: _offset.y
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 5787516406540862062, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
       propertyPath: _rayDistance
@@ -1752,7 +1756,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7675074342292373217, guid: 45c65bedcf0050b478282de13b9a0fe2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.5
+      value: -50.1
       objectReference: {fileID: 0}
     - target: {fileID: 7675074342292373217, guid: 45c65bedcf0050b478282de13b9a0fe2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1760,7 +1764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7675074342292373217, guid: 45c65bedcf0050b478282de13b9a0fe2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.6
+      value: -33.8
       objectReference: {fileID: 0}
     - target: {fileID: 7675074342292373217, guid: 45c65bedcf0050b478282de13b9a0fe2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4019,6 +4023,8 @@ MonoBehaviour:
   _innerEyeFadeInDuration: 2
   _innerBirdEye: {fileID: 137911036}
   _innerCircle: {fileID: 1670587782}
+  _spawner: {fileID: 951776888}
+  _entityTagSO: {fileID: 11400000, guid: 8ac05556dd904cd429a39f3eca443a89, type: 2}
 --- !u!114 &1900399314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4598,7 +4604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8635841005145571776, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}
       propertyPath: _spawningHeightOffset
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7292cd5c3b029f84ca8f66d4b1f8283c, type: 3}

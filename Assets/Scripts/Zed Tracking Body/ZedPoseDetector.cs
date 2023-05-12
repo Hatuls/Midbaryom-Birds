@@ -28,7 +28,7 @@ public class ZedPoseDetector : MonoBehaviour
     [SerializeField]
     private bool _drawSkeleton;
 
-
+    private bool _gameStarted;
 
     private void Awake()
     {
@@ -48,15 +48,17 @@ public class ZedPoseDetector : MonoBehaviour
 
     private IEnumerator Start()
     {
-
+        _gameStarted = false;
         yield return null;
+        yield return null;
+        _gameStarted = true;
 
         InitPose();
     }
 
     private void Update()
     {
-        if (_zEDBodyTrackingManager == null)
+        if (_zEDBodyTrackingManager == null || !_gameStarted)
             return;
 
         if (IsBodyTrackingWorking())
@@ -189,12 +191,13 @@ public class TurningLeftPosture : IBodyTrackAnalyzer
         bool leftHandPose = leftAngle < _leftArmAngle;
         bool rightHandPose = rightAngle < _rightArmAngle;
         bool handAbove = leftShoulder.y < leftHand.y && rightShoulder.y >= rightHand.y;
-#if UNITY_EDITOR
-        Debug.Log($"{typeof(TurningLeftPosture).Name}  RESULT: { leftHandPose && rightHandPose}\n" +
-                $"Right arm angle: {rightAngle}. Need to be under {_rightArmAngle}. Result = {rightHandPose}\n" +
-                $"Left arm angle: " + leftAngle + $". Need to be under {_leftArmAngle}.Result = {leftHandPose}");
-        // float angle = Vector3.Angle(rightHandToElbow, rightElbowToShoulder);
-#endif
+//#if UNITY_EDITOR
+//        Debug.Log($"{typeof(TurningLeftPosture).Name}  RESULT: { leftHandPose && rightHandPose && handAbove}\n" +
+//                $"Right arm angle: {rightAngle}. Need to be under {_rightArmAngle}. Result = {rightHandPose}\n" +
+//                $"Left arm angle: " + leftAngle + $". Need to be under {_leftArmAngle}.Result = {leftHandPose}\n" +
+//        $"Left arm need to be under left shoulder - shoulder ({leftShoulder.y}), hand ({leftHand.y}), RESULT - {leftShoulder.y < leftHand.y}\n" +
+//        $"Right arm need to be above right shoulder - shoulder ({rightShoulder.y}), hand ({rightHand.y}), RESULT - {rightShoulder.y < rightHand.y}");
+//#endif
         if (leftHandPose && rightHandPose && handAbove)
             OnPostureDetected?.Invoke();
         return leftHandPose && rightHandPose;
@@ -218,14 +221,15 @@ public class TurningLeftPosture : IBodyTrackAnalyzer
 
         bool leftHandPose = leftAngle < _leftArmAngle;
         bool rightHandPose = rightAngle < _rightArmAngle;
-
+        bool handAbove = leftShoulder.y > leftHand.y && rightShoulder.y < rightHand.y;
 #if UNITY_EDITOR
-        Debug.Log($"{typeof(TurningLeftPosture).Name}  RESULT: { leftHandPose && rightHandPose}\n" +
-            $"Right arm angle: {rightAngle}. Need to be above {_rightArmAngle}. Result = {rightHandPose}\n" +
-            $"Left arm angle: " + leftAngle + $". Need to be under {_leftArmAngle}.Result = {leftHandPose}");
-        // float angle = Vector3.Angle(rightHandToElbow, rightElbowToShoulder);
+        Debug.Log($"{typeof(TurningLeftPosture).Name}  RESULT: { leftHandPose && rightHandPose && handAbove}\n" +
+                $"Right arm angle: {rightAngle}. Need to be under {_rightArmAngle}. Result = {rightHandPose}\n" +
+                $"Left arm angle: " + leftAngle + $". Need to be under {_leftArmAngle}.Result = {leftHandPose}\n" +
+        $"Left arm need to be under left shoulder - shoulder ({leftShoulder.y}), hand ({leftHand.y}), RESULT - {leftShoulder.y > leftHand.y}\n" +
+        $"Right arm need to be above right shoulder - shoulder ({rightShoulder.y}), hand ({rightHand.y}), RESULT - {rightShoulder.y < rightHand.y}");
 #endif
-        Gizmos.color = leftHandPose && rightHandPose ? Color.green : Color.red;
+        Gizmos.color = leftHandPose && handAbove && rightHandPose ? Color.green : Color.red;
         Gizmos.DrawLine(leftHand, leftShoulder);
 
 
@@ -275,11 +279,12 @@ public class TurningRightPosture : IBodyTrackAnalyzer
     public bool CheckPosture(SkeletonHandler skeleton)
     {
         //receiving the points from the skeleton
-        Vector3 leftHand = skeleton.currentJoints[LEFT_HAND];
-        Vector3 leftShoulder = skeleton.currentJoints[LEFT_SHOULDER];
+        Vector3[] skeletonJoints = skeleton.currentJoints;
+        Vector3 leftHand = skeletonJoints[LEFT_HAND];
+        Vector3 leftShoulder = skeletonJoints[LEFT_SHOULDER];
 
-        Vector3 rightHand = skeleton.currentJoints[RIGHT_HAND];
-        Vector3 rightShoulder = skeleton.currentJoints[RIGHT_SHOULDER];
+        Vector3 rightHand = skeletonJoints[RIGHT_HAND];
+        Vector3 rightShoulder = skeletonJoints[RIGHT_SHOULDER];
 
         // creating the vector from the shoulder to the hand
         Vector3 leftShoulderToHand = leftHand - leftShoulder;
@@ -294,13 +299,15 @@ public class TurningRightPosture : IBodyTrackAnalyzer
         bool leftHandPose = leftAngle > _leftArmAngle;
         // right hand is under a certain angle
         bool rightHandPose = rightAngle > _rightArmAngle;
-        bool handAbove = leftShoulder.y > leftHand.y && rightShoulder.y <= rightHand.y;
-#if UNITY_EDITOR
-        Debug.Log($"{typeof(TurningRightPosture).Name} RESULT: { leftHandPose && rightHandPose}\n" +
-      $"Right arm angle: {rightAngle}. Need to be above {_rightArmAngle}. Result = {rightHandPose}\n" +
-      $"Left arm angle: " + leftAngle + $". Need to be above {_leftArmAngle}.Result = {leftHandPose}");
-        // float angle = Vector3.Angle(rightHandToElbow, rightElbowToShoulder);
-#endif
+        bool handAbove = leftShoulder.y < leftHand.y && rightShoulder.y > rightHand.y;
+//#if UNITY_EDITOR
+//        Debug.Log($"{typeof(TurningRightPosture).Name} RESULT: { leftHandPose && rightHandPose && handAbove}\n" +
+//      $"Right arm angle: {rightAngle}. Need to be above {_rightArmAngle}. Result = {rightHandPose}\n" +
+//      $"Left arm angle: " + leftAngle + $". Need to be above {_leftArmAngle}.Result = {leftHandPose}\n" +
+//      $"Left arm need to be above left shoulder - shoulder ({leftShoulder.y}), hand ({leftHand.y}), RESULT - {leftShoulder.y < leftHand.y}\n" +
+//      $"Right arm need to be under right shoulder - shoulder ({rightShoulder.y}), hand ({rightHand.y}), RESULT - {rightShoulder.y > rightHand.y}");
+//        // float angle = Vector3.Angle(rightHandToElbow, rightElbowToShoulder);
+//#endif
         // posture is correct!
         if (leftHandPose && rightHandPose && handAbove)
             OnPostureDetected?.Invoke();
@@ -309,11 +316,12 @@ public class TurningRightPosture : IBodyTrackAnalyzer
 
     public void DrawGizmos(SkeletonHandler skeleton)
     {
-        Vector3 leftHand = skeleton.currentJoints[LEFT_HAND];
-        Vector3 leftShoulder = skeleton.currentJoints[LEFT_SHOULDER];
+        Vector3[] skeletonJoints = skeleton.currentJoints;
+        Vector3 leftHand = skeletonJoints[LEFT_HAND];
+        Vector3 leftShoulder = skeletonJoints[LEFT_SHOULDER];
 
-        Vector3 rightHand = skeleton.currentJoints[RIGHT_HAND];
-        Vector3 rightShoulder = skeleton.currentJoints[RIGHT_SHOULDER];
+        Vector3 rightHand = skeletonJoints[RIGHT_HAND];
+        Vector3 rightShoulder = skeletonJoints[RIGHT_SHOULDER];
 
         Vector3 leftShoulderToHand = leftHand - leftShoulder;
         Vector3 rightShoulderToHand = rightHand - rightShoulder;
@@ -323,12 +331,16 @@ public class TurningRightPosture : IBodyTrackAnalyzer
 
         bool leftHandPose = leftAngle > _leftArmAngle;
         bool rightHandPose = rightAngle > _rightArmAngle;
+        bool handAbove = leftShoulder.y > leftHand.y && rightShoulder.y <= rightHand.y;
+
 #if UNITY_EDITOR
-        Debug.Log($"{typeof(TurningRightPosture).Name}- RESULT: { leftHandPose && rightHandPose}\n" +
-      $"Right arm angle: {rightAngle}. Need to be above {_rightArmAngle}. Result = {rightHandPose}\n" +
-      $"Left arm angle: " + leftAngle + $". Need to be above {_leftArmAngle}.Result = {leftHandPose}");
+        Debug.Log($"{typeof(TurningRightPosture).Name} RESULT: { leftHandPose && rightHandPose && handAbove}\n" +
+$"Right arm angle: {rightAngle}. Need to be above {_rightArmAngle}. Result = {rightHandPose}\n" +
+$"Left arm angle: " + leftAngle + $". Need to be above {_leftArmAngle}.Result = {leftHandPose}\n" +
+$"Left arm need to be above left shoulder - shoulder ({leftShoulder.y}), hand ({leftHand.y}), RESULT - {leftShoulder.y < leftHand.y}\n" +
+$"Right arm need to be under right shoulder - shoulder ({rightShoulder.y}), hand ({rightHand.y}), RESULT - {rightShoulder.y > rightHand.y}");
 #endif
-        Gizmos.color = leftHandPose && rightHandPose ? Color.green : Color.red;
+        Gizmos.color = leftHandPose && handAbove && rightHandPose ? Color.green : Color.red;
         Gizmos.DrawLine(leftHand, leftShoulder);
         Gizmos.DrawLine(rightHand, rightShoulder);
     }
@@ -351,6 +363,7 @@ public class HuntingPosture : IBodyTrackAnalyzer
 {
     public event Action OnPostureDetected;
     public const int LEFT_HAND = (int)sl.BODY_34_PARTS.LEFT_HAND;
+    public const int LEFT_ELBOW = (int)sl.BODY_34_PARTS.LEFT_ELBOW;
     public const int LEFT_SHOULDER = (int)sl.BODY_34_PARTS.LEFT_SHOULDER;
 
     public const int RIGHT_HAND = (int)sl.BODY_34_PARTS.RIGHT_HAND;
@@ -368,36 +381,73 @@ public class HuntingPosture : IBodyTrackAnalyzer
 
     public bool CheckPosture(SkeletonHandler skeleton)
     {
-        Vector3 leftHand = skeleton.currentJoints[LEFT_HAND];
-        Vector3 leftShoulder = skeleton.currentJoints[LEFT_SHOULDER];
+        Vector3[] skeletonJoints = skeleton.currentJoints;
 
-        Vector3 rightHand = skeleton.currentJoints[RIGHT_HAND];
-        Vector3 rightShoulder = skeleton.currentJoints[RIGHT_SHOULDER];
+        Vector3 leftHand = skeletonJoints[LEFT_HAND];
+        Vector3 leftShoulder = skeletonJoints[LEFT_SHOULDER];
 
-        float leftDistance = Vector3.Distance(leftHand, leftShoulder);
-        float rightDistance = Vector3.Distance(rightHand, rightShoulder);
 
-        bool isCorrectPosture = leftDistance < _distance && rightDistance < _distance;
-        if (isCorrectPosture)
-            OnPostureDetected?.Invoke();
+        Vector3 rightHand = skeletonJoints[RIGHT_HAND];
+        Vector3 rightShoulder = skeletonJoints[RIGHT_SHOULDER];
+
+        float leftXDistance = Mathf.Abs(leftHand.x - leftShoulder.x);
+        float rightXDistance = Mathf.Abs(rightHand.x - rightShoulder.x);
+
+        float armLength = Vector3.Distance(leftShoulder, skeletonJoints[LEFT_ELBOW]); // calculating the length of the arm
+        float left = Vector3.Distance(leftHand, leftShoulder);
+        float right = Vector3.Distance(rightHand, rightShoulder);
+        bool isHandsCloseToShoulder= left <= armLength && right <= armLength;
+
+
+
+        bool isCorrectPosture = IsHandsCloseToShoulderOnXAxis(leftXDistance, rightXDistance) && isHandsCloseToShoulder;
+#if UNITY_EDITOR
+        Debug.Log($"{typeof(HuntingPosture).Name}- RESULT: {isCorrectPosture}\n" +
+$"Distance between left hand and left Shoulder is {left} need to be under {armLength}\nDistance Between right Hand and right shoulder is {right} need to be under {armLength}\n" +
+$"Left Hand X position ({leftHand.x}) needs to be under {_distance} distance, Current value - {leftXDistance}, Result - { leftXDistance <= _distance }\n" +
+$"Right Hand X position ({rightHand.x}) needs to be under {_distance} distance, Current value - {rightXDistance}, Result - { rightXDistance <= _distance }");
+#endif
 
         return isCorrectPosture;
+  
+        bool IsHandsCloseToShoulderOnXAxis(float leftDistance, float rightDistance)
+        {
+            return leftDistance <= _distance && rightDistance <= _distance;
+        }
     }
 
     public void DrawGizmos(SkeletonHandler skeleton)
     {
-        Vector3 leftHand = skeleton.currentJoints[LEFT_HAND];
-        Vector3 leftShoulder = skeleton.currentJoints[LEFT_SHOULDER];
+        Vector3[] skeletonJoints = skeleton.currentJoints;
 
-        Vector3 rightHand = skeleton.currentJoints[RIGHT_HAND];
-        Vector3 rightShoulder = skeleton.currentJoints[RIGHT_SHOULDER];
+        Vector3 leftHand = skeletonJoints[LEFT_HAND];
+        Vector3 leftShoulder = skeletonJoints[LEFT_SHOULDER];
 
-        float leftDistance = Vector3.Distance(leftHand, leftShoulder);
-        float rightDistance = Vector3.Distance(rightHand, rightShoulder);
-        bool isCorrectPosture = leftDistance < _distance && rightDistance < _distance;
+
+        Vector3 rightHand = skeletonJoints[RIGHT_HAND];
+        Vector3 rightShoulder = skeletonJoints[RIGHT_SHOULDER];
+
+        float leftXDistance = Mathf.Abs(leftHand.x - leftShoulder.x);
+        float rightXDistance = Mathf.Abs(rightHand.x - rightShoulder.x);
+        bool isXClose = leftXDistance <= _distance && rightXDistance <= _distance;
+
+        float armLength = Vector3.Distance(leftHand, skeletonJoints[LEFT_ELBOW]); // calculating the length of the arm
+        float left = Vector3.Distance(leftHand, leftShoulder);
+        float right = Vector3.Distance(rightHand, rightShoulder);
+        bool isHandsCloseToShoulder = left <= armLength && right <= armLength;
+
+
+        bool isCorrectPosture = isXClose && isHandsCloseToShoulder;
+        //if (isCorrectPosture)
+        //    OnPostureDetected?.Invoke();
+
+
+
 #if UNITY_EDITOR
         Debug.Log($"{typeof(HuntingPosture).Name}- RESULT: {isCorrectPosture}\n" +
-$"Distance between left hand and left Shoulder is {leftDistance} need to be under {_distance}\nDistance Between right Hand and right shoulder is {rightDistance} need to be under {_distance}");
+$"Distance between left hand and left Shoulder is {left} need to be under {armLength}\nDistance Between right Hand and right shoulder is {right} need to be under {armLength}\n" +
+$"Left Hand X position ({leftHand.x}) needs to be under {_distance} distance, Current value - {leftXDistance}, Result - { leftXDistance <= _distance }\n" +
+$"Right Hand X position ({rightHand.x}) needs to be under {_distance} distance, Current value - {rightXDistance}, Result - { rightXDistance <= _distance }");
 #endif
         Gizmos.color = (isCorrectPosture) ? Color.green : Color.red;
         Gizmos.DrawLine(leftHand, leftShoulder);

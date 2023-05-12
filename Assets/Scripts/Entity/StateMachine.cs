@@ -98,14 +98,14 @@ namespace Midbaryom.Core
 
         private readonly ILocomotion _movementHandler;
         private readonly IPlayer _player;
-        private readonly IStat _diveSpeed, _movementSpeed;
+        private readonly IStat _diveXZSpeed, _movementSpeed;
         private float _rotatingAngle = .05f;
         private bool _isPlayingAnimation;
         public override StateType StateType => StateType.Dive;
         public PlayerDiveState(IPlayer player, IStat speed) : base(player.Entity)
         {
             _player = player;
-            _diveSpeed = speed;
+            _diveXZSpeed = speed;
             
             _movementSpeed = _entity.StatHandler[StatType.MovementSpeed];
             _movementHandler = _entity.MovementHandler;
@@ -113,10 +113,10 @@ namespace Midbaryom.Core
 
         public override void OnStateEnter()
         {
+            _movementSpeed.Value += _diveXZSpeed.Value;
             _player.TargetHandler.LockAtTarget();
             _player.CameraManager.ChangeState(CameraState.FaceTowardsEnemy);
             _entity.HeightHandler.ChangeState(HeightType.Animal);
-            _movementSpeed.Value += _diveSpeed.Value;
             _isPlayingAnimation = false;
             _movementHandler.StopMovement = true;
             _player.PlayerController.LockInputs = true;
@@ -125,7 +125,7 @@ namespace Midbaryom.Core
 
         public override void OnStateExit()
         {
-            _movementSpeed.Value -= _diveSpeed.Value;
+            _movementSpeed.Value -= _diveXZSpeed.Value;
           //  _entity.Rotator.StopRotation = false;
             _movementHandler.StopMovement = false;
             _player.PlayerController.LockInputs = false;

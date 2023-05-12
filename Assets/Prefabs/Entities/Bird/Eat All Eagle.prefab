@@ -191,6 +191,14 @@ PrefabInstance:
       propertyPath: _playerStateMachine
       value: 
       objectReference: {fileID: 3750997155052517636}
+    - target: {fileID: 7208185016336647936, guid: 08b3b8e50db30644fb8a1210b036ea38, type: 3}
+      propertyPath: _stats.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208185016336647936, guid: 08b3b8e50db30644fb8a1210b036ea38, type: 3}
+      propertyPath: _stats.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5bb4507ae5c385b4fa86c921fcb75808, type: 2}
     - target: {fileID: 8111495349040714921, guid: 08b3b8e50db30644fb8a1210b036ea38, type: 3}
       propertyPath: m_Name
       value: Eat All Eagle

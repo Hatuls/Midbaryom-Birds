@@ -43,6 +43,11 @@ public class BirdEyeTutorial : BaseEyeTutorial
     [SerializeField]
     private Image _innerCircle;
 
+    [SerializeField]
+    private Spawner _spawner;
+    [SerializeField]
+    private EntityTagSO _entityTagSO;
+
 
     protected override void SetVisuals()
     {
@@ -50,7 +55,19 @@ public class BirdEyeTutorial : BaseEyeTutorial
         Array.ForEach(_objectsToCloseAtStart, x => x.SetActive(false));
         Array.ForEach(_objectsToOpenAtStart, x => x.SetActive(true));
         _player.PlayerController.SetInputBehaviour(new NoInputBehaviour());
+
+        SpawnRabbit();
         base.SetVisuals();
+    }
+
+    private void SpawnRabbit()
+    {
+   
+        //   _player.Entity.Rotator.AssignRotation(Vector3.zero);
+        Vector3 dir = _player.AimAssists.FacingDirection;
+        Ray rei = new Ray(_player.Entity.CurrentPosition, dir);
+        Physics.Raycast(rei, out RaycastHit hit);
+        _spawner.SpawnEntity(_entityTagSO, hit.point);
     }
 
     private IEnumerator CameraTransition()

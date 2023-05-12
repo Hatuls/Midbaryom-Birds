@@ -38,7 +38,9 @@ public class BirdTypeEditorScript
              { 10, 0, 0, 60, 30, 0, 0 },
              { 30, 60, 10, 0, 0, 0, 0 },
              { 0, 10, 30, 0, 0, 60, 0 },
-             { 0, 0, 0, 0, 0, 0, 100 }
+             { 0, 0, 0, 0, 0, 0, 100 },
+             { 0, 0, 0, 0, 0, 0, 0 },
+            
         };
 
         for (int i = 0; i < configs.Count; i++)
@@ -60,7 +62,7 @@ public class BirdTypeEditorScript
         //עקב עיטי,
         //בז מצוי,
         //נשר מקראי
-
+        // דרור
         string[] configsNames = new string[]
         {
             "Short-toed snake eagle",
@@ -68,6 +70,7 @@ public class BirdTypeEditorScript
             "Long-legged buzzard",
             "Common kestrel",
             "Eurasian griffon vulture",
+            "House sparrow",
         };
 
         int[] InfoIndexes = new int[]
@@ -77,6 +80,7 @@ public class BirdTypeEditorScript
             17,
             14,
             13,
+            24,
         };
 
         int[] NameIndexes = new int[]
@@ -86,6 +90,7 @@ public class BirdTypeEditorScript
             9,
             11,
             10,
+            23,
          };
 
 

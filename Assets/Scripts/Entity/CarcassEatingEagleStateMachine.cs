@@ -14,7 +14,7 @@ namespace Midbaryom.Core
 
         public override void InitStateMachine()
         {
-            _playerDiveState = new PlayerDiveState(_player, _player.Entity.StatHandler[StatType.DiveSpeed]);
+            _playerDiveState = new PlayerDiveState(_player, _player.Entity.StatHandler[StatType.DiveXZSpeed]);
             _playerDiveState.OnStateEnterEvent += _particleSystem.Play;
             _playerDiveState.OnStateExitEvent += _particleSystem.Stop;
 

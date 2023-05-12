@@ -67,7 +67,7 @@ namespace Midbaryom.Core
         }
 
         public Vector3 ScreenToWorldPoint()
-        => _camera.ViewportToWorldPoint(Quaternion.Euler(_offset) * _middleScreenPoint);
+        => _camera.ViewportToWorldPoint(_offset+ _middleScreenPoint);
 
 
         private void Scan(Vector3 facingDirection)

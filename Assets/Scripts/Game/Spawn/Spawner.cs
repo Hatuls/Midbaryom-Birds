@@ -95,12 +95,23 @@ namespace Midbaryom.Core
             if (!_toStopReposition)
                 RePositionMob();
         }
+        public IEntity GetEntity(EntityTagSO entityTagSO)
+        {
+            for (int i = 0; i < _activeEntities.Count; i++)
+            {
+                if (_activeEntities[i].EntityTagSO == entityTagSO)
+                    return _activeEntities[i];
 
+            }
+            throw new System.Exception("Entity was not found active - " + entityTagSO.name);
+          
+        }
         private void RePositionMob()
         {
             List<IEntity> tooFarEntities = new List<IEntity>();
                 Vector3 playerPosition = _aimAssists.PointOnWorld;
                 EntityTagSO entityTagSO = _player.Entity.EntityTagSO;
+          
             for (int i = 0; i < AllEntities.Count; i++)
             {
                 IEntity entity = AllEntities[i];
@@ -181,7 +192,7 @@ namespace Midbaryom.Core
             Ray rei = new Ray(destination, Vector3.down);
             if (Physics.Raycast(rei, out RaycastHit raycastHit, 500f, -1))
             {
-                const float GROUND_OFFSET = 2f;
+                const float GROUND_OFFSET = 5f;
                 destination.y = raycastHit.point.y + GROUND_OFFSET;
             }
             else

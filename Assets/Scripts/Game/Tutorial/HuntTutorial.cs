@@ -20,13 +20,10 @@ namespace Midbaryom.Core.Tutorial
 
         public override void TaskStarted()
         {
-            _player = _spawner.Player;
-            //   _player.Entity.Rotator.AssignRotation(Vector3.zero);
-            Vector3 dir = _player.AimAssists.FacingDirection;
-            Ray rei = new Ray(_player.Entity.CurrentPosition, dir);
-            Physics.Raycast(rei, out RaycastHit hit);
+ 
             Array.ForEach(_objectsToOpen, x => x.SetActive(true));
-            var mob = _spawner.SpawnEntity(_enemyTag, hit.point);
+            var mob = _spawner.GetEntity(_enemyTag);
+            _player = _spawner.Player;
             mob.DestroyHandler.OnDestroy += EntityHunted;
             StartCoroutine(EffectCoroutine(_fadeOut, FadeIn));
           //  _player.Entity.MovementHandler.StopMovement = true;
@@ -76,7 +73,7 @@ namespace Midbaryom.Core.Tutorial
             _player.PlayerController.ResetToDefault();
 
             TaskCompleted();
-            _player.PlayerController.CanCancelHunt = true;
+          //  _player.PlayerController.CanCancelHunt = true;
             _languageTMPRO.gameObject.SetActive(_isActive);
 
         }
