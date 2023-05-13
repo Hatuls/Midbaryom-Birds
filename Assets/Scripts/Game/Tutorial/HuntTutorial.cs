@@ -17,13 +17,17 @@ namespace Midbaryom.Core.Tutorial
         private bool _isActive;
         [SerializeField]
         private GameObject[] _objectsToOpen;
-
+        private void Start()
+        {
+            _player = _spawner.Player;
+            _player.PlayerController.LockHuntInput = true;
+        }
         public override void TaskStarted()
         {
  
             Array.ForEach(_objectsToOpen, x => x.SetActive(true));
             var mob = _spawner.GetEntity(_enemyTag);
-            _player = _spawner.Player;
+          
             mob.DestroyHandler.OnDestroy += EntityHunted;
             StartCoroutine(EffectCoroutine(_fadeOut, FadeIn));
           //  _player.Entity.MovementHandler.StopMovement = true;
@@ -35,7 +39,7 @@ namespace Midbaryom.Core.Tutorial
                 _player.PlayerController.CanCancelHunt = false ;
                 _player.Entity.MovementHandler.StopMovement = false;
 
-                StartCoroutine(EffectCoroutine(_fadeIn));
+                StartCoroutine(EffectCoroutine(_fadeIn, () => _player.PlayerController.LockHuntInput = false)) ;
                 base.TaskStarted();
 
                 _isActive = true;

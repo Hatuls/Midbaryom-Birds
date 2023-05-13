@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -1415,7 +1415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _panel: {fileID: 551287529}
   _text: {fileID: 627878964}
-  _sessionTime: {fileID: 11400000, guid: 3239c52ff5581db48aefd7bb6bac5be2, type: 2}
+  _sessionTime: {fileID: 11400000, guid: 617015d5dc9af6248bed2997692fabab, type: 2}
   _img: {fileID: 1839300545}
   isTimeDepleted: 0
 --- !u!114 &627878964
@@ -2346,7 +2346,7 @@ MonoBehaviour:
   - {fileID: 1900399314}
   - {fileID: 702654298}
   - {fileID: 205196031}
-  _skipTutorial: 0
+  _gameConfig: {fileID: 11400000, guid: 617015d5dc9af6248bed2997692fabab, type: 2}
   _languageTMPRO: {fileID: 1549313264}
 --- !u!114 &951776888 stripped
 MonoBehaviour:
@@ -3981,7 +3981,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _duration: 1
+  _duration: 1.5
   _startingFOV: 40
   _endingFOV: 10
   _objectsToClose:
@@ -4022,9 +4022,62 @@ MonoBehaviour:
     m_RotationOrder: 4
   _innerEyeFadeInDuration: 2
   _innerBirdEye: {fileID: 137911036}
+  _tutorialBirdEyeImage: {fileID: 70850974}
+  _birdEyeFadeOutTransition: 2
+  _birdEyeFadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.022693023
+      value: 0.99344635
+      inSlope: 0.27353805
+      outSlope: 0.27353805
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.11195016
+    - serializedVersion: 3
+      time: 1.0208476
+      value: 0.0080125835
+      inSlope: 0.027071567
+      outSlope: 0.027071567
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21298426
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _birdEyeFadeInTransition: 1
+  _birdEyeFadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _innerCircle: {fileID: 1670587782}
   _spawner: {fileID: 951776888}
   _entityTagSO: {fileID: 11400000, guid: 8ac05556dd904cd429a39f3eca443a89, type: 2}
+  _delayBeforeFirstFade: 1
+  _delayBetweenFades: 0.2
 --- !u!114 &1900399314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4043,7 +4096,7 @@ MonoBehaviour:
   OnTutorialFinished:
     m_PersistentCalls:
       m_Calls: []
-  _delay: 3
+  _delay: 6
 --- !u!1 &1924912438
 GameObject:
   m_ObjectHideFlags: 0

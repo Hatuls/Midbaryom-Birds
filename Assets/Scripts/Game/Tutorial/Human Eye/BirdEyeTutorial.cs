@@ -41,6 +41,18 @@ public class BirdEyeTutorial : BaseEyeTutorial
     private CanvasGroup _innerBirdEye;
 
     [SerializeField]
+    private RawImage _tutorialBirdEyeImage;
+    [SerializeField]
+    private float _birdEyeFadeOutTransition=1f;
+    [SerializeField]
+    private AnimationCurve _birdEyeFadeOutCurve;
+
+    [SerializeField]
+    private float _birdEyeFadeInTransition = 1f;
+    [SerializeField]
+    private AnimationCurve _birdEyeFadeInCurve;
+
+    [SerializeField]
     private Image _innerCircle;
 
     [SerializeField]
@@ -48,7 +60,11 @@ public class BirdEyeTutorial : BaseEyeTutorial
     [SerializeField]
     private EntityTagSO _entityTagSO;
 
+    [SerializeField]
+    private float _delayBeforeFirstFade;
 
+    [SerializeField]
+    private float _delayBetweenFades;
     protected override void SetVisuals()
     {
         StartCoroutine(CameraTransition());
@@ -72,18 +88,56 @@ public class BirdEyeTutorial : BaseEyeTutorial
 
     private IEnumerator CameraTransition()
     {
+        yield return BirdFadeInTransition();
+        yield return new WaitForSeconds(_delayBeforeFirstFade);
+     //   yield return BirdEyeFadeOutTransition();
+      //  yield return new WaitForSeconds(_delayBetweenFades);
+  //      yield return CameraBlendTransition();
+    }
+    private IEnumerator CameraBlendTransition()
+    {
         float counter = 0;
+        var c = _tutorialBirdEyeImage.color;
         _camera.usePhysicalProperties = false;
-        while (counter <_duration)
+        while (counter < _duration)
         {
-            _camera.fieldOfView = Mathf.Lerp(_startingFOV, _endingFOV, _curve.Evaluate(counter / _duration));
             yield return null;
             counter += Time.deltaTime;
+
+            c.a = _birdEyeFadeOutCurve.Evaluate(counter / _birdEyeFadeOutTransition);
+            _tutorialBirdEyeImage.color = c;
+
+
+            _camera.fieldOfView = Mathf.Lerp(_startingFOV, _endingFOV, _curve.Evaluate(counter / _duration));
         }
         _camera.usePhysicalProperties = true;
         _camera.fieldOfView = _endingFOV;
     }
+    private IEnumerator BirdFadeInTransition()
+    {
+        float counter = 0;
+        var c = _tutorialBirdEyeImage.color;
+        while (counter < _birdEyeFadeInTransition)
+        {
+            yield return null;
 
+            counter += Time.deltaTime;
+            c.a = _birdEyeFadeInCurve.Evaluate(counter / _birdEyeFadeInTransition);
+            _tutorialBirdEyeImage.color = c;
+        }
+    }
+    private IEnumerator BirdEyeFadeOutTransition()
+    {
+        float counter = 0;
+        var c = _tutorialBirdEyeImage.color;
+        while (counter < _birdEyeFadeOutTransition)
+        {
+            yield return null;
+            counter += Time.deltaTime;
+            c.a = _birdEyeFadeOutCurve.Evaluate(counter / _birdEyeFadeOutTransition);
+            _tutorialBirdEyeImage.color = c;
+        }
+    }
     protected override void RemoveVisuals()
     {
         Array.ForEach(_objectsToClose, x => x.SetActive(false));

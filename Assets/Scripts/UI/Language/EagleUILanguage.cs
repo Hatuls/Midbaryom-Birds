@@ -28,4 +28,12 @@ public class EagleUILanguage : MonoBehaviour
         _eagleInfo.SetText(obj.InfoIndex);
         _eagleName.SetText(obj.EagleNameIndex);
     }
+
+
+#if UNITY_EDITOR
+    [SerializeField]
+    private EagleTypeSO _eagle;
+    [ContextMenu("Test Eagle Texts")]
+    private void ShowTexts() => ShowTexts(_eagle);
+#endif
 }

@@ -18,14 +18,14 @@ namespace Midbaryom.Core.Tutorial
         private int _currentTask;
         private IPlayer _player;
         [SerializeField]
-        private bool _skipTutorial;
+        private GameSessionConfig _gameConfig;
         [SerializeField]
         private LanguageTMPRO _languageTMPRO;
 
         private IEnumerator Start()
         {
 #if UNITY_EDITOR
-            if (_skipTutorial)
+            if (_gameConfig.SkipTutorial)
             {
                 CompleteTutorial();
                 yield break;

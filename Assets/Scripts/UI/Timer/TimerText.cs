@@ -15,7 +15,7 @@ public class TimerText : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _text;
     [SerializeField]
-    private TimerSO _sessionTime ;
+    private GameSessionConfig _sessionTime ;
     float _counter = 0;
 
     [SerializeField]

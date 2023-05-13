@@ -22,7 +22,7 @@ public class ScoreAnalyzer : MonoBehaviour
     private EagleTypeSO AnalyzeScore()
     {
         if (AnimalScore.TotalAmount == 0)
-            return _eagleTypeSOs.First(x=>x.Name.Contains("Sparrow"));
+            return _eagleTypeSOs.First(x=>x.Name.Contains("sparrow"));
 
 
         float[] sample = PlayerScore.Instance.GetKillFeedPrecentages();

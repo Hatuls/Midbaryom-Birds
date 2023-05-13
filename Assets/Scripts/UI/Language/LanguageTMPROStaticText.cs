@@ -24,7 +24,7 @@
 
          
             if (_languageType != LanguageType.English)
-                result = Reverse(text);
+                result = ReverseLetters(text);
             _text.text = result;
         }
     }
