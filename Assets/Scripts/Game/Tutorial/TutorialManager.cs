@@ -95,6 +95,8 @@ namespace Midbaryom.Core.Tutorial
         protected TransitionEffect _fadeIn;
         [SerializeField]
         protected TransitionEffect _fadeOut;
+
+        
         protected void ShowInstructions()
         {
             _parent.SetActive(true);
@@ -107,6 +109,7 @@ namespace Midbaryom.Core.Tutorial
             _parent.SetActive(false);
             base.TaskCompleted();
         }
+  
         protected IEnumerator EffectCoroutine(TransitionEffect effect, Action OnComplete = null)
         {
             float duration = effect.Duration;

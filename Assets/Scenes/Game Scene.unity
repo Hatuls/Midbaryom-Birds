@@ -1735,6 +1735,37 @@ MonoBehaviour:
   _transform: {fileID: 1606029015}
   _objectsToOpen:
   - {fileID: 680068290}
+  _objectsToClose:
+  - {fileID: 70850972}
+  _birdEye: {fileID: 70850974}
+  _birdEyeFadeIn:
+    _startColor: {r: 0, g: 0, b: 0, a: 0}
+    _endColor: {r: 0, g: 0, b: 0, a: 0}
+    _duration: 1
+    _curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.022693023
+        value: 0.99344635
+        inSlope: 0.27353805
+        outSlope: 0.27353805
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.11195016
+      - serializedVersion: 3
+        time: 1.0208476
+        value: 0.0080125835
+        inSlope: 0.027071567
+        outSlope: 0.027071567
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.21298426
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!1001 &719452542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3985,8 +4016,6 @@ MonoBehaviour:
   _startingFOV: 40
   _endingFOV: 10
   _objectsToClose:
-  - {fileID: 616696622}
-  - {fileID: 70850972}
   - {fileID: 616696622}
   _objectsToOpen:
   - {fileID: 1670587780}

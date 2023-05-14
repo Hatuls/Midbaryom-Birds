@@ -88,11 +88,11 @@ public class BirdEyeTutorial : BaseEyeTutorial
 
     private IEnumerator CameraTransition()
     {
+     //  yield return CameraBlendTransition(); 
         yield return BirdFadeInTransition();
-        yield return new WaitForSeconds(_delayBeforeFirstFade);
-     //   yield return BirdEyeFadeOutTransition();
-      //  yield return new WaitForSeconds(_delayBetweenFades);
-  //      yield return CameraBlendTransition();
+  //      yield return new WaitForSeconds(_delayBeforeFirstFade);
+  //   //   yield return BirdEyeFadeOutTransition();
+  //    //  yield return new WaitForSeconds(_delayBetweenFades);
     }
     private IEnumerator CameraBlendTransition()
     {
