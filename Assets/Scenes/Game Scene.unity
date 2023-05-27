@@ -943,8 +943,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: yerp hctac dna evid ot ydob ruoy ot swoble ruoy dloH
-  m_isRightToLeft: 1
+  m_text: Hold your elbows to your body to dive and catch prey
+  m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c10d39f0b0f1bd644b9d0ede41b20870, type: 2}
   m_sharedMaterial: {fileID: 339179210271497659, guid: c10d39f0b0f1bd644b9d0ede41b20870, type: 2}
   m_fontSharedMaterials: []
