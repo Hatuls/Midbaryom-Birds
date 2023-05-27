@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
+
 namespace Midbaryom.Core
 {
     public class EatAllTargetHandler : BaseTargetHandler
@@ -71,6 +73,8 @@ namespace Midbaryom.Core
             }
             base.ResetTarget();
         }
+
+
 
 
         [System.Serializable]

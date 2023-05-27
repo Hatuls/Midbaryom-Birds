@@ -30,6 +30,8 @@ namespace Midbaryom.Core
         private void OnEnable()
         {
             _entity.VisualHandler.AnimatorController.SetBool("isDead", false);
+            //_rb.isKinematic = false;
+            //_rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         }
         /// <summary>
         /// Called the moment the bird holds the prey
@@ -44,7 +46,7 @@ namespace Midbaryom.Core
             _entity.VisualHandler.AnimatorController.SetBool("isDead", true);
 
             _rb.isKinematic = true;
-
+            _rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
             OnEaten?.Invoke();
         }
 
@@ -57,7 +59,18 @@ namespace Midbaryom.Core
             }
         }
 
+#if UNITY_EDITOR
+        [ContextMenu("Set Targets Hunting Position")]
+        private void SetPosition()
+        {
+  
+            var entityTag = _entity.EntityTagSO;
 
+            entityTag.HoldingOffset.PositionOffset = transform.localPosition;
+            entityTag.HoldingOffset.RotaionOffset = transform.localRotation;
+
+        }
+#endif
         public void UnTargeted()
         {
             Debug.Log("Not Target: " + gameObject.name);

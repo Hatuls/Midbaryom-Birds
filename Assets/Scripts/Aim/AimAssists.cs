@@ -83,9 +83,10 @@ namespace Midbaryom.Core
                     WarnOtherTarget();
                     return;
                 }
+                else ResetTarget();
             }
-
-            ResetTarget();
+            else
+                ResetTarget();
         }
 
 
@@ -116,7 +117,7 @@ namespace Midbaryom.Core
                 {
                     currentEntity = allActiveEntities[i];
 
-                    if (!currentEntity.ContainOneOrMoreTags(_targetingTags))
+                    if (!currentEntity.ContainOneOrMoreTags(_targetingTags) )
                         continue;
 
                   //  if (!currentEntity.EntityTagSO.CanBeTargeted)
@@ -132,7 +133,7 @@ namespace Midbaryom.Core
                         else if (currentsTargetDistance < GetDistance(closestTarget, middleScanPoint))
                             closestTarget = currentEntity;
 
-                        if(!_allTargets.Contains(currentEntity))
+                        if(!_allTargets.Contains(currentEntity) && currentEntity.Transform.position.y >= -25f)
                         _allTargets.Add(currentEntity);
                     }
                     else

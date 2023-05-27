@@ -28,7 +28,7 @@ namespace Midbaryom.Inputs
             _player = player;
             _entity = entity;
             _birdInputAction = new BirdInputAction();
-
+            LockHuntInput = false;
             _movementInputAction = _birdInputAction.Player.Move;
             LockInputs = false;
             _huntInputAction = _birdInputAction.Player.Hunt;

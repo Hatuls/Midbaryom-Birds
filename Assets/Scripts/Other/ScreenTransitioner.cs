@@ -84,3 +84,27 @@ public class TransitionEffect
     public Color EndColor { get => _endColor;}
     public Color StartColor { get => _startColor; }
 }
+[Serializable]
+public class FloatTransitionEffect : BaseTransitionEffect<float>
+{
+    [SerializeField]
+    private float _startValue;
+    [SerializeField]
+    private float _endValue;
+
+    public override float StartResult => _startValue;
+    public override float EndResult => _endValue;
+}
+[Serializable]
+public abstract class BaseTransitionEffect<T>
+{
+    [SerializeField]
+    private float _duration;
+    [SerializeField]
+    private AnimationCurve _curve;
+
+    public abstract T StartResult { get; }
+    public abstract T EndResult { get; }
+    public float Duration => _duration;
+    public AnimationCurve Curve => _curve;
+}

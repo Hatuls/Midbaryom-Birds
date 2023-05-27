@@ -93,8 +93,9 @@ namespace Midbaryom.Core
     public class PlayerDiveState : BaseState
     {
         public event Action OnTargetHit;
+        public event Action OnCloseToTarget;
         private const float minDistanceToTargetAquire = 5f;
-        private const float minDistanceToStartCatchingAnimation = 12f;
+        public const float minDistanceToStartCatchingAnimation = 12f;
 
         private readonly ILocomotion _movementHandler;
         private readonly IPlayer _player;
@@ -130,7 +131,7 @@ namespace Midbaryom.Core
             _movementHandler.StopMovement = false;
             _player.PlayerController.LockInputs = false;
             base.OnStateExit();
-            _player.AimAssists.UnLockTarget();
+
         }
         public override void OnStateTick()
         {
@@ -156,7 +157,7 @@ namespace Midbaryom.Core
                 else if (!_isPlayingAnimation && distance <= minDistanceToStartCatchingAnimation)
                 {
                     _isPlayingAnimation = true;
-                 //   Debug.Log(distance);
+                    OnCloseToTarget?.Invoke();
                     _entity.VisualHandler.AnimatorController.SetTrigger("Attack");
                 }
             }
@@ -210,8 +211,9 @@ namespace Midbaryom.Core
         }
         public override void OnStateExit()
         {
-            base.OnStateExit();
             _entity.StatHandler[StatType.MovementSpeed].Value -= _recoverSpeed.Value;
+            _player.AimAssists.UnLockTarget();
+            base.OnStateExit();
         }
 
         public override void OnStateTick()
@@ -288,9 +290,9 @@ namespace Midbaryom.Core
 
         private void ResetParams()
         {
-            Aibehaviour.StartCoroutine(GenerateRandomPoint());
             if (_agent.isActiveAndEnabled && Aibehaviour.gameObject.activeSelf&& _agent.isOnNavMesh)
             {
+            Aibehaviour.StartCoroutine(GenerateRandomPoint());
             
                 _agent.isStopped = false; 
             }

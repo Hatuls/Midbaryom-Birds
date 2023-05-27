@@ -32,6 +32,6 @@ namespace Midbaryom.Core
         public Vector3 PositionOffset;
         [SerializeField]
         private Vector3 _rotationOffset;
-        public Quaternion RotaionOffset => Quaternion.Euler(_rotationOffset);
+        public Quaternion RotaionOffset { get => Quaternion.Euler(_rotationOffset); set => _rotationOffset = value.eulerAngles; }
     }
 }

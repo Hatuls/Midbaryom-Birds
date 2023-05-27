@@ -31,11 +31,11 @@ namespace Midbaryom.Core.Tutorial
         private void Start()
         {
             _player = _spawner.Player;
-            _player.PlayerController.LockHuntInput = true;
+
         }
         public override void TaskStarted()
         {
- 
+            _player.PlayerController.LockHuntInput = true;
             Array.ForEach(_objectsToOpen, x => x.SetActive(true));
             var mob = _spawner.GetEntity(_enemyTag);
           
