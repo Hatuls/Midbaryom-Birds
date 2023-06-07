@@ -54,6 +54,7 @@ namespace Midbaryom.Core
         {
             if (_agent.isActiveAndEnabled)
             {
+                if (_agent.isOnNavMesh)
                 _agent.isStopped = true;
                 _agent.enabled = false;
             }
@@ -73,7 +74,7 @@ namespace Midbaryom.Core
 #endif
         public void UnTargeted()
         {
-            Debug.Log("Not Target: " + gameObject.name);
+     //       Debug.Log("Not Target: " + gameObject.name);
             _isPotentiallyTargeted = false;
             OnUnTargeted?.Invoke();
         }

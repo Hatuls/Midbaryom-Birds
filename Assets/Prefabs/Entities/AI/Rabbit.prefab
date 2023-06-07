@@ -172,6 +172,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3392092191957949889}
     m_Modifications:
+    - target: {fileID: 568549840438735966, guid: def3680db508d36448d3841f0dd5ae57, type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.0031905258
+      objectReference: {fileID: 0}
+    - target: {fileID: 568549840438735966, guid: def3680db508d36448d3841f0dd5ae57, type: 3}
+      propertyPath: m_LODs.Array.data[3].screenRelativeHeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 568549840452739326, guid: def3680db508d36448d3841f0dd5ae57, type: 3}
       propertyPath: m_RootOrder
       value: 0

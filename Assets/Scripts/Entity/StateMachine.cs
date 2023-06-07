@@ -376,7 +376,7 @@ namespace Midbaryom.Core
         public override void OnStateEnter()
         {
             base.OnStateEnter();
-            Debug.Log($"{Aibehaviour.gameObject.name} is Running!");
+        //    Debug.Log($"{Aibehaviour.gameObject.name} is Running!");
             _movementSpeed.Value += _runAwaySpeed.Value;
        
         }
@@ -384,7 +384,7 @@ namespace Midbaryom.Core
         public override void OnStateExit()
         {
             _movementSpeed.Value -= _runAwaySpeed.Value;
-            Debug.Log($"{Aibehaviour.gameObject.name} is stopped running!");
+         //   Debug.Log($"{Aibehaviour.gameObject.name} is stopped running!");
             base.OnStateExit();
         }
 

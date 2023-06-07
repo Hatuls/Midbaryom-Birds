@@ -1987,6 +1987,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4473881242949625818, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4905046054833450700, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

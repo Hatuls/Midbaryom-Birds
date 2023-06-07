@@ -84,12 +84,12 @@ public class CarcussEatingVisualController : MonoBehaviour
             float SHDistance = Mathf.Abs(startingHeight - x);
             float CurrentDistance = Mathf.Abs(x - player.CurrentPosition.y);
             float result = Mathf.Lerp(effect.StartResult, effect.EndResult,
-                curve.Evaluate(1 - Mathf.Clamp01((CurrentDistance - PlayerDiveState.minDistanceToStartCatchingAnimation )/ SHDistance ))//  target.CurrentPosition.y / player.CurrentPosition.y)
+                curve.Evaluate(1 - Mathf.Clamp01((CurrentDistance - PlayerDiveState.minDistanceToStartCatchingAnimation ) / SHDistance ))//  target.CurrentPosition.y / player.CurrentPosition.y)
                 );
-            Debug.Log($"Target's Height {x}\n starting Height {startingHeight}\nStarting distance {SHDistance}\nCurrent Distance from target{CurrentDistance}\n evaluation {1 - Mathf.Clamp01((CurrentDistance - PlayerDiveState.minDistanceToStartCatchingAnimation )/ SHDistance )}");
+       //    Debug.Log($"Target's Height {x}\n starting Height {startingHeight}\nStarting distance {SHDistance}\nCurrent Distance from target{CurrentDistance}\n evaluation {1 - Mathf.Clamp01((CurrentDistance - PlayerDiveState.minDistanceToStartCatchingAnimation )/ SHDistance )}");
             _zoomedCamera.fieldOfView = result;
         }
-            Debug.Log("Finished Diving");
+        //    Debug.Log("Finished Diving");
     }
     private void EnablePossProcessing() => OnStartEatingCarcuss?.Invoke();
     private void DisablePossProcessing() => OnFinishedEating?.Invoke();
