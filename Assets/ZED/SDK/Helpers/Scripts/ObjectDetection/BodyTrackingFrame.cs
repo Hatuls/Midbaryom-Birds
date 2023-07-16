@@ -88,8 +88,8 @@ public class BodyTrackingFrame
         detectingZEDManager = detectingmanager;
         frameDetected = Time.frameCount;
 
-        Vector3 campos = detectingmanager.GetLeftCameraTransform().position;
-        Quaternion camrot = detectingmanager.GetLeftCameraTransform().rotation;
+        Vector3 campos = detectingmanager.GetRightCameraTransform().position;
+        Quaternion camrot = detectingmanager.GetRightCameraTransform().rotation;
 
         for (int i = 0; i < bodies.nbBodies; i++)
         {
