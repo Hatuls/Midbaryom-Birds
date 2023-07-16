@@ -21,13 +21,14 @@ namespace Midbaryom.Inputs
         private Vector3 _previousInput;
         private float _counter;
         public bool LockInputs { get; set; }
+        public bool LockHuntInput { get; set; }
         public bool CanCancelHunt { get; set; }
         public PlayerController(Player player, IEntity entity, BodyTrackingConfigSO bodyTrackingConfigSO)
         {
             _player = player;
             _entity = entity;
             _birdInputAction = new BirdInputAction();
-
+            LockHuntInput = false;
             _movementInputAction = _birdInputAction.Player.Move;
             LockInputs = false;
             _huntInputAction = _birdInputAction.Player.Hunt;
@@ -42,6 +43,7 @@ namespace Midbaryom.Inputs
 
         private void StartHundDown(InputAction.CallbackContext obj)
         {
+            if(!LockHuntInput)
             HuntDown();
         }
 

@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 937610856477849042}
   - component: {fileID: 4055434377312234954}
   - component: {fileID: 5227603478703347340}
-  - component: {fileID: 3500646158318834887}
   m_Layer: 0
   m_Name: Wild Grass_LOD2_Var1_vdilbaiia
   m_TagString: Untagged
@@ -143,20 +142,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3500646158318834887
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 900759950665342664}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3500199066710798291, guid: 90f54b523035cdb40abd9c741622982b, type: 3}
 --- !u!1 &1704207622015380035
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +153,6 @@ GameObject:
   - component: {fileID: 1974385392830388874}
   - component: {fileID: 8510465241896889598}
   - component: {fileID: 4050044365418351650}
-  - component: {fileID: 4763117199158758458}
   m_Layer: 0
   m_Name: Wild Grass_LOD4_Var1_vdilbaiia
   m_TagString: Untagged
@@ -239,20 +223,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4763117199158758458
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704207622015380035}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2199917973037313854, guid: 3a82eac9db66f2c48a97f2be0dc9a313, type: 3}
 --- !u!1 &4317357189194668239
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +234,6 @@ GameObject:
   - component: {fileID: 4465319318843447399}
   - component: {fileID: 5292469173204361837}
   - component: {fileID: 6956587559331899025}
-  - component: {fileID: 5641483806065057359}
   m_Layer: 0
   m_Name: Wild Grass_LOD0_Var1_vdilbaiia
   m_TagString: Untagged
@@ -335,17 +304,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5641483806065057359
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4317357189194668239}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2499462273916062442, guid: 1238f1905cd95c74e907e1cdbd26c11c, type: 3}

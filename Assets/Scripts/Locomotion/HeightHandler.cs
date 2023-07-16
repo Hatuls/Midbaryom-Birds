@@ -166,7 +166,7 @@ namespace Midbaryom.Core
         public HuntHeightState(Transform transform, HeightTransition heightTransition, IPlayer player) : base(transform, heightTransition)
         {
             this.aimAssists = player.AimAssists;
-            _movementSpeedStat = player.Entity.StatHandler[StatType.MovementSpeed];
+            _movementSpeedStat = player.Entity.StatHandler[StatType.DiveYSpeed];
         }
         public override void OnStateEnter()
         {

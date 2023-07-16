@@ -11,6 +11,7 @@ namespace Midbaryom.Core
     /// </summary>
     public interface IEntity : ITrackable, ITaggable
     {
+        int InstanceID { get; }
         ITargetBehaviour TargetBehaviour { get; }
         EntityTagSO EntityTagSO { get; }
         Rigidbody Rigidbody { get; }
@@ -30,7 +31,11 @@ namespace Midbaryom.Core
 
     public class Entity : MonoBehaviour, IEntity
     {
+        public static int COUNT = 0;
+        
         [Header("Tags:")]
+        [SerializeField]
+        private int _ID;
         [SerializeField]
         private EntityTagSO _entityTag;
         [SerializeField]
@@ -47,6 +52,7 @@ namespace Midbaryom.Core
         private AnimationCurve _rotationCurve;
         [SerializeField]
         private TargetedBehaviour _targetBehaviour;
+
         private IRotator _rotator;
         private IDestroyHandler _destroyHandler;
         private IStatHandler _statHandler;
@@ -85,6 +91,8 @@ namespace Midbaryom.Core
             }
         }
 
+        public int InstanceID { get=> _ID; private set => _ID = value; }
+
         private void Awake()
         {
             _destroyHandler = new DestroyBehaviour(this);
@@ -92,7 +100,8 @@ namespace Midbaryom.Core
             _rotator = new Rotator(_transform, false, _statHandler[StatType.RotationSpeed],_transform.rotation, _rotationCurve);
             _movementHandler = new Locomotion(_transform, Rigidbody, false, _statHandler[StatType.MovementSpeed]);
             _heightHandler = new HeightHandler(MovementHandler as Locomotion, Transform, EntityTagSO.StartingHeight);
-
+            COUNT++;
+            InstanceID = COUNT;
         }
         private void OnEnable()
         {
@@ -113,6 +122,7 @@ namespace Midbaryom.Core
         private void OnDestroy()
         {
             _destroyHandler.Destroy();
+            COUNT--;
         }
     }
     public interface IUpdateable

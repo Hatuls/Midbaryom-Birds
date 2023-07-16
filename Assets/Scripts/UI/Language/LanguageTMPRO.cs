@@ -48,15 +48,31 @@ public class LanguageTMPRO : MonoBehaviour
         else if(_text != null)
         {
             string result = text;
-
          var language =    ApplicationManager.Instance?.LanguageSettings?.LanguageType ?? LanguageType.English;
+            _text.lineSpacing = language == LanguageType.English ? 1 : -1;
             if (language != LanguageType.English)
-                result = Reverse(text);
+            {
+                result = ReverseLetters(text);
+            }
             _text.text = result;
         }
     }
 
-    protected string Reverse(string text)
+    private string ReverseWordsOrder(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return string.Empty;
+        string[] s = text.Split(' ');
+        string result = string.Empty;
+        const string space = " ";
+        for (int i = s.Length - 1; i >= 0; i--)
+        {
+            result = string.Concat(result, space, s[i]);
+        }
+        return result;
+    }
+
+    protected string ReverseLetters(string text)
     {
         if (string.IsNullOrEmpty(text))
             return string.Empty;

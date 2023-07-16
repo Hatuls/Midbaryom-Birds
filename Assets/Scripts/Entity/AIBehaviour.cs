@@ -15,6 +15,10 @@ namespace Midbaryom.AI
         private AIBehaviourSO _aIBehaviourSO;
         [SerializeField]
         private Entity _entity;
+
+
+
+
         private IStateMachine _stateMachine;
         private AIBrain _aIBrain;
 
@@ -87,10 +91,23 @@ namespace Midbaryom.AI
                 item.Tick();
         }
 
- 
+#if UNITY_EDITOR
+        public bool DrawGizmosOnAnimal;
+
+
         private void OnDrawGizmosSelected()
         {
+
+
+
             Vector3 CurrentPos = transform.position;
+            if (DrawGizmosOnAnimal)
+            {
+
+            Gizmos.color = Color.black;
+            Gizmos.DrawSphere(CurrentPos, 5f);
+            }
+
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(CurrentPos, AIBehaviourSO.TargetDestinationRadius);
             if (_moveState != null)
@@ -100,7 +117,7 @@ namespace Midbaryom.AI
                 Gizmos.DrawSphere(MoveToPosition, 2f);
             }
         }
-
+#endif
         private void UpdateAgentSpeed(float amount)
         {
             _agent.speed = amount;

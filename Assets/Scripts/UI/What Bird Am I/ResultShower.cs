@@ -56,4 +56,11 @@ public class ResultShower : MonoBehaviour
         void SetScale(Vector3 vector3)
             => _resultTransform.localScale = vector3;
     }
+
+#if UNITY_EDITOR
+    public EagleTypeSO _eagle;
+    [ContextMenu("Test Eagle")]
+    private void TestEagle() => ShowResult(_eagle);
+#endif
+
 }
