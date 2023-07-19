@@ -3,11 +3,23 @@ using Midbaryom.Core.Config;
 using Midbaryom.Core.Tutorial;
 using System;
 using UnityEngine;
+
+
+using UnityEngine.UI; //TEMP
+
+
+
 namespace Midbaryom.Core
 {
     [DefaultExecutionOrder(-99999)]
     public class GameManager : MonoBehaviour
     {
+        //TEMP
+        public bool useDebugMessages;
+        public Text leftL, rightL, aboveL;
+        public Text leftR, rightR, aboveR;
+        public Text midL, midR;
+
         public static event Action OnGameStarted;
         public static event Action OnTutorialStarted;
         public static event Action OnGameReset;

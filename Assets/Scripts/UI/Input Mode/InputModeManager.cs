@@ -20,49 +20,58 @@ public class InputModeManager : MonoBehaviour
     private ZEDManager _zedManager;
     [SerializeField]
     private SceneHandler _sceneHandler;
+
+    //TEMP
+    public bool useCameraDefault;
+
     void Start()
     {
         _canvas.SetActive(true);
         _camera.gameObject.SetActive(true);
 
-        //try
-        //{
+        if(useCameraDefault)
+        {
+            try
+            {
 
-        //    _canvas.SetActive(false);
-        //    _bodyTrackingConfigSO.SetInput(InputMode.Camera);
-        //    _camera.gameObject.SetActive(false);
+                _canvas.SetActive(false);
+                _bodyTrackingConfigSO.SetInput(InputMode.Camera);
+                _camera.gameObject.SetActive(false);
 
-        //    _zedManager = FindObjectOfType<ZEDManager>();
-        //    _zedManager.OnBodyTrackingInitialized += LoadNextScene;
-        //    Screen.SetResolution(ApplicationManager.SCREEN_RESOLUTION, ApplicationManager.SCREEN_RESOLUTION, true);
-        //}
-        //catch (Exception e)
-        //{
-        //    throw e;
-        //}
+                _zedManager = FindObjectOfType<ZEDManager>();
+                _zedManager.OnBodyTrackingInitialized += LoadNextScene;
+                Screen.SetResolution(ApplicationManager.SCREEN_RESOLUTION_WIDTH, ApplicationManager.SCREEN_RESOLUTION_HEIGHT, true);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 
 
     public  void SetCameraInputMode()
     {
-
-        // if ()
-        try
+        if (!useCameraDefault)
         {
+            try
+            {
 
-            _canvas.SetActive(false);
-            _bodyTrackingConfigSO.SetInput(InputMode.Camera);
-            _camera.gameObject.SetActive(false);
-            //_zedManager = Instantiate(_zedManager);
-            //_zedManager = FindObjectOfType<ZEDManager>();
-            //_zedManager.OnBodyTrackingInitialized += LoadNextScene;
-            //Screen.SetResolution(ApplicationManager.SCREEN_RESOLUTION, ApplicationManager.SCREEN_RESOLUTION, true);
-        }
-        catch (Exception e)
-        {
-            throw e;
+                _canvas.SetActive(false);
+                _bodyTrackingConfigSO.SetInput(InputMode.Camera);
+                _camera.gameObject.SetActive(false);
+                //_zedManager = Instantiate(_zedManager);
+                //_zedManager = FindObjectOfType<ZEDManager>();
+                //_zedManager.OnBodyTrackingInitialized += LoadNextScene;
+                //Screen.SetResolution(ApplicationManager.SCREEN_RESOLUTION, ApplicationManager.SCREEN_RESOLUTION, true);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
+
     public void SetKeyboardInputMode()
     {
         _bodyTrackingConfigSO.SetInput(InputMode.Keyboard);

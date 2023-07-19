@@ -475,6 +475,7 @@ MonoBehaviour:
   _bodyTrackingConfigSO: {fileID: 11400000, guid: 95d6eddd6e9254c428e26f88f8e1b3e2, type: 2}
   _zedManager: {fileID: 114491592745282986, guid: 76db3eb81fd21ae45bab5204e324ae42, type: 3}
   _sceneHandler: {fileID: 664964503}
+  useCameraDefault: 0
 --- !u!4 &641507156
 Transform:
   m_ObjectHideFlags: 0

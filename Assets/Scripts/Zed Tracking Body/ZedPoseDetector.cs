@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
+
+
 public class ZedPoseDetector : MonoBehaviour
 {
 
@@ -30,7 +32,6 @@ public class ZedPoseDetector : MonoBehaviour
     private bool _drawSkeleton;
 
     private bool _gameStarted;
-
 
 
     private void Awake()
@@ -194,6 +195,13 @@ public class TurningLeftPosture : IBodyTrackAnalyzer
 
         bool handAbove = rightShoulder.z < rightHand.z;
 
+        if(GameManager.Instance.useDebugMessages)
+        {
+            GameManager.Instance.leftL.text = "Left L: " + leftAngle.ToString();
+            GameManager.Instance.rightL.text = "Right L: " + rightAngle.ToString();
+            GameManager.Instance.aboveL.text = handAbove == true ? "Above L: Yes" : "Above L: No";
+        }
+
         //Debug.Log("Left L: " + leftAngle);
         //Debug.Log("right L: " + rightAngle);
         //Debug.Log("Above L: " + handAbove);
@@ -296,6 +304,13 @@ public class TurningRightPosture : IBodyTrackAnalyzer
 
         bool handAbove = leftShoulder.z < leftHand.z;
 
+        if (GameManager.Instance.useDebugMessages)
+        {
+            GameManager.Instance.leftR.text = "Left R: " + leftAngle.ToString();
+            GameManager.Instance.rightR.text = "Right R: " + rightAngle.ToString();
+            GameManager.Instance.aboveR.text = handAbove == true ? "Above R: Yes" : "Above R: No";
+        }
+
         //Debug.Log("Left R: " + leftAngle);
         //Debug.Log("right R: " + rightAngle);
         //Debug.Log("Above R: " + handAbove);
@@ -378,6 +393,12 @@ public class HuntingPosture : IBodyTrackAnalyzer
 
         float leftXDistance = Mathf.Abs(leftHand.x - leftShoulder.x);
         float rightXDistance = Mathf.Abs(rightHand.x - rightShoulder.x);
+
+        if (GameManager.Instance.useDebugMessages)
+        {
+            GameManager.Instance.midL.text = "Mid L: " + leftXDistance.ToString();
+            GameManager.Instance.midR.text = "Mid R: " + rightXDistance.ToString();
+        }
 
         //float armLength = Vector3.Distance(leftShoulder, skeletonJoints[LEFT_ELBOW]); // calculating the length of the arm
         //float left = Vector3.Distance(leftHand, leftShoulder);
