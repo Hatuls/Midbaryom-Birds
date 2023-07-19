@@ -10,7 +10,7 @@ public class PlayButton : MonoBehaviour
 
     private void Start()
     {
-        Screen.SetResolution(ApplicationManager.SCREEN_RESOLUTION, ApplicationManager.SCREEN_RESOLUTION, true);
+        Screen.SetResolution(ApplicationManager.SCREEN_RESOLUTION_WIDTH, ApplicationManager.SCREEN_RESOLUTION_HEIGHT, true);
     }
     public void Play()
     {

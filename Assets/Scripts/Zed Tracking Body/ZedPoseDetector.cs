@@ -223,14 +223,14 @@ public class TurningLeftPosture : IBodyTrackAnalyzer
         //bool rightHandPose = rightAngle < _rightArmAngle;
         bool handAbove = leftShoulder.y > leftHand.y && rightShoulder.y < rightHand.y;
 //#if UNITY_EDITOR
-//        Debug.Log($"{typeof(TurningLeftPosture).Name}  RESULT: { leftHandPose && rightHandPose && handAbove}\n" +
+//        Debug.Log($"{typeof(TurningLeftPosture).Name}  RESULT: {leftHandPose && rightHandPose && handAbove}\n" +
 //                $"Right arm angle: {rightAngle}. Need to be under {_rightArmAngle}. Result = {rightHandPose}\n" +
 //                $"Left arm angle: " + leftAngle + $". Need to be under {_leftArmAngle}.Result = {leftHandPose}\n" +
 //        $"Left arm need to be under left shoulder - shoulder ({leftShoulder.y}), hand ({leftHand.y}), RESULT - {leftShoulder.y > leftHand.y}\n" +
 //        $"Right arm need to be above right shoulder - shoulder ({rightShoulder.y}), hand ({rightHand.y}), RESULT - {rightShoulder.y < rightHand.y}");
 //#endif
-        //Gizmos.color = leftHandPose && handAbove && rightHandPose ? Color.green : Color.red;
-        //Gizmos.DrawLine(leftHand, leftShoulder);
+//        Gizmos.color = leftHandPose && handAbove && rightHandPose ? Color.green : Color.red;
+//        Gizmos.DrawLine(leftHand, leftShoulder);
 
 
 

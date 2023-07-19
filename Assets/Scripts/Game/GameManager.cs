@@ -26,6 +26,8 @@ namespace Midbaryom.Core
         public CameraRotationSO HuntDown, HuntUp;
         public HeightConfigSO HeightConfigSO;
         public SpawnConfigSO _spawnConfig;
+
+        public UnityEngine.Camera zoomCamera;
         private void Awake()
         {
             if (_instance == null || _instance == this)
@@ -62,17 +64,17 @@ namespace Midbaryom.Core
             _timerText.OnTimeEnded -= MoveToNextScene;
             _tutorialManager.OnTutorialCompeleted -= StartGame;
         }
-#if UNITY_EDITOR
-        [Header("Editor:")]
-        public float Radius;
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(HeightConfigSO.AnimalHeight.Height * Vector3.up, Radius);
-            Gizmos.DrawSphere(HeightConfigSO.PlayerHeight.Height * Vector3.up, Radius);
-            Gizmos.DrawSphere(HeightConfigSO.GroundHeight.Height * Vector3.up, Radius);
-        }
-#endif
+//#if UNITY_EDITOR
+//        [Header("Editor:")]
+//        public float Radius;
+//        private void OnDrawGizmosSelected()
+//        {
+//            Gizmos.color = Color.yellow;
+//            Gizmos.DrawSphere(HeightConfigSO.AnimalHeight.Height * Vector3.up, Radius);
+//            Gizmos.DrawSphere(HeightConfigSO.PlayerHeight.Height * Vector3.up, Radius);
+//            Gizmos.DrawSphere(HeightConfigSO.GroundHeight.Height * Vector3.up, Radius);
+//        }
+//#endif
     }
 
 

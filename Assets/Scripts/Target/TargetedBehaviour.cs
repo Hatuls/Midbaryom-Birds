@@ -38,6 +38,10 @@ namespace Midbaryom.Core
         /// </summary>
         public void Eaten()
         {
+            int LayerIgnore = LayerMask.NameToLayer("Animal");
+            var newMask = GameManager.Instance.zoomCamera.cullingMask & ~(1 << LayerIgnore);
+            GameManager.Instance.zoomCamera.cullingMask = newMask;
+
             _entity.MovementHandler.StopMovement = true;
             _entity.Rotator.StopRotation = true;
 
@@ -64,7 +68,7 @@ namespace Midbaryom.Core
         [ContextMenu("Set Targets Hunting Position")]
         private void SetPosition()
         {
-  
+
             var entityTag = _entity.EntityTagSO;
 
             entityTag.HoldingOffset.PositionOffset = transform.localPosition;

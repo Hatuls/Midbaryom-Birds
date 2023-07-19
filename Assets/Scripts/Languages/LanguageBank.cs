@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using TMPro;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Languages/Bank")]
 public class LanguageBank : ScriptableObject
@@ -7,10 +8,26 @@ public class LanguageBank : ScriptableObject
     [SerializeField]
     private Sentence[] _sentences;
 
+    [SerializeField]
+    private Font[] fonts;
+
+    [SerializeField]
+    private TMP_FontAsset[] TMPFonts;
+
     public Sentence this[int index]
     {
         get => _sentences[index];
     }
+
+    public Font ReturnFont(int index)
+    {
+        return fonts[index];
+    }
+    public TMP_FontAsset ReturnFontAsset(int index)
+    {
+        return TMPFonts[index];
+    }
+
     public string GetText(LanguageType type, int index)
     {
         return GetLanguage(this[index], type);

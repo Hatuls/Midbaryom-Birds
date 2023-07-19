@@ -25,11 +25,11 @@ public class CarcussEatingVisualController : MonoBehaviour
     [SerializeField]
     private FloatTransitionEffect _startEffect,_endEffect;
 
-    private int _defaultCullingMaskBit;
+    //private int _defaultCullingMaskBit;
 
     private IEnumerator Start()
     {
-        _defaultCullingMaskBit = _humanEyeCamera.cullingMask;
+        //_defaultCullingMaskBit = _humanEyeCamera.cullingMask;
         _defaultZoomedInFOV = _zoomedCamera.fieldOfView;
         yield return null;
         _player = _spawner.Player;
@@ -102,7 +102,7 @@ public class CarcussEatingVisualController : MonoBehaviour
 
     private void ResetCameraMask()
     {
-        _humanEyeCamera.cullingMask = _defaultCullingMaskBit;
+        //_humanEyeCamera.cullingMask = _defaultCullingMaskBit;
     }
 
     private void OnDestroy()
@@ -127,7 +127,7 @@ public class CarcussEatingVisualController : MonoBehaviour
 
     private void MaskHumanEye()
     {
-        _humanEyeCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Animal"));
+        //_humanEyeCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Animal"));
     }
 
     private void Update()

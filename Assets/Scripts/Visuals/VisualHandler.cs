@@ -187,7 +187,7 @@ namespace Midbaryom.Visual
                     return;
 
                 _counter += Time.deltaTime;
-                transform.localScale = Vector3.Lerp(scale, Vector3.zero, _scaleEase.Evaluate( _counter / _duration));
+                //transform.localScale = Vector3.Lerp(scale, Vector3.zero, _scaleEase.Evaluate( _counter / _duration));
 
             } while (_counter <= _duration);
 

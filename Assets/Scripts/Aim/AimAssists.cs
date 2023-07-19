@@ -215,7 +215,7 @@ namespace Midbaryom.Core
             //     Gizmos.DrawLine(_camera.transform.position, hit.point);
 
 
-         
+
         }
 
         private void OnDrawGizmos()
@@ -239,7 +239,7 @@ namespace Midbaryom.Core
             {
                 Gizmos.color = Color.blue;
                 Vector3 currentPosition = entity.CurrentPosition;
-                Gizmos.DrawLine(currentPosition, currentPosition + entity.MovementHandler.CurrentFacingDirection * (transform.position-currentPosition).magnitude);
+                Gizmos.DrawLine(currentPosition, currentPosition + entity.MovementHandler.CurrentFacingDirection * (transform.position - currentPosition).magnitude);
             }
 
             void DrawTargetsFacingTowardPlayerDirection(IEntity entity)

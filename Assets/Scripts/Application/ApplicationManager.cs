@@ -5,7 +5,8 @@ public class ApplicationManager : MonoBehaviour
 {
     private static ApplicationManager _instance;
 
-    public const int SCREEN_RESOLUTION = 1376;
+    public const int SCREEN_RESOLUTION_WIDTH = 1920;
+    public const int SCREEN_RESOLUTION_HEIGHT = 1080;
     [SerializeField]
     private LanguageBank _languageBank;
 
@@ -24,13 +25,13 @@ public class ApplicationManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
         _instance = this;
         LanguageSettings = new LangaugeSettings(_languageBank);
-        Screen.SetResolution(SCREEN_RESOLUTION, SCREEN_RESOLUTION, true);
+        Screen.SetResolution(SCREEN_RESOLUTION_WIDTH, SCREEN_RESOLUTION_HEIGHT, true);
         PlayerPrefs.Save();
     }
     private IEnumerator Start()
     {
         yield return null;
-        Screen.SetResolution(SCREEN_RESOLUTION, SCREEN_RESOLUTION, true);
+        Screen.SetResolution(SCREEN_RESOLUTION_WIDTH, SCREEN_RESOLUTION_HEIGHT, true);
     }
     private void Update()
     {

@@ -10,12 +10,15 @@ public class LanguageTMPRO : MonoBehaviour
     protected TextMeshProUGUI _textMeshProUGUI;
     [SerializeField]
     protected Text _text;
+
+    LanguageType currentLangauge;
+
     protected virtual void Awake()
     {
         if (ApplicationManager.Instance == null)
             gameObject.SetActive(false);
 
-        var currentLangauge = ApplicationManager.Instance?.LanguageSettings?.LanguageType ?? LanguageType.English;
+        currentLangauge = ApplicationManager.Instance?.LanguageSettings?.LanguageType ?? LanguageType.English;
         ChangeAllignments(currentLangauge);
     }
 
@@ -56,6 +59,9 @@ public class LanguageTMPRO : MonoBehaviour
             }
             _text.text = result;
         }
+
+        ChangeFont(currentLangauge, _textMeshProUGUI, _text);
+
     }
 
     private string ReverseWordsOrder(string text)
@@ -82,5 +88,16 @@ public class LanguageTMPRO : MonoBehaviour
             s = string.Concat(s,letter);
 
         return s;
+    }
+
+    private void ChangeFont(LanguageType _languageType, TextMeshProUGUI _textMeshProUGUI, Text _text)
+    {
+        if (_text)
+            _text.font = ApplicationManager.Instance.LanguageSettings.LanguageBank.ReturnFont((int)_languageType);
+
+        if (_textMeshProUGUI)
+        {
+            _textMeshProUGUI.font = ApplicationManager.Instance.LanguageSettings.LanguageBank.ReturnFontAsset((int)_languageType);
+        }
     }
 }
