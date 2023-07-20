@@ -166,6 +166,8 @@ public class TurningLeftPosture : IBodyTrackAnalyzer
     public const int RIGHT_SHOULDER = (int)sl.BODY_38_PARTS.RIGHT_SHOULDER;
     private readonly PlayerController playerController;
     private float _leftArmAngle;
+    private float _rightArmAngle;
+    private float tempDistanceEmpty;
 
     public TurningLeftPosture(PlayerController playerController, BodyTrackingConfigSO.TurningConfig turningConfig) : this(turningConfig.LeftArmAngle, turningConfig.RightArmAngle)
     {
@@ -175,7 +177,10 @@ public class TurningLeftPosture : IBodyTrackAnalyzer
     public TurningLeftPosture(float leftArmAngle, float rightArmAngle)
     {
         //_rightArmAngle = rightArmAngle;
-        _leftArmAngle = leftArmAngle;
+        //_leftArmAngle = leftArmAngle;
+
+        _rightArmAngle = GameManager.Instance.rightLTemp;
+        _leftArmAngle = GameManager.Instance.leftLTemp;
     }
 
     public bool CheckPosture(SkeletonHandler skeleton)
@@ -273,6 +278,7 @@ public class TurningRightPosture : IBodyTrackAnalyzer
     private readonly PlayerController playerController;
     private float _rightArmAngle;
     private float _leftArmAngle;
+    private float tempDistanceEmpty;
 
     public TurningRightPosture(PlayerController playerController, BodyTrackingConfigSO.TurningConfig turningConfig) : this(turningConfig.LeftArmAngle, turningConfig.RightArmAngle)
     {
@@ -280,8 +286,11 @@ public class TurningRightPosture : IBodyTrackAnalyzer
     }
     public TurningRightPosture(float leftArmAngle, float rightArmAngle)
     {
-        _rightArmAngle = rightArmAngle;
-        _leftArmAngle = leftArmAngle;
+        _rightArmAngle = GameManager.Instance.rightRTemp;
+        _leftArmAngle = GameManager.Instance.leftRTemp;
+
+        //_rightArmAngle = rightArmAngle;
+        //_leftArmAngle = leftArmAngle;
     }
 
     public bool CheckPosture(SkeletonHandler skeleton)
@@ -377,7 +386,10 @@ public class HuntingPosture : IBodyTrackAnalyzer
     public HuntingPosture(PlayerController playerController, float distance)
     {
         this.playerController = playerController;
-        _distance = distance;
+        //_distance = distance;
+
+        _distance = GameManager.Instance.distanceTemp;
+
     }
 
     public bool CheckPosture(SkeletonHandler skeleton)
@@ -391,8 +403,10 @@ public class HuntingPosture : IBodyTrackAnalyzer
         Vector3 rightHand = skeletonJoints[RIGHT_HAND];
         Vector3 rightShoulder = skeletonJoints[RIGHT_SHOULDER];
 
+
         float leftXDistance = Mathf.Abs(leftHand.x - leftShoulder.x);
         float rightXDistance = Mathf.Abs(rightHand.x - rightShoulder.x);
+
 
         if (GameManager.Instance.useDebugMessages)
         {

@@ -5496,6 +5496,12 @@ MonoBehaviour:
   aboveR: {fileID: 170941263}
   midL: {fileID: 1042642072}
   midR: {fileID: 466651863}
+  sessionConfig: {fileID: 11400000, guid: 617015d5dc9af6248bed2997692fabab, type: 2}
+  leftRTemp: 0
+  rightRTemp: 0
+  leftLTemp: 0
+  rightLTemp: 0
+  distanceTemp: 0
   _screenTransitioner: {fileID: 976557554}
   _tutorialManager: {fileID: 857267638}
   _timerText: {fileID: 627878963}
