@@ -16,26 +16,26 @@ namespace ZED.Tracking
 
     public static class ZedsMotionPacksExtentions
     {
-        public static void Add(this TrackingMotionManagerMB m,int id, ZedsMotionPacks zedsMotionPacks)
+        public static void Add(this TrackingMotionManagerMB m, ZedsMotionPacks zedsMotionPacks)
         {
             BaseMotionCondition[] motions = zedsMotionPacks.Motions;
             for (int i = 0; i < motions.Length; i++)
-                m.Add(id,motions[i].MotionCondition);
+                m.Add(motions[i].MotionCondition);
 
         }
-        public static void Remove(this TrackingMotionManagerMB m,int id, ZedsMotionPacks zedsMotionPacks)
+        public static void Remove(this TrackingMotionManagerMB m,ZedsMotionPacks zedsMotionPacks)
         {
             BaseMotionCondition[] motions = zedsMotionPacks.Motions;
             for (int i = 0; i < motions.Length; i++)
-                m.Remove(id,motions[i].MotionCondition);
+                m.Remove(motions[i].MotionCondition);
 
         }
 
-        public static void SetNewMotionsPack(this TrackingMotionManagerMB m,int id , IMotionPack motionPack)
+        public static void SetNewMotionsPack(this TrackingMotionManagerMB m , IMotionPack motionPack)
         {
-            m.RemoveAll(id);
+            m.RemoveAll();
             foreach (var item in motionPack.Motions)
-                m.Add(id,item.MotionCondition);
+                m.Add(item.MotionCondition);
 
         }
     }

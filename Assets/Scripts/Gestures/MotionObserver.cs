@@ -23,8 +23,6 @@ namespace ZED.Tracking
         private StatusType _currentStatus;
         private IBaseIntervalCondition<T> _motion;
 
-        public MotionObserver(int id):this (id, null){ }
-    
         public MotionObserver(int id, IBaseIntervalCondition<T> baseIntervalCondition)
         {
             ID = id;

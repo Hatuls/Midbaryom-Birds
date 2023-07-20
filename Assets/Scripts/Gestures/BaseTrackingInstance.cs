@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace ZED.Tracking
 {
-    public abstract class TrackingMotionManager<T>
+    public abstract class BaseTrackingInstance<T>
     {
         private List<IBaseIntervalCondition<T>> _startingBehaviours = new List<IBaseIntervalCondition<T>>();
         private List<IBaseIntervalCondition<T>> _onGoingBehaviours = new List<IBaseIntervalCondition<T>>();
@@ -11,8 +11,7 @@ namespace ZED.Tracking
         protected abstract T GetCurrentFramesData();
 
         protected List<MotionObserver<T>> _observers;
-
-        public TrackingMotionManager()
+        public BaseTrackingInstance()
         {
             _observers = new List<MotionObserver<T>>();
         }
@@ -59,8 +58,8 @@ namespace ZED.Tracking
                 {
                     CheckCondition(_onGoingBehaviours[i]);
                 }
-
             }
+
             void CheckCondition(IBaseIntervalCondition<T> behaviour)
             {
                 if (behaviour.Status == StatusType.Finished)
@@ -68,8 +67,10 @@ namespace ZED.Tracking
                     ReturnToStartTrackingList(behaviour);
                     return;
                 }
+
                 // behaviour = _onGoingBehaviours[i];
                 //waiting for the next interval to check this motion
+
                 if (!behaviour.IsPassFrameInterval())
                 {
                     behaviour.NextFrame(deltaTime);

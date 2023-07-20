@@ -8,21 +8,22 @@ public class SnakeLikeGameLogic : MonoBehaviour
     private const int FORWARD_MOTION_ID = 1;
     private const int LEFT_MOTION_ID = 2;
     private const int RIGHT_MOTION_ID = 3;
+
     [SerializeField]
     private Transform _transform;
-
 
     public Vector3[] Lanes;
     public float Speed =5f;
 
     private int _counter;
     private int _currentPositionIndex;
+
     [SerializeField]
     private TrackingMotionManagerMB _trackingMotionManagerMB;
 
 
     [SerializeField]
-    private ZedsMotionPacks[] Foo;
+    private ZedsMotionPacks[] _snakeMotionsPack;
     private void Awake()
     {
         _currentPositionIndex = 1;
@@ -30,35 +31,34 @@ public class SnakeLikeGameLogic : MonoBehaviour
     }
     private void Start()
     {
-        int firstKeyIndex = _trackingMotionManagerMB.SkeletonDictionary.Keys.First();
-        _trackingMotionManagerMB.TryGetOrCreateEmptyObserver(firstKeyIndex, FORWARD_MOTION_ID, out MotionObserver<SkeletonHandler> observer);
 
+        _trackingMotionManagerMB.TryGetOrCreateEmptyObserver(FORWARD_MOTION_ID, out MotionObserver<SkeletonHandler> observer);
         observer.OnGoing += MoveForward;
 
-
-        _trackingMotionManagerMB.TryGetOrCreateEmptyObserver(firstKeyIndex, LEFT_MOTION_ID, out  observer);
+        _trackingMotionManagerMB.TryGetOrCreateEmptyObserver(LEFT_MOTION_ID, out  observer);
         observer.OnComplete += MoveOneLeft;
-        _trackingMotionManagerMB.TryGetOrCreateEmptyObserver(firstKeyIndex, RIGHT_MOTION_ID, out observer);
+
+        _trackingMotionManagerMB.TryGetOrCreateEmptyObserver(RIGHT_MOTION_ID, out observer);
         observer.OnComplete += MoveOneRight;
 
+        _counter++;
+        _trackingMotionManagerMB.SetNewMotionsPack(_snakeMotionsPack[_counter % _snakeMotionsPack.Length]);
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _counter++;
-            _trackingMotionManagerMB.SetNewMotionsPack(_trackingMotionManagerMB.SkeletonDictionary.Keys.First(), Foo[_counter % Foo.Length]);
+            _trackingMotionManagerMB.SetNewMotionsPack( _snakeMotionsPack[_counter % _snakeMotionsPack.Length]);
         }
     }
     private void OnDestroy()
     {
-        int firstKeyID = _trackingMotionManagerMB.SkeletonDictionary.Keys.First();
-        _trackingMotionManagerMB.TryGetObserver(firstKeyID, FORWARD_MOTION_ID, out var observer);
-
+        _trackingMotionManagerMB.TryGetObserver(FORWARD_MOTION_ID, out var observer);
         observer.OnGoing -= MoveForward;
-        _trackingMotionManagerMB.TryGetObserver(firstKeyID, LEFT_MOTION_ID, out observer);
+        _trackingMotionManagerMB.TryGetObserver(LEFT_MOTION_ID, out observer);
         observer.OnComplete -= MoveOneLeft;
-        _trackingMotionManagerMB.TryGetObserver(firstKeyID, RIGHT_MOTION_ID, out observer);
+        _trackingMotionManagerMB.TryGetObserver(RIGHT_MOTION_ID, out observer);
         observer.OnComplete -= MoveOneRight;
     }
 

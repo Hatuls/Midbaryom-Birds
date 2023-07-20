@@ -11,59 +11,28 @@ namespace ZED.Tracking
     }
     public interface IBaseIntervalCondition<T> : IBaseMotionCondition<T>
     {
-        //event Action OnConditionFalse;
-        //event Action OnConditionTrue;
-        //event Action OnConditionStarted;
-        //event Action OnConditionFinished;
-
         StatusType Status { get; }
-        //  bool IsOnGoing { get; }
         int FrameInterval { get; }
         int ID { get; }
         bool IsPassFrameInterval();
         void NextFrame(float deltaTime);
         void Reset();
         void ResetFrameCounter();
-
     }
 
     [Serializable]
     public abstract class BaseIntervalCondition<T> : IBaseIntervalCondition<T>
     {
-        //public event Action OnConditionTrue;
-        //public event Action OnConditionFalse;
-        //public event Action OnConditionStarted;
-        //public event Action OnConditionFinished;
-
         [SerializeField]
         private int _frameCounter;
-
-
-        public int FrameInterval { get; private set; }
         [SerializeField]
         protected T _deltaData;
         [SerializeField]
         private StatusType _status;
 
-        //[SerializeField]
-        //private bool _isOnGoing;
-        //public bool IsOnGoing
-        //{
-        //    get => _isOnGoing; protected set
-        //    {
-        //        if (value != _isOnGoing)
-        //            _isOnGoing = value;
-
-        //        if (IsOnGoing)
-        //            OnConditionTrue?.Invoke();
-        //        else
-        //            OnConditionFalse?.Invoke();
-        //    }
-        //}
-
-        public StatusType Status { get => _status; protected set => _status = value; }
-
         public int ID { get; }
+        public int FrameInterval { get; private set; }
+        public StatusType Status { get => _status; protected set => _status = value; }
 
         public BaseIntervalCondition(int id, int frameInterval)
         {

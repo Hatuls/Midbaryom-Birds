@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace ZED.Tracking
 {
-    public class TrackingTestManager : TrackingMotionManager<SkeletonHandler>
+    public class TrackingSkeletonHandler : BaseTrackingInstance<SkeletonHandler>
     {
         public SkeletonHandler SkeletonHandler { get; set; }
 
@@ -11,27 +11,21 @@ namespace ZED.Tracking
         {
             return SkeletonHandler;
         }
-
     }
 
 
     public class TrackingMotionManagerMB : BaseTrackingMotion<SkeletonHandler>
     {
-        private TrackingTestManager[] _trackingTestManager;
+        private TrackingSkeletonHandler _tracker;
 
         [SerializeField]
         private ZEDBodyTrackingManager _zEDBodyTrackingManager;
 
-        public override TrackingMotionManager<SkeletonHandler>[] TrackingMotionManager => _trackingTestManager;
+        public override BaseTrackingInstance<SkeletonHandler> Tracker => _tracker;
 
-        public Dictionary<int, TrackingTestManager> SkeletonDictionary = new Dictionary<int, TrackingTestManager>();
         protected override  void Awake()
         {
-            _trackingTestManager = new TrackingTestManager[4];
-            for (int i = 0; i < _trackingTestManager.Length; i++)
-            {
-                _trackingTestManager[i] = new TrackingTestManager();
-            }
+            _tracker = new TrackingSkeletonHandler();
             base.Awake();
         }
         protected override void Update()
@@ -40,18 +34,7 @@ namespace ZED.Tracking
             if (_zEDBodyTrackingManager == null || !IsBodyTrackingWorking())
                 return;
 
-
-            foreach (KeyValuePair<int, SkeletonHandler> item in _zEDBodyTrackingManager.AvatarControlList)
-            {
-                if (!SkeletonDictionary.TryGetValue(item.Key, out var motionManager))
-                {
-                    motionManager = _trackingTestManager[SkeletonDictionary.Count];
-                    SkeletonDictionary.Add(item.Key, motionManager);
-                }
-
-                motionManager.SkeletonHandler = item.Value;
-            }
-
+            _tracker.SkeletonHandler = _zEDBodyTrackingManager.AvatarControlList[0];
 
             base.Update();
         }

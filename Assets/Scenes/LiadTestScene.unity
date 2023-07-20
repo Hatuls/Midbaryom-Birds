@@ -360,10 +360,10 @@ MonoBehaviour:
   - {x: 3, y: 0, z: 0}
   Speed: 5
   _trackingMotionManagerMB: {fileID: 1824231211}
-  Foo:
-  - {fileID: 11400000, guid: b8faba4377688f8489f1e9912c887956, type: 2}
-  - {fileID: 11400000, guid: 1b481b6fd7d02c94298b9a1a0581d745, type: 2}
-  - {fileID: 11400000, guid: 7d82e135da102b248801361aa2bba9a3, type: 2}
+  _snakeMotionsPack:
+  - {fileID: 11400000, guid: 9f6e990f262f3bc48b782d1106b46f37, type: 2}
+  - {fileID: 11400000, guid: 2d167b2b9bb00ed42bedde8e59b70b9e, type: 2}
+  - {fileID: 11400000, guid: 795b84bfdbc023c4ca97df288e4ba458, type: 2}
 --- !u!4 &1055698546
 Transform:
   m_ObjectHideFlags: 0

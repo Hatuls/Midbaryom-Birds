@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using UnityEngine;
 namespace ZED.Tracking
 {
@@ -9,20 +8,16 @@ namespace ZED.Tracking
         private float _deltaTime;
         private bool _isGameOn;
 
- 
-        public abstract TrackingMotionManager<T>[] TrackingMotionManager { get; }
+
+        public abstract BaseTrackingInstance<T> Tracker { get; }
 
 
         protected virtual void Update()
         {
             _deltaTime = Time.deltaTime;
 
-            for (int i = 0; i < TrackingMotionManager.Length; i++)
-            {
-                for (int j = 0; j < TrackingMotionManager[i].Observers.Count; j++)
-                TrackingMotionManager[i].Observers[j].Tick();
-
-            }
+            for (int j = 0; j < Tracker.Observers.Count; j++)
+                Tracker.Observers[j].Tick();
         }
         protected virtual void Awake()
         {
@@ -42,10 +37,7 @@ namespace ZED.Tracking
             {
                 while (_isGameOn)
                 {
-                    for (int i = 0; i < TrackingMotionManager.Length; i++)
-                    {
-                        TrackingMotionManager[i].Tick(_deltaTime);
-                    }
+                    Tracker.Tick(_deltaTime);
                 }
             }
             catch (System.Exception e)
@@ -55,40 +47,40 @@ namespace ZED.Tracking
             }
             Debug.Log("Loop Ended");
         }
-        public void Add(int id, params IBaseIntervalCondition<T>[] motions)
+        public void Add(params IBaseIntervalCondition<T>[] motions)
         {
             for (int i = 0; i < motions.Length; i++)
-                Add(id, motions[i]);
+                Add(motions[i]);
 
         }
 
-        public void Remove(int id, params IBaseIntervalCondition<T>[] motions)
+        public void Remove(params IBaseIntervalCondition<T>[] motions)
         {
             for (int i = 0; i < motions.Length; i++)
-                Remove(id, motions[i]);
+                Remove(motions[i]);
         }
-        public void Add(int id, IBaseIntervalCondition<T> motion)
+        public void Add(IBaseIntervalCondition<T> motion)
         {
-            TrackingMotionManager[id].AddIntervals(motion);
-            if (TryGetObserver(id, motion.ID, out var observer))
+            Tracker.AddIntervals(motion);
+            if (TryGetObserver(motion.ID, out var observer))
                 observer.AssignCondition(motion);
             else
-                TrackingMotionManager[id].Observers.Add(new MotionObserver<T>(motion.ID, motion));
+                Tracker.Observers.Add(new MotionObserver<T>(motion.ID, motion));
         }
 
-        public void Remove(int id, int motionID, IBaseIntervalCondition<T> motion)
+        public void Remove(IBaseIntervalCondition<T> motion)
         {
-            TrackingMotionManager[id].RemoveIntervals( motion);
-            if (TryGetObserver(id, motion.ID, out var observer))
+            Tracker.RemoveIntervals(motion);
+            if (TryGetObserver(motion.ID, out var observer))
                 observer.AssignCondition(null);
         }
-        public void RemoveAll(int id)
+        public void RemoveAll()
         {
-            TrackingMotionManager[id].RemoveAll();
+            Tracker.RemoveAll();
         }
-        public bool TryGetObserver(int id,int motionID, out MotionObserver<T> motion)
+        public bool TryGetObserver(int motionID, out MotionObserver<T> motion)
         {
-            var observers = TrackingMotionManager[id].Observers;
+            var observers = Tracker.Observers;
             int count = observers.Count;
             motion = null;
             if (count > 0)
@@ -105,12 +97,12 @@ namespace ZED.Tracking
             return false;
         }
 
-        public void TryGetOrCreateEmptyObserver(int id, int motionID , out MotionObserver<T> motion)
+        public void TryGetOrCreateEmptyObserver(int motionID, out MotionObserver<T> motion)
         {
-            if (!TryGetObserver(id, motionID, out motion))
+            if (!TryGetObserver(motionID, out motion))
             {
-                motion = new MotionObserver<T>(id);
-                TrackingMotionManager[id].Observers.Add(motion);
+                motion = new MotionObserver<T>(motionID, null);
+                Tracker.Observers.Add(motion);
             }
         }
     }
