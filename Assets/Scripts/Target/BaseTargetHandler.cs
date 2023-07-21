@@ -33,10 +33,6 @@ namespace Midbaryom.Core
         {
             if (HasTargetAttached)
             {
-                int LayerStopIgnore = LayerMask.NameToLayer("Animal");
-                var newMask = GameManager.Instance.zoomCamera.cullingMask | (1 << LayerStopIgnore);
-                GameManager.Instance.zoomCamera.cullingMask = newMask;
-
                 HasTargetAttached = false;
                 _holdingTarget.DestroyHandler.Destroy();
                 _aimAssists.UnLockTarget();

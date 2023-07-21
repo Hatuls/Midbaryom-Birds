@@ -46,7 +46,10 @@ namespace Midbaryom.Core
         public HeightConfigSO HeightConfigSO;
         public SpawnConfigSO _spawnConfig;
 
-        public UnityEngine.Camera zoomCamera;
+        public UnityEngine.Camera mainCam;
+        public UnityEngine.Camera zoomCam;
+
+        public Animator eagleAnimator;
         private void Awake()
         {
             if (_instance == null || _instance == this)

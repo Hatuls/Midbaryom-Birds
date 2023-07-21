@@ -1109,7 +1109,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 417044524765322834, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
       propertyPath: field of view
-      value: 10.000001
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 417044524765322834, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
       propertyPath: m_FocalLength
@@ -2082,6 +2082,18 @@ PrefabInstance:
     - target: {fileID: 3401383980636536663, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401383980636669641, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -84.61797
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401383980636669641, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -86.891106
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401383980636669641, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 219.86218
       objectReference: {fileID: 0}
     - target: {fileID: 3667342044682633435, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
       propertyPath: m_IsActive
@@ -4030,7 +4042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1058997992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5509,7 +5521,9 @@ MonoBehaviour:
   HuntUp: {fileID: 11400000, guid: 9774fc0d2dba7d0488b72d7bfd033afc, type: 2}
   HeightConfigSO: {fileID: 11400000, guid: b9d3e3f037e28ee4991170e0fb5cd06e, type: 2}
   _spawnConfig: {fileID: 11400000, guid: 96662b79441852048aef4ceed3d20473, type: 2}
-  zoomCamera: {fileID: 417044525184744075}
+  mainCam: {fileID: 7954466998024878237}
+  zoomCam: {fileID: 417044525184744075}
+  eagleAnimator: {fileID: 1911033051}
 --- !u!4 &1808002221
 Transform:
   m_ObjectHideFlags: 0
@@ -5921,6 +5935,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _delay: 6
+--- !u!95 &1911033051 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3401383980629187031, guid: 2658a52b7487f314cbda309938d44b26, type: 3}
+  m_PrefabInstance: {fileID: 419488985}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1924912438
 GameObject:
   m_ObjectHideFlags: 0

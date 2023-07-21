@@ -159,6 +159,8 @@ namespace Midbaryom.Core
                     _isPlayingAnimation = true;
                     OnCloseToTarget?.Invoke();
                     _entity.VisualHandler.AnimatorController.SetTrigger("Attack");
+                    //_entity.VisualHandler.AnimatorController.SetBool("IsEating", true);
+
                 }
             }
 

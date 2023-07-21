@@ -36,7 +36,7 @@ public class CarcussEatingVisualController : MonoBehaviour
         IReadOnlyDictionary<StateType, IState> statesMachine = _player.StateMachine.StateDictionary;
         var diveState = statesMachine[StateType.Dive] as PlayerDiveState;
         var recoverState = statesMachine[StateType.Recover];
-        recoverState.OnStateEnterEvent += ReturnToNormal;
+        recoverState.OnStateEnterEvent += () => StartCoroutine(ReturnToNormal());
         diveState.OnStateEnterEvent += ApplyEffectOnlyOnDive;
         diveState.OnCloseToTarget += DisablePossProcessing;
         //_eatState = statesMachine[StateType.Eat];
@@ -93,11 +93,41 @@ public class CarcussEatingVisualController : MonoBehaviour
     }
     private void EnablePossProcessing() => OnStartEatingCarcuss?.Invoke();
     private void DisablePossProcessing() => OnFinishedEating?.Invoke();
-    private void ReturnToNormal()
+    private IEnumerator ReturnToNormal()
     {
-        StartCoroutine(FOVTransition(_endEffect));
+        //all hard coded = problem!
+
+
+        yield return new WaitForSeconds(4.7f);
         EnablePossProcessing();
         ResetCameraMask();
+
+        GameManager.Instance.eagleAnimator.SetTrigger("ReturnToBaseState");
+
+
+        int LayerIgnore2 = LayerMask.NameToLayer("Bird Body");
+        var newMask2 = GameManager.Instance.zoomCam.cullingMask & ~(1 << LayerIgnore2);
+        GameManager.Instance.zoomCam.cullingMask = newMask2;
+
+        int LayerIgnore3 = LayerMask.NameToLayer("Animal");
+        var newMask3 = GameManager.Instance.zoomCam.cullingMask & ~(1 << LayerIgnore3);
+        GameManager.Instance.zoomCam.cullingMask = newMask3;
+
+        yield return (StartCoroutine(FOVTransition(_endEffect)));
+
+        int LayerStopIgnore = LayerMask.NameToLayer("Animal");
+        var newMask = GameManager.Instance.mainCam.cullingMask | (1 << LayerStopIgnore);
+        GameManager.Instance.mainCam.cullingMask = newMask;
+
+        int LayerStopIgnore2 = LayerMask.NameToLayer("Bird Body");
+        var newMask4 = GameManager.Instance.zoomCam.cullingMask | (1 << LayerStopIgnore2);
+        GameManager.Instance.zoomCam.cullingMask = newMask4;
+
+        int LayerStopIgnore3 = LayerMask.NameToLayer("Animal");
+        var newMask5 = GameManager.Instance.zoomCam.cullingMask | (1 << LayerStopIgnore3);
+        GameManager.Instance.zoomCam.cullingMask = newMask5;
+
+
     }
 
     private void ResetCameraMask()
@@ -112,7 +142,7 @@ public class CarcussEatingVisualController : MonoBehaviour
         IReadOnlyDictionary<StateType, IState> statesMachine = _player.StateMachine.StateDictionary;
         var diveState = statesMachine[StateType.Dive] as PlayerDiveState;
         var recoverState = statesMachine[StateType.Recover];
-        recoverState.OnStateEnterEvent -= ReturnToNormal;
+        recoverState.OnStateEnterEvent -= () => StartCoroutine(ReturnToNormal());
         diveState.OnStateEnterEvent      -= ApplyEffectOnlyOnDive;
         diveState.OnCloseToTarget -= DisablePossProcessing;
     }

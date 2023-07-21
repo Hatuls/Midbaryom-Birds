@@ -29,7 +29,7 @@ namespace Midbaryom.Core
         }
         private void OnEnable()
         {
-            _entity.VisualHandler.AnimatorController.SetBool("isDead", false);
+            //_entity.VisualHandler.AnimatorController.SetTrigger("isDead");
             //_rb.isKinematic = false;
             //_rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         }
@@ -39,8 +39,8 @@ namespace Midbaryom.Core
         public void Eaten()
         {
             int LayerIgnore = LayerMask.NameToLayer("Animal");
-            var newMask = GameManager.Instance.zoomCamera.cullingMask & ~(1 << LayerIgnore);
-            GameManager.Instance.zoomCamera.cullingMask = newMask;
+            var newMask = GameManager.Instance.mainCam.cullingMask & ~(1 << LayerIgnore);
+            GameManager.Instance.mainCam.cullingMask = newMask;
 
             _entity.MovementHandler.StopMovement = true;
             _entity.Rotator.StopRotation = true;
