@@ -98,12 +98,14 @@ public class CarcussEatingVisualController : MonoBehaviour
         //all hard coded = problem!
 
 
-        yield return new WaitForSeconds(4.7f);
+        yield return new WaitForSeconds(4);
         EnablePossProcessing();
         ResetCameraMask();
 
         GameManager.Instance.eagleAnimator.SetTrigger("ReturnToBaseState");
 
+        yield return new WaitForEndOfFrame();
+        GameManager.Instance.eagleAnimator.ResetTrigger("ReturnToBaseState");
 
         int LayerIgnore2 = LayerMask.NameToLayer("Bird Body");
         var newMask2 = GameManager.Instance.zoomCam.cullingMask & ~(1 << LayerIgnore2);

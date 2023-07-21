@@ -13,6 +13,11 @@ namespace Midbaryom.Core
 
         public abstract void InitStateMachine();
 
+
+        private void Update()
+        {
+            Debug.Log(StateMachine.CurrentState.ToString());
+        }
         public virtual void Tick()
         {
             _playerStateMachine.Tick();

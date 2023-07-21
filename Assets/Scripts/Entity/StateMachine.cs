@@ -12,7 +12,7 @@ namespace Midbaryom.Core
 {
     public class StateMachine : IStateMachine
     {
-        private StateType _currentStateType;
+        [SerializeField] private StateType _currentStateType;
         protected Dictionary<StateType, IState> _stateDictionary;
 
         public IReadOnlyDictionary<StateType, IState> StateDictionary => _stateDictionary;
