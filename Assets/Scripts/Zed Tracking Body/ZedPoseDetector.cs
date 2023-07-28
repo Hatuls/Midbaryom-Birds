@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class ZedPoseDetector : MonoBehaviour
 {
+    public static float handZPosOffset = 0.2f;
 
     [SerializeField]
     private BodyTrackingConfigSO _bodyTrackingConfigSO;
@@ -157,7 +158,6 @@ public interface IBodyTrackAnalyzer
 
 public class TurningLeftPosture : IBodyTrackAnalyzer
 {
-
     //public event Action OnPostureDetected;
     public const int LEFT_HAND = (int)sl.BODY_38_PARTS.LEFT_WRIST;
     public const int LEFT_SHOULDER = (int)sl.BODY_38_PARTS.LEFT_SHOULDER;
@@ -198,7 +198,7 @@ public class TurningLeftPosture : IBodyTrackAnalyzer
         float rightAngle = Mathf.Sin(rightShoulderToHand.y / rightShoulderToHand.x) * Mathf.Rad2Deg;
         float leftAngle = Mathf.Sin(leftShoulderToHand.y / leftShoulderToHand.x) * Mathf.Rad2Deg;
 
-        bool handAbove = rightShoulder.z < rightHand.z;
+        bool handAbove = rightHand.z > rightShoulder.z + ZedPoseDetector.handZPosOffset;
 
         if(GameManager.Instance.useDebugMessages)
         {
@@ -257,7 +257,7 @@ public class TurningLeftPosture : IBodyTrackAnalyzer
 
     public void PostureDetected()
     {
-        playerController.Rotate(Vector3.left / 2);
+        playerController.Rotate(Vector3.left);
         //OnPostureDetected?.Invoke();
     }
 
@@ -311,7 +311,7 @@ public class TurningRightPosture : IBodyTrackAnalyzer
         float rightAngle = Mathf.Sin(rightShoulderToHand.y / rightShoulderToHand.x) * Mathf.Rad2Deg;
         float leftAngle = Mathf.Sin(leftShoulderToHand.y / leftShoulderToHand.x) * Mathf.Rad2Deg;
 
-        bool handAbove = leftShoulder.z < leftHand.z;
+        bool handAbove = leftHand.z > leftShoulder.z + ZedPoseDetector.handZPosOffset;
 
         if (GameManager.Instance.useDebugMessages)
         {
@@ -357,7 +357,7 @@ public class TurningRightPosture : IBodyTrackAnalyzer
 
     public void PostureDetected()
     {
-        playerController.Rotate(Vector3.right / 2);
+        playerController.Rotate(Vector3.right);
         //OnPostureDetected?.Invoke();
     }
 
@@ -427,7 +427,8 @@ public class HuntingPosture : IBodyTrackAnalyzer
 
 
 
-        bool isCorrectPosture = IsHandsCloseToShoulderOnXAxis(leftXDistance, rightXDistance) /*&& isHandsCloseToShoulder*/;
+        //bool isCorrectPosture = IsHandsCloseToShoulderOnXAxis(leftXDistance, rightXDistance) /*&& isHandsCloseToShoulder*/;
+        bool isCorrectPosture = BothHandAbove(leftShoulder, leftHand, rightShoulder, rightHand) /*&& isHandsCloseToShoulder*/;
 
         if(isCorrectPosture)
         {
@@ -441,14 +442,22 @@ public class HuntingPosture : IBodyTrackAnalyzer
 
         return isCorrectPosture;
   
-        bool IsHandsCloseToShoulderOnXAxis(float leftDistance, float rightDistance)
-        {
-
-
-            return leftDistance <= _distance && rightDistance <= _distance;
-        }
-
     }
+
+    bool IsHandsCloseToShoulderOnXAxis(float leftDistance, float rightDistance)
+    {
+
+
+        return leftDistance <= _distance && rightDistance <= _distance;
+    }
+
+    bool BothHandAbove(Vector3 leftShoulder, Vector3 leftHand, Vector3 rightShoulder, Vector3 rightHand)
+    {
+
+        return leftHand.z >= leftShoulder.z + ZedPoseDetector.handZPosOffset &&
+                          rightHand.z >= rightShoulder.z + ZedPoseDetector.handZPosOffset;
+    }
+
     //public void ClearLog()
     //{
     //    var assembly = Assembly.GetAssembly(typeof(UnityEditor.Editor));

@@ -89,6 +89,7 @@ namespace Midbaryom.Inputs
                 return;
 
             _movementInputHandler.Handle(direction);
+
         }
         public void SetInputBehaviour(IInputHandler<Vector2> inputBehaviour)
         {
