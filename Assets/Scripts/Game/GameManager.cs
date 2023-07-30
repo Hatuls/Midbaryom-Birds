@@ -84,6 +84,8 @@ namespace Midbaryom.Core
         {
             if (Input.GetKeyDown(KeyCode.Escape))
                 Application.Quit();
+            if (Input.GetKeyUp(KeyCode.DownArrow))
+                useDebugMessages = !useDebugMessages;
         }
         private void OnDestroy()
         {

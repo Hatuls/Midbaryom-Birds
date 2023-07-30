@@ -694,7 +694,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Above R: Yes'
+  m_Text: 
 --- !u!222 &170941264
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2390,7 +2390,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left R 25
+  m_Text: 
 --- !u!222 &466651864
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2469,7 +2469,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left R 25
+  m_Text: 
 --- !u!222 &514710056
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4015,7 +4015,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left R 25
+  m_Text: 
 --- !u!222 &1042642073
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4042,7 +4042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1058997992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4582,7 +4582,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left R 25
+  m_Text: 
 --- !u!222 &1484191049
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4913,7 +4913,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left R 25
+  m_Text: 
 --- !u!222 &1572358701
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5410,7 +5410,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Above R: Yes'
+  m_Text: 
 --- !u!222 &1774058231
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5500,7 +5500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd265308b777494d97abf92ef43faf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useDebugMessages: 1
+  useDebugMessages: 0
   leftL: {fileID: 1572358700}
   rightL: {fileID: 514710055}
   aboveL: {fileID: 1774058230}
@@ -5738,7 +5738,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left R 25
+  m_Text: 
 --- !u!222 &1868572027
 CanvasRenderer:
   m_ObjectHideFlags: 0
