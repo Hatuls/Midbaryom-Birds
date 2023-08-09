@@ -107,6 +107,15 @@ public class TargetedAnimalIcon
         _targetedImageObject.SetActive(false);
     }
 
+    public void Hide()
+    {
+        _targetedImageObject.transform.parent.gameObject.SetActive(false);
+    }
+    public void Show()
+    {
+        _targetedImageObject.transform.parent.gameObject.SetActive(true);
+    }
+
     public void Init(GameObject gameObject, TargetGroup entityTag)
     {
         var parentTransform = gameObject.transform;
