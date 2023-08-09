@@ -31,6 +31,8 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        audioSources = new Dictionary<sounds, AudioSource>();
+
         for (int i = 0; i < System.Enum.GetValues(typeof(sounds)).Length; i++)
         {
             audioSources.Add((sounds)i, allAudioSources[i]);
