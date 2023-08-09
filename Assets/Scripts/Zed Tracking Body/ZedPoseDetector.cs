@@ -378,6 +378,7 @@ public class HuntingPosture : IBodyTrackAnalyzer
 
     public const int RIGHT_HAND = (int)sl.BODY_38_PARTS.RIGHT_WRIST;
     public const int RIGHT_SHOULDER = (int)sl.BODY_38_PARTS.RIGHT_SHOULDER;
+    public const int NECK = (int)sl.BODY_38_PARTS.NECK;
     private readonly PlayerController playerController;
     private float _distance;
 
@@ -428,7 +429,10 @@ public class HuntingPosture : IBodyTrackAnalyzer
 
 
         //bool isCorrectPosture = IsHandsCloseToShoulderOnXAxis(leftXDistance, rightXDistance) /*&& isHandsCloseToShoulder*/;
-        bool isCorrectPosture = BothHandAbove(leftShoulder, leftHand, rightShoulder, rightHand) /*&& isHandsCloseToShoulder*/;
+
+        Vector3 necKPos = skeletonJoints[NECK];
+
+        bool isCorrectPosture = BothHandAbove(leftShoulder, leftHand, rightShoulder, rightHand, necKPos) /*&& isHandsCloseToShoulder*/;
 
         if(isCorrectPosture)
         {
@@ -451,11 +455,11 @@ public class HuntingPosture : IBodyTrackAnalyzer
         return leftDistance <= _distance && rightDistance <= _distance;
     }
 
-    bool BothHandAbove(Vector3 leftShoulder, Vector3 leftHand, Vector3 rightShoulder, Vector3 rightHand)
+    bool BothHandAbove(Vector3 leftShoulder, Vector3 leftHand, Vector3 rightShoulder, Vector3 rightHand, Vector3 neckPos)
     {
 
-        return leftHand.z >= leftShoulder.z + ZedPoseDetector.handZPosOffset &&
-                          rightHand.z >= rightShoulder.z + ZedPoseDetector.handZPosOffset;
+        return leftHand.z >= neckPos.z + ZedPoseDetector.handZPosOffset &&
+                          rightHand.z >= neckPos.z + ZedPoseDetector.handZPosOffset;
     }
 
     //public void ClearLog()
