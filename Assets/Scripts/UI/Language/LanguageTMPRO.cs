@@ -22,6 +22,15 @@ public class LanguageTMPRO : MonoBehaviour
         ChangeAllignments(currentLangauge);
     }
 
+    private void ManuallyCheckLanguage()
+    {
+        if (ApplicationManager.Instance == null)
+            gameObject.SetActive(false);
+
+        currentLangauge = ApplicationManager.Instance?.LanguageSettings?.LanguageType ?? LanguageType.English;
+        ChangeAllignments(currentLangauge);
+    }
+
     protected void ChangeAllignments(LanguageType currentLangauge)
     {
         if (_textMeshProUGUI == null)
@@ -45,6 +54,8 @@ public class LanguageTMPRO : MonoBehaviour
 
     public virtual void SetText(int index)
     {
+        ManuallyCheckLanguage();
+
         string text = ApplicationManager.Instance?.LanguageSettings?.GetText(index);
         if (_textMeshProUGUI != null)
             _textMeshProUGUI.text = text;
