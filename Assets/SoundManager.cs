@@ -8,17 +8,19 @@ public enum sounds
     WindForToutorial,
     MoveRightTutorial,
     MoveLeftTutorial,
-    Nesika,
+    tslila,
     StartFlyingInGame,
     MoveRightInGame,
     MoveLeftInGame,
     Grab,
-    EndGameUIAppear
+    GrabDeadAnimal,
+    EndGameUIAppear,
+    LockingOnPrey
 
 }
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
+    public static SoundManager Instance;
 
     public List<AudioSource> allAudioSources;
 
@@ -26,7 +28,14 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
     private void Start()
@@ -39,12 +48,39 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public IEnumerator PlaySound(sounds sound)
+    public void CallPlaySound(sounds sound)
     {
+        StartCoroutine(PlaySound(sound));
+    }
+    private IEnumerator PlaySound(sounds sound)
+    {
+        if (audioSources[sound].gameObject.activeInHierarchy) yield break;
+
         audioSources[sound].gameObject.SetActive(true);
 
         yield return new WaitForSeconds(audioSources[sound].clip.length);
 
+        if(!audioSources[sound].loop)
+        {
+            audioSources[sound].gameObject.SetActive(false);
+        }
+    }
+
+    public void StopSound(sounds sound)
+    {
         audioSources[sound].gameObject.SetActive(false);
+    }
+
+    public void StopAllSounds()
+    {
+        foreach (var pair in audioSources)
+        {
+            pair.Value.gameObject.SetActive(false);
+        }
+    }
+
+    public bool isSoundPlaying(sounds sound)
+    {
+        return audioSources[sound].gameObject.activeInHierarchy;
     }
 }

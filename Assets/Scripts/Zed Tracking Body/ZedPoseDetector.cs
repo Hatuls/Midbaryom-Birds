@@ -258,6 +258,8 @@ public class TurningLeftPosture : IBodyTrackAnalyzer
     public void PostureDetected()
     {
         playerController.Rotate(Vector3.left);
+
+        SoundManager.Instance.CallPlaySound(sounds.MoveLeftInGame);
         //OnPostureDetected?.Invoke();
     }
 
@@ -358,6 +360,9 @@ public class TurningRightPosture : IBodyTrackAnalyzer
     public void PostureDetected()
     {
         playerController.Rotate(Vector3.right);
+
+        SoundManager.Instance.CallPlaySound(sounds.MoveLeftInGame);
+
         //OnPostureDetected?.Invoke();
     }
 
@@ -369,7 +374,7 @@ public class TurningRightPosture : IBodyTrackAnalyzer
 
 
 
-public class HuntingPosture : IBodyTrackAnalyzer
+public class HuntingPosture : MonoBehaviour, IBodyTrackAnalyzer
 {
     //public event Action OnPostureDetected;
     public const int LEFT_HAND = (int)sl.BODY_38_PARTS.LEFT_WRIST;
@@ -437,6 +442,7 @@ public class HuntingPosture : IBodyTrackAnalyzer
         if(isCorrectPosture)
         {
             Debug.Log("Correct");
+
         }
         else
         {

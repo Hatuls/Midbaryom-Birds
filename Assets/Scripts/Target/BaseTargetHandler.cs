@@ -27,6 +27,8 @@ namespace Midbaryom.Core
 
             // Target.TargetBehaviour.Targeted();
             _aimAssists.LockTarget();
+
+            SoundManager.Instance.CallPlaySound(sounds.LockingOnPrey);
         }
 
         public virtual void ResetTarget()
@@ -80,7 +82,7 @@ namespace Midbaryom.Core
 
             SetTargetAtHoldingPosition(_holdingTarget);
         }
-     
+
 
         protected virtual void SetTargetAtHoldingPosition(IEntity target)
         {

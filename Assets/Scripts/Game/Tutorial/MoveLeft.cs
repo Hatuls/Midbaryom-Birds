@@ -31,10 +31,16 @@ namespace Midbaryom.Core.Tutorial
             ShowInstructions();
             StartCoroutine(EffectCoroutine(_fadeIn));
             base.TaskStarted();
+
         }
         void CheckTask()
         {
-            if(_endAngle >= _playerTransform.rotation.eulerAngles.y)
+            if (_endAngle >= _playerTransform.localRotation.eulerAngles.y / 1.5f)
+            {
+                SoundManager.Instance.CallPlaySound(sounds.MoveLeftTutorial);
+            }
+
+            if (_endAngle >= _playerTransform.rotation.eulerAngles.y)
             {
             TaskCompleted();
             }

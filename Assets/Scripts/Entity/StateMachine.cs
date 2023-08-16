@@ -3,14 +3,12 @@ using Midbaryom.Camera;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Midbaryom.Core
 {
-    public class StateMachine : IStateMachine
+    public class StateMachine : MonoBehaviour, IStateMachine
     {
         [SerializeField] private StateType _currentStateType;
         protected Dictionary<StateType, IState> _stateDictionary;
@@ -63,7 +61,7 @@ namespace Midbaryom.Core
     }
 
 
-    public abstract class BaseState : IState
+    public abstract class BaseState : MonoBehaviour, IState
     {
         public event Action OnStateEnterEvent, OnStateExitEvent, OnStateTickEvent;
         protected readonly IEntity _entity;
@@ -122,6 +120,18 @@ namespace Midbaryom.Core
             _movementHandler.StopMovement = true;
             _player.PlayerController.LockInputs = true;
             base.OnStateEnter();
+
+            if(SoundManager.Instance.isSoundPlaying(sounds.WindForToutorial))
+            {
+                SoundManager.Instance.StopSound(sounds.WindForToutorial);
+            }
+
+            if(SoundManager.Instance.isSoundPlaying(sounds.StartFlyingInGame))
+            {
+                SoundManager.Instance.StopSound(sounds.StartFlyingInGame);
+            }
+
+            SoundManager.Instance.CallPlaySound(sounds.tslila);
         }
 
         public override void OnStateExit()
@@ -159,6 +169,10 @@ namespace Midbaryom.Core
                     _isPlayingAnimation = true;
                     OnCloseToTarget?.Invoke();
                     _entity.VisualHandler.AnimatorController.SetTrigger("Attack");
+
+                    SoundManager.Instance.StopSound(sounds.tslila);
+                    SoundManager.Instance.CallPlaySound(sounds.Grab);
+
                     //_entity.VisualHandler.AnimatorController.SetBool("IsEating", true);
 
                 }
@@ -205,6 +219,8 @@ namespace Midbaryom.Core
 
         public override void OnStateEnter()
         {
+            SoundManager.Instance.CallPlaySound(sounds.StartFlyingInGame);
+
             _entity.HeightHandler.ChangeState(HeightType.Player);
             _player.CameraManager.ChangeState(CameraState.FaceUp);
             _entity.StatHandler[StatType.MovementSpeed].Value += _recoverSpeed.Value;

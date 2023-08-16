@@ -38,10 +38,11 @@ public class ScreenTransitioner : MonoBehaviour
     public void StartExit(int nextScene)
     {
         _img.gameObject.SetActive(true);
-        StartCoroutine(EffectCoroutine(_exitEffect,FinishExit));
+        StartCoroutine(EffectCoroutine(_exitEffect, () => StartCoroutine(FinishExit())));
 
-        void FinishExit()
+        IEnumerator FinishExit()
         {
+            yield return new WaitForSeconds(4);
             _sceneHandler.LoadSceneAdditive(nextScene, true);
         }
     }

@@ -154,6 +154,7 @@ namespace Midbaryom.Core
         internal void LockTarget()
         {
             _lockTarget = true;
+
         }
 
         public void ResetTarget()

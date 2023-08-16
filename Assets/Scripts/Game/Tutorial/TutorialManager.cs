@@ -40,6 +40,10 @@ namespace Midbaryom.Core.Tutorial
 
         private void InitTutorial()
         {
+            GameManager.isDuringTutorial = true;
+
+            SoundManager.Instance.CallPlaySound(sounds.WindForToutorial);
+
             for (int i = 0; i < _baseTutorialTasks.Length; i++)
                 _baseTutorialTasks[i].OnComplete += MoveNext;
         }
@@ -57,6 +61,7 @@ namespace Midbaryom.Core.Tutorial
         private void MoveNext()
         {
             _currentTask++;
+
             if (_currentTask < _baseTutorialTasks.Length)
                 _baseTutorialTasks[_currentTask].TaskStarted();
             else
@@ -67,6 +72,8 @@ namespace Midbaryom.Core.Tutorial
 
         private void CompleteTutorial()
         {
+            GameManager.isDuringTutorial = false;
+
             if (PlayerScore.Instance != null)
                 PlayerScore.Instance.ResetScores();
             OnTutorialCompleted?.Invoke();

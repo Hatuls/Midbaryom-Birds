@@ -23,6 +23,7 @@ namespace Midbaryom.Core
         public float leftRTemp, rightRTemp;
         public float leftLTemp, rightLTemp;
         public float distanceTemp;
+        public static bool isDuringTutorial;
 
 
 

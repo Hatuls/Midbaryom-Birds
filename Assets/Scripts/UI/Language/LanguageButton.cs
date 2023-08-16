@@ -7,5 +7,7 @@ public class LanguageButton : MonoBehaviour
     public void Click()
     {
         ApplicationManager.Instance.SetLanguage(_languageType);
+
+        SoundManager.Instance.CallPlaySound(sounds.StartOfGame);
     }
 }

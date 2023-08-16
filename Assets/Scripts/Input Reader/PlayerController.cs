@@ -6,8 +6,9 @@ using UnityEngine.InputSystem;
 namespace Midbaryom.Inputs
 {
 
-    public class PlayerController : IUpdateable
+    public class PlayerController : MonoBehaviour, IUpdateable
     {
+
         public event Action<Vector2> OnMove;
         private readonly IEntity _entity;
         private readonly Player _player;
@@ -50,7 +51,9 @@ namespace Midbaryom.Inputs
         public void HuntDown()
         {
             if (_player.AimAssists.HasTarget)
+            {
                 _player.StateMachine.ChangeState(StateType.Dive);
+            }
         }
 
         private void EndHunt(InputAction.CallbackContext obj)
@@ -111,9 +114,18 @@ public interface IInputHandler<T>
 {
     void Handle(T input);
 }
+enum MoveDir
+{
+    None,
+    left,
+    right
+}
 
 public class RegularInputs : IInputHandler<Vector2>
 {
+    //New
+    MoveDir currentMoveDirection = MoveDir.None;
+
     private readonly IEntity _entity;
     public RegularInputs(IEntity entity)
     {
@@ -123,7 +135,25 @@ public class RegularInputs : IInputHandler<Vector2>
     {
         Vector3 result = new Vector3(input.x, 0, 0);
 
+
         _entity.Rotator.AssignRotation(result);
+
+        if (input.x > 0)
+        {
+            if (currentMoveDirection == MoveDir.right) return;
+
+            currentMoveDirection = MoveDir.right;
+
+            SoundManager.Instance.CallPlaySound(sounds.MoveRightInGame);
+        }
+        else if (input.x < 0)
+        {
+            if (currentMoveDirection == MoveDir.left) return;
+
+            currentMoveDirection = MoveDir.left;
+
+            SoundManager.Instance.CallPlaySound(sounds.MoveLeftInGame);
+        }
     }
 }
 public class OnlyRightInputEnabled : IInputHandler<Vector2>
@@ -144,6 +174,7 @@ public class OnlyRightInputEnabled : IInputHandler<Vector2>
         {
             _entity.Rotator.AssignRotation(result);
             OnRight?.Invoke();
+
         }
     }
 }
@@ -166,7 +197,7 @@ public class OnlyLeftInputEnabled : IInputHandler<Vector2>
             _entity.Rotator.AssignRotation(result);
         if (input.x < 0)
             OnLeft?.Invoke();
-        
+
     }
 }
 
