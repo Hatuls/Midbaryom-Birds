@@ -16,7 +16,7 @@ namespace Midbaryom.Core
 
         private void Update()
         {
-            Debug.Log(StateMachine.CurrentState.ToString());
+            //Debug.Log(StateMachine.CurrentState.ToString());
         }
         public virtual void Tick()
         {

@@ -19,9 +19,9 @@ public class LanguageTMPROStaticText : LanguageTMPRO
             _languageType = ApplicationManager.Instance.LanguageSettings.LanguageType;
         ChangeAllignments(_languageType);
         string text = ApplicationManager.Instance?.LanguageSettings?.GetText(index,_languageType);
-        if (_textMeshProUGUI != null)
+        if (rtlText != null)
         {
-            _textMeshProUGUI.text = text;
+            rtlText.text = text;
         }
         else if (_text != null)
         {
@@ -33,7 +33,7 @@ public class LanguageTMPROStaticText : LanguageTMPRO
             _text.text = result;
         }
 
-        ChangeFont(_languageType, _textMeshProUGUI, _text);
+        ChangeFont(_languageType, rtlText, _text);
 
     }
 

@@ -298,7 +298,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 29413369}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: b9839c2d141529145a431aef4d757ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -311,8 +311,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u05E8\u05E2\u05D9 \u05E9\u05D2\u05D1"
   m_isRightToLeft: 1
-  m_fontAsset: {fileID: 11400000, guid: 037d857ced84c8043adccf2822b4c6f5, type: 2}
-  m_sharedMaterial: {fileID: 8718866018853603657, guid: 037d857ced84c8043adccf2822b4c6f5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -378,6 +378,11 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+  preserveNumbers: 0
+  farsi: 1
+  originalText: "\u05E8\u05E2\u05D9 \u05E9\u05D2\u05D1"
+  fixTags: 1
+  forceFix: 0
 --- !u!222 &29413372
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -398,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de8ed0ff6d9fbc428c5882191e2f88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textMeshProUGUI: {fileID: 29413371}
+  rtlText: {fileID: 29413371}
   _text: {fileID: 0}
 --- !u!1 &185571783
 GameObject:
@@ -614,7 +619,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 353353610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: b9839c2d141529145a431aef4d757ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -625,13 +630,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0646\u064A\u0628\u0627\u0639\u062B\u0644\u0627 \u0646\u0645 \u0645\u0647\u0645\u0638\u0639\u0645
-    \u060C\u0646\u0627\u0648\u064A\u062D 200 \u0648\u062D\u0646 \u0646\u064A\u0628\u0627\u0639\u062B\u0644\u0627
-    \u062F\u0627\u064A\u0635 \u0629\u0631\u0627\u0631\u0635 \u0628\u0627\u0642\u0639
-    \u0646\u0645 \u0646\u0627\u062C\u0648\u0632 \u062F\u0627\u0637\u0635\u064A \u060C\u062F\u062D"
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c10d39f0b0f1bd644b9d0ede41b20870, type: 2}
-  m_sharedMaterial: {fileID: 339179210271497659, guid: c10d39f0b0f1bd644b9d0ede41b20870, type: 2}
+  m_text: 
+  m_isRightToLeft: 1
+  m_fontAsset: {fileID: 11400000, guid: 5ca7da7cd9d1d084e940fb3b82ce9751, type: 2}
+  m_sharedMaterial: {fileID: -6949820610600499109, guid: 5ca7da7cd9d1d084e940fb3b82ce9751, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -656,11 +658,11 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontSize: 66.55
-  m_fontSizeBase: 36
+  m_fontSizeBase: 66.55
   m_fontWeight: 400
-  m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 94.29
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 0
+  m_fontSizeMax: 100
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -676,7 +678,7 @@ MonoBehaviour:
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
+  m_enableKerning: 0
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -691,12 +693,17 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 20, y: 40, z: 20, w: 40}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+  preserveNumbers: 0
+  farsi: 1
+  originalText: 
+  fixTags: 1
+  forceFix: 0
 --- !u!222 &353353613
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1007,7 +1014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de8ed0ff6d9fbc428c5882191e2f88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textMeshProUGUI: {fileID: 0}
+  rtlText: {fileID: 0}
   _text: {fileID: 584679062}
 --- !u!1 &620880108
 GameObject:
@@ -1700,7 +1707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de8ed0ff6d9fbc428c5882191e2f88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textMeshProUGUI: {fileID: 0}
+  rtlText: {fileID: 0}
   _text: {fileID: 1240647064}
 --- !u!1 &1252136848
 GameObject:
@@ -2252,7 +2259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de8ed0ff6d9fbc428c5882191e2f88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textMeshProUGUI: {fileID: 353353612}
+  rtlText: {fileID: 353353612}
   _text: {fileID: 0}
 --- !u!1001 &1745018394
 PrefabInstance:

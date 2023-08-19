@@ -1,13 +1,15 @@
 using System;
 using System.Linq;
 using TMPro;
+using RTLTMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LanguageTMPRO : MonoBehaviour
 {
     [SerializeField]
-    protected TextMeshProUGUI _textMeshProUGUI;
+    //protected TextMeshProUGUI _textMeshProUGUI;
+    protected RTLTextMeshPro rtlText;
     [SerializeField]
     protected Text _text;
 
@@ -33,7 +35,7 @@ public class LanguageTMPRO : MonoBehaviour
 
     protected void ChangeAllignments(LanguageType currentLangauge)
     {
-        if (_textMeshProUGUI == null)
+        if (rtlText == null)
             return;
 
         switch (currentLangauge)
@@ -41,10 +43,10 @@ public class LanguageTMPRO : MonoBehaviour
             case LanguageType.Hebrew:
             case LanguageType.Arabic:
                 //_textMeshProUGUI.alignment = TextAlignmentOptions.Midline;
-                _textMeshProUGUI.isRightToLeftText = true;
+                rtlText.isRightToLeftText = true;
                 break;
             case LanguageType.English:
-                _textMeshProUGUI.isRightToLeftText = false;
+                rtlText.isRightToLeftText = false;
                 //_textMeshProUGUI.alignment= TextAlignmentOptions.Midline;
                 break;
             default:
@@ -57,8 +59,8 @@ public class LanguageTMPRO : MonoBehaviour
         ManuallyCheckLanguage();
 
         string text = ApplicationManager.Instance?.LanguageSettings?.GetText(index);
-        if (_textMeshProUGUI != null)
-            _textMeshProUGUI.text = text;
+        if (rtlText != null)
+            rtlText.text = text;
         else if(_text != null)
         {
             string result = text;
@@ -71,7 +73,7 @@ public class LanguageTMPRO : MonoBehaviour
             _text.text = result;
         }
 
-        ChangeFont(currentLangauge, _textMeshProUGUI, _text);
+        ChangeFont(currentLangauge, rtlText, _text);
 
     }
 

@@ -49,7 +49,7 @@ namespace Midbaryom.Core.Tutorial
         {
             _player.Entity.Rotator.AssignRotation(Vector3.zero);
             _moveLeft.OnLeft -= CheckTask;
-            Debug.LogWarning("Task Left Completed");
+            Debug.Log("Task Left Completed");
             base.TaskCompleted();
         }
     }
