@@ -11,7 +11,7 @@ namespace Midbaryom.Inputs
 
         public event Action<Vector2> OnMove;
         private readonly IEntity _entity;
-        private readonly Player _player;
+        public Player _player;
         private readonly BodyTrackingConfigSO _bodyTrackingConfigSO;
 
 
@@ -84,7 +84,16 @@ namespace Midbaryom.Inputs
         private void Rotation()
         {
             Vector2 value = _movementInputAction.ReadValue<Vector2>();
+            Debug.Log("Value 1: " + value);
             _movementInputHandler.Handle(value);
+        }
+        public void CustomCamRotation(Vector2 direction)
+        {
+            Vector2 value = _movementInputAction.ReadValue<Vector2>();
+
+            Debug.Log("Value 2: " + direction);
+
+            _movementInputHandler.Handle(direction);
         }
         public void Rotate(Vector3 direction)
         {
@@ -105,7 +114,6 @@ namespace Midbaryom.Inputs
             foreach (var input in InputActions)
                 input.Disable();
         }
-
     }
 
 }

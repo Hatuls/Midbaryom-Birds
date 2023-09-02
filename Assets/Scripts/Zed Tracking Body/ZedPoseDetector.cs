@@ -63,25 +63,39 @@ public class ZedPoseDetector : MonoBehaviour
 
     private void Update()
     {
-        if (_zEDBodyTrackingManager == null || !_gameStarted)
-            return;
+        if (!_gameStarted) return;
 
-        if (IsBodyTrackingWorking())
-        {
-            foreach (SkeletonHandler item in _zEDBodyTrackingManager.AvatarControlList.Values)
-            {
-                for (int i = 0; i < _bodyTrackAnalyzers.Count; i++)
-                {
-                    if (_bodyTrackAnalyzers[i].CheckPosture(item))
-                    {
-                        _bodyTrackAnalyzers[i].PostureDetected();
-                        break;
-                    }
-                    else
-                        _bodyTrackAnalyzers[i].PostureNotDetected();
-                }
-            }
-        }
+        Debug.Log("Is this working?");
+
+
+
+
+
+
+
+
+
+
+
+        //if (_zEDBodyTrackingManager == null || !_gameStarted)
+        //    return;
+
+        //if (IsBodyTrackingWorking())
+        //{
+        //    foreach (SkeletonHandler item in _zEDBodyTrackingManager.AvatarControlList.Values)
+        //    {
+        //        for (int i = 0; i < _bodyTrackAnalyzers.Count; i++)
+        //        {
+        //            if (_bodyTrackAnalyzers[i].CheckPosture(item))
+        //            {
+        //                _bodyTrackAnalyzers[i].PostureDetected();
+        //                break;
+        //            }
+        //            else
+        //                _bodyTrackAnalyzers[i].PostureNotDetected();
+        //        }
+        //    }
+        //}
     }
 
     private bool IsBodyTrackingWorking()
@@ -179,8 +193,8 @@ public class TurningLeftPosture : IBodyTrackAnalyzer
         //_rightArmAngle = rightArmAngle;
         //_leftArmAngle = leftArmAngle;
 
-        _rightArmAngle = GameManager.Instance.rightLTemp;
-        _leftArmAngle = GameManager.Instance.leftLTemp;
+        _rightArmAngle = GameManager.Instance.moveLeft_LeftArmMin;
+        _leftArmAngle = GameManager.Instance.moveLeft_LeftArmMax;
     }
 
     public bool CheckPosture(SkeletonHandler skeleton)
@@ -288,8 +302,8 @@ public class TurningRightPosture : IBodyTrackAnalyzer
     }
     public TurningRightPosture(float leftArmAngle, float rightArmAngle)
     {
-        _rightArmAngle = GameManager.Instance.rightRTemp;
-        _leftArmAngle = GameManager.Instance.leftRTemp;
+        _rightArmAngle = GameManager.Instance.moveLeft_RightArmMin;
+        _leftArmAngle = GameManager.Instance.moveLeft_RightArmMax;
 
         //_rightArmAngle = rightArmAngle;
         //_leftArmAngle = leftArmAngle;

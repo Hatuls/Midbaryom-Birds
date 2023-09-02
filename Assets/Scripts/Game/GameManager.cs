@@ -15,16 +15,26 @@ namespace Midbaryom.Core
     public class GameManager : MonoBehaviour
     {
         //TEMP
+        [Header("TEMP")]
         public bool useDebugMessages;
         public Text leftL, rightL, aboveL;
         public Text leftR, rightR, aboveR;
         public Text midL, midR;
+        public Canvas debugCanvas;
         public GameSessionConfig sessionConfig;
-        public float leftRTemp, rightRTemp;
-        public float leftLTemp, rightLTemp;
-        public float distanceTemp;
         public static bool isDuringTutorial;
 
+        [Header("Loaded Data")]
+        public float moveRight_RightArmMin, moveRight_RightArmMax;
+        public float moveRight_LeftArmMin, moveRight_LeftArmMax;
+
+        public float moveLeft_RightArmMax, moveLeft_RightArmMin;
+        public float moveLeft_LeftArmMax, moveLeft_LeftArmMin;
+
+        public float hunt_RightArmMax, hunt_RightArmMin;
+        public float hunt_LeftArmMax, hunt_LeftArmMin;
+
+        public float distanceTemp;
 
 
 
@@ -32,7 +42,7 @@ namespace Midbaryom.Core
         public static event Action OnTutorialStarted;
         public static event Action OnGameReset;
 
-
+        [Header("Gameplay")]
         private static GameManager _instance;
         public static GameManager Instance => _instance;
 
@@ -86,7 +96,10 @@ namespace Midbaryom.Core
             if (Input.GetKeyDown(KeyCode.Escape))
                 Application.Quit();
             if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
                 useDebugMessages = !useDebugMessages;
+                debugCanvas.gameObject.SetActive(useDebugMessages);
+            }
         }
         private void OnDestroy()
         {
@@ -112,11 +125,22 @@ namespace Midbaryom.Core
             {
                 string[] parameters = File.ReadAllLines(Application.streamingAssetsPath + "\\Parameter.ini");
 
-                rightLTemp = float.Parse(parameters[0]);
-                leftLTemp = float.Parse(parameters[1]);
-                rightRTemp = float.Parse(parameters[2]);
-                leftRTemp = float.Parse(parameters[3]);
-                distanceTemp = float.Parse(parameters[4]);
+                moveLeft_LeftArmMin = float.Parse(parameters[0]);
+                moveLeft_LeftArmMax = float.Parse(parameters[1]);
+                moveLeft_RightArmMin = float.Parse(parameters[2]);
+                moveLeft_RightArmMax = float.Parse(parameters[3]);
+
+                moveRight_LeftArmMin = float.Parse(parameters[4]);
+                moveRight_LeftArmMax = float.Parse(parameters[5]);
+                moveRight_RightArmMin = float.Parse(parameters[6]);
+                moveRight_RightArmMax = float.Parse(parameters[7]);
+
+                hunt_LeftArmMax = float.Parse(parameters[10]);
+                hunt_LeftArmMin = float.Parse(parameters[11]);
+                hunt_RightArmMax = float.Parse(parameters[8]);
+                hunt_RightArmMin = float.Parse(parameters[9]);
+
+                distanceTemp = float.Parse(parameters[12]);
             }
         }
         public void LoadGameSessionParameters()
@@ -125,7 +149,7 @@ namespace Midbaryom.Core
             {
                 string[] parameters = File.ReadAllLines(Application.streamingAssetsPath + "\\Parameter.ini");
 
-                sessionConfig.SessionTime = float.Parse(parameters[5]);
+                sessionConfig.SessionTime = float.Parse(parameters[13]);
             }
         }
     }

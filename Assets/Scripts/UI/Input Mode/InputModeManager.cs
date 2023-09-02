@@ -47,6 +47,10 @@ public class InputModeManager : MonoBehaviour
                 throw e;
             }
         }
+        else
+        {
+            SetKeyboardInputMode();
+        }
     }
 
 
