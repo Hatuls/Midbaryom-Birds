@@ -53,6 +53,8 @@ namespace Midbaryom.Core
 
         public Vector3 PointOnWorld { get => _pointOnWorld; }
 
+        public TargetedAnimalIconHandler targetAnimalHandler;
+
         private void Start()
         {
             ///Set _targetingTags to the current targeting animals
@@ -154,6 +156,11 @@ namespace Midbaryom.Core
         internal void LockTarget()
         {
             _lockTarget = true;
+
+            if(!GameManager.isDuringTutorial)
+            {
+                targetAnimalHandler.GetIcon(Target).Show();
+            }
 
         }
 

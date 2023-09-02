@@ -8,6 +8,8 @@ public class EagleUILanguage : MonoBehaviour
     private LanguageTMPRO _eagleName;
     [SerializeField]
     private LanguageTMPRO _huntedLike;
+    [SerializeField]
+    private LanguageTMPRO eagleEats;
 
     [SerializeField]
     private ScoreAnalyzer _scoreAnalyzer;
@@ -27,6 +29,34 @@ public class EagleUILanguage : MonoBehaviour
         _huntedLike.SetText(HUNTED_LIKE_TEXT);
         _eagleInfo.SetText(obj.InfoIndex);
         _eagleName.SetText(obj.EagleNameIndex);
+
+
+        if(obj._eagleName == "House sparrow")
+        {
+            eagleEats.gameObject.SetActive(false);
+        }
+        else
+        {
+            eagleEats.gameObject.SetActive(true);
+
+            string text = ApplicationManager.Instance?.LanguageSettings?.GetText(obj.EagleNameIndex);
+            switch (ApplicationManager.Instance.LanguageSettings.LanguageType)
+            {
+                case LanguageType.Hebrew:
+                    eagleEats.rtlText.text = text + "  אוכל";
+                    break;
+                case LanguageType.English:
+                    eagleEats.rtlText.text = text + "  feeds on";
+                    break;
+                case LanguageType.Arabic:
+                    eagleEats.rtlText.text = text + "  يأكل";
+                    break;
+                default:
+                    break;
+            }
+
+            eagleEats.ChangeFont(ApplicationManager.Instance.LanguageSettings.LanguageType, eagleEats.rtlText, null);
+        }
     }
 
 

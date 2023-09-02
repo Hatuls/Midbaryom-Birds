@@ -55,7 +55,7 @@ public class TargetedAnimalIconHandler : MonoBehaviour
         _entityTag = entityTag;
     }
 
-    private TargetedAnimalIcon GetIcon(IEntity entityTag)
+    public TargetedAnimalIcon GetIcon(IEntity entityTag)
     {
         for (int i = 0; i < _targetedAnimalIcons.Length; i++)
         {
@@ -97,14 +97,14 @@ public class TargetedAnimalIcon
 
     public void Targeted()
     {
-        _untargetedImageObject.SetActive(false);
-        _targetedImageObject.SetActive(true);
+        //_untargetedImageObject.SetActive(false);
+        //_targetedImageObject.SetActive(true);
     }
 
     public void UnTargeted()
     {
-        _untargetedImageObject.SetActive(true);
-        _targetedImageObject.SetActive(false);
+        //_untargetedImageObject.SetActive(true);
+        //_targetedImageObject.SetActive(false);
     }
 
     public void Hide()

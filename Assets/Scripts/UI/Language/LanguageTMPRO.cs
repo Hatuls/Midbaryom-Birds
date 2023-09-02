@@ -9,9 +9,9 @@ public class LanguageTMPRO : MonoBehaviour
 {
     [SerializeField]
     //protected TextMeshProUGUI _textMeshProUGUI;
-    protected RTLTextMeshPro rtlText;
+    public RTLTextMeshPro rtlText;
     [SerializeField]
-    protected Text _text;
+    public Text _text;
 
     LanguageType currentLangauge;
 
@@ -103,7 +103,7 @@ public class LanguageTMPRO : MonoBehaviour
         return s;
     }
 
-    private void ChangeFont(LanguageType _languageType, TextMeshProUGUI _textMeshProUGUI, Text _text)
+    public void ChangeFont(LanguageType _languageType, TextMeshProUGUI _textMeshProUGUI, Text _text)
     {
         if (_text)
             _text.font = ApplicationManager.Instance.LanguageSettings.LanguageBank.ReturnFont((int)_languageType);
