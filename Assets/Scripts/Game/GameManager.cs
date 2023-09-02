@@ -135,10 +135,10 @@ namespace Midbaryom.Core
                 moveRight_RightArmMin = float.Parse(parameters[6]);
                 moveRight_RightArmMax = float.Parse(parameters[7]);
 
-                hunt_LeftArmMax = float.Parse(parameters[10]);
-                hunt_LeftArmMin = float.Parse(parameters[11]);
-                hunt_RightArmMax = float.Parse(parameters[8]);
-                hunt_RightArmMin = float.Parse(parameters[9]);
+                hunt_RightArmMin = float.Parse(parameters[8]);
+                hunt_RightArmMax = float.Parse(parameters[9]);
+                hunt_LeftArmMin = float.Parse(parameters[10]);
+                hunt_LeftArmMax = float.Parse(parameters[11]);
 
                 distanceTemp = float.Parse(parameters[12]);
             }

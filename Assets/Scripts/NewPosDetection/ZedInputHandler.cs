@@ -71,11 +71,11 @@ namespace Midbaryom.Core
                 Debug.LogWarning("Got empty player data from Zed");
                 return null;
             }
-            else if (splitData.Length != 9)
-            {
-                Debug.LogWarningFormat("Got invalid player data from Zed. Data is {0}", data);
-                return null;
-            }
+            //else if (splitData.Length != 9)
+            //{
+            //    Debug.LogWarningFormat("Got invalid player data from Zed. Data is {0}", data);
+            //    return null;
+            //}
             ZedPoints playerPoints = new ZedPoints();
             playerPoints.PlayerID = int.Parse(splitData[0]) + 0;
             playerPoints.Head = new Vector2(int.Parse(splitData[1]), int.Parse(splitData[2]));

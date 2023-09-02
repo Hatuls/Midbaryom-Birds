@@ -37,38 +37,47 @@ namespace Midbaryom.Core
 
             CalculateHandAngles();
 
-
-            if(!DetectLeft() && !DetectRight())
-            {
-                DetectHunt();
-            }
+            DetectHunt();
+            DetectLeft();
+            DetectRight();
+            //if (!DetectLeft() && !DetectRight())
+            //{
+            //    DetectHunt();
+            //}
 
         }
 
 
         private void CalculateHandAngles()
         {
-            if (zedpoints.rightShoulder != Vector2.zero && zedpoints.leftShoulder != Vector2.zero)
-            {
-                Vector3 rightShoulderToHand = zedpoints.RightHand - zedpoints.rightShoulder;
-                Vector3 leftShoulderToHand = zedpoints.LeftHand - zedpoints.leftShoulder;
+            Vector3 rightShoulderToHand = zedpoints.RightHand - zedpoints.rightShoulder;
+            Vector3 leftShoulderToHand = zedpoints.LeftHand - zedpoints.leftShoulder;
 
-                rightHandAngle = Mathf.Sin(zedpoints.rightShoulder.y / rightShoulderToHand.x) * Mathf.Rad2Deg;
-                leftHandeAngle = Mathf.Sin(zedpoints.leftShoulder.y / leftShoulderToHand.x) * Mathf.Rad2Deg;
-            }
-            else
-            {
-                Vector3 rightShoulderToHand = zedpoints.RightHand - zedpoints.Head;
-                Vector3 leftShoulderToHand = zedpoints.LeftHand - zedpoints.Head;
+            rightHandAngle = Mathf.Sin(zedpoints.rightShoulder.y / rightShoulderToHand.x) * Mathf.Rad2Deg;
+            leftHandeAngle = Mathf.Sin(zedpoints.leftShoulder.y / leftShoulderToHand.x) * Mathf.Rad2Deg;
 
-                rightHandAngle = Mathf.Sin(zedpoints.Head.y / rightShoulderToHand.x) * Mathf.Rad2Deg;
-                leftHandeAngle = Mathf.Sin(zedpoints.Head.y / leftShoulderToHand.x) * Mathf.Rad2Deg;
-            }
+            //if (zedpoints.rightShoulder != Vector2.zero && zedpoints.leftShoulder != Vector2.zero)
+            //{
+            //    Vector3 rightShoulderToHand = zedpoints.RightHand - zedpoints.rightShoulder;
+            //    Vector3 leftShoulderToHand = zedpoints.LeftHand - zedpoints.leftShoulder;
 
-            if(GameManager.Instance.useDebugMessages)
+            //    rightHandAngle = Mathf.Sin(zedpoints.rightShoulder.y / rightShoulderToHand.x) * Mathf.Rad2Deg;
+            //    leftHandeAngle = Mathf.Sin(zedpoints.leftShoulder.y / leftShoulderToHand.x) * Mathf.Rad2Deg;
+            //}
+            //else
+            //{
+            //    Vector3 rightShoulderToHand = zedpoints.RightHand - zedpoints.Head;
+            //    Vector3 leftShoulderToHand = zedpoints.LeftHand - zedpoints.Head;
+
+            //    rightHandAngle = Mathf.Sin(zedpoints.Head.y / rightShoulderToHand.x) * Mathf.Rad2Deg;
+            //    leftHandeAngle = Mathf.Sin(zedpoints.Head.y / leftShoulderToHand.x) * Mathf.Rad2Deg;
+            //}
+
+            if (GameManager.Instance.useDebugMessages)
             {
                 GameManager.Instance.rightR.text = "Right H Angle: " + rightHandAngle.ToString();
                 GameManager.Instance.leftR.text = "Left H Angle: " + leftHandeAngle.ToString();
+                GameManager.Instance.midL.text = "ABS: " + Mathf.Abs(rightHandAngle + leftHandeAngle).ToString();
                 //GameManager.Instance.aboveR.text = handAbove == true ? "Above R: Yes" : "Above R: No";
             }
         }
@@ -139,7 +148,8 @@ namespace Midbaryom.Core
             if (rightHandAngle > GameManager.Instance.hunt_RightArmMin &&
                 rightHandAngle < GameManager.Instance.hunt_RightArmMax &&
                 leftHandeAngle > GameManager.Instance.hunt_LeftArmMin &&
-                leftHandeAngle < GameManager.Instance.hunt_LeftArmMax)
+                leftHandeAngle < GameManager.Instance.hunt_LeftArmMax /*&&*/
+                /*Mathf.Abs(rightHandAngle + leftHandeAngle) < 10 */)
             {
                 PostureHuntDetected();
                 return true;
@@ -150,9 +160,10 @@ namespace Midbaryom.Core
 
         public void PostureHuntDetected()
         {
+            Debug.Log("Hunt Detected");
+
             if (playerRef.PlayerController._player == null) return;
 
-            Debug.Log("Hunt Detected");
 
             playerRef.PlayerController.HuntDown();
         }
