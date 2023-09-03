@@ -22,24 +22,34 @@ namespace Midbaryom.Core
             {
                 PostureLeftDetected();
             }
-            if (Input.GetKey(KeyCode.C))
+            else if (Input.GetKey(KeyCode.C))
             {
                 PostureRightDetected();
             }
-            if (Input.GetKey(KeyCode.X))
+            else if (Input.GetKey(KeyCode.X))
             {
                 PostureHuntDetected();
             }
+            else
+            {
+                playerRef.PlayerController.CustomResetCamRotation();
+            }
 
+
+            // from here on out - must detect a person to check.
             zedpoints = ZedInputHandler.GetPlayerPosition(0);
 
             if (zedpoints == null) return;
 
             CalculateHandAngles();
 
-            DetectHunt();
-            DetectLeft();
-            DetectRight();
+            if(!DetectLeft() && !DetectRight())
+            {
+                if(!DetectHunt())
+                {
+                    playerRef.PlayerController.CustomResetCamRotation();
+                }
+            }
             //if (!DetectLeft() && !DetectRight())
             //{
             //    DetectHunt();
@@ -148,8 +158,8 @@ namespace Midbaryom.Core
             if (rightHandAngle > GameManager.Instance.hunt_RightArmMin &&
                 rightHandAngle < GameManager.Instance.hunt_RightArmMax &&
                 leftHandeAngle > GameManager.Instance.hunt_LeftArmMin &&
-                leftHandeAngle < GameManager.Instance.hunt_LeftArmMax /*&&*/
-                /*Mathf.Abs(rightHandAngle + leftHandeAngle) < 10 */)
+                leftHandeAngle < GameManager.Instance.hunt_LeftArmMax &&
+                Mathf.Abs(rightHandAngle + leftHandeAngle) < 10)
             {
                 PostureHuntDetected();
                 return true;

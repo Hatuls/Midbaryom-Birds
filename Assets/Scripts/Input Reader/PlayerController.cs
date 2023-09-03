@@ -85,16 +85,20 @@ namespace Midbaryom.Inputs
         {
             Vector2 value = _movementInputAction.ReadValue<Vector2>();
             Debug.Log("Value 1: " + value);
-            _movementInputHandler.Handle(value);
+            //_movementInputHandler.Handle(value);
         }
         public void CustomCamRotation(Vector2 direction)
         {
-            Vector2 value = _movementInputAction.ReadValue<Vector2>();
-
             Debug.Log("Value 2: " + direction);
 
             _movementInputHandler.Handle(direction);
         }
+
+        public void CustomResetCamRotation()
+        {
+            _movementInputHandler.Handle(Vector3.zero);
+        }
+
         public void Rotate(Vector3 direction)
         {
             if (LockInputs)

@@ -22,6 +22,7 @@ namespace Midbaryom.Core
         public Text midL, midR;
         public Canvas debugCanvas;
         public GameSessionConfig sessionConfig;
+        public float maxRotationSpeed;
         public static bool isDuringTutorial;
 
         [Header("Loaded Data")]
