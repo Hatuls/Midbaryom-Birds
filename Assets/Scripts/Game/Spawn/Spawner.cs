@@ -1,5 +1,6 @@
 using Midbaryom.Core.Config;
 using Midbaryom.Pool;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,12 +25,21 @@ namespace Midbaryom.Core
 
         [SerializeField]
         private bool _toStopReposition;
-
+        public float _tickTime = 0.002f;
         private HeightConfigSO _heightConfigSO;
         private IEntity _playerEntity;
         private IPlayer _player;
         private UnityEngine.Camera _camera;
         private bool _startSpawning;
+        [SerializeField]
+        private AimAssists _aimAssists;
+
+
+        [SerializeField]
+        private float _maxViewPort = 1f;
+        [SerializeField]
+        private float _minViewPort = 0f;
+
         public IReadOnlyList<IEntity> AllEntities => _activeEntities;
 
         public IEntity PlayerEntity
@@ -66,37 +76,72 @@ namespace Midbaryom.Core
             _heightConfigSO = GameManager.Instance.HeightConfigSO;
             _playerEntity = PlayerEntity;
             _camera = UnityEngine.Camera.main;
+            StartCoroutine(SpawnCoroutine());
         }
 
         private void OnDestroy()
         {
             GameManager.OnGameStarted -= StartGame;
+            StopAllCoroutines();
         }
-        private void FixedUpdate()
+
+
+
+        private IEnumerator SpawnCoroutine()
         {
-            if (!_startSpawning)
-                return;
-            // check if there is enough mobs on the map
-            // if not then spawn new mob
-            if (AllEntities.Count - 1 < _spawnConfig.MaxMobsCount)
-                SpawnEntity();
+            var yieldInstructions = new WaitForSeconds(_tickTime);
+            while (true)
+            {
 
-            // check all mobs locations and distance from the player
-            // any far mob will need to be repositioned;
-            if (!_toStopReposition)
-                RePositionMob();
+                if (!_startSpawning)
+                {
+                    yield return null;
+                    continue;
+                }
+                else
+                    yield return yieldInstructions;
+                // check if there is enough mobs on the map
+                // if not then spawn new mob
+                if (AllEntities.Count - 1 < _spawnConfig.MaxMobsCount)
+                    SpawnEntity();
+
+                // check all mobs locations and distance from the player
+                // any far mob will need to be repositioned;
+                if (!_toStopReposition)
+                    RePositionMob();
+
+            }
         }
+        public IEntity GetEntity(EntityTagSO entityTagSO)
+        {
+            for (int i = 0; i < _activeEntities.Count; i++)
+            {
+                if (_activeEntities[i].EntityTagSO == entityTagSO)
+                    return _activeEntities[i];
 
+            }
+            throw new System.Exception("Entity was not found active - " + entityTagSO.name);
+
+        }
         private void RePositionMob()
         {
             List<IEntity> tooFarEntities = new List<IEntity>();
+            Vector3 playerPosition = _aimAssists.PointOnWorld;
+            EntityTagSO entityTagSO = _player.Entity.EntityTagSO;
+            var currentTarget = _player.AimAssists.Target;
             for (int i = 0; i < AllEntities.Count; i++)
             {
-                Vector3 playerPosition = _playerEntity.CurrentPosition;
-                Vector3 currentPosition = AllEntities[i].CurrentPosition;
+                IEntity entity = AllEntities[i];
+                Vector3 currentPosition = entity.CurrentPosition;
+                if (_player.AimAssists.HasTarget)
+                {
+                    bool isCurrentTarget = currentTarget.InstanceID == entity.InstanceID;
+                    if (isCurrentTarget)
+                        continue;
+                }
 
-                if (Vector3.Distance(currentPosition, playerPosition) > _spawnConfig.ReturnRadius)
-                    tooFarEntities.Add(AllEntities[i]);
+                if (Vector3.Distance(currentPosition, playerPosition) > _spawnConfig.ReturnRadius && entity.EntityTagSO != entityTagSO)
+                    tooFarEntities.Add(entity);
             }
 
             if (tooFarEntities.Count > 0)
@@ -118,13 +163,13 @@ namespace Midbaryom.Core
             SpawnEntity(mobTag);
         }
 
-        public IEntity SpawnEntity(EntityTagSO mobTag,Vector3 spawnLocation)
+        public IEntity SpawnEntity(EntityTagSO mobTag, Vector3 spawnLocation)
         {
             IEntity mob = _poolManager.Pull(mobTag);
             Transform t = mob.Transform;
             t.SetParent(null);
             mob.Rigidbody.isKinematic = true;
-            t.position = spawnLocation;  
+            t.position = spawnLocation;
             t.gameObject.SetActive(true);
             mob.Rigidbody.isKinematic = false;
             return mob;
@@ -134,10 +179,12 @@ namespace Midbaryom.Core
             IEntity mob = _poolManager.Pull(mobTag);
             Transform t = mob.Transform;
             t.SetParent(null);
+            mob.Rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
             mob.Rigidbody.isKinematic = true;
             float yPos = _heightConfigSO.GetHeight(mobTag.StartingHeight).Height + _spawningHeightOffset;
             t.position = GenerateSpawnLocation(yPos, _spawnConfig.SpawnRadius);
             t.gameObject.SetActive(true);
+            mob.Rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
             mob.Rigidbody.isKinematic = false;
             return mob;
         }
@@ -149,14 +196,15 @@ namespace Midbaryom.Core
             t.SetParent(null);
             mob.Rigidbody.isKinematic = true;
             float yPos = _heightConfigSO.GetHeight(mobTag.StartingHeight).Height + _spawningHeightOffset;
-            t.position = GenerateSpawnLocation(yPos, radius );
+            t.position = GenerateSpawnLocation(yPos, radius);
             t.gameObject.SetActive(true);
             mob.Rigidbody.isKinematic = false;
             return mob;
         }
-        private Vector3 GenerateSpawnLocation(float yPos,float radius)
+        private Vector3 GenerateSpawnLocation(float yPos, float radius)
         {
-            Vector3 playerPosition = _playerEntity.Transform.position;
+            // Vector3 playerPosition = _playerEntity.Transform.position;
+            Vector3 playerPosition = _aimAssists.PointOnWorld;
             Vector3 destination = playerPosition;
             destination.y = yPos;
             do
@@ -169,7 +217,7 @@ namespace Midbaryom.Core
             Ray rei = new Ray(destination, Vector3.down);
             if (Physics.Raycast(rei, out RaycastHit raycastHit, 500f, -1))
             {
-                const float GROUND_OFFSET = 2f;
+                const float GROUND_OFFSET = 5f;
                 destination.y = raycastHit.point.y + GROUND_OFFSET;
             }
             else
@@ -208,12 +256,12 @@ namespace Midbaryom.Core
             }
 
             bool Is01(float a)
-            => a > 0 && a < 1;
+            => a > _minViewPort && a < _maxViewPort;
 
             float GetRandomPoint(float playerAxisPoint)
             {
                 float min = playerAxisPoint - radius;
-                float max = playerAxisPoint + radius ;
+                float max = playerAxisPoint + radius;
 
                 if (min <= max)
                     return UnityEngine.Random.Range(min, max);

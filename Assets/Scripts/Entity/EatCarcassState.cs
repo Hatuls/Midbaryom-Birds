@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections;
 
 namespace Midbaryom.Core
 {
@@ -18,7 +19,6 @@ namespace Midbaryom.Core
        
         }
 
-
         public override void OnStateEnter()
         {
             SetConfig(true);
@@ -31,15 +31,26 @@ namespace Midbaryom.Core
 
         public override void OnStateExit()
         {
-            SetConfig( false);
+            SetConfig(false);
             base.OnStateExit();
         }
 
         private void SetConfig(bool value)
         {
+            //if (value)
+            //{
+            //    SoundManager.Instance.StopSound(sounds.tslila);
+            //    SoundManager.Instance.CallPlaySound(sounds.GrabDeadAnimal);
+            //}
+            //else
+            //{
+            //    SoundManager.Instance.CallPlaySound(sounds.StartFlyingInGame);
+            //}
+
             _entity.Rotator.StopRotation = value;
             _entity.MovementHandler.StopMovement = value;
             _entity.VisualHandler.AnimatorController.SetBool("IsEating", value);
+
         }
 
         public override void OnStateTick()

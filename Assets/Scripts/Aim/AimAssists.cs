@@ -38,7 +38,7 @@ namespace Midbaryom.Core
         [SerializeField]
         private TagSO[] _targetingTags;
 
-
+        private Vector3 _pointOnWorld;
         private bool _lockTarget;
         private Vector3 _middleScreenPoint;
         public bool HasTarget => Target != null;
@@ -50,6 +50,10 @@ namespace Midbaryom.Core
         public IReadOnlyList<IEntity> AllTargets { get => _allTargets; }
         public IWarningTargets WarningTargets { get => _warningTargets; }
         public Vector3 FacingDirection => (ScreenToWorldPoint() - transform.position).normalized;
+
+        public Vector3 PointOnWorld { get => _pointOnWorld; }
+
+        public TargetedAnimalIconHandler targetAnimalHandler;
 
         private void Start()
         {
@@ -64,24 +68,27 @@ namespace Midbaryom.Core
             Scan(FacingDirection);
         }
 
-        private Vector3 ScreenToWorldPoint()
-        => _camera.ViewportToWorldPoint(Quaternion.Euler(_offset) * _middleScreenPoint);
+        public Vector3 ScreenToWorldPoint()
+        => _camera.ViewportToWorldPoint(_offset+ _middleScreenPoint);
 
 
         private void Scan(Vector3 facingDirection)
         {
             if (ShootRaycast(facingDirection, out RaycastHit raycastHit))
             {
-                IEntity closestTarget = CheckDistance(raycastHit.point);
+                _pointOnWorld = raycastHit.point;
+                IEntity closestTarget = CheckDistance(_pointOnWorld);
+
                 if (closestTarget != null)
                 { 
                     AssignTarget(closestTarget);
                     WarnOtherTarget();
                     return;
                 }
+                else ResetTarget();
             }
-
-            ResetTarget();
+            else
+                ResetTarget();
         }
 
 
@@ -112,7 +119,7 @@ namespace Midbaryom.Core
                 {
                     currentEntity = allActiveEntities[i];
 
-                    if (!currentEntity.ContainOneOrMoreTags(_targetingTags))
+                    if (!currentEntity.ContainOneOrMoreTags(_targetingTags) )
                         continue;
 
                   //  if (!currentEntity.EntityTagSO.CanBeTargeted)
@@ -128,7 +135,7 @@ namespace Midbaryom.Core
                         else if (currentsTargetDistance < GetDistance(closestTarget, middleScanPoint))
                             closestTarget = currentEntity;
 
-                        if(!_allTargets.Contains(currentEntity))
+                        if(!_allTargets.Contains(currentEntity) && currentEntity.Transform.position.y >= -25f)
                         _allTargets.Add(currentEntity);
                     }
                     else
@@ -149,6 +156,12 @@ namespace Midbaryom.Core
         internal void LockTarget()
         {
             _lockTarget = true;
+
+            if(!GameManager.isDuringTutorial)
+            {
+                targetAnimalHandler.GetIcon(Target).Show();
+            }
+
         }
 
         public void ResetTarget()
@@ -210,7 +223,7 @@ namespace Midbaryom.Core
             //     Gizmos.DrawLine(_camera.transform.position, hit.point);
 
 
-         
+
         }
 
         private void OnDrawGizmos()
@@ -234,7 +247,7 @@ namespace Midbaryom.Core
             {
                 Gizmos.color = Color.blue;
                 Vector3 currentPosition = entity.CurrentPosition;
-                Gizmos.DrawLine(currentPosition, currentPosition + entity.MovementHandler.CurrentFacingDirection * (transform.position-currentPosition).magnitude);
+                Gizmos.DrawLine(currentPosition, currentPosition + entity.MovementHandler.CurrentFacingDirection * (transform.position - currentPosition).magnitude);
             }
 
             void DrawTargetsFacingTowardPlayerDirection(IEntity entity)

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Midbaryom.Core
-{
     [CreateAssetMenu(menuName ="ScriptableObjects/Tags/New Tag")]
     public class TagSO : ScriptableObject { }
     public interface ITaggable
@@ -115,4 +113,3 @@ namespace Midbaryom.Core
             return isContainAll;
         }
     }
-}

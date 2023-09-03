@@ -15,7 +15,7 @@ public class TimerText : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _text;
     [SerializeField]
-    private TimerSO _sessionTime ;
+    private GameSessionConfig _sessionTime ;
     float _counter = 0;
 
     [SerializeField]
@@ -76,6 +76,9 @@ public class TimerText : MonoBehaviour
         {
             isTimeDepleted = true;
             OnTimeEnded?.Invoke();
+
+            SoundManager.Instance.StopAllSounds();
+            SoundManager.Instance.CallPlaySound(sounds.EndGameUIAppear);
         }
 
     }

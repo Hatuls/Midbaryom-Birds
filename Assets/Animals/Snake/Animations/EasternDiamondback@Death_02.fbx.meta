@@ -1,204 +1,550 @@
 fileFormatVersion: 2
 guid: 8c91997b2b2b3f24ca44a45cafc11037
-timeCreated: 1551384500
-licenseType: Store
 ModelImporter:
-  serializedVersion: 19
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: Head
-    100004: Jaw
-    100006: LeftFang01
-    100008: LeftFang02
-    100010: LeftFang03
-    100012: LeftTongue01
-    100014: LeftTongue02
-    100016: LeftTongue03
-    100018: LeftTongue04
-    100020: LeftTongue05
-    100022: LeftTongue06
-    100024: LowerLip
-    100026: RightFang01
-    100028: RightFang02
-    100030: RightFang03
-    100032: RightTongue01
-    100034: RightTongue02
-    100036: RightTongue03
-    100038: RightTongue04
-    100040: RightTongue05
-    100042: RightTongue06
-    100044: Spine01
-    100046: Spine02
-    100048: Spine03
-    100050: Spine04
-    100052: Spine05
-    100054: Spine06
-    100056: Spine07
-    100058: Spine08
-    100060: Spine09
-    100062: Spine10
-    100064: Spine11
-    100066: Spine12
-    100068: Spine13
-    100070: Spine14
-    100072: Spine15
-    100074: Spine16
-    100076: Spine17
-    100078: Spine18
-    100080: Spine19
-    100082: Spine20
-    100084: Spine21
-    100086: Spine22
-    100088: Spine23
-    100090: Spine24
-    100092: Spine25
-    100094: Spine26
-    100096: Spine27
-    100098: Spine28
-    100100: Spine29
-    100102: Spine30
-    100104: Spine31
-    100106: Spine32
-    100108: Spine33
-    100110: Spine34
-    100112: Spine35
-    100114: Spine36
-    100116: Spine37
-    100118: Spine38
-    100120: Spine39
-    100122: Spine40
-    100124: Spine41
-    100126: Spine42
-    100128: Spine43
-    100130: Spine44
-    100132: Spine45
-    100134: Spine46
-    100136: Spine47
-    100138: Spine48
-    100140: Spine49
-    100142: ThroatBone
-    100144: Tongue01
-    100146: Tongue02
-    100148: Tongue03
-    100150: Tongue04
-    100152: Tongue05
-    100154: Tongue06
-    100156: Tongue07
-    100158: Tongue08
-    100160: Tongue09
-    100162: Tongue10
-    100164: Tongue11
-    100166: UpperLip
-    400000: //RootNode
-    400002: Head
-    400004: Jaw
-    400006: LeftFang01
-    400008: LeftFang02
-    400010: LeftFang03
-    400012: LeftTongue01
-    400014: LeftTongue02
-    400016: LeftTongue03
-    400018: LeftTongue04
-    400020: LeftTongue05
-    400022: LeftTongue06
-    400024: LowerLip
-    400026: RightFang01
-    400028: RightFang02
-    400030: RightFang03
-    400032: RightTongue01
-    400034: RightTongue02
-    400036: RightTongue03
-    400038: RightTongue04
-    400040: RightTongue05
-    400042: RightTongue06
-    400044: Spine01
-    400046: Spine02
-    400048: Spine03
-    400050: Spine04
-    400052: Spine05
-    400054: Spine06
-    400056: Spine07
-    400058: Spine08
-    400060: Spine09
-    400062: Spine10
-    400064: Spine11
-    400066: Spine12
-    400068: Spine13
-    400070: Spine14
-    400072: Spine15
-    400074: Spine16
-    400076: Spine17
-    400078: Spine18
-    400080: Spine19
-    400082: Spine20
-    400084: Spine21
-    400086: Spine22
-    400088: Spine23
-    400090: Spine24
-    400092: Spine25
-    400094: Spine26
-    400096: Spine27
-    400098: Spine28
-    400100: Spine29
-    400102: Spine30
-    400104: Spine31
-    400106: Spine32
-    400108: Spine33
-    400110: Spine34
-    400112: Spine35
-    400114: Spine36
-    400116: Spine37
-    400118: Spine38
-    400120: Spine39
-    400122: Spine40
-    400124: Spine41
-    400126: Spine42
-    400128: Spine43
-    400130: Spine44
-    400132: Spine45
-    400134: Spine46
-    400136: Spine47
-    400138: Spine48
-    400140: Spine49
-    400142: ThroatBone
-    400144: Tongue01
-    400146: Tongue02
-    400148: Tongue03
-    400150: Tongue04
-    400152: Tongue05
-    400154: Tongue06
-    400156: Tongue07
-    400158: Tongue08
-    400160: Tongue09
-    400162: Tongue10
-    400164: Tongue11
-    400166: UpperLip
-    7400000: Death_02
-    9500000: //RootNode
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: Head
+  - first:
+      1: 100004
+    second: Jaw
+  - first:
+      1: 100006
+    second: LeftFang01
+  - first:
+      1: 100008
+    second: LeftFang02
+  - first:
+      1: 100010
+    second: LeftFang03
+  - first:
+      1: 100012
+    second: LeftTongue01
+  - first:
+      1: 100014
+    second: LeftTongue02
+  - first:
+      1: 100016
+    second: LeftTongue03
+  - first:
+      1: 100018
+    second: LeftTongue04
+  - first:
+      1: 100020
+    second: LeftTongue05
+  - first:
+      1: 100022
+    second: LeftTongue06
+  - first:
+      1: 100024
+    second: LowerLip
+  - first:
+      1: 100026
+    second: RightFang01
+  - first:
+      1: 100028
+    second: RightFang02
+  - first:
+      1: 100030
+    second: RightFang03
+  - first:
+      1: 100032
+    second: RightTongue01
+  - first:
+      1: 100034
+    second: RightTongue02
+  - first:
+      1: 100036
+    second: RightTongue03
+  - first:
+      1: 100038
+    second: RightTongue04
+  - first:
+      1: 100040
+    second: RightTongue05
+  - first:
+      1: 100042
+    second: RightTongue06
+  - first:
+      1: 100044
+    second: Spine01
+  - first:
+      1: 100046
+    second: Spine02
+  - first:
+      1: 100048
+    second: Spine03
+  - first:
+      1: 100050
+    second: Spine04
+  - first:
+      1: 100052
+    second: Spine05
+  - first:
+      1: 100054
+    second: Spine06
+  - first:
+      1: 100056
+    second: Spine07
+  - first:
+      1: 100058
+    second: Spine08
+  - first:
+      1: 100060
+    second: Spine09
+  - first:
+      1: 100062
+    second: Spine10
+  - first:
+      1: 100064
+    second: Spine11
+  - first:
+      1: 100066
+    second: Spine12
+  - first:
+      1: 100068
+    second: Spine13
+  - first:
+      1: 100070
+    second: Spine14
+  - first:
+      1: 100072
+    second: Spine15
+  - first:
+      1: 100074
+    second: Spine16
+  - first:
+      1: 100076
+    second: Spine17
+  - first:
+      1: 100078
+    second: Spine18
+  - first:
+      1: 100080
+    second: Spine19
+  - first:
+      1: 100082
+    second: Spine20
+  - first:
+      1: 100084
+    second: Spine21
+  - first:
+      1: 100086
+    second: Spine22
+  - first:
+      1: 100088
+    second: Spine23
+  - first:
+      1: 100090
+    second: Spine24
+  - first:
+      1: 100092
+    second: Spine25
+  - first:
+      1: 100094
+    second: Spine26
+  - first:
+      1: 100096
+    second: Spine27
+  - first:
+      1: 100098
+    second: Spine28
+  - first:
+      1: 100100
+    second: Spine29
+  - first:
+      1: 100102
+    second: Spine30
+  - first:
+      1: 100104
+    second: Spine31
+  - first:
+      1: 100106
+    second: Spine32
+  - first:
+      1: 100108
+    second: Spine33
+  - first:
+      1: 100110
+    second: Spine34
+  - first:
+      1: 100112
+    second: Spine35
+  - first:
+      1: 100114
+    second: Spine36
+  - first:
+      1: 100116
+    second: Spine37
+  - first:
+      1: 100118
+    second: Spine38
+  - first:
+      1: 100120
+    second: Spine39
+  - first:
+      1: 100122
+    second: Spine40
+  - first:
+      1: 100124
+    second: Spine41
+  - first:
+      1: 100126
+    second: Spine42
+  - first:
+      1: 100128
+    second: Spine43
+  - first:
+      1: 100130
+    second: Spine44
+  - first:
+      1: 100132
+    second: Spine45
+  - first:
+      1: 100134
+    second: Spine46
+  - first:
+      1: 100136
+    second: Spine47
+  - first:
+      1: 100138
+    second: Spine48
+  - first:
+      1: 100140
+    second: Spine49
+  - first:
+      1: 100142
+    second: ThroatBone
+  - first:
+      1: 100144
+    second: Tongue01
+  - first:
+      1: 100146
+    second: Tongue02
+  - first:
+      1: 100148
+    second: Tongue03
+  - first:
+      1: 100150
+    second: Tongue04
+  - first:
+      1: 100152
+    second: Tongue05
+  - first:
+      1: 100154
+    second: Tongue06
+  - first:
+      1: 100156
+    second: Tongue07
+  - first:
+      1: 100158
+    second: Tongue08
+  - first:
+      1: 100160
+    second: Tongue09
+  - first:
+      1: 100162
+    second: Tongue10
+  - first:
+      1: 100164
+    second: Tongue11
+  - first:
+      1: 100166
+    second: UpperLip
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: Head
+  - first:
+      4: 400004
+    second: Jaw
+  - first:
+      4: 400006
+    second: LeftFang01
+  - first:
+      4: 400008
+    second: LeftFang02
+  - first:
+      4: 400010
+    second: LeftFang03
+  - first:
+      4: 400012
+    second: LeftTongue01
+  - first:
+      4: 400014
+    second: LeftTongue02
+  - first:
+      4: 400016
+    second: LeftTongue03
+  - first:
+      4: 400018
+    second: LeftTongue04
+  - first:
+      4: 400020
+    second: LeftTongue05
+  - first:
+      4: 400022
+    second: LeftTongue06
+  - first:
+      4: 400024
+    second: LowerLip
+  - first:
+      4: 400026
+    second: RightFang01
+  - first:
+      4: 400028
+    second: RightFang02
+  - first:
+      4: 400030
+    second: RightFang03
+  - first:
+      4: 400032
+    second: RightTongue01
+  - first:
+      4: 400034
+    second: RightTongue02
+  - first:
+      4: 400036
+    second: RightTongue03
+  - first:
+      4: 400038
+    second: RightTongue04
+  - first:
+      4: 400040
+    second: RightTongue05
+  - first:
+      4: 400042
+    second: RightTongue06
+  - first:
+      4: 400044
+    second: Spine01
+  - first:
+      4: 400046
+    second: Spine02
+  - first:
+      4: 400048
+    second: Spine03
+  - first:
+      4: 400050
+    second: Spine04
+  - first:
+      4: 400052
+    second: Spine05
+  - first:
+      4: 400054
+    second: Spine06
+  - first:
+      4: 400056
+    second: Spine07
+  - first:
+      4: 400058
+    second: Spine08
+  - first:
+      4: 400060
+    second: Spine09
+  - first:
+      4: 400062
+    second: Spine10
+  - first:
+      4: 400064
+    second: Spine11
+  - first:
+      4: 400066
+    second: Spine12
+  - first:
+      4: 400068
+    second: Spine13
+  - first:
+      4: 400070
+    second: Spine14
+  - first:
+      4: 400072
+    second: Spine15
+  - first:
+      4: 400074
+    second: Spine16
+  - first:
+      4: 400076
+    second: Spine17
+  - first:
+      4: 400078
+    second: Spine18
+  - first:
+      4: 400080
+    second: Spine19
+  - first:
+      4: 400082
+    second: Spine20
+  - first:
+      4: 400084
+    second: Spine21
+  - first:
+      4: 400086
+    second: Spine22
+  - first:
+      4: 400088
+    second: Spine23
+  - first:
+      4: 400090
+    second: Spine24
+  - first:
+      4: 400092
+    second: Spine25
+  - first:
+      4: 400094
+    second: Spine26
+  - first:
+      4: 400096
+    second: Spine27
+  - first:
+      4: 400098
+    second: Spine28
+  - first:
+      4: 400100
+    second: Spine29
+  - first:
+      4: 400102
+    second: Spine30
+  - first:
+      4: 400104
+    second: Spine31
+  - first:
+      4: 400106
+    second: Spine32
+  - first:
+      4: 400108
+    second: Spine33
+  - first:
+      4: 400110
+    second: Spine34
+  - first:
+      4: 400112
+    second: Spine35
+  - first:
+      4: 400114
+    second: Spine36
+  - first:
+      4: 400116
+    second: Spine37
+  - first:
+      4: 400118
+    second: Spine38
+  - first:
+      4: 400120
+    second: Spine39
+  - first:
+      4: 400122
+    second: Spine40
+  - first:
+      4: 400124
+    second: Spine41
+  - first:
+      4: 400126
+    second: Spine42
+  - first:
+      4: 400128
+    second: Spine43
+  - first:
+      4: 400130
+    second: Spine44
+  - first:
+      4: 400132
+    second: Spine45
+  - first:
+      4: 400134
+    second: Spine46
+  - first:
+      4: 400136
+    second: Spine47
+  - first:
+      4: 400138
+    second: Spine48
+  - first:
+      4: 400140
+    second: Spine49
+  - first:
+      4: 400142
+    second: ThroatBone
+  - first:
+      4: 400144
+    second: Tongue01
+  - first:
+      4: 400146
+    second: Tongue02
+  - first:
+      4: 400148
+    second: Tongue03
+  - first:
+      4: 400150
+    second: Tongue04
+  - first:
+      4: 400152
+    second: Tongue05
+  - first:
+      4: 400154
+    second: Tongue06
+  - first:
+      4: 400156
+    second: Tongue07
+  - first:
+      4: 400158
+    second: Tongue08
+  - first:
+      4: 400160
+    second: Tongue09
+  - first:
+      4: 400162
+    second: Tongue10
+  - first:
+      4: 400164
+    second: Tongue11
+  - first:
+      4: 400166
+    second: UpperLip
+  - first:
+      74: 7400000
+    second: Death_02
+  - first:
+      95: 9500000
+    second: //RootNode
+  externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 0
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: Death_02
       takeName: Base Stack
+      internalID: 0
       firstFrame: 724
       lastFrame: 813
       wrapMode: 0
@@ -207,7 +553,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -391,33 +737,52 @@ ModelImporter:
         weight: 1
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 724
     isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 1
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -427,15 +792,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: Spine23
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 96655e18227ff724fb692238bbe40066,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 96655e18227ff724fb692238bbe40066, type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 2
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

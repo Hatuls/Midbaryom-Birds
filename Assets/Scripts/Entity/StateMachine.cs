@@ -3,16 +3,14 @@ using Midbaryom.Camera;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Midbaryom.Core
 {
-    public class StateMachine : IStateMachine
+    public class StateMachine : MonoBehaviour, IStateMachine
     {
-        private StateType _currentStateType;
+        [SerializeField] private StateType _currentStateType;
         protected Dictionary<StateType, IState> _stateDictionary;
 
         public IReadOnlyDictionary<StateType, IState> StateDictionary => _stateDictionary;
@@ -63,7 +61,7 @@ namespace Midbaryom.Core
     }
 
 
-    public abstract class BaseState : IState
+    public abstract class BaseState : MonoBehaviour, IState
     {
         public event Action OnStateEnterEvent, OnStateExitEvent, OnStateTickEvent;
         protected readonly IEntity _entity;
@@ -93,19 +91,20 @@ namespace Midbaryom.Core
     public class PlayerDiveState : BaseState
     {
         public event Action OnTargetHit;
+        public event Action OnCloseToTarget;
         private const float minDistanceToTargetAquire = 5f;
-        private const float minDistanceToStartCatchingAnimation = 12f;
+        public const float minDistanceToStartCatchingAnimation = 12f;
 
         private readonly ILocomotion _movementHandler;
         private readonly IPlayer _player;
-        private readonly IStat _diveSpeed, _movementSpeed;
+        private readonly IStat _diveXZSpeed, _movementSpeed;
         private float _rotatingAngle = .05f;
         private bool _isPlayingAnimation;
         public override StateType StateType => StateType.Dive;
         public PlayerDiveState(IPlayer player, IStat speed) : base(player.Entity)
         {
             _player = player;
-            _diveSpeed = speed;
+            _diveXZSpeed = speed;
             
             _movementSpeed = _entity.StatHandler[StatType.MovementSpeed];
             _movementHandler = _entity.MovementHandler;
@@ -113,24 +112,36 @@ namespace Midbaryom.Core
 
         public override void OnStateEnter()
         {
+            _movementSpeed.Value += _diveXZSpeed.Value;
             _player.TargetHandler.LockAtTarget();
             _player.CameraManager.ChangeState(CameraState.FaceTowardsEnemy);
             _entity.HeightHandler.ChangeState(HeightType.Animal);
-            _movementSpeed.Value += _diveSpeed.Value;
             _isPlayingAnimation = false;
             _movementHandler.StopMovement = true;
             _player.PlayerController.LockInputs = true;
             base.OnStateEnter();
+
+            if(SoundManager.Instance.isSoundPlaying(sounds.WindForToutorial))
+            {
+                SoundManager.Instance.StopSound(sounds.WindForToutorial);
+            }
+
+            if(SoundManager.Instance.isSoundPlaying(sounds.StartFlyingInGame))
+            {
+                SoundManager.Instance.StopSound(sounds.StartFlyingInGame);
+            }
+
+            SoundManager.Instance.CallPlaySound(sounds.tslila);
         }
 
         public override void OnStateExit()
         {
-            _movementSpeed.Value -= _diveSpeed.Value;
+            _movementSpeed.Value -= _diveXZSpeed.Value;
           //  _entity.Rotator.StopRotation = false;
             _movementHandler.StopMovement = false;
             _player.PlayerController.LockInputs = false;
             base.OnStateExit();
-            _player.AimAssists.UnLockTarget();
+
         }
         public override void OnStateTick()
         {
@@ -156,8 +167,14 @@ namespace Midbaryom.Core
                 else if (!_isPlayingAnimation && distance <= minDistanceToStartCatchingAnimation)
                 {
                     _isPlayingAnimation = true;
-                 //   Debug.Log(distance);
+                    OnCloseToTarget?.Invoke();
                     _entity.VisualHandler.AnimatorController.SetTrigger("Attack");
+
+                    SoundManager.Instance.StopSound(sounds.tslila);
+                    SoundManager.Instance.CallPlaySound(sounds.Grab);
+
+                    //_entity.VisualHandler.AnimatorController.SetBool("IsEating", true);
+
                 }
             }
 
@@ -202,6 +219,8 @@ namespace Midbaryom.Core
 
         public override void OnStateEnter()
         {
+            SoundManager.Instance.CallPlaySound(sounds.StartFlyingInGame);
+
             _entity.HeightHandler.ChangeState(HeightType.Player);
             _player.CameraManager.ChangeState(CameraState.FaceUp);
             _entity.StatHandler[StatType.MovementSpeed].Value += _recoverSpeed.Value;
@@ -210,8 +229,9 @@ namespace Midbaryom.Core
         }
         public override void OnStateExit()
         {
-            base.OnStateExit();
             _entity.StatHandler[StatType.MovementSpeed].Value -= _recoverSpeed.Value;
+            _player.AimAssists.UnLockTarget();
+            base.OnStateExit();
         }
 
         public override void OnStateTick()
@@ -288,9 +308,9 @@ namespace Midbaryom.Core
 
         private void ResetParams()
         {
-            Aibehaviour.StartCoroutine(GenerateRandomPoint());
             if (_agent.isActiveAndEnabled && Aibehaviour.gameObject.activeSelf&& _agent.isOnNavMesh)
             {
+            Aibehaviour.StartCoroutine(GenerateRandomPoint());
             
                 _agent.isStopped = false; 
             }
@@ -374,7 +394,7 @@ namespace Midbaryom.Core
         public override void OnStateEnter()
         {
             base.OnStateEnter();
-            Debug.Log($"{Aibehaviour.gameObject.name} is Running!");
+        //    Debug.Log($"{Aibehaviour.gameObject.name} is Running!");
             _movementSpeed.Value += _runAwaySpeed.Value;
        
         }
@@ -382,7 +402,7 @@ namespace Midbaryom.Core
         public override void OnStateExit()
         {
             _movementSpeed.Value -= _runAwaySpeed.Value;
-            Debug.Log($"{Aibehaviour.gameObject.name} is stopped running!");
+         //   Debug.Log($"{Aibehaviour.gameObject.name} is stopped running!");
             base.OnStateExit();
         }
 

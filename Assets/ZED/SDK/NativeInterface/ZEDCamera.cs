@@ -285,7 +285,7 @@ namespace sl
         /// <summary>
         /// Current Plugin Version.
         /// </summary>
-        public static readonly System.Version PluginVersion = new System.Version(4, 0, 0);
+        public static readonly System.Version PluginVersion = new System.Version(4, 0, 4);
 
         /******** DLL members ***********/
         [DllImport(nameDll, EntryPoint = "GetRenderEventFunc")]
@@ -320,6 +320,7 @@ namespace sl
 
         /*
         * Opening function (Opens camera and creates textures).
+        * Some initparameters are passed as arguments to facilitate Marshalling.
         */
         [DllImport(nameDll, EntryPoint = "sl_open_camera")]
         private static extern int dllz_open(int cameraID, ref dll_initParameters parameters, uint serialNumber, System.Text.StringBuilder svoPath, System.Text.StringBuilder ipStream, int portStream, System.Text.StringBuilder output, System.Text.StringBuilder opt_settings_path, System.Text.StringBuilder opencv_calib_path);
@@ -539,7 +540,7 @@ namespace sl
          */
         [DllImport(nameDll, EntryPoint = "sl_enable_positional_tracking_unity")]
         private static extern int dllz_enable_tracking(int cameraID, ref Quaternion quat, ref Vector3 vec, bool enableSpatialMemory = false, bool enablePoseSmoothing = false, bool enableFloorAlignment = false, 
-            bool trackingIsStatic = false, bool enableIMUFusion = true, float depthMinRange = -1.0f, bool setGravityAsOrigin = true, System.Text.StringBuilder aeraFilePath = null);
+            bool trackingIsStatic = false, bool enableIMUFusion = true, float depthMinRange = -1.0f, bool setGravityAsOrigin = true, sl.POSTIONAL_TRACKING_MODE mode = sl.POSTIONAL_TRACKING_MODE.STANDARD, System.Text.StringBuilder aeraFilePath = null);
 
         [DllImport(nameDll, EntryPoint = "sl_disable_positional_tracking")]
         private static extern void dllz_disable_tracking(int cameraID, System.Text.StringBuilder path);
@@ -1022,7 +1023,7 @@ namespace sl
             /// 0 means a low temporal smmoothing behavior(for highly dynamic scene),
             /// 100 means a high temporal smoothing behavior(for static scene)
             /// </summary>
-            public float depthStabilization;
+            public int depthStabilization;
             /// <summary>
             /// Minimum distance from the camera from which depth will be computed, in the defined coordinateUnit.
             /// </summary>
@@ -1058,12 +1059,6 @@ namespace sl
             [MarshalAs(UnmanagedType.U1)]
             public bool enableImageEnhancement;
             /// <summary>
-            /// Set an optional file path where the SDK can find a file containing the calibration information of the camera computed by OpenCV.
-            /// <remarks> Using this will disable the factory calibration of the camera. </remarks>
-            /// <warning> Erroneous calibration values can lead to poor SDK modules accuracy. </warning>
-            /// </summary>
-            public string optionalOpencvCalibrationFile;
-            /// <summary>
             /// Define a timeout in seconds after which an error is reported if the \ref open() command fails.
             /// Set to '-1' to try to open the camera endlessly without returning error in case of failure.
             /// Set to '0' to return error in case of failure at the first attempt.
@@ -1078,6 +1073,15 @@ namespace sl
             /// </summary>
            [MarshalAs(UnmanagedType.U1)]
             public bool asyncGrabRecovery;
+            /// </summary>
+            /// Define a computation upper limit to the grab frequency. 0 means that the setting is ignored.
+            /// This can be useful to get a known constant fixed rate or limit the computation load while keeping a short exposure time by setting a high camera capture framerate.
+            /// The value should be inferior to the InitParameters::camera_fps and strictly positive. It has no effect when reading an SVO file.
+            /// This is an upper limit and won't make a difference if the computation is slower than the desired compute capping fps.
+            /// Internally the grab function always tries to get the latest available image while respecting the desired fps as much as possible.
+            /// Default value is 0.
+            /// </summary>
+            public float grabComputeCappingFPS;
 
             /// <summary>
             /// Copy constructor. Takes values from Unity-suited InitParameters class.
@@ -1103,9 +1107,9 @@ namespace sl
                 depthStabilization = init.depthStabilization;
                 sensorsRequired = init.sensorsRequired;
                 enableImageEnhancement = init.enableImageEnhancement;
-                optionalOpencvCalibrationFile = init.optionalOpencvCalibrationFile;
                 openTimeoutSec = init.openTimeoutSec;
-                asyncGrabRecovery = init.asyncGrabRecovery;
+                asyncGrabRecovery = init.asyncGrabCameraRecovery;
+                grabComputeCappingFPS = init.grabComputeCappingFPS;
             }
         }
 
@@ -1354,11 +1358,11 @@ namespace sl
         /// <param name="areaFilePath"> (optional) file of spatial memory file that has to be loaded to relocate in the scene.</param>
         /// <returns></returns>
         public sl.ERROR_CODE EnableTracking(ref Quaternion quat, ref Vector3 vec, bool enableSpatialMemory = true, bool enablePoseSmoothing = false, bool enableFloorAlignment = false, bool trackingIsStatic = false,
-            bool enableIMUFusion = true, float depthMinRange = -1.0f, bool setGravityAsOrigin = true, string areaFilePath = "")
+            bool enableIMUFusion = true, float depthMinRange = -1.0f, bool setGravityAsOrigin = true, sl.POSTIONAL_TRACKING_MODE mode = POSTIONAL_TRACKING_MODE.STANDARD, string areaFilePath = "")
         {
             sl.ERROR_CODE trackingStatus = sl.ERROR_CODE.CAMERA_NOT_DETECTED;
             trackingStatus = (sl.ERROR_CODE)dllz_enable_tracking(CameraID, ref quat, ref vec, enableSpatialMemory, enablePoseSmoothing, enableFloorAlignment, 
-                trackingIsStatic, enableIMUFusion, depthMinRange, setGravityAsOrigin, new System.Text.StringBuilder(areaFilePath, areaFilePath.Length));
+                trackingIsStatic, enableIMUFusion, depthMinRange, setGravityAsOrigin, mode, new System.Text.StringBuilder(areaFilePath, areaFilePath.Length));
             return trackingStatus;
         }
 
@@ -2051,8 +2055,6 @@ namespace sl
             SetCameraSettings(sl.CAMERA_SETTINGS.AUTO_WHITEBALANCE, 1);
             SetCameraSettings(sl.CAMERA_SETTINGS.AEC_AGC, 1);
             SetCameraSettings(sl.CAMERA_SETTINGS.LED_STATUS, 1);
-
-            SetCameraSettings(sl.CAMERA_SETTINGS.AEC_AGC_ROI,2, new sl.Rect(), true);
         }
 
         /// <summary>
@@ -2966,15 +2968,6 @@ namespace sl
                     case sl.BODY_TRACKING_MODEL.HUMAN_BODY_ACCURATE: m_out = sl.AI_MODELS.HUMAN_BODY_38_ACCURATE_DETECTION; break;
                 }
             
-            }
-            else if (bodyFormat == sl.BODY_FORMAT.BODY_70)
-            {
-                switch (m_in)
-                {
-                    case sl.BODY_TRACKING_MODEL.HUMAN_BODY_FAST:     m_out = sl.AI_MODELS.HUMAN_BODY_70_FAST_DETECTION; break;
-                    case sl.BODY_TRACKING_MODEL.HUMAN_BODY_MEDIUM:   m_out = sl.AI_MODELS.HUMAN_BODY_70_MEDIUM_DETECTION; break;
-                    case sl.BODY_TRACKING_MODEL.HUMAN_BODY_ACCURATE: m_out = sl.AI_MODELS.HUMAN_BODY_70_ACCURATE_DETECTION; break;
-                }
             }
             else
             {

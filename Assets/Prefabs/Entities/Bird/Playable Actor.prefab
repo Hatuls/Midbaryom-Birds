@@ -643,6 +643,7 @@ MonoBehaviour:
   _aimAssists: {fileID: 4481805199779135657}
   _targetHandler: {fileID: 0}
   _playerStateMachine: {fileID: 0}
+  _bodyTrackingConfigSO: {fileID: 0}
 --- !u!114 &292323024
 MonoBehaviour:
   m_ObjectHideFlags: 0

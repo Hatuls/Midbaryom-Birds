@@ -106,6 +106,7 @@ namespace Midbaryom.Core
         protected float _counter;
         protected float _lerpDuration;
         protected AnimationCurve _curve;
+        protected int _rotationCounter;
         public Rotator(Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation)
         {
             _lockRotation = toLockRotation;
@@ -149,24 +150,39 @@ namespace Midbaryom.Core
         }
         protected virtual void RotateTowards()
         {
+            //if (_rotationCounter % 3 == 0)
+            //{
+            //    Debug.Log("rotation");
+            //    float targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
+            //    float currentYRotation = _transform.eulerAngles.y;
 
+            //    _counter += Time.deltaTime;
+
+
+            //    float relativeAngle = targetAngle + currentYRotation;
+            //    float rotationLerpValue = _curve.Evaluate((_counter * RotationSpeed) / 100f);
+            //    //  Debug.Log(rotationLerpValue);
+            //    //float smoothAngle = Mathf.SmoothDampAngle(currentYRotation, relativeAngle, ref _currentVelocity, rotationLerpValue);
+            //    Quaternion lerpDirection = Quaternion.Lerp(_transform.rotation, Quaternion.Euler(0, relativeAngle, 0), rotationLerpValue);
+            //    SetRotation(lerpDirection);
+
+            //    OnFaceDirection?.Invoke(relativeAngle);
+            //}
+            //Debug.Log("not rotation");
+            //_rotationCounter++;
+
+            float counterClamped = Mathf.Min(_counter, 100);
+            float curve = _curve.Evaluate(counterClamped / 100f);
             float targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
-            float currentYRotation = _transform.eulerAngles.y;
+            var yRotation = _transform.eulerAngles.y;
+            var relativeAngle = yRotation + targetAngle;
+            var rotation = Quaternion.Lerp(_transform.rotation, Quaternion.Euler(0, relativeAngle, 0), Time.deltaTime * RotationSpeed * curve);
 
-            _counter += Time.deltaTime  ;
 
-         
-            float relativeAngle = targetAngle + currentYRotation;
-            float rotationLerpValue = _curve.Evaluate((_counter * RotationSpeed) / 100f);
-         //  Debug.Log(rotationLerpValue);
-            //float smoothAngle = Mathf.SmoothDampAngle(currentYRotation, relativeAngle, ref _currentVelocity, rotationLerpValue);
-            Quaternion lerpDirection = Quaternion.Lerp(_transform.rotation, Quaternion.Euler(0, relativeAngle, 0), rotationLerpValue);
-            SetRotation(lerpDirection);
-
+            SetRotation(rotation);
             OnFaceDirection?.Invoke(relativeAngle);
 
-         
-
+            _counter += Time.deltaTime;
         }
         protected virtual bool CanRotate()
         {

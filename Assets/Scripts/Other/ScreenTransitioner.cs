@@ -38,10 +38,11 @@ public class ScreenTransitioner : MonoBehaviour
     public void StartExit(int nextScene)
     {
         _img.gameObject.SetActive(true);
-        StartCoroutine(EffectCoroutine(_exitEffect,FinishExit));
+        StartCoroutine(EffectCoroutine(_exitEffect, () => StartCoroutine(FinishExit())));
 
-        void FinishExit()
+        IEnumerator FinishExit()
         {
+            yield return new WaitForSeconds(4);
             _sceneHandler.LoadSceneAdditive(nextScene, true);
         }
     }
@@ -83,4 +84,28 @@ public class TransitionEffect
 
     public Color EndColor { get => _endColor;}
     public Color StartColor { get => _startColor; }
+}
+[Serializable]
+public class FloatTransitionEffect : BaseTransitionEffect<float>
+{
+    [SerializeField]
+    private float _startValue;
+    [SerializeField]
+    private float _endValue;
+
+    public override float StartResult => _startValue;
+    public override float EndResult => _endValue;
+}
+[Serializable]
+public abstract class BaseTransitionEffect<T>
+{
+    [SerializeField]
+    private float _duration;
+    [SerializeField]
+    private AnimationCurve _curve;
+
+    public abstract T StartResult { get; }
+    public abstract T EndResult { get; }
+    public float Duration => _duration;
+    public AnimationCurve Curve => _curve;
 }

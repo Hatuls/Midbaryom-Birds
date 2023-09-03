@@ -32,7 +32,14 @@ public class BirdsDietManager : MonoBehaviour
         ResetAll();
         foreach (var entity in eagleTypeSO.DietDatas)
         {
-            GetIcon(entity.DietType)?.Targeted();
+            if(entity.Precentage > 0)
+            {
+                GetIcon(entity.DietType)?.Targeted();
+            }
+            else
+            {
+                GetIcon(entity.DietType)?.Hide();
+            }
         }
     }
     private TargetedAnimalIcon GetIcon(TagSO entityTag)

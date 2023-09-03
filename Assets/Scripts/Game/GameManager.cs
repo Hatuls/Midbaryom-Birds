@@ -3,19 +3,49 @@ using Midbaryom.Core.Config;
 using Midbaryom.Core.Tutorial;
 using System;
 using UnityEngine;
+using System.IO;
+
+using UnityEngine.UI; //TEMP
+
+
+
 namespace Midbaryom.Core
 {
     [DefaultExecutionOrder(-99999)]
     public class GameManager : MonoBehaviour
     {
+        //TEMP
+        [Header("TEMP")]
+        public bool useDebugMessages;
+        public Text leftL, rightL, aboveL;
+        public Text leftR, rightR, aboveR;
+        public Text midL, midR;
+        public Canvas debugCanvas;
+        public GameSessionConfig sessionConfig;
+        public static bool isDuringTutorial;
+
+        [Header("Loaded Data")]
+        public float moveRight_RightArmMin, moveRight_RightArmMax;
+        public float moveRight_LeftArmMin, moveRight_LeftArmMax;
+
+        public float moveLeft_RightArmMax, moveLeft_RightArmMin;
+        public float moveLeft_LeftArmMax, moveLeft_LeftArmMin;
+
+        public float hunt_RightArmMax, hunt_RightArmMin;
+        public float hunt_LeftArmMax, hunt_LeftArmMin;
+
+        public float distanceTemp;
+
+
+
         public static event Action OnGameStarted;
         public static event Action OnTutorialStarted;
         public static event Action OnGameReset;
 
-
+        [Header("Gameplay")]
         private static GameManager _instance;
         public static GameManager Instance => _instance;
-  
+
         [SerializeField]
         private ScreenTransitioner _screenTransitioner;
         [SerializeField]
@@ -26,6 +56,11 @@ namespace Midbaryom.Core
         public CameraRotationSO HuntDown, HuntUp;
         public HeightConfigSO HeightConfigSO;
         public SpawnConfigSO _spawnConfig;
+
+        public UnityEngine.Camera mainCam;
+        public UnityEngine.Camera zoomCam;
+
+        public Animator eagleAnimator;
         private void Awake()
         {
             if (_instance == null || _instance == this)
@@ -37,9 +72,13 @@ namespace Midbaryom.Core
         {
             if (PlayerScore.Instance != null)
                 PlayerScore.Instance.ResetScores();
-         
+
             _timerText.OnTimeEnded += MoveToNextScene;
             _tutorialManager.OnTutorialCompeleted += StartGame;
+
+            LoadGameSessionParameters();
+            LoadParameters();
+
         }
         public void StartGame()
         {
@@ -47,7 +86,7 @@ namespace Midbaryom.Core
         }
         private void MoveToNextScene()
         {
-    
+
             const int END_GAME_SCENE_INDEX = 3;
             _screenTransitioner.StartExit(END_GAME_SCENE_INDEX);
         }
@@ -56,23 +95,63 @@ namespace Midbaryom.Core
         {
             if (Input.GetKeyDown(KeyCode.Escape))
                 Application.Quit();
+            if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                useDebugMessages = !useDebugMessages;
+                debugCanvas.gameObject.SetActive(useDebugMessages);
+            }
         }
         private void OnDestroy()
         {
             _timerText.OnTimeEnded -= MoveToNextScene;
             _tutorialManager.OnTutorialCompeleted -= StartGame;
         }
-#if UNITY_EDITOR
-        [Header("Editor:")]
-        public float Radius;
-        private void OnDrawGizmosSelected()
+        //#if UNITY_EDITOR
+        //        [Header("Editor:")]
+        //        public float Radius;
+        //        private void OnDrawGizmosSelected()
+        //        {
+        //            Gizmos.color = Color.yellow;
+        //            Gizmos.DrawSphere(HeightConfigSO.AnimalHeight.Height * Vector3.up, Radius);
+        //            Gizmos.DrawSphere(HeightConfigSO.PlayerHeight.Height * Vector3.up, Radius);
+        //            Gizmos.DrawSphere(HeightConfigSO.GroundHeight.Height * Vector3.up, Radius);
+        //        }
+        //#endif
+
+
+        public void LoadParameters()
         {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(HeightConfigSO.AnimalHeight.Height * Vector3.up, Radius);
-            Gizmos.DrawSphere(HeightConfigSO.PlayerHeight.Height * Vector3.up, Radius);
-            Gizmos.DrawSphere(HeightConfigSO.GroundHeight.Height * Vector3.up, Radius);
+            if (File.Exists(Application.streamingAssetsPath + "\\Parameter.ini"))
+            {
+                string[] parameters = File.ReadAllLines(Application.streamingAssetsPath + "\\Parameter.ini");
+
+                moveLeft_LeftArmMin = float.Parse(parameters[0]);
+                moveLeft_LeftArmMax = float.Parse(parameters[1]);
+                moveLeft_RightArmMin = float.Parse(parameters[2]);
+                moveLeft_RightArmMax = float.Parse(parameters[3]);
+
+                moveRight_LeftArmMin = float.Parse(parameters[4]);
+                moveRight_LeftArmMax = float.Parse(parameters[5]);
+                moveRight_RightArmMin = float.Parse(parameters[6]);
+                moveRight_RightArmMax = float.Parse(parameters[7]);
+
+                hunt_RightArmMin = float.Parse(parameters[8]);
+                hunt_RightArmMax = float.Parse(parameters[9]);
+                hunt_LeftArmMin = float.Parse(parameters[10]);
+                hunt_LeftArmMax = float.Parse(parameters[11]);
+
+                distanceTemp = float.Parse(parameters[12]);
+            }
         }
-#endif
+        public void LoadGameSessionParameters()
+        {
+            if (File.Exists(Application.streamingAssetsPath + "\\Parameter.ini"))
+            {
+                string[] parameters = File.ReadAllLines(Application.streamingAssetsPath + "\\Parameter.ini");
+
+                sessionConfig.SessionTime = float.Parse(parameters[13]);
+            }
+        }
     }
 
 

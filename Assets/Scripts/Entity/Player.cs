@@ -26,6 +26,7 @@ namespace Midbaryom.Core
         public IEntity Entity => _entity;
         public AimAssists AimAssists => _aimAssists;
         public IEnumerable<TagSO> Tags => Entity.Tags;
+
         public PlayerController PlayerController { get; set; }
         public CameraManager CameraManager { get; set; }
         public IEnumerable<IUpdateable> UpdateCollection

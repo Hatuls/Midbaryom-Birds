@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2092666468016100408, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278893716058877744, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5015281901615709696, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
       propertyPath: m_Mass
       value: 1
@@ -67,9 +75,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6366026649775990322, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7313164665674190772, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
       propertyPath: m_Name
       value: AI Actor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7313164665674190772, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8206922584222522397, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
       propertyPath: _visualHandler
@@ -147,6 +163,7 @@ MonoBehaviour:
   _entity: {fileID: 5269848389614339371}
   MoveToPosition: {x: 0, y: 0, z: 0}
   CurrentPosition: {x: 0, y: 0, z: 0}
+  DrawGizmosOnAnimal: 0
 --- !u!114 &7033308147361413513
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,7 +28,6 @@ namespace Midbaryom.Core.Tutorial
 
             StartCoroutine(EffectCoroutine(_fadeOut, FadeIn));
 
-     
 
             void FadeIn()
             {
@@ -43,13 +42,19 @@ namespace Midbaryom.Core.Tutorial
 
         void CheckTask()
         {
+
+            if (_endAngle <= _playerTransform.localRotation.eulerAngles.y * 1.5f)
+            {
+                SoundManager.Instance.CallPlaySound(sounds.MoveRightTutorial);
+            }
+
             if (_endAngle <= _playerTransform.localRotation.eulerAngles.y)
                 TaskCompleted();
         }
         protected override void TaskCompleted()
         {
             _player.Entity.Rotator.AssignRotation(Vector3.zero);
-            Debug.LogWarning("Task Right Completed");
+            Debug.Log("Task Right Completed");
             _moveRight.OnRight -= CheckTask;
           
             base.TaskCompleted();

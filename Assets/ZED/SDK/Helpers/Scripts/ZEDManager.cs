@@ -18,7 +18,7 @@ using sl;
 /// </remarks>
 public class ZEDManager : MonoBehaviour
 {
-    public event Action OnBodyTrackingInitialized;
+
     /// <summary>
     /// Static function to get instance of the ZEDManager with a given camera_ID. See sl.ZED_CAMERA_ID for the available choices.
     /// </summary>
@@ -129,7 +129,18 @@ public class ZEDManager : MonoBehaviour
     /// the grab() will exit after a short period and return the ERROR_CODE::CAMERA_REBOOTING warning.
     /// </summary>
     [HideInInspector]
-    public bool asyncGrabRecovery = false;
+    public bool asyncGrabCameraRecovery = false;
+
+    /// <summary>
+    /// Define a computation upper limit to the grab frequency. 0 means setting is ignored.
+    /// This can be useful to get a known constant fixed rate or limit the computation load while keeping a short exposure time by setting a high camera capture framerate.
+	/// The value should be inferior to the InitParameters::camera_fps and strictly positive.It has no effect when reading an SVO file.
+	/// This is an upper limit and won't make a difference if the computation is slower than the desired compute capping fps.
+	/// Internally the grab function always tries to get the latest available image while respecting the desired fps as much as possible.
+    /// default is 0.
+    /// </summary>
+    [HideInInspector]
+    public float grabComputeCappingFPS = 0f;
 
     /// <summary>
     /// SVO loop back option
@@ -268,6 +279,12 @@ public class ZEDManager : MonoBehaviour
     /// </summary>
     [HideInInspector]
     public string pathSpatialMemory;
+
+    /// <summary>
+    /// Positional tracking mode used. Can be used to improve accuracy in some type of scene at the cost of longer runtime.
+    /// </summary>
+    [HideInInspector]
+    public sl.POSTIONAL_TRACKING_MODE positionalTrackingMode;
 
     /// <summary>
     /// Estimate initial position by detecting the floor.
@@ -690,6 +707,12 @@ public class ZEDManager : MonoBehaviour
     public int bodyTrackingConfidenceThreshold = 60;
 
     /// <summary>
+    /// Ratio of SDK skeleton smoothing application. 0 is none, 1 is max smoothing.
+    /// </summary>
+    [HideInInspector]
+    public float bodyTrackingSkeletonSmoothing = 0.2f;
+
+    /// <summary>
     /// Whether the body tracking module has been activated successfully.
     /// </summary>
     private bool bodyTrackingRunning = false;
@@ -757,6 +780,7 @@ public class ZEDManager : MonoBehaviour
 
     private sl.BodyTrackingRuntimeParameters bodyTrackingRuntimeParams = new sl.BodyTrackingRuntimeParameters();
 
+    public Action OnBodyTrackingInitialized;
     /////////////////////////////////////////////////////////////////////////
     ///////////////////////////// Rendering ///////////////////////////////////
     /////////////////////////////////////////////////////////////////////////
@@ -1295,7 +1319,7 @@ public class ZEDManager : MonoBehaviour
     /// the depth stabilize smooth range is [0, 100]
     /// 0 means a low temporal smmoothing behavior(for highly dynamic scene),
     /// 100 means a high temporal smoothing behavior(for static scene)
-    private float depthStabilization = -1f;
+    private int depthStabilization = -1;
     /// <summary>
     /// Indicates if Sensors( IMU,...) is needed/required. For most applications, it is required.
     /// Sensors are transmitted through USB2.0 lines. If USB2 is not available (USB3.0 only extension for example), set it to false.
@@ -1738,24 +1762,6 @@ public class ZEDManager : MonoBehaviour
 
     #region CHECK_AR
 
-    private bool hasXRDevice()
-    {
-#if UNITY_2020_1_OR_NEWER
-        var xrDisplaySubsystems = new List<XRDisplaySubsystem>();
-        SubsystemManager.GetInstances<XRDisplaySubsystem>(xrDisplaySubsystems);
-        foreach (var xrDisplay in xrDisplaySubsystems)
-        {
-            if (xrDisplay.running)
-            {
-                return true;
-            }
-        }
-        return false;
-#else
-        return XRDevice.isPresent;
-#endif
-    }
-
     /// <summary>
     /// Checks if this GameObject is a stereo rig. Requires a child object called 'Camera_eyes' and
     /// two cameras as children of that object, one with stereoTargetEye set to Left, the other two Right.
@@ -1765,7 +1771,6 @@ public class ZEDManager : MonoBehaviour
     {
         zedRigRoot = gameObject.transform; //The object moved by tracking. By default it's this Transform. May get changed.
 
-        bool devicePresent = hasXRDevice(); //May not need.
         //Set first left eye
         Component[] cams = gameObject.GetComponentsInChildren<Camera>();
         //Camera firstmonocam = null;
@@ -1827,9 +1832,17 @@ public class ZEDManager : MonoBehaviour
                 zedRigRoot = camLeftTransform.parent; //Make the camera's parent object (Camera_eyes in the ZED_Rig_Stereo prefab) the new zedRigRoot to be tracked.
             }
 
-            if (hasXRDevice() && allowARPassThrough)
+            if (ZEDSupportFunctions.hasXRDevice() && allowARPassThrough)
             {
                 isStereoRig = true;
+
+                List<XRInputSubsystem> subsystems = new List<XRInputSubsystem>();
+                SubsystemManager.GetInstances<XRInputSubsystem>(subsystems);
+                for (int i = 0; i < subsystems.Count; i++)
+                {
+                     subsystems[i].TrySetTrackingOriginMode(TrackingOriginModeFlags.Device);
+                     subsystems[i].TryRecenter();
+                }
             }
             else
             {
@@ -2039,7 +2052,8 @@ public class ZEDManager : MonoBehaviour
         initParameters.cameraDisableSelfCalib = !enableSelfCalibration;
         initParameters.optionalOpencvCalibrationFile = opencvCalibFile;
         initParameters.openTimeoutSec = openTimeoutSec;
-        initParameters.asyncGrabRecovery = asyncGrabRecovery;
+        initParameters.asyncGrabCameraRecovery = asyncGrabCameraRecovery;
+        initParameters.grabComputeCappingFPS = grabComputeCappingFPS;
 
         //Check if this rig is a stereo rig. Will set isStereoRig accordingly.
         CheckStereoMode();
@@ -2185,12 +2199,16 @@ public class ZEDManager : MonoBehaviour
                 while (optimStatus != sl.ERROR_CODE.SUCCESS)
                 {
                     if (watch.Elapsed.TotalSeconds > optimTimeout_S)
+                    {
                         Debug.LogError("Optimization process Timeout. Please try to optimze the AI models outside of Unity, using the ZED Diagnostic tool ");
+                        yield break;
+                    }
 
                     Debug.LogWarning($"Optimizing neural model ... The process can take few minutes. Running for {watch.Elapsed.TotalSeconds.ToString("N2")} seconds.");
                     yield return new WaitForSeconds(5.0f);
                 }
                 threadOptim.Join();
+                watch.Stop();
             }
         }
 
@@ -2292,7 +2310,7 @@ public class ZEDManager : MonoBehaviour
     void AdjustZEDRigCameraPosition()
     {
         //Vector3 rightCameraOffset = new Vector3(zedCamera.Baseline, 0.0f, 0.0f);
-        if (isStereoRig && hasXRDevice()) //Using AR pass-through mode.
+        if (isStereoRig && ZEDSupportFunctions.hasXRDevice()) //Using AR pass-through mode.
         {
             //zedRigRoot transform (origin of the global camera) is placed on the HMD headset. Therefore, we move the
             //camera in front of it by offsetHmdZEDPosition to compensate for the ZED's position on the headset.
@@ -2438,7 +2456,9 @@ public class ZEDManager : MonoBehaviour
                     NeedNewFrameGrab = false;
                 }
                 else if (!pauseSVOReading)
-                    ZEDGrabError = zedCamera.Grab(ref runtimeParameters);
+                {
+                    ZEDGrabError = zedCamera.Grab(ref runtimeParameters);                
+                }
 
                 currentFrame = zedCamera.GetSVOPosition();
             }
@@ -2544,7 +2564,7 @@ public class ZEDManager : MonoBehaviour
             trackerThread.Join();
 
 
-        if (isStereoRig && hasXRDevice())
+        if (isStereoRig && ZEDSupportFunctions.hasXRDevice())
         {
             ZEDMixedRealityPlugin.Pose pose = arRig.InitTrackingAR();
             OriginPosition = pose.translation;
@@ -2579,7 +2599,7 @@ public class ZEDManager : MonoBehaviour
             }
 
             sl.ERROR_CODE err = (zedCamera.EnableTracking(ref zedOrientation, ref zedPosition, enableSpatialMemory,
-                enablePoseSmoothing, setFloorAsOrigin, trackingIsStatic, enableIMUFusion, depthMinRange, setGravityAsOrigin, pathSpatialMemory));
+                enablePoseSmoothing, setFloorAsOrigin, trackingIsStatic, enableIMUFusion, depthMinRange, setGravityAsOrigin, positionalTrackingMode, pathSpatialMemory));
 
             //Now enable the tracking with the proper parameters.
             if (!(enableTracking = (err == sl.ERROR_CODE.SUCCESS)))
@@ -2705,7 +2725,7 @@ public class ZEDManager : MonoBehaviour
 
             isCameraTracked = true;
 
-            if (hasXRDevice() && isStereoRig) //AR pass-through mode.
+            if (ZEDSupportFunctions.hasXRDevice() && isStereoRig) //AR pass-through mode.
             {
                 if (calibrationHasChanged) //If the HMD offset calibration file changed during runtime.
                 {
@@ -2733,7 +2753,7 @@ public class ZEDManager : MonoBehaviour
                     zedRigRoot.localPosition = zedPosition;
             }
         }
-        else if (hasXRDevice() && isStereoRig) //ZED tracking is off but HMD tracking is on. Fall back to that.
+        else if (ZEDSupportFunctions.hasXRDevice() && isStereoRig) //ZED tracking is off but HMD tracking is on. Fall back to that.
         {
             isCameraTracked = true;
             arRig.ExtractLatencyPose(imageTimeStamp); //Find what HMD's pose was at ZED image's timestamp for latency compensation.
@@ -2751,7 +2771,7 @@ public class ZEDManager : MonoBehaviour
     /// </summary>
     void UpdateHmdPose()
     {
-        if (IsStereoRig && hasXRDevice())
+        if (IsStereoRig && ZEDSupportFunctions.hasXRDevice())
             arRig.CollectPose(); //Save headset pose with current timestamp.
     }
 
@@ -2793,7 +2813,7 @@ public class ZEDManager : MonoBehaviour
 
             if (isZEDTracked)
                 trackingState = ZEDTrackingState.ToString();
-            else if (hasXRDevice() && isStereoRig)
+            else if (ZEDSupportFunctions.hasXRDevice() && isStereoRig)
                 trackingState = "HMD Tracking";
             else
                 trackingState = "Camera Not Tracked";
@@ -2998,7 +3018,11 @@ public class ZEDManager : MonoBehaviour
 
                 while (optimStatus != sl.ERROR_CODE.SUCCESS)
                 {
-                    if (watch.Elapsed.TotalSeconds > optimTimeout_S) Debug.LogError("Optimization process Timeout. Please try to optimze the AI models outside of Unity, using the ZED Diagnostic tool ");
+                    if (watch.Elapsed.TotalSeconds > optimTimeout_S)
+                    {
+                        Debug.LogError("Optimization process Timeout. Please try to optimze the AI models outside of Unity, using the ZED Diagnostic tool ");
+                        yield break;
+                    }
                     Debug.LogWarning("Optimizing AI Model  : " + sl.ZEDCamera.cvtDetection(objectDetectionModel) + "... The process can take few minutes.... " + watch.Elapsed.TotalSeconds.ToString("N2") + " sec");
                     yield return new WaitForSeconds(5.0f);
                 }
@@ -3032,8 +3056,8 @@ public class ZEDManager : MonoBehaviour
             objectDetectionRuntimeParameters.objectConfidenceThreshold[(int)sl.OBJECT_CLASS.ELECTRONICS] = OD_electronicsDetectionConfidenceThreshold;
             objectDetectionRuntimeParameters.objectConfidenceThreshold[(int)sl.OBJECT_CLASS.FRUIT_VEGETABLE] = OD_fruitVegetableDetectionConfidenceThreshold;
             objectDetectionRuntimeParameters.objectConfidenceThreshold[(int)sl.OBJECT_CLASS.SPORT] = OD_sportDetectionConfidenceThreshold;
+ 
             objectDetectionRuntimeParameters.objectClassFilter = new int[(int)sl.OBJECT_CLASS.LAST];
-
             objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.PERSON] = Convert.ToInt32(objectClassPersonFilter);
             objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.VEHICLE] = Convert.ToInt32(objectClassVehicleFilter);
             objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.BAG] = Convert.ToInt32(objectClassBagFilter);
@@ -3085,19 +3109,24 @@ public class ZEDManager : MonoBehaviour
 
         //Update the runtime parameters in case the user made changes.
         objectDetectionRuntimeParameters.objectConfidenceThreshold = new int[(int)sl.OBJECT_CLASS.LAST];
-        objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.ANIMAL] = Convert.ToInt32(objectClassAnimalFilter);
-        objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.ELECTRONICS] = Convert.ToInt32(objectClassElectronicsFilter);
-        objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.FRUIT_VEGETABLE] = Convert.ToInt32(objectClassFruitVegetableFilter);
         objectDetectionRuntimeParameters.objectConfidenceThreshold[(int)sl.OBJECT_CLASS.PERSON] = OD_personDetectionConfidenceThreshold;
         objectDetectionRuntimeParameters.objectConfidenceThreshold[(int)sl.OBJECT_CLASS.VEHICLE] = OD_vehicleDetectionConfidenceThreshold;
         objectDetectionRuntimeParameters.objectConfidenceThreshold[(int)sl.OBJECT_CLASS.BAG] = OD_bagDetectionConfidenceThreshold;
         objectDetectionRuntimeParameters.objectConfidenceThreshold[(int)sl.OBJECT_CLASS.ANIMAL] = OD_animalDetectionConfidenceThreshold;
         objectDetectionRuntimeParameters.objectConfidenceThreshold[(int)sl.OBJECT_CLASS.ELECTRONICS] = OD_electronicsDetectionConfidenceThreshold;
         objectDetectionRuntimeParameters.objectConfidenceThreshold[(int)sl.OBJECT_CLASS.FRUIT_VEGETABLE] = OD_fruitVegetableDetectionConfidenceThreshold;
+        objectDetectionRuntimeParameters.objectConfidenceThreshold[(int)sl.OBJECT_CLASS.SPORT] = OD_sportDetectionConfidenceThreshold;
+
+
         objectDetectionRuntimeParameters.objectClassFilter = new int[(int)sl.OBJECT_CLASS.LAST];
         objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.PERSON] = Convert.ToInt32(objectClassPersonFilter);
         objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.VEHICLE] = Convert.ToInt32(objectClassVehicleFilter);
         objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.BAG] = Convert.ToInt32(objectClassBagFilter);
+        objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.ANIMAL] = Convert.ToInt32(objectClassAnimalFilter);
+        objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.ELECTRONICS] = Convert.ToInt32(objectClassElectronicsFilter);
+        objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.FRUIT_VEGETABLE] = Convert.ToInt32(objectClassFruitVegetableFilter);
+        objectDetectionRuntimeParameters.objectClassFilter[(int)sl.OBJECT_CLASS.SPORT] = Convert.ToInt32(objectClassSportFilter);
+
 
 
         if (objectDetectionImageSyncMode == false) RetrieveObjectDetectionFrame(); //If true, this is called in the AcquireImages function in the image acquisition thread.
@@ -3190,9 +3219,9 @@ public class ZEDManager : MonoBehaviour
     /// </summary>
     public void StartBodyTracking()
     {
-        if (bodyFormat != sl.BODY_FORMAT.BODY_18 && bodyFormat != sl.BODY_FORMAT.BODY_34 && bodyFormat != sl.BODY_FORMAT.BODY_38 && bodyFormat != sl.BODY_FORMAT.BODY_70)
+        if (bodyFormat != sl.BODY_FORMAT.BODY_18 && bodyFormat != sl.BODY_FORMAT.BODY_34 && bodyFormat != sl.BODY_FORMAT.BODY_38)
         {
-            Debug.LogError("Error: Invalid BODY_MODEL! Please use either BODY_34, BODY_38 or BODY_70.");
+            Debug.LogError("Error: Invalid BODY_MODEL! Please use either BODY_34 or BODY_38.");
 #if UNITY_EDITOR
             EditorApplication.ExitPlaymode();
 #else
@@ -3243,7 +3272,11 @@ public class ZEDManager : MonoBehaviour
 
             while (optimStatus != sl.ERROR_CODE.SUCCESS)
             {
-                if (watch.Elapsed.TotalSeconds > optimTimeout_S) Debug.LogError("Optimization process Timeout. Please try to optimize the AI models outside of Unity, using the ZED Diagnostic tool ");
+                if (watch.Elapsed.TotalSeconds > optimTimeout_S)
+                {
+                    Debug.LogError("Optimization process Timeout. Please try to optimize the AI models outside of Unity, using the ZED Diagnostic tool ");
+                    yield break;
+                }
                 Debug.LogWarning("Optimizing AI Model  : " + sl.ZEDCamera.cvtDetection(bodyTrackingModel, bodyFormat) + "... The process can take few minutes.... " + watch.Elapsed.TotalSeconds.ToString("N2") + " sec");
                 yield return new WaitForSeconds(5.0f);
             }
@@ -3255,6 +3288,7 @@ public class ZEDManager : MonoBehaviour
 
         if (zedCamera != null)
         {
+            OnBodyTrackingInitialized?.Invoke();
             btIsStarting = true;
             Debug.LogWarning("Starting Body Tracking. This may take a moment.");
 
@@ -3273,6 +3307,8 @@ public class ZEDManager : MonoBehaviour
 
             bodyTrackingRuntimeParams.detectionConfidenceThreshold = bodyTrackingConfidenceThreshold;
             bodyTrackingRuntimeParams.minimumKeypointsThreshold = bodyTrackingMinimumKPThreshold;
+            bodyTrackingRuntimeParams.skeletonSmoothing = bodyTrackingSkeletonSmoothing;
+
 
             sl.ERROR_CODE err = zedCamera.EnableBodyTracking(ref bt_param);
             if (err == sl.ERROR_CODE.SUCCESS)
@@ -3289,7 +3325,6 @@ public class ZEDManager : MonoBehaviour
             watch.Stop();
 
             btIsStarting = false;
-            OnBodyTrackingInitialized?.Invoke();
         }
     }
 
@@ -3315,6 +3350,7 @@ public class ZEDManager : MonoBehaviour
         //Update the runtime parameters in case the user made changes.
         bodyTrackingRuntimeParams.detectionConfidenceThreshold = bodyTrackingConfidenceThreshold;
         bodyTrackingRuntimeParams.minimumKeypointsThreshold = bodyTrackingMinimumKPThreshold;
+        bodyTrackingRuntimeParams.skeletonSmoothing = bodyTrackingSkeletonSmoothing;
 
         if (bodyTrackingImageSyncMode == false) RetrieveBodyTrackingFrame(); //If true, this is called in the AcquireImages function in the image acquisition thread.
 
@@ -3464,13 +3500,9 @@ public class ZEDManager : MonoBehaviour
         arRig.quadCenter = centerScreen.transform;
 
         ZEDMixedRealityPlugin.OnHmdCalibChanged += CalibrationHasChanged;
-        if (hasXRDevice())
+        if (ZEDSupportFunctions.hasXRDevice())
         {
-#if UNITY_2019_1_OR_NEWER
             HMDDevice = XRSettings.loadedDeviceName;
-#else
-            HMDDevice = XRDevice.model;
-#endif
         }
 
         return zedRigDisplayer;
@@ -3781,7 +3813,7 @@ public class ZEDManager : MonoBehaviour
             {
                 //Enables tracking and initializes the first position of the camera.
                 if (!(enableTracking = (zedCamera.EnableTracking(ref zedOrientation, ref zedPosition, enableSpatialMemory, enablePoseSmoothing, setFloorAsOrigin, trackingIsStatic,
-                    enableIMUFusion, depthMinRange, setGravityAsOrigin, pathSpatialMemory) == sl.ERROR_CODE.SUCCESS)))
+                    enableIMUFusion, depthMinRange, setGravityAsOrigin, positionalTrackingMode, pathSpatialMemory) == sl.ERROR_CODE.SUCCESS)))
                 {
                     isZEDTracked = false;
                     throw new Exception(ZEDLogMessage.Error2Str(ZEDLogMessage.ERROR.TRACKING_NOT_INITIALIZED));

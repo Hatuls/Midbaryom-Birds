@@ -6,11 +6,12 @@ using UnityEngine.InputSystem;
 namespace Midbaryom.Inputs
 {
 
-    public class PlayerController : IUpdateable
+    public class PlayerController : MonoBehaviour, IUpdateable
     {
+
         public event Action<Vector2> OnMove;
         private readonly IEntity _entity;
-        private readonly Player _player;
+        public Player _player;
         private readonly BodyTrackingConfigSO _bodyTrackingConfigSO;
 
 
@@ -21,13 +22,14 @@ namespace Midbaryom.Inputs
         private Vector3 _previousInput;
         private float _counter;
         public bool LockInputs { get; set; }
+        public bool LockHuntInput { get; set; }
         public bool CanCancelHunt { get; set; }
         public PlayerController(Player player, IEntity entity, BodyTrackingConfigSO bodyTrackingConfigSO)
         {
             _player = player;
             _entity = entity;
             _birdInputAction = new BirdInputAction();
-
+            LockHuntInput = false;
             _movementInputAction = _birdInputAction.Player.Move;
             LockInputs = false;
             _huntInputAction = _birdInputAction.Player.Hunt;
@@ -42,13 +44,16 @@ namespace Midbaryom.Inputs
 
         private void StartHundDown(InputAction.CallbackContext obj)
         {
+            if(!LockHuntInput)
             HuntDown();
         }
 
         public void HuntDown()
         {
             if (_player.AimAssists.HasTarget)
+            {
                 _player.StateMachine.ChangeState(StateType.Dive);
+            }
         }
 
         private void EndHunt(InputAction.CallbackContext obj)
@@ -79,7 +84,16 @@ namespace Midbaryom.Inputs
         private void Rotation()
         {
             Vector2 value = _movementInputAction.ReadValue<Vector2>();
+            Debug.Log("Value 1: " + value);
             _movementInputHandler.Handle(value);
+        }
+        public void CustomCamRotation(Vector2 direction)
+        {
+            Vector2 value = _movementInputAction.ReadValue<Vector2>();
+
+            Debug.Log("Value 2: " + direction);
+
+            _movementInputHandler.Handle(direction);
         }
         public void Rotate(Vector3 direction)
         {
@@ -87,6 +101,7 @@ namespace Midbaryom.Inputs
                 return;
 
             _movementInputHandler.Handle(direction);
+
         }
         public void SetInputBehaviour(IInputHandler<Vector2> inputBehaviour)
         {
@@ -99,7 +114,6 @@ namespace Midbaryom.Inputs
             foreach (var input in InputActions)
                 input.Disable();
         }
-
     }
 
 }
@@ -108,9 +122,18 @@ public interface IInputHandler<T>
 {
     void Handle(T input);
 }
+enum MoveDir
+{
+    None,
+    left,
+    right
+}
 
 public class RegularInputs : IInputHandler<Vector2>
 {
+    //New
+    MoveDir currentMoveDirection = MoveDir.None;
+
     private readonly IEntity _entity;
     public RegularInputs(IEntity entity)
     {
@@ -120,7 +143,25 @@ public class RegularInputs : IInputHandler<Vector2>
     {
         Vector3 result = new Vector3(input.x, 0, 0);
 
+
         _entity.Rotator.AssignRotation(result);
+
+        if (input.x > 0)
+        {
+            if (currentMoveDirection == MoveDir.right) return;
+
+            currentMoveDirection = MoveDir.right;
+
+            SoundManager.Instance.CallPlaySound(sounds.MoveRightInGame);
+        }
+        else if (input.x < 0)
+        {
+            if (currentMoveDirection == MoveDir.left) return;
+
+            currentMoveDirection = MoveDir.left;
+
+            SoundManager.Instance.CallPlaySound(sounds.MoveLeftInGame);
+        }
     }
 }
 public class OnlyRightInputEnabled : IInputHandler<Vector2>
@@ -141,6 +182,7 @@ public class OnlyRightInputEnabled : IInputHandler<Vector2>
         {
             _entity.Rotator.AssignRotation(result);
             OnRight?.Invoke();
+
         }
     }
 }
@@ -163,7 +205,7 @@ public class OnlyLeftInputEnabled : IInputHandler<Vector2>
             _entity.Rotator.AssignRotation(result);
         if (input.x < 0)
             OnLeft?.Invoke();
-        
+
     }
 }
 

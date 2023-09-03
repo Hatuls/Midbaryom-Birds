@@ -17,12 +17,20 @@ namespace Midbaryom.Core.Tutorial
         private BaseTask[] _baseTutorialTasks;
         private int _currentTask;
         private IPlayer _player;
-
+        [SerializeField]
+        private GameSessionConfig _gameConfig;
         [SerializeField]
         private LanguageTMPRO _languageTMPRO;
 
         private IEnumerator Start()
         {
+#if UNITY_EDITOR
+            if (_gameConfig.SkipTutorial)
+            {
+                CompleteTutorial();
+                yield break;
+            }
+#endif
             InitTutorial();
             yield return null;
             _player = Spawner.Instance.Player;
@@ -32,6 +40,10 @@ namespace Midbaryom.Core.Tutorial
 
         private void InitTutorial()
         {
+            GameManager.isDuringTutorial = true;
+
+            SoundManager.Instance.CallPlaySound(sounds.WindForToutorial);
+
             for (int i = 0; i < _baseTutorialTasks.Length; i++)
                 _baseTutorialTasks[i].OnComplete += MoveNext;
         }
@@ -49,17 +61,25 @@ namespace Midbaryom.Core.Tutorial
         private void MoveNext()
         {
             _currentTask++;
+
             if (_currentTask < _baseTutorialTasks.Length)
                 _baseTutorialTasks[_currentTask].TaskStarted();
             else
             {
-                if (PlayerScore.Instance != null)
-                    PlayerScore.Instance.ResetScores();
-                OnTutorialCompleted?.Invoke();
-                OnTutorialCompeleted?.Invoke();
-                _languageTMPRO.gameObject.SetActive(false);
-                Debug.Log("Complete!");
+                CompleteTutorial();
             }
+        }
+
+        private void CompleteTutorial()
+        {
+            GameManager.isDuringTutorial = false;
+
+            if (PlayerScore.Instance != null)
+                PlayerScore.Instance.ResetScores();
+            OnTutorialCompleted?.Invoke();
+            OnTutorialCompeleted?.Invoke();
+            _languageTMPRO.gameObject.SetActive(false);
+            Debug.Log("Complete!");
         }
     }
 
@@ -82,6 +102,8 @@ namespace Midbaryom.Core.Tutorial
         protected TransitionEffect _fadeIn;
         [SerializeField]
         protected TransitionEffect _fadeOut;
+
+        
         protected void ShowInstructions()
         {
             _parent.SetActive(true);
@@ -94,6 +116,7 @@ namespace Midbaryom.Core.Tutorial
             _parent.SetActive(false);
             base.TaskCompleted();
         }
+  
         protected IEnumerator EffectCoroutine(TransitionEffect effect, Action OnComplete = null)
         {
             float duration = effect.Duration;

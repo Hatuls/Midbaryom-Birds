@@ -9,7 +9,7 @@ using UnityEngine;
 public class EagleTypeSO : ScriptableObject, IComparable<EagleTypeSO>
 {
     [SerializeField]
-    private string _eagleName;
+    public string _eagleName;
     [SerializeField]
     private Sprite _eagleImage;
     [SerializeField]
