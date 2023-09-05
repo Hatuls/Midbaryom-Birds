@@ -10,8 +10,10 @@ namespace Midbaryom.Core
         ZedPoints zedpoints = new ZedPoints();
 
         float rightHandAngle, leftHandeAngle;
+        bool rightHandAbove, leftHandAbove;
 
         [SerializeField] private Player playerRef;
+
 
 
         MoveDir currentMoveDirection = MoveDir.None;
@@ -66,6 +68,9 @@ namespace Midbaryom.Core
             rightHandAngle = Mathf.Sin(zedpoints.rightShoulder.y / rightShoulderToHand.x) * Mathf.Rad2Deg;
             leftHandeAngle = Mathf.Sin(zedpoints.leftShoulder.y / leftShoulderToHand.x) * Mathf.Rad2Deg;
 
+            rightHandAbove = zedpoints.RightHand.y < zedpoints.rightShoulder.y + GameManager.Instance.distanceTemp;
+            leftHandAbove = zedpoints.LeftHand.y < zedpoints.leftShoulder.y + GameManager.Instance.distanceTemp;
+
             //if (zedpoints.rightShoulder != Vector2.zero && zedpoints.leftShoulder != Vector2.zero)
             //{
             //    Vector3 rightShoulderToHand = zedpoints.RightHand - zedpoints.rightShoulder;
@@ -88,6 +93,9 @@ namespace Midbaryom.Core
                 GameManager.Instance.rightR.text = "Right H Angle: " + rightHandAngle.ToString();
                 GameManager.Instance.leftR.text = "Left H Angle: " + leftHandeAngle.ToString();
                 GameManager.Instance.midL.text = "ABS: " + Mathf.Abs(rightHandAngle + leftHandeAngle).ToString();
+
+                GameManager.Instance.rightL.text = "Right H above: " + rightHandAbove.ToString();
+                GameManager.Instance.leftL.text = "Left H above: " + leftHandAbove.ToString();
                 //GameManager.Instance.aboveR.text = handAbove == true ? "Above R: Yes" : "Above R: No";
             }
         }
@@ -96,12 +104,16 @@ namespace Midbaryom.Core
         {
             //bool handAbove = leftHand.z > leftShoulder.z + ZedPoseDetector.handZPosOffset;
 
-            if (rightHandAngle > GameManager.Instance.moveRight_RightArmMin && 
+            /*if (rightHandAngle > GameManager.Instance.moveRight_RightArmMin && 
                 rightHandAngle < GameManager.Instance.moveRight_RightArmMax &&
                 leftHandeAngle > GameManager.Instance.moveRight_LeftArmMin &&
-                leftHandeAngle < GameManager.Instance.moveRight_LeftArmMax)
+                leftHandeAngle < GameManager.Instance.moveRight_LeftArmMax)*/
+            if (rightHandAngle > GameManager.Instance.moveRight_RightArmMin &&
+                rightHandAngle < GameManager.Instance.moveRight_RightArmMax &&
+                leftHandAbove && !rightHandAbove)
             {
                 PostureRightDetected();
+                GameManager.Instance.midR.text = "Right Detected";
                 return true;
             }
 
@@ -125,12 +137,16 @@ namespace Midbaryom.Core
 
         private bool DetectLeft()
         {
-            if (rightHandAngle > GameManager.Instance.moveLeft_RightArmMin &&
+            /*if (rightHandAngle > GameManager.Instance.moveLeft_RightArmMin &&
                 rightHandAngle < GameManager.Instance.moveLeft_RightArmMax &&
                 leftHandeAngle > GameManager.Instance.moveLeft_LeftArmMin &&
-                leftHandeAngle < GameManager.Instance.moveLeft_LeftArmMax)
+                leftHandeAngle < GameManager.Instance.moveLeft_LeftArmMax)*/
+            if (leftHandeAngle > GameManager.Instance.moveLeft_LeftArmMin &&
+                leftHandeAngle < GameManager.Instance.moveLeft_LeftArmMax &&
+                rightHandAbove && ! leftHandAbove)
             {
                 PostureLeftDetected();
+                GameManager.Instance.midR.text = "Left Detected";
                 return true;
             }
 
@@ -159,9 +175,10 @@ namespace Midbaryom.Core
                 rightHandAngle < GameManager.Instance.hunt_RightArmMax &&
                 leftHandeAngle > GameManager.Instance.hunt_LeftArmMin &&
                 leftHandeAngle < GameManager.Instance.hunt_LeftArmMax &&
-                Mathf.Abs(rightHandAngle + leftHandeAngle) < 10)
+                !leftHandAbove && !rightHandAbove)
             {
                 PostureHuntDetected();
+                GameManager.Instance.midR.text = "Hunt Detected";
                 return true;
             }
 
