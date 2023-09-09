@@ -113,6 +113,8 @@ namespace Midbaryom.Core
 
         public void PostureRightDetected()
         {
+            GameManager.Instance.ResetResetGameplayTimer();
+
             if (playerRef.PlayerController._player == null) return;
 
             playerRef.PlayerController.CustomCamRotation(Vector3.right);
@@ -145,6 +147,8 @@ namespace Midbaryom.Core
 
         public void PostureLeftDetected()
         {
+            GameManager.Instance.ResetResetGameplayTimer();
+
             if (playerRef.PlayerController._player == null) return;
 
             playerRef.PlayerController.CustomCamRotation(Vector3.left);
@@ -177,6 +181,7 @@ namespace Midbaryom.Core
         public void PostureHuntDetected()
         {
             Debug.Log("Hunt Detected");
+            GameManager.Instance.ResetResetGameplayTimer();
 
             if (playerRef.PlayerController._player == null) return;
 

@@ -62,6 +62,13 @@ namespace Midbaryom.Core
         public UnityEngine.Camera zoomCam;
 
         public Animator eagleAnimator;
+
+
+        [Header("Counters")]
+        [SerializeField] private float fileTimeWaitInactiveGampley;
+        [SerializeField] private float currentTimeWaitInactiveGameplay;
+
+        bool isRestartingGameplay;
         private void Awake()
         {
             if (_instance == null || _instance == this)
@@ -79,6 +86,8 @@ namespace Midbaryom.Core
 
             LoadGameSessionParameters();
             LoadParameters();
+
+            ResetResetGameplayTimer();
 
         }
         public void StartGame()
@@ -101,7 +110,35 @@ namespace Midbaryom.Core
                 useDebugMessages = !useDebugMessages;
                 debugCanvas.gameObject.SetActive(useDebugMessages);
             }
+
+            CountDownInactiveResetGameplay();
         }
+
+        private void CountDownInactiveResetGameplay()
+        {
+            if(currentTimeWaitInactiveGameplay > 0)
+            {
+                currentTimeWaitInactiveGameplay -= Time.deltaTime;
+            }
+
+            if (currentTimeWaitInactiveGameplay <= 0 && !isRestartingGameplay)
+            {
+                SoundManager.Instance.StopAllSounds();
+
+                isRestartingGameplay = true;
+                Debug.LogError("Reloading scene 1 - inactivity");
+                _screenTransitioner.StartExit(1);
+
+                // restart scene to index 1
+            }
+
+        }
+        public void ResetResetGameplayTimer()
+        {
+            isRestartingGameplay = false;
+            currentTimeWaitInactiveGameplay = fileTimeWaitInactiveGampley;
+        }
+
         private void OnDestroy()
         {
             _timerText.OnTimeEnded -= MoveToNextScene;
@@ -151,6 +188,7 @@ namespace Midbaryom.Core
                 string[] parameters = File.ReadAllLines(Application.streamingAssetsPath + "\\Parameter.ini");
 
                 sessionConfig.SessionTime = float.Parse(parameters[13]);
+                fileTimeWaitInactiveGampley = float.Parse(parameters[14]);
             }
         }
     }
