@@ -5,8 +5,8 @@ public class ApplicationManager : MonoBehaviour
 {
     private static ApplicationManager _instance;
 
-    public const int SCREEN_RESOLUTION_WIDTH = 1920;
-    public const int SCREEN_RESOLUTION_HEIGHT = 1080;
+    public const int SCREEN_RESOLUTION_WIDTH = 1376;
+    public const int SCREEN_RESOLUTION_HEIGHT = 1376;
     [SerializeField]
     private LanguageBank _languageBank;
 
