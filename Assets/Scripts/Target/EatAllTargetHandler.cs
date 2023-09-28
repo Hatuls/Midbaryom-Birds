@@ -18,7 +18,7 @@ namespace Midbaryom.Core
             HasTargetAttached = true;
             _holdingTarget = Target;
             _holdingTarget.TargetBehaviour.Eaten();
-            _aimAssists.LockTarget();
+            //_aimAssists.LockTarget();
 
             StateType nextState = CheckTargetsTags(_holdingTarget);
             if(nextState == StateType.Recover)

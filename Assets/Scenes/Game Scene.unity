@@ -313,7 +313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Name
-      value: Animal Icon (1)
+      value: Animal Icon - Turtle
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Layer
@@ -3220,7 +3220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Name
-      value: Animal Icon (6)
+      value: Animal Icon - Beetle
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Layer
@@ -3439,7 +3439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Name
-      value: Animal Icon (5)
+      value: Animal Icon - Dead Rabbit
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Layer
@@ -6329,7 +6329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Name
-      value: Animal Icon (3)
+      value: Animal Icon - Gecko
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Layer
@@ -6506,7 +6506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Name
-      value: Animal Icon (2)
+      value: Animal Icon - Snake
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Layer
@@ -6720,7 +6720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Name
-      value: Animal Icon (4)
+      value: Animal Icon - Rabbit Alive
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Layer
@@ -7003,7 +7003,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Name
-      value: Animal Icon
+      value: Animal Icon - Mice
       objectReference: {fileID: 0}
     - target: {fileID: 3715795465934078434, guid: 4be3d0912e2ff90449d1a6c01afd86d7, type: 3}
       propertyPath: m_Layer

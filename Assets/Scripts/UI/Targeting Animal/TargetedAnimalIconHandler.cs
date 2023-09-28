@@ -19,6 +19,8 @@ public class TargetedAnimalIconHandler : MonoBehaviour
 
     private AimAssists _aimAssists;
 
+    
+
     private IEnumerator Start()
     {
         ResetAll();
@@ -94,7 +96,7 @@ public class TargetedAnimalIcon
     [SerializeField]
     private TargetGroup _entityTag;
     public TargetGroup TargetType => _entityTag;
-
+    private int[] _animalesCounts = new int[7];
     public void Targeted()
     {
         //_untargetedImageObject.SetActive(false);
@@ -109,10 +111,12 @@ public class TargetedAnimalIcon
 
     public void Hide()
     {
+        ResetCount(_targetedImageObject.transform.parent.name, _targetedImageObject.transform.parent.Find("Not Targeted Icon").gameObject);
         _targetedImageObject.transform.parent.gameObject.SetActive(false);
     }
     public void Show()
     {
+        UpdateCount(_targetedImageObject.transform.parent.name, _targetedImageObject.transform.parent.Find("Not Targeted Icon").gameObject);
         _targetedImageObject.transform.parent.gameObject.SetActive(true);
     }
 
@@ -123,7 +127,137 @@ public class TargetedAnimalIcon
         _targetedImageObject = parentTransform.GetChild(1).gameObject;
         _entityTag = entityTag;
     }
+
+    private void UpdateCount(string TargetedParentName, GameObject TragetGameobject)
+    {
+        switch(TargetedParentName)
+        {
+            case "Animal Icon - Mice":
+            {
+                    _animalesCounts[0]++;
+                    if(_animalesCounts[0] == 2)
+                        TragetGameobject.transform.Find("Number 2").gameObject.SetActive(true);
+
+                    else if(_animalesCounts[0] == 3)
+                        TragetGameobject.transform.Find("Number 3").gameObject.SetActive(true);
+
+                    break;
+            }
+            case "Animal Icon - Turtle":
+                {
+                    _animalesCounts[1]++;
+                    if (_animalesCounts[1] == 2)
+                        TragetGameobject.transform.Find("Number 2").gameObject.SetActive(true);
+
+                    else if (_animalesCounts[1] == 3)
+                        TragetGameobject.transform.Find("Number 3").gameObject.SetActive(true);
+
+                    break;
+                }
+            case "Animal Icon - Snake":
+                {
+                    _animalesCounts[2]++;
+                    if (_animalesCounts[2] == 2)
+                        TragetGameobject.transform.Find("Number 2").gameObject.SetActive(true);
+
+                    else if (_animalesCounts[2] == 3)
+                        TragetGameobject.transform.Find("Number 3").gameObject.SetActive(true);
+
+                    break;
+                }
+            case "Animal Icon - Gecko":
+                {
+                    _animalesCounts[3]++;
+                    if (_animalesCounts[3] == 2)
+                        TragetGameobject.transform.Find("Number 2").gameObject.SetActive(true);
+
+                    else if (_animalesCounts[3] == 3)
+                        TragetGameobject.transform.Find("Number 3").gameObject.SetActive(true);
+
+                    break;
+                }
+            case "Animal Icon - Rabbit Alive":
+                {
+                    _animalesCounts[4]++;
+                    if (_animalesCounts[4] == 2)
+                        TragetGameobject.transform.Find("Number 2").gameObject.SetActive(true);
+                   
+
+                    else if (_animalesCounts[4] == 3)
+                        TragetGameobject.transform.Find("Number 3").gameObject.SetActive(true);
+
+                    break;
+                }
+            case "Animal Icon - Dead Rabbit":
+                {
+                    _animalesCounts[5]++;
+                    if (_animalesCounts[5] == 2)
+                        TragetGameobject.transform.Find("Number 2").gameObject.SetActive(true);
+
+                    else if (_animalesCounts[5] == 3)
+                        TragetGameobject.transform.Find("Number 3").gameObject.SetActive(true);
+
+                    break;
+                }
+            case "Animal Icon - Beetle":
+                {
+                    _animalesCounts[6]++;
+                    if (_animalesCounts[6] == 2)
+                        TragetGameobject.transform.Find("Number 2").gameObject.SetActive(true);
+
+                    else if (_animalesCounts[6] == 3)
+                        TragetGameobject.transform.Find("Number 3").gameObject.SetActive(true);
+
+                    break;
+                }
+        }
+    }
+
+    private void ResetCount(string TargetedParentName, GameObject TragetGameobject)
+    {
+        switch (TargetedParentName)
+        {
+            case "Animal Icon - Mice":
+                {
+                    _animalesCounts[0] = 0;
+                    break;
+                }
+            case "Animal Icon - Turtle":
+                {
+                    _animalesCounts[1] = 0;
+                    break;
+                }
+            case "Animal Icon - Snake":
+                {
+                    _animalesCounts[2] = 0;
+                    break;
+                }
+            case "Animal Icon - Gecko":
+                {
+                    _animalesCounts[3] = 0;
+                    break;
+                }
+            case "Animal Icon - Rabbit Alive":
+                {
+                    _animalesCounts[4] = 0;
+                    break;
+                }
+            case "Animal Icon - Dead Rabbit":
+                {
+                    _animalesCounts[5] = 0;
+                    break;
+                }
+            case "Animal Icon - Beetle":
+                {
+                    _animalesCounts[6] = 0;
+                    break;
+                }
+        }
+        TragetGameobject.transform.Find("Number 2").gameObject.SetActive(false);
+        TragetGameobject.transform.Find("Number 3").gameObject.SetActive(false);
+    }
 }
+
 [System.Serializable]
 public class TargetGroup : ITaggable
 {
