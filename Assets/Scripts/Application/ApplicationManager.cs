@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using UnityEngine;
 
 public class ApplicationManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class ApplicationManager : MonoBehaviour
 
     public const int SCREEN_RESOLUTION_WIDTH = 1376;
     public const int SCREEN_RESOLUTION_HEIGHT = 1376;
+    public bool IsAccessibleStation;
     [SerializeField]
     private LanguageBank _languageBank;
 
@@ -26,6 +28,7 @@ public class ApplicationManager : MonoBehaviour
         _instance = this;
         LanguageSettings = new LangaugeSettings(_languageBank);
         Screen.SetResolution(SCREEN_RESOLUTION_WIDTH, SCREEN_RESOLUTION_HEIGHT, true);
+        LoadGameSessionParameters();
         PlayerPrefs.Save();
     }
     private IEnumerator Start()
@@ -37,6 +40,20 @@ public class ApplicationManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape))
             Application.Quit();
+    }
+
+    public void LoadGameSessionParameters()
+    {
+        if (File.Exists(Application.streamingAssetsPath + "\\Parameter.ini"))
+        {
+            string[] parameters = File.ReadAllLines(Application.streamingAssetsPath + "\\Parameter.ini");
+
+            float accessible = float.Parse(parameters[16]);
+            if (accessible == 0)
+                IsAccessibleStation = true;
+            else if (accessible == 1)
+                IsAccessibleStation = false;
+        }
     }
 
     private void OnDestroy()

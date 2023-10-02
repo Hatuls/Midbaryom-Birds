@@ -63,7 +63,6 @@ namespace Midbaryom.Core
 
         public Animator eagleAnimator;
 
-
         [Header("Counters")]
         [SerializeField] private float fileTimeWaitInactiveGampley;
         [SerializeField] private float currentTimeWaitInactiveGameplay;
