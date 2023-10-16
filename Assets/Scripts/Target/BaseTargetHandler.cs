@@ -27,9 +27,14 @@ namespace Midbaryom.Core
 
             // Target.TargetBehaviour.Targeted();
             _aimAssists.LockTarget();
-
             SoundManager.Instance.CallPlaySound(sounds.LockingOnPrey);
         }
+
+        public void TurnOnIcon()
+        {
+            _aimAssists.ShowIcon();
+        }
+
 
         public virtual void ResetTarget()
         {

@@ -156,12 +156,14 @@ namespace Midbaryom.Core
         internal void LockTarget()
         {
             _lockTarget = true;
+        }
 
-            if(!GameManager.isDuringTutorial)
+        public void ShowIcon()
+        {
+            if (!GameManager.isDuringTutorial)
             {
                 targetAnimalHandler.GetIcon(Target).Show();
             }
-
         }
 
         public void ResetTarget()

@@ -137,9 +137,10 @@ namespace Midbaryom.Core
         public override void OnStateExit()
         {
             _movementSpeed.Value -= _diveXZSpeed.Value;
-          //  _entity.Rotator.StopRotation = false;
+            //  _entity.Rotator.StopRotation = false;
             _movementHandler.StopMovement = false;
             _player.PlayerController.LockInputs = false;
+            _player.TargetHandler.TurnOnIcon();
             base.OnStateExit();
 
         }
