@@ -77,7 +77,7 @@ namespace Midbaryom.Camera
         public event System.Action OnStateExitEvent;
         public event System.Action OnStateTickEvent;
 
-        public BaseRotationState(CameraRotationSO cameraConfig, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation) : base(transform, toLockRotation, rotationSpeed, startRotation)
+        public BaseRotationState(CameraRotationSO cameraConfig, Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation) : base(transform, toLockRotation, rotationSpeed, startRotation, false)
         {
             _cameraRotationSO = cameraConfig;
         }

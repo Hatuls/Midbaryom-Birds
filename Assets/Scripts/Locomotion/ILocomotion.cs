@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Experimental.XR.Interaction;
 
 namespace Midbaryom.Core
 {
@@ -96,18 +97,22 @@ namespace Midbaryom.Core
     }
     public class Rotator : IRotator
     {
+        private static int  _layerMask = 1 << LayerMask.NameToLayer("TransparentFX");
+
+        private readonly TerrainData _terrainData;
         public event Action<float> OnFaceDirection;
         protected readonly Transform _transform;
         protected readonly IStat _rotationSpeed;
         protected readonly Quaternion _startRotation;
         protected float _currentVelocity;
+        protected bool _isAffectedByTerrainFace;
         protected bool _lockRotation;
         protected Vector3 _direction;
         protected float _counter;
         protected float _lerpDuration;
         protected AnimationCurve _curve;
         protected int _rotationCounter;
-        public Rotator(Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation)
+        public Rotator(Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation, bool isAffectedByTerrainFace)
         {
             _lockRotation = toLockRotation;
             _rotationSpeed = rotationSpeed;
@@ -116,8 +121,12 @@ namespace Midbaryom.Core
             _counter = 0;
             _lerpDuration = rotationSpeed.Value;
             _curve = AnimationCurve.EaseInOut(0, 0, 1f, 1f);
-        } 
-        public Rotator(Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation, AnimationCurve rotationCurve)
+            _isAffectedByTerrainFace = isAffectedByTerrainFace;
+
+            Terrain terrain = Terrain.activeTerrain;
+            _terrainData = terrain.terrainData;
+        }
+        public Rotator(Transform transform, bool toLockRotation, IStat rotationSpeed, Quaternion startRotation, AnimationCurve rotationCurve, bool isAffectedByTerrainFace )
         {
             _lockRotation = toLockRotation;
             _rotationSpeed = rotationSpeed;
@@ -126,6 +135,10 @@ namespace Midbaryom.Core
             _counter = 0;
             _lerpDuration = rotationSpeed.Value;
             _curve = rotationCurve;
+            _isAffectedByTerrainFace = isAffectedByTerrainFace;
+
+            Terrain terrain = Terrain.activeTerrain;
+            _terrainData = terrain.terrainData;
         }
 
         public Vector3 NewDirection => _direction;
@@ -143,7 +156,7 @@ namespace Midbaryom.Core
         {
             if (!CanRotate())
                 return;
-            else if(NewDirection.magnitude > 0)
+            else if (NewDirection.magnitude > 0)
                 RotateTowards();
             else
                 ResetLerp();
@@ -186,6 +199,9 @@ namespace Midbaryom.Core
             var relativeAngle = yRotation + targetAngle;
             Debug.Log("relativeAngle: " + relativeAngle);
 
+
+
+
             var rotation = Quaternion.Lerp(_transform.rotation, Quaternion.Euler(0, relativeAngle, 0), Time.deltaTime * RotationSpeed * curve);
             Debug.Log("rotation: " + rotation);
 
@@ -200,7 +216,38 @@ namespace Midbaryom.Core
             return (!StopRotation);
         }
 
-        public virtual void SetRotation(Quaternion rotation) => _transform.rotation = rotation;
+        public virtual void SetRotation(Quaternion rotation) 
+        { 
+            _transform.rotation = rotation;
+
+            if (!_isAffectedByTerrainFace)
+                return;
+
+
+            //RaycastHit hit;
+            //var rei = new Ray(_transform.position + Vector3.up*5f, Vector3.down);
+
+
+           
+            //if (!Physics.Raycast(rei, out hit, 1000f, _layerMask))
+            //{
+            //    Debug.Log("Not hitting anything!");
+            //    return;
+            //}
+
+            //if (hit.collider == null)
+            //    return;
+
+            //// Assuming you have already done a raycast and have hitInfo with the hitNormal
+            //Vector3 hitNormal = hit.normal;
+
+            //// Get the rotation that aligns the forward axis of your object with the hit normal
+            //Quaternion relativeRotationToGround = Quaternion.FromToRotation(_transform.up, hitNormal);
+
+            //// Apply the rotation to your object's transform
+            //_transform.rotation = relativeRotationToGround;
+
+        }
         public void Lock() => _lockRotation = true;
         public void UnLock() => _lockRotation = false;
         public void ResetLerp() => _counter = 0;

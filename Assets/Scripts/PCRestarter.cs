@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.IO;
 using System.Diagnostics;
+using System.Collections;
 
 public class PCRestarter : MonoBehaviour
 {
@@ -31,10 +32,17 @@ public class PCRestarter : MonoBehaviour
     }
 
     [ContextMenu("Check Works PC Restart")]
-    public void Run()
+    public IEnumerator RestartPC()
     {
         // start the child process
         Process process = new Process();
+
+        if (File.Exists(Application.streamingAssetsPath + "\\CloseZed.bat"))
+        {
+            Process.Start(Application.streamingAssetsPath + "\\CloseZed.bat");
+        }
+
+        yield return new WaitForSeconds(5f);
 
         if (File.Exists(Application.streamingAssetsPath + "\\RestartCommand.lnk"))
         {
@@ -53,7 +61,7 @@ public class PCRestarter : MonoBehaviour
         {
             UnityEngine.Debug.LogError("Restart PC");
             isRestartingPC = true;
-            Run();
+            StartCoroutine(RestartPC());
             //do restart pc here by external file.
         }
     }

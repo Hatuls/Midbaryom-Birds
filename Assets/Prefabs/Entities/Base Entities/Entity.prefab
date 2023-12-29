@@ -75,6 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931cfcd9ee4813f4cb14955e004e7128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsPlayer: 0
+  _ID: 0
   _entityTag: {fileID: 0}
   _stats: []
   _transform: {fileID: 8559331389127733801}

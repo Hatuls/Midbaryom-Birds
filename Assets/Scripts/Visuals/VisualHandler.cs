@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+
 namespace Midbaryom.Visual
 {
     public interface IVisualHandler
@@ -14,6 +15,7 @@ namespace Midbaryom.Visual
 
     public class VisualHandler : MonoBehaviour, IVisualHandler
     {
+   
         [SerializeField]
         private bool _isPlayer;
         [SerializeField]
@@ -37,6 +39,27 @@ namespace Midbaryom.Visual
                 _eatenEffect.Init();
             }
         }
+        private void Update()
+        {
+            if (_isPlayer)
+            {
+                return;
+            }
+
+            Terrain t = Terrain.activeTerrain;
+            var worldPosition = transform.parent.position;
+            var terrainPosition = worldPosition - t.transform.position;
+            var td = t.terrainData;
+
+            float x = (terrainPosition.x / td.size.x);
+            float z = (terrainPosition.z / td.size.z);
+            Vector3 normal = td.GetInterpolatedNormal(x, z);
+            Vector3 f = Vector3.Cross(transform.parent.right, normal);
+
+            var rot = Quaternion.LookRotation(f, normal);
+            transform.rotation = rot;
+        }
+
 
         private void LateUpdate()
         {

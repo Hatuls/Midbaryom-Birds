@@ -32,7 +32,10 @@ namespace Midbaryom.Core
     public class Entity : MonoBehaviour, IEntity
     {
         public static int COUNT = 0;
-        
+
+        public bool IsPlayer = false;
+
+
         [Header("Tags:")]
         [SerializeField]
         private int _ID;
@@ -97,7 +100,7 @@ namespace Midbaryom.Core
         {
             _destroyHandler = new DestroyBehaviour(this);
             _statHandler = new StatHandler(_stats);
-            _rotator = new Rotator(_transform, false, _statHandler[StatType.RotationSpeed],_transform.rotation, _rotationCurve);
+            _rotator = new Rotator(_transform, false, _statHandler[StatType.RotationSpeed],_transform.rotation, _rotationCurve, !IsPlayer);
             _movementHandler = new Locomotion(_transform, Rigidbody, false, _statHandler[StatType.MovementSpeed]);
             _heightHandler = new HeightHandler(MovementHandler as Locomotion, Transform, EntityTagSO.StartingHeight);
             COUNT++;

@@ -466,6 +466,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8206922584222522397, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
+      propertyPath: IsPlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206922584222522397, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
       propertyPath: _entityTag
       value: 
       objectReference: {fileID: 11400000, guid: 8d99dff1cd95c3a469d397346a631ae1, type: 2}
@@ -574,6 +578,54 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6366026649775990322, guid: 5ad0638ed79c76b4aa650b4f16974830, type: 3}
   m_PrefabInstance: {fileID: 1579715150867127069}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &292323024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5599360877878689071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e580f9d3c501684bbe613110f68bfc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isPlayer: 1
+  _visualTransform: {fileID: 0}
+  _animatorController:
+    _animator: {fileID: 0}
+  _eatenEffect:
+    _entity: {fileID: 7208185016336647936}
+    _targetBehaviour: {fileID: 0}
+    _scaleEase:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _duration: 2
+  _shaderView:
+    _glowingShaderSO: {fileID: 11400000, guid: 3a4df44c6a9b41f4c804c2900b9faba0, type: 2}
+    _meshRenderers: []
+    _targetedBehaviour: {fileID: 0}
 --- !u!114 &228793355471029808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,6 +677,7 @@ MonoBehaviour:
     _preciseness: 0
   _startWarningAnimalsAt: 2
   _targetingTags: []
+  targetAnimalHandler: {fileID: 0}
 --- !u!114 &5723832581012774896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,51 +697,3 @@ MonoBehaviour:
   _targetHandler: {fileID: 0}
   _playerStateMachine: {fileID: 0}
   _bodyTrackingConfigSO: {fileID: 0}
---- !u!114 &292323024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5599360877878689071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e580f9d3c501684bbe613110f68bfc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isPlayer: 1
-  _visualTransform: {fileID: 0}
-  _animatorController:
-    _animator: {fileID: 0}
-  _eatenEffect:
-    _entity: {fileID: 7208185016336647936}
-    _targetBehaviour: {fileID: 0}
-    _scaleEase:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    _duration: 2
-  _shaderView:
-    _glowingShaderSO: {fileID: 11400000, guid: 3a4df44c6a9b41f4c804c2900b9faba0, type: 2}
-    _meshRenderers: []
-    _targetedBehaviour: {fileID: 0}

@@ -37,7 +37,7 @@ public class ScreenTransitioner : MonoBehaviour
     }
     public void StartExit(int nextScene)
     {
-        if(nextScene == 1)
+        if(nextScene == 2)
         {
             //Do reset 1 hour counter here
             PCRestarter.instance.ResetResetPCTimer();
