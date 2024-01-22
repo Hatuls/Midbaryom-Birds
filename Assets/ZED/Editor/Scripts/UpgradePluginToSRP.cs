@@ -60,7 +60,7 @@ public class UpgradePluginToSRP
                     }
                     else
                     {
-                        Debug.Log("Frame is not found");
+                        Debug.Log(System.DateTime.Now.ToString() + "" + "Frame is not found");
                     }
                 }
                 using (var editScope = new EditPrefabAssetScope(zedRigStereoPath))
@@ -73,7 +73,7 @@ public class UpgradePluginToSRP
                     }
                     else
                     {
-                        Debug.Log("Frame Left is not found");
+                        Debug.Log(System.DateTime.Now.ToString() + "" + "Frame Left is not found");
                     }
 
                     Transform frame_right = editScope.prefabRoot.transform.Find("Camera_eyes").Find("Right_eye").Find("Frame");
@@ -84,7 +84,7 @@ public class UpgradePluginToSRP
                     }
                     else
                     {
-                        Debug.Log("Frame Right is not found");
+                        Debug.Log(System.DateTime.Now.ToString() + "" + "Frame Right is not found");
                     }
                 }
                 // Modify prefab contents and save it back to the Prefab Asset
@@ -98,7 +98,7 @@ public class UpgradePluginToSRP
                     }
                     else
                     {
-                        Debug.Log("Frame is not found");
+                        Debug.Log(System.DateTime.Now.ToString() + "" + "Frame is not found");
                     }
                 }
                 using (var editScope = new EditPrefabAssetScope(zedPlanetariumPath))
@@ -111,13 +111,13 @@ public class UpgradePluginToSRP
                     }
                     else
                     {
-                        Debug.Log("Planetarium is not found");
+                        Debug.Log(System.DateTime.Now.ToString() + "" + "Planetarium is not found");
                     }
                 }
             }
             else
             {
-                Debug.LogWarning("Trying to convert to URP without using URP !!");
+                Debug.LogWarning(System.DateTime.Now.ToString() + "" + "Trying to convert to URP without using URP !!");
             }
         }
 
@@ -154,7 +154,7 @@ public class UpgradePluginToSRP
                 }
                 else
                 {
-                    Debug.Log("Frame is not found");
+                    Debug.Log(System.DateTime.Now.ToString() + "" + "Frame is not found");
                 }
             }
 
@@ -168,7 +168,7 @@ public class UpgradePluginToSRP
                 }
                 else
                 {
-                    Debug.Log("Frame Left is not found");
+                    Debug.Log(System.DateTime.Now.ToString() + "" + "Frame Left is not found");
                 }
 
                 Transform frame_right = editScope.prefabRoot.transform.Find("Camera_eyes").Find("Right_eye").Find("Frame");
@@ -179,7 +179,7 @@ public class UpgradePluginToSRP
                 }
                 else
                 {
-                    Debug.Log("Frame Right is not found");
+                    Debug.Log(System.DateTime.Now.ToString() + "" + "Frame Right is not found");
                 }
             }
             // Modify prefab contents and save it back to the Prefab Asset
@@ -193,7 +193,7 @@ public class UpgradePluginToSRP
                 }
                 else
                 {
-                    Debug.Log("Frame is not found");
+                    Debug.Log(System.DateTime.Now.ToString() + "" + "Frame is not found");
                 }
             }
             using (var editScope = new EditPrefabAssetScope(zedPlanetariumPath))
@@ -206,13 +206,13 @@ public class UpgradePluginToSRP
                 }
                 else
                 {
-                    Debug.Log("Planetarium is not found");
+                    Debug.Log(System.DateTime.Now.ToString() + "" + "Planetarium is not found");
                 }
             }
         }
         else
         {
-            Debug.LogWarning("Trying to convert to HDRP without using HDRP !!");
+            Debug.LogWarning(System.DateTime.Now.ToString() + "" + "Trying to convert to HDRP without using HDRP !!");
         }
     }
 

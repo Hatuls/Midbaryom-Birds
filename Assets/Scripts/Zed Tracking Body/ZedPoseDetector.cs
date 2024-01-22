@@ -65,7 +65,7 @@ public class ZedPoseDetector : MonoBehaviour
     {
         if (!_gameStarted) return;
 
-        Debug.Log("Is this working?");
+        Debug.Log(System.DateTime.Now.ToString() + "" + "Is this working?");
 
 
 
@@ -455,12 +455,12 @@ public class HuntingPosture : MonoBehaviour, IBodyTrackAnalyzer
 
         if(isCorrectPosture)
         {
-            Debug.Log("Correct");
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Correct");
 
         }
         else
         {
-            Debug.Log("Not Correct");
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Not Correct");
         }
 
 

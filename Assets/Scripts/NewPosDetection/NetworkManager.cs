@@ -53,7 +53,7 @@ namespace Midbaryom.Core
             endPoint = new IPEndPoint(IPAddress.Any, ListeningPort); //this line will listen to all IP addresses in the network
                                                                      //endPoint = new IPEndPoint(IPAddress.Parse(LocalIPAddress), ListeningPort); //this line will listen to a specific IP address
             udp = new UdpClient(endPoint);
-            Debug.Log("Listening for Data...");
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Listening for Data...");
             listener = new Thread(new ThreadStart(MessageHandler));
             listener.IsBackground = true;
             listener.Start();
@@ -72,7 +72,7 @@ namespace Midbaryom.Core
                 catch (Exception err)
                 {
                     //If there's a problem
-                    Debug.Log("Communication error, recieve data error " + err);
+                    Debug.Log(System.DateTime.Now.ToString() + "" + "Communication error, recieve data error " + err);
                     udp.Close();
                     return;
                 }
@@ -102,7 +102,7 @@ namespace Midbaryom.Core
             byte[] bytes = Encoding.ASCII.GetBytes(message);
             send_client.Send(bytes, bytes.Length, send_endPoint);
             send_client.Close();
-            Debug.Log("Sent message: " + message);
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Sent message: " + message);
         }
     }
 }

@@ -125,7 +125,7 @@ namespace Midbaryom.Core
                 SoundManager.Instance.StopAllSounds();
 
                 isRestartingGameplay = true;
-                Debug.LogError("Reloading scene 1 - inactivity");
+                Debug.LogError(System.DateTime.Now.ToString() + "" + "Reloading scene 1 - inactivity");
                 _screenTransitioner.StartExit(1);
 
                 // restart scene to index 1

@@ -22,7 +22,7 @@ namespace Midbaryom.Core
         private bool _isPotentiallyTargeted;
         public void PotentiallyTarget()
         {
-            Debug.Log("Potential Target: " + gameObject.name);
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Potential Target: " + gameObject.name);
             if (!_isPotentiallyTargeted && OnPotentiallyTargeted != null)
                 OnPotentiallyTargeted.Invoke();
             _isPotentiallyTargeted = true;

@@ -185,25 +185,25 @@ namespace Midbaryom.Core
             //_rotationCounter++;
 
             float counterClamped = Mathf.Min(_counter, GameManager.Instance.maxRotationSpeed);
-            Debug.Log("Counter: " + counterClamped);
+            Debug.Log(System.DateTime.Now.ToString() + "" + System.DateTime.Now.ToString() + "" +"Counter: " + counterClamped);
 
             float curve = _curve.Evaluate(counterClamped / 100f);
-            Debug.Log("curve: " + curve);
+            Debug.Log(System.DateTime.Now.ToString() + "" + "curve: " + curve);
 
             float targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
-            Debug.Log("targetAngle: " + targetAngle);
+            Debug.Log(System.DateTime.Now.ToString() + "" + "targetAngle: " + targetAngle);
 
             var yRotation = _transform.eulerAngles.y;
-            Debug.Log("yRotation: " + yRotation);
+            Debug.Log(System.DateTime.Now.ToString() + "" + "yRotation: " + yRotation);
 
             var relativeAngle = yRotation + targetAngle;
-            Debug.Log("relativeAngle: " + relativeAngle);
+            Debug.Log(System.DateTime.Now.ToString() + "" + "relativeAngle: " + relativeAngle);
 
 
 
 
             var rotation = Quaternion.Lerp(_transform.rotation, Quaternion.Euler(0, relativeAngle, 0), Time.deltaTime * RotationSpeed * curve);
-            Debug.Log("rotation: " + rotation);
+            Debug.Log(System.DateTime.Now.ToString() + "" + "rotation: " + rotation);
 
 
             SetRotation(rotation);

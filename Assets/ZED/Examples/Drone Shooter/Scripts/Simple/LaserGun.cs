@@ -59,7 +59,7 @@ public class LaserGun : MonoBehaviour
             zedManager = FindObjectOfType<ZEDManager>();
             if (ZEDManager.GetInstances().Count > 1)
             {
-                Debug.Log("Warning: " + gameObject + " ZEDManager reference not set, but there are multiple ZEDManagers in the scene. " +
+                Debug.Log(System.DateTime.Now.ToString() + "" + "Warning: " + gameObject + " ZEDManager reference not set, but there are multiple ZEDManagers in the scene. " +
                     "Setting to first available ZEDManager, which may cause undesirable crosshair positions.");
             }
         }

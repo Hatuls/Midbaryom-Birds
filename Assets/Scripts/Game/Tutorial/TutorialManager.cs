@@ -79,7 +79,7 @@ namespace Midbaryom.Core.Tutorial
             OnTutorialCompleted?.Invoke();
             OnTutorialCompeleted?.Invoke();
             _languageTMPRO.gameObject.SetActive(false);
-            Debug.Log("Complete!");
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Complete!");
         }
     }
 

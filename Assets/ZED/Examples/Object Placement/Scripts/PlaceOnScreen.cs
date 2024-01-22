@@ -65,9 +65,9 @@ public class PlaceOnScreen : MonoBehaviour
             else
             {
 				if (Normal.x == float.NaN)
-				Debug.Log ("Cannot place object at this position. Normal vector not detected.");
+				Debug.Log (System.DateTime.Now.ToString() + "" + "Cannot place object at this position. Normal vector not detected.");
 				if (Vector3.Dot(Normal, Vector3.up) <= 0.85f)
-					Debug.Log ("Cannot place object at this position. Normal vector angled too far from up: "+Mathf.Acos(Vector3.Dot(Normal, Vector3.up))*Mathf.Rad2Deg + "°");
+					Debug.Log (System.DateTime.Now.ToString() + "" + "Cannot place object at this position. Normal vector angled too far from up: " +Mathf.Acos(Vector3.Dot(Normal, Vector3.up))*Mathf.Rad2Deg + "°");
 			}
         }
     }

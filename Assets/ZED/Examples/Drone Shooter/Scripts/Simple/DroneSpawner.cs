@@ -274,7 +274,7 @@ public class DroneSpawner : MonoBehaviour
 
         if (!dronecomponent)
         {
-            Debug.LogError("Drone prefab spawned by DroneSpawner does not contain the Drone.cs component.");
+            Debug.LogError(System.DateTime.Now.ToString() + "" + "Drone prefab spawned by DroneSpawner does not contain the Drone.cs component.");
         }
 
         //Give the drone a reference to this object so it can clear its reference and set the timer properly when it dies

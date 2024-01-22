@@ -67,7 +67,7 @@ public class ZEDProjectile : MonoBehaviour
             //calculated using an arbitrary camera. Warn the user. 
             if (testCollisionsUsingAllZEDs == false && ZEDManager.GetInstances().Count > 1)
             {
-                Debug.LogWarning("Warning: ZEDProjectile's zedManager value was not specified, resulting in assigning to first available " +
+                Debug.LogWarning(System.DateTime.Now.ToString() + "" + "Warning: ZEDProjectile's zedManager value was not specified, resulting in assigning to first available " +
                     " camera, but there are multiple cameras in the scene. This can cause strange collision test behavior.");
             }
         }

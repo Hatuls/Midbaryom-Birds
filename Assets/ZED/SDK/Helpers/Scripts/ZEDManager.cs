@@ -2068,7 +2068,7 @@ public class ZEDManager : MonoBehaviour
         bool res = zedCamera.CreateCamera((int)cameraID, wrapperVerbose);
         if (!res)
         {
-            Debug.LogError("ZEDManager on " + gameObject.name + " couldn't connect to camera: " + cameraID +
+            Debug.LogError(System.DateTime.Now.ToString() + "" + "ZEDManager on " + gameObject.name + " couldn't connect to camera: " + cameraID +
                ". Check if another ZEDManager is already connected.");
             this.gameObject.SetActive(false);
             return;

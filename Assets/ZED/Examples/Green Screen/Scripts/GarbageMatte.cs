@@ -156,7 +156,7 @@ public class GarbageMatte
         }
         if (loadAtStart && Load())
         {
-            Debug.Log("Config garbage matte found, and loaded ( " + garbageMattePath + " )");
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Config garbage matte found, and loaded ( " + garbageMattePath + " )");
             ApplyGarbageMatte();
             editMode = false;
         }

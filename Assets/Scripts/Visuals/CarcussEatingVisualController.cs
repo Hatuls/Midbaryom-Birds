@@ -165,6 +165,6 @@ public class CarcussEatingVisualController : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
-            Debug.Log(_humanEyeCamera.cullingMask);
+            Debug.Log(System.DateTime.Now.ToString() + "" + _humanEyeCamera.cullingMask);
     }
 }

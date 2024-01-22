@@ -37,7 +37,7 @@ public class EagleTypeSO : ScriptableObject, IComparable<EagleTypeSO>
     {
         if (tagSO == null || _diets == null || _diets.Length == 0)
         {
-            Debug.LogError("Initalization was not set correct");
+            Debug.LogError(System.DateTime.Now.ToString() + "" + "Initalization was not set correct");
             return -1;
         }
 
@@ -48,7 +48,7 @@ public class EagleTypeSO : ScriptableObject, IComparable<EagleTypeSO>
                 return _diets[i].Precentage;
         }
 
-        Debug.LogWarning("Type was not found?");
+        Debug.LogWarning(System.DateTime.Now.ToString() + "" + "Type was not found?");
         return -1;
     }
 

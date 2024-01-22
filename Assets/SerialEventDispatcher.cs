@@ -19,12 +19,12 @@ public class SerialEventDispatcher : MonoBehaviour
 
         if (File.Exists(cfg)){
             string text = File.ReadAllLines(cfg)[0];
-            Debug.Log(text);
+            Debug.Log(System.DateTime.Now.ToString() + "" + text);
             if (text != "")
                 sc.portName = text;
         }
         else{
-            Debug.LogWarning($"config file {cfg} not found");
+            Debug.LogWarning(System.DateTime.Now.ToString() + "" + $"config file {cfg} not found");
         }
 
     }

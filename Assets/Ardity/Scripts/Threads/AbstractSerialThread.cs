@@ -146,7 +146,7 @@ public abstract class AbstractSerialThread
                     // A disconnection happened, or there was a problem
                     // reading/writing to the device. Log the detailed message
                     // to the console and notify the listener.
-                    Debug.LogWarning("Exception: " + ioe.Message + " StackTrace: " + ioe.StackTrace);
+                    Debug.LogWarning(System.DateTime.Now.ToString() + "" + "Exception: " + ioe.Message + " StackTrace: " + ioe.StackTrace);
                     if (enqueueStatusMessages)
                         inputQueue.Enqueue(SerialController.SERIAL_DEVICE_DISCONNECTED);
 
@@ -176,7 +176,7 @@ public abstract class AbstractSerialThread
         }
         catch (Exception e)
         {
-            Debug.LogError("Unknown exception: " + e.Message + " " + e.StackTrace);
+            Debug.LogError(System.DateTime.Now.ToString() + "" + "Unknown exception: " + e.Message + " " + e.StackTrace);
         }
     }
 
@@ -255,7 +255,7 @@ public abstract class AbstractSerialThread
                 }
                 else
                 {
-                    Debug.LogWarning("Queue is full. Dropping message: " + inputMessage);
+                    Debug.LogWarning(System.DateTime.Now.ToString() + "" + "Queue is full. Dropping message: " + inputMessage);
                 }
             }
         }

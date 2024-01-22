@@ -84,12 +84,12 @@ namespace Midbaryom.Inputs
         private void Rotation()
         {
             Vector2 value = _movementInputAction.ReadValue<Vector2>();
-            Debug.Log("Value 1: " + value);
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Value 1: " + value);
             //_movementInputHandler.Handle(value);
         }
         public void CustomCamRotation(Vector2 direction)
         {
-            Debug.Log("Value 2: " + direction);
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Value 2: " + direction);
 
             _movementInputHandler.Handle(direction);
         }

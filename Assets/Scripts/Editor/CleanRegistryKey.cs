@@ -20,7 +20,7 @@ public class CleanRegistryKey
         {
             if (key == null) // Key doesn't exist
             {
-                Debug.LogWarning("Could not find key. Have you built this project at least once?\n"
+                Debug.LogWarning(System.DateTime.Now.ToString() + "" + "Could not find key. Have you built this project at least once?\n"
                                  + "Key tried: " + keyPath);
                 return;
             }
@@ -31,7 +31,7 @@ public class CleanRegistryKey
 
             if (!screenManagerVals.Any())
             {
-                Debug.LogWarning("There were no 'Screenmanager' values in the registry. " +
+                Debug.LogWarning(System.DateTime.Now.ToString() + "" + "There were no 'Screenmanager' values in the registry. " +
                                  "Have you cleaned this key before?\n" +
                                  "Key tried: " + keyPath);
                 return;
@@ -40,11 +40,11 @@ public class CleanRegistryKey
             foreach (string value in screenManagerVals)
             {
                 // These keys all have to do with setting screen size / type.
-                Debug.Log("Deleting value: " + value);
+                Debug.Log(System.DateTime.Now.ToString() + "" + "Deleting value: " + value);
                 key.DeleteValue(value);
             }
 
-            Debug.Log("Successfully deleted the 'Screenmanager' values.");
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Successfully deleted the 'Screenmanager' values.");
         }
     }
 }

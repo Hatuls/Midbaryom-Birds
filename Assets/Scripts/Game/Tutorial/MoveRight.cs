@@ -54,7 +54,7 @@ namespace Midbaryom.Core.Tutorial
         protected override void TaskCompleted()
         {
             _player.Entity.Rotator.AssignRotation(Vector3.zero);
-            Debug.Log("Task Right Completed");
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Task Right Completed");
             _moveRight.OnRight -= CheckTask;
           
             base.TaskCompleted();

@@ -15,7 +15,7 @@ namespace Midbaryom.Core
 
             if (string.IsNullOrWhiteSpace(data))
             {
-                Debug.LogWarning("Got empty data from Zed");
+                Debug.LogWarning(System.DateTime.Now.ToString() + "" + "Got empty data from Zed");
                 return;
             }
 
@@ -23,7 +23,7 @@ namespace Midbaryom.Core
 
             if (splitData.Length == 0)
             {
-                Debug.LogWarningFormat("Got invalid data from Zed. Data is {0} ", data);
+                Debug.LogWarningFormat(System.DateTime.Now.ToString() + "" + "Got invalid data from Zed. Data is {0} ", data);
                 return;
             }
             else
@@ -68,7 +68,7 @@ namespace Midbaryom.Core
             string[] splitData = data.Split(',');
             if (splitData.Length == 0)
             {
-                Debug.LogWarning("Got empty player data from Zed");
+                Debug.LogWarning(System.DateTime.Now.ToString() + "" + "Got empty player data from Zed");
                 return null;
             }
             //else if (splitData.Length != 9)
@@ -131,12 +131,12 @@ namespace Midbaryom.Core
 
         public void Print()
         {
-            Debug.LogFormat("Player {0}: Pelvis is {1} Head is {2} LeftHand is {3} RightHand is {4} Neck is {5}, RightShouler {6}, LeftShoulder {7}", PlayerID, Pelvis, Head, LeftHand, RightHand, Neck, rightShoulder, leftShoulder);
+            Debug.LogFormat(System.DateTime.Now.ToString() + "" + "Player {0}: Pelvis is {1} Head is {2} LeftHand is {3} RightHand is {4} Neck is {5}, RightShouler {6}, LeftShoulder {7}", PlayerID, Pelvis, Head, LeftHand, RightHand, Neck, rightShoulder, leftShoulder);
         }
 
         public void PrintOffsets()
         {
-            Debug.LogFormat("Head X is {0}, Pelvis X is {1}, Offset is {2}", Head.x, Pelvis.x, Head.x - Pelvis.x);
+            Debug.LogFormat(System.DateTime.Now.ToString() + "" + "Head X is {0}, Pelvis X is {1}, Offset is {2}", Head.x, Pelvis.x, Head.x - Pelvis.x);
         }
     }
 }

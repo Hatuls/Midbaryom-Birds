@@ -59,7 +59,7 @@ public class PCRestarter : MonoBehaviour
 
         if (currentTimeWaitRestartPC <= 0 && !isRestartingPC)
         {
-            UnityEngine.Debug.LogError("Restart PC");
+            UnityEngine.Debug.LogError(System.DateTime.Now.ToString() + "" + "Restart PC");
             isRestartingPC = true;
             StartCoroutine(RestartPC());
             //do restart pc here by external file.

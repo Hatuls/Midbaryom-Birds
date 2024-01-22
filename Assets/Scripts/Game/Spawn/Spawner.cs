@@ -222,7 +222,7 @@ namespace Midbaryom.Core
             }
             else
             {
-                Debug.LogError("Spawner: Didnt hit the ground?");
+                Debug.LogError(System.DateTime.Now.ToString() + "" + "Spawner: Didnt hit the ground?");
                 return GenerateSpawnLocation(yPos, radius);
             }
 

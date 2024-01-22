@@ -14,12 +14,12 @@ public class AimAt : MonoBehaviour
     {
         if (zedManager == null)
         {
-            Debug.LogError("zedManager is null. Please set a ZedManager.");
+            Debug.LogError(System.DateTime.Now.ToString() + "" + "zedManager is null. Please set a ZedManager.");
             Application.Quit();
         }
         if (zedBodyTrackingManager == null)
         {
-            Debug.LogError("zedBodyTrackingManager is null. Please set a zedBodyTrackingManager.");
+            Debug.LogError(System.DateTime.Now.ToString() + "" + "zedBodyTrackingManager is null. Please set a zedBodyTrackingManager.");
             Application.Quit();
         }
     }

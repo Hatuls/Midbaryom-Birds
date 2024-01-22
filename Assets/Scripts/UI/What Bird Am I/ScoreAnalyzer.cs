@@ -63,7 +63,7 @@ public class ScoreAnalyzer : MonoBehaviour
         sortedList?.Sort(new EagleOrderSorter());
         _eagleTypeSOs = sortedList?.ToArray();
         if (_eagleTypeSOs == null || _eagleTypeSOs.Length == 0)
-            Debug.LogError("Eagles Data were not found");
+            Debug.LogError(System.DateTime.Now.ToString() + "" + "Eagles Data were not found");
     }
 
     public class EagleOrderSorter : IComparer<EagleTypeSO>

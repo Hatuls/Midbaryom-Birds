@@ -112,7 +112,7 @@ public class ZEDPluginInspector : EditorWindow
     {
         if (!sl.ZEDCamera.CheckPlugin())
         {
-            Debug.Log("ZED SDK is not installed or needs to be updated");
+            Debug.Log(System.DateTime.Now.ToString() + "" + "ZED SDK is not installed or needs to be updated");
         }
 
         EditorApplication.update -= UpdateLog;

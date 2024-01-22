@@ -58,7 +58,7 @@ public class PlayerScore : MonoBehaviour
         if (found)
             AnimalScore.TotalAmount++;
         else
-            Debug.LogError("Tag was not found!");
+            Debug.LogError(System.DateTime.Now.ToString() + "" + "Tag was not found!");
     }
     public float[] GetKillFeedPrecentages()
     {

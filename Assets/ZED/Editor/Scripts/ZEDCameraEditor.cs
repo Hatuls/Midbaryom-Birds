@@ -1102,7 +1102,7 @@ public class ZEDCameraEditor : Editor
                         manager.needRecordFrame = true;
                     else
                     {
-                        Debug.LogError("Failed to start SVO Recording");
+                        Debug.LogError(System.DateTime.Now.ToString() + "" + "Failed to start SVO Recording");
                         manager.needRecordFrame = false;
                     }
                 }

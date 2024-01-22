@@ -106,7 +106,7 @@ public class ZEDControllerTracker : MonoBehaviour
             if (ZEDManager.GetInstances().Count > 1)
             {
                 //Using Log instead of LogWarning because most users don't enable warnings but this is actually important.
-                Debug.Log("Warning: ZEDController automatically set itself to first available ZED (" + zedManager.cameraID + ") because zedManager " +
+                Debug.Log(System.DateTime.Now.ToString() + "" + "Warning: ZEDController automatically set itself to first available ZED (" + zedManager.cameraID + ") because zedManager " +
                     "value wasn't set, but there are multiple ZEDManagers in the scene. Assign a reference directly to ensure no unexpected behavior.");
             }
         }

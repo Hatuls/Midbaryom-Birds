@@ -31,7 +31,7 @@ public class AnimalRotation : MonoBehaviour
         int layerMask = 1 << LayerMask.NameToLayer("Ground");
         if (!Physics.Raycast(rei, out hit, 1000f, layerMask))
         {
-            Debug.Log("Not hitting anything!");
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Not hitting anything!");
             return;
         }
 

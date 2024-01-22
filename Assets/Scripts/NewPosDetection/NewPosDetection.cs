@@ -119,7 +119,7 @@ namespace Midbaryom.Core
 
             playerRef.PlayerController.CustomCamRotation(Vector3.right);
 
-            Debug.Log("Moving Right");
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Moving Right");
 
             //if (currentMoveDirection == MoveDir.right) return;
 
@@ -153,7 +153,7 @@ namespace Midbaryom.Core
 
             playerRef.PlayerController.CustomCamRotation(Vector3.left);
 
-            Debug.Log("Moving Left");
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Moving Left");
 
             //if (currentMoveDirection == MoveDir.left) return;
 
@@ -180,7 +180,7 @@ namespace Midbaryom.Core
 
         public void PostureHuntDetected()
         {
-            Debug.Log("Hunt Detected");
+            Debug.Log(System.DateTime.Now.ToString() + "" + "Hunt Detected");
             GameManager.Instance.ResetResetGameplayTimer();
 
             if (playerRef.PlayerController._player == null) return;

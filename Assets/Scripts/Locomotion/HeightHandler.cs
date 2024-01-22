@@ -205,7 +205,7 @@ namespace Midbaryom.Core
             float currentHeight = Transform.position.y;
             float remainDistance = aimAssists.Target.CurrentPosition.y - currentHeight;
             _time = Mathf.Abs(remainDistance) / _movementSpeedStat.Value;
-            Debug.LogWarning($"My Height: {currentHeight}\nDistance: {remainDistance}\nSpeed: {_movementSpeedStat.Value}\nEstimate Time: {_time}");
+            Debug.LogWarning(System.DateTime.Now.ToString() + "" + $"My Height: {currentHeight}\nDistance: {remainDistance}\nSpeed: {_movementSpeedStat.Value}\nEstimate Time: {_time}");
         }
     }
 }
